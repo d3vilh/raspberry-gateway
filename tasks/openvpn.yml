@@ -1,0 +1,32 @@
+---
+- name: Create OpenVPN folder on Pi.
+  ansible.builtin.file:
+    path: "{{ config_dir }}/openvpn"
+    state: directory
+    mode: 0755
+  become: false
+
+- name: Synchronize openvpn directory.
+  ansible.posix.synchronize:
+    src: openvpn
+    dest: "{{ config_dir }}/"
+    delete: false
+    recursive: true
+    perms: false
+  become: false
+
+- name: Copy OpenVPN docker-compose template to Pi.
+  ansible.builtin.template:
+    src: templates/openvpn-docker-compose.yml.j2
+    dest: "{{ config_dir }}/openvpn/docker-compose.yml"
+    mode: '0640'
+  become: false
+  notify: Restart openvpn
+
+# TODO: The first time this playbook is run, the `pi` user may not be added
+# to the `docker` group, so this task may fail.
+- name: Ensure OpenVPN is running.
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/openvpn/"
+    build: false
+  become: false

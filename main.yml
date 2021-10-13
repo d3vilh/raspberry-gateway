@@ -1,0 +1,59 @@
+---
+- hosts: raspberry-gateway
+  become: true
+
+  pre_tasks:
+    - name: Load configuration (with defaults from example file).
+      ansible.builtin.include_vars: "{{ item }}"
+      loop:
+        - example.config.yml
+        - config.yml
+
+    - name: Ensure apt cache is up to date.
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+      when:
+        - ansible_facts.os_family == "Debian"
+
+    - name: Ensure pacman cache is up to date
+      community.general.pacman:
+        update_cache: true
+      when:
+        - ansible_facts.os_family == "Archlinux"
+
+  handlers:
+    - name: Include handlers.
+      ansible.builtin.import_tasks: tasks/handlers.yml
+
+  tasks:
+    - name: Setup Docker.
+      ansible.builtin.import_tasks: tasks/docker.yml
+
+    - name: Set up Portainer
+      ansible.builtin.import_tasks: tasks/portainer.yml
+      when: portainer_enable
+
+    - name: Set up Pi Hole.
+      ansible.builtin.import_tasks: tasks/pi-hole.yml
+      when: pihole_enable
+
+    - name: Set up OpenVPN
+      ansible.builtin.import_tasks: tasks/openvpn.yml
+      when: ovpn_enable
+
+    - name: Set up Rasbpi Monitoring.
+      ansible.builtin.import_tasks: tasks/raspi-monitoring.yml
+      when: monitoring_enable
+
+    - name: Set up Air Gradient Monitoring.
+      ansible.builtin.import_tasks: tasks/airgradient.yml
+      when: airgradient_enable
+
+    - name: Set up Shelly Plug Monitoring.
+      ansible.builtin.import_tasks: tasks/shelly-plug.yml
+      when: shelly_plug_enable
+
+    - name: Set up Starlink Monitoring.
+      ansible.builtin.import_tasks: tasks/starlink.yml
+      when: starlink_enable
