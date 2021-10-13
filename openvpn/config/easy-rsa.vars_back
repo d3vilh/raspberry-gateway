@@ -1,0 +1,22 @@
+#export EASY_RSA="/usr/share/easy-rsa"
+export OPENSSL="openssl"
+export PKCS11TOOL="pkcs11-tool"
+export GREP="grep"
+export PKCS11_MODULE_PATH="dummy"
+export PKCS11_PIN="dummy"
+export KEY_COUNTRY="UA"
+export KEY_PROVINCE="Kyiv"
+export KEY_CITY="New York"
+export KEY_ORG="dummy"
+export KEY_EMAIL="demo@example.com"
+export KEY_OU="IT"
+export KEY_NAME="iXa-CA"
+export KEY_SIZE=2048
+
+export EASYRSA_REQ_COUNTRY="UA"
+export EASYRSA_REQ_PROVINCE="Kyiv"
+export EASYRSA_REQ_CITY="Chayka"
+export EASYRSA_REQ_ORG="Copyleft Certificate Co"
+export EASYRSA_REQ_EMAIL="me@example.net"
+export EASYRSA_REQ_OU="Fuck off"
+export EASYRSA_KEY_SIZE=2048

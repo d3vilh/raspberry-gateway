@@ -1,0 +1,56 @@
+---
+- name: Restart pi-hole
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/pi-hole/"
+    build: false
+    restarted: true
+  become: false
+
+- name: Restart rasbpi-monitoring
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/rasbpi-monitoring/"
+    build: false
+    restarted: true
+  become: false
+
+- name: Restart shelly-plug-prometheus
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/shelly-plug-prometheus/"
+    build: false
+    restarted: true
+  become: false
+
+- name: Restart airgradient-prometheus
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/airgradient-prometheus/"
+    build: false
+    restarted: true
+  become: false
+
+- name: Restart starlink-exporter
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/starlink-exporter/"
+    build: false
+    restarted: true
+  become: false
+
+- name: Restart portainer
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/portainer/"
+    build: false
+    restarted: true
+  become: false
+
+- name: Restart openvpn
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/openvpn/"
+    build: false
+    restarted: true
+  become: false
+
+#- name: Restart openvpn-ui
+#  community.docker.docker_compose:
+#    project_src: "{{ config_dir }}/openvpn-ui/"
+#    build: false
+#    restarted: true
+#  become: false  

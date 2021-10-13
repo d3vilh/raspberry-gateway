@@ -1,0 +1,49 @@
+---
+- name: Gather package facts.
+  ansible.builtin.package_facts:
+    manager: auto
+  when: ansible_facts.userspace_bits == '32'
+
+- name: Upgrade libseccomp2 to latest version (32-bit Debian).
+  ansible.builtin.import_tasks: tasks/debian-libseccomp-update.yml
+  when:
+    - ansible_facts.os_family == "Debian"
+    - ansible_facts.userspace_bits == '32'
+    - ansible_facts.packages['libseccomp2'][0]['version'] is version('2.4.4', '<')
+
+- name: Synchronize raspi-monitoring directory.
+  ansible.posix.synchronize:
+    src: raspi-monitoring
+    dest: "{{ config_dir }}/"
+    delete: false
+    recursive: true
+    perms: false
+  become: false
+
+- name: Ensure raspi-monitoring directory is not a Git repository.
+  ansible.builtin.file:
+    path: "{{ config_dir }}/raspi-monitoring/.git/"
+    state: absent
+  become: false
+
+- name: Copy templated raspi-monitoring files into place.
+  ansible.builtin.template:
+    src: templates/{{ item.src }}
+    dest: "{{ config_dir }}/raspi-monitoring/{{ item.dest }}"
+    mode: 0644
+  loop:
+    - src: grafana-config.monitoring.j2
+      dest: grafana/config.monitoring
+    - src: prometheus.yml.j2
+      dest: prometheus/prometheus.yml
+    - src: prometheus-pinghosts.yaml.j2
+      dest: prometheus/pinghosts.yaml
+  notify: Restart raspi-monitoring
+  become: false
+
+- name: Ensure raspi-monitoring environment is running.
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/raspi-monitoring/"
+    build: false
+  become: false
+
