@@ -1,5 +1,4 @@
 #!/bin/bash
-# OVPN SCRIPT
 set -e
 
 # .ovpn file path
@@ -22,29 +21,30 @@ echo 'Generate client certificate...'
 # Copy easy-rsa variables
 cd /usr/share/easy-rsa
 cp /etc/openvpn/config/easy-rsa.vars ./vars
-./vars
-echo $KEY_COUNTRY
-echo $KEY_EMAIL
 
 # Generate certificates
 if  [[ -z $2 ]]; then
     echo 'Without password...'
-    ./easyrsa --batch --req-cn="$1" gen-req "client-$1" nopass
+   # export KEY_NAME="$1"
+./easyrsa --batch --req-cn="$1" gen-req "$1" nopass 
 else
     echo 'With password...'
     # See https://stackoverflow.com/questions/4294689/how-to-generate-an-openssl-key-using-a-passphrase-from-the-command-line
     # ... and https://stackoverflow.com/questions/22415601/using-easy-rsa-how-to-automate-client-server-creation-process
     # ... and https://github.com/OpenVPN/easy-rsa/blob/master/doc/EasyRSA-Advanced.md
-    (echo -e '\n') | ./easyrsa --batch --req-cn="$1" --passin=pass:${2} --passout=pass:${2} gen-req "client-$1"
+    (echo -e '\n') | ./easyrsa --batch --req-cn="$1" --passin=pass:${2} --passout=pass:${2} gen-req "$1"
 fi
 
 # Sign request
-./easyrsa sign-req client "client-$1"
-
+./easyrsa sign-req client "$1"
+# Fix for /name in index.txt
+sed -i'.bak' "$ s/$/\/name=${1}/" /usr/share/easy-rsa/pki/index.txt
+echo "index.txt updated:"
+tail -1 /usr/share/easy-rsa/pki/index.txt
 # Certificate properties
 CA="$(cat ./pki/ca.crt )"
-CERT="$(cat ./pki/issued/client-${1}.crt | grep -zEo -e '-----BEGIN CERTIFICATE-----(\n|.)*-----END CERTIFICATE-----' | tr -d '\0')"
-KEY="$(cat ./pki/private/client-${1}.key)"
+CERT="$(cat ./pki/issued/${1}.crt | grep -zEo -e '-----BEGIN CERTIFICATE-----(\n|.)*-----END CERTIFICATE-----' | tr -d '\0')"
+KEY="$(cat ./pki/private/${1}.key)"
 TLS_AUTH="$(cat ./pki/ta.key)"
 
 #echo 'Sync pki directory...'

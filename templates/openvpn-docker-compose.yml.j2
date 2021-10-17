@@ -9,10 +9,6 @@ services:
        privileged: true
        ports: 
           - "1194:1194/udp"
-          - "2080:2080"
-       networks:
-           vpn-net:
-               ipv4_address: 10.0.70.2
        environment:
            REQ_COUNTRY: UA
            REQ_PROVINCE: Kyiv
@@ -28,7 +24,7 @@ services:
            - ./log:/var/log/openvpn
        cap_add:
            - NET_ADMIN
-       restart: unless-stopped
+       restart: always
        depends_on:
            - "openvpn-ui"
 
@@ -42,12 +38,5 @@ services:
            - ./:/etc/openvpn
            - ./db:/opt/openvpn-gui/db
            - ./pki:/usr/share/easy-rsa/pki
-       restart: unless-stopped
+       restart: always
 
-networks:
-    vpn-net:
-        driver: bridge
-        ipam:
-            driver: default
-            config:
-                -   subnet: 10.0.70.0/24
