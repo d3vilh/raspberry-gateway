@@ -10,7 +10,7 @@
 
 [**OpenVPN**](https://openvpn.net) server and [OpenVPN-web-ui](https://github.com/adamwalach/openvpn-web-ui) as UI administration interface:
 
-![OpenVPN WEB UI](/images/OpenVPN-UI.png)
+![OpenVPN WEB UI](/images/OpenVPN-UI-Home.png)
 
 [**Raspi Monitoring**](https://github.com/d3vilh/raspberry-gateway/tree/master/raspi-monitoring) which includes Gafana and Prometheus along with a few exporters to monitor your Raspberry server utilisation (CPU,MEM,I/O, Tempriture and Storage usage) with Internet connection statisitcs graphs based on Speedtest.net tests results, HTTP push tests for desired sites to mesure Internet connection, ping stats and overall network availability:
 
