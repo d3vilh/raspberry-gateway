@@ -30,13 +30,13 @@
   - **Starlink Monitoring**: Installs a [`starlink` prometheus exporter](https://github.com/danopstech/starlink_exporter) and a Grafana dashboard, which tracks and displays Starlink statistics. (Disabled by default)
   - **Shelly Plug Monitoring**: Installs a [`shelly-plug-prometheus` exporter](https://github.com/geerlingguy/shelly-plug-prometheus) and a Grafana dashboard, which tracks and displays power usage on a Shelly Plug running on the local network. (Disabled by default. Enable and configure using the `shelly_plug_*` vars in `config.yml`.)
 
-## Requirements
+# Requirements
 - [**Raspberry Pi 4**](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/), [**Raspberry Pi CM4**](https://www.raspberrypi.com/products/compute-module-4/?variant=raspberry-pi-cm4001000) **and** [**CM4 I/O Board**](https://www.raspberrypi.com/products/compute-module-4-io-board/) or [**Raspberry Pi 3**](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) board, all with 2-4Gb RAM minimum.
 - [**Raspberry Pi Imager**](https://www.raspberrypi.com/software/) to simplify installation of Raspberry Pi OS Lite.
 - **16Gb SD Card**
 > You can run it on Raspberry-pi Zero-W board as well, but be ware, that it has no internal Ehernet adapter and has very limited performance resources, which limits you on the number of running containers and clients connected to your VPN server.
 
-## Installation
+# Installation
 
   1. Install [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html):
      ```shell 
@@ -71,17 +71,18 @@
      ```
 > **If running locally on the Pi**: You may have error like `Error while fetching server API version`. You have to relogin (or reboot your Pi) and then run the playbook again.
 
-## Usage
+# Usage
 
-### Portainer
+## Portainer
 
 Visit the Pi's IP address (e.g. http://localhost:9000/) (change `localhost` to your docker host ip/name) it will ask to set new password during the first startup - save it.
 
-### Pi-hole
+## Pi-hole
 
 Visit the Pi's IP address (e.g. http://localhost/) and use the `pihole_password` you configured in your `config.yml` file.
 
-### OpenVPN 
+## OpenVPN 
+
 Im still porting **OpenVPN WEB UI** for Raspberry Pi as part of [this project](https://github.com/d3vilh/raspberry-gateway). Work is still in progress, but you alreday have container with GoLang Web UI available, which can be accessed by its own address (e.g. http://localhost:8080) and default preconfigured password `AbabaGalamaga1997` (shhh. its a secret). You can already see some statistics, OpenVPN logfile in realtime and generate new Client certificates by one click.
 
 However standard **OpenVPN server** are already accessisble for use with full functionality.
@@ -93,29 +94,6 @@ The volume container will be inicialized by using the official `openvpn_openvpn`
  - a self-certificate matching the private key for the OpenVPN server
  - a TLS auth key from HMAC security
 
-#### Generating .ovpn files
-
-Before client certificate generation you need to update the external IP address to your OpenVPN server in the client configuration `openvpn/config/client.conf`,  set your IP address here `remote <external_ip> <port> udp`. 
-
-The `client.conf` file will be used as base-configuration for each `.ovpn` file.
-
-```shell
-sudo docker exec openvpn bash /opt/app/bin/genclient.sh <name> <password>
-```
-
-You can find you .ovpn file under `/openvpn/clients/<name>.ovpn`, make sure to change the `remote ip-address`, `port` and `protocol`.
-
-#### Revoking .ovpn files
-
-```shell
-sudo docker exec openvpn bash /opt/app/bin/rmclient.sh <name>
-```
-
-Revoked certificates won't kill active connections, you'll have to restart the service if you want the user to immediately disconnect:
-```shell
-sudo docker-compose restart openvpn
-```
-
 This setup use `tun` mode, because it works on the widest range of devices. tap mode, for instance, does not work on Android, except if the device is rooted.
 
 The topology used is `subnet`, because it works on the widest range of OS. p2p, for instance, does not work on Windows.
@@ -123,6 +101,46 @@ The topology used is `subnet`, because it works on the widest range of OS. p2p, 
 The UDP server uses `10.0.70.0/24` for dynamic clients by default, just because.
 
 The client profile specifies `push redirect-gateway def1 bypass-dhcp`, meaning that after establishing the VPN connection, all traffic will go through the VPN. This might cause problems if you use local DNS recursors which are not directly reachable, since you will try to reach them through the VPN and they might not answer to you. If that happens, use public DNS resolvers like those of OpenDNS (`208.67.222.222` and `208.67.220.220`) or Google (`8.8.4.4` and `8.8.8.8`).
+
+### Generating .ovpn files
+
+Before client certificate generation you need to update the external IP address to your OpenVPN server in OVPN-UI GUI.
+
+For this go to "Configuration > Settings":
+
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_ext_serv_ip1.png" alt="Configuration > Settings" width="350" border="1" />
+
+And then update "Server Address (external)" field with your external Internet IP. Then go to "Certificates", enter new VPN client name in the field at the page below and press "Create" to generate new Client certificate:
+
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_ext_serv_ip2.png" alt="Server Address" width="350" border="1" />  <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_New_Client.png" alt="Create Certificate" width="350" border="1" />
+
+To download .OVPN client configuration file, press on the Client Name you just created:
+
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_New_Client_download.png" alt="download OVPN" width="350" border="1" />
+
+Deliver .OVPN file to the client devilce, open it in the Official OpenVPN client and connect with new profile to enjoy your free VPN:
+
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_Palm_import.png" alt="PalmTX Import" width="350" border="1" /> <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_Palm_connected.png" alt="PalmTX Connected" width="350" border="1" />
+
+### Alternative CLI way to generate .ovpn files
+
+Execute following command. Password as second argument is an optional:
+```shell
+sudo docker exec openvpn bash /opt/app/bin/genclient.sh <name> <?password?>
+```
+
+You can find you .ovpn file under `/openvpn/clients/<name>.ovpn`, make sure to check and modify the `remote ip-address`, `port` and `protocol`.
+
+### Revoking .ovpn files
+
+```shell
+sudo docker exec openvpn bash /opt/app/bin/rmclient.sh <name>
+```
+
+Revoked certificates won't kill active connections, you'll have to restart the service if you want the user to immediately disconnect. It can be done via Portainer GUI or CLI:
+```shell
+sudo docker-compose restart openvpn
+```
 
 All the Server and client configuration locates in Dockerfile volume and can be easly tuned. Here are tree of volume content:
 
@@ -176,7 +194,7 @@ All the Server and client configuration locates in Dockerfile volume and can be 
 |-- staticclients
 ```
 
-### Grafana
+## Grafana
 
 Visit the Pi's IP address with port 3030 (e.g. http://localhost:3030/), and log in with username `admin` and the password `monitoring_grafana_admin_password` you configured in your `config.yml`.
 
