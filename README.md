@@ -1,6 +1,6 @@
 # Raspberry Gateway
 
-**Raspberry PI internet gateway** is the *Swiss knife* in the world of home gateways. It includes **OpenVPN server** with simple WEB UI, **Pi-hole** - the network-wide ad-blocking and local DNS, Internet and Raspberry Pi **monitoring bashboards** and finally - **Portainer** the lightweight *universal* management GUI for all Docker enviroments included into this project.
+The Swiss knife in the world of home Internet gateways. It includes **OpenVPN server** with simple WEB UI, **Pi-hole** - the network-wide ad-blocking and local DNS, Internet and Raspberry Pi **monitoring bashboards** and finally - **Portainer** the lightweight *universal* management GUI for all Docker enviroments included into this project.
 
 ## Features
 
@@ -79,7 +79,7 @@ Visit the Pi's IP address (*e.g. http://localhost:9000/ , change `localhost` to 
 
 ## Pi-hole
 
-Visit the Pi's IP address (*e.g. http://localhost/ , change `localhost` to your Raspberry host ip/name*) the default password is `ASobakaBosa666` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L9) `config.yml` file in var `pihole_password`. Consider to change it before the installation as security must be secure.
+Visit the Pi's IP address (*e.g. http://localhost/ , change `localhost` to your Raspberry host ip/name*) the default password is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L9) `config.yml` file in var `pihole_password`. Consider to change it before the installation as security must be secure.
 
 ## OpenVPN 
 
@@ -196,13 +196,25 @@ All the Server and client configuration locates in Dockerfile volume and can be 
 |-- staticclients
 ```
 
-## Grafana
+## Raspi-monitoring
 
-Visit the Pi's IP address with port 3030 (e.g. http://localhost:3030/), and log in with username `admin` and the password `monitoring_grafana_admin_password` you configured in your `config.yml`.
+The DataSource and Dashboard for Raspi-monitoring are automatically provisioned.
+
+### Grafana dashboard
+
+is available at http://localhost:3030/d/o9mIe_Aik/Raspi-monitoring 
+
+Login with `admin` and the password `monitoring_grafana_admin_password` you preconfigured in `config.yml`.
 
 > Note: The `monitoring_grafana_admin_password` is only used the first time Grafana starts up; if you need to change it later, do it via Grafana's admin UI.
 
-## Prometheus
+If you don't see any data on dashboard - try to change the time duration to something smaller. If this does not helps - check via **Portainer UI** that all the exporters containers are running:
+
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/portainer-run.png" alt="Running containers" width="350" border="1" />
+
+Then debug **Prometheus targets** described in next partagraph.
+
+### Prometheus
 
 http://localhost:9090/targets shows status of monitored targets as seen from prometheus - in this case which hosts being pinged and speedtest. note: speedtest will take a while before it shows as UP as it takes about 30s to respond.
 
