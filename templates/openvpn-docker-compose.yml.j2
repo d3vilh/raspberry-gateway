@@ -31,9 +31,12 @@ services:
     openvpn-ui:
        container_name: openvpn-ui
        image: d3vilh/openvpn-ui-arm32v7:latest
+       environment:
+           - OPENVPN_ADMIN_USERNAME=admin
+           - OPENVPN_ADMIN_PASSWORD=PETROL
        privileged: true
        ports:
-          - "8080:8080/tcp"
+           - "8080:8080/tcp"
        volumes:
            - ./:/etc/openvpn
            - ./db:/opt/openvpn-gui/db
