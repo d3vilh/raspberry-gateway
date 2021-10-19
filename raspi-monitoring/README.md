@@ -1,49 +1,30 @@
-# Internet Monitoring Docker Stack with Prometheus + Grafana
+# Raspi-monitoring
 
-> This repository is a fork from [maxandersen/internet-monitoring](https://github.com/maxandersen/internet-monitoring), tailored for use on a Raspberry Pi. It has only been tested on a Raspberry Pi 4 running Pi OS 64-bit beta.
->
-> This has also recently been merged into the internet-pi repository, so there could be a few little things that need tweaking.
+[**Raspi Monitoring**](https://github.com/d3vilh/raspberry-gateway/tree/master/raspi-monitoring) for monitor your Raspberry server utilisation (CPU,MEM,I/O, Tempriture, storage usage) and Internet connection. Internet connection statistics is based on [Speedtest.net exporter](https://github.com/MiguelNdeCarvalho/speedtest-exporter) results, ping stats and overall Internet availability tests based on HTTP push methods running by [Blackbox exporter](https://github.com/prometheus/blackbox_exporter) to the desired internet sites:
 
-Stand-up a Docker [Prometheus](http://prometheus.io/) stack containing Prometheus, Grafana with [blackbox-exporter](https://github.com/prometheus/blackbox_exporter), and [speedtest-exporter](https://github.com/MiguelNdeCarvalho/speedtest-exporter) to collect and graph home Internet reliability and throughput.
+![Raspberry Monitoring Dashboard in Grafana picture 1](/images/raspi-monitoring_1.png) 
+![Raspberry Monitoring Dashboard in Grafana picture 2](/images/raspi-monitoring_2.png) 
 
-## Pre-requisites
+All this functionality based on [Grafana](https://grafana.com) and [Prometheus](http://prometheus.io/).
+  > If you use the included Raspi Monitoring, it **will download a decently-large amount of data through your Internet connection on a daily basis**. You can completetly shutdown containers belongs to the `Raspi-monitoring stack` with **Portainer** or tune the `raspi-monitoring` setup to not run the speedtests as often.
 
-Make sure Docker and [Docker Compose](https://docs.docker.com/compose/install/) are installed on your Docker host machine.
+The DataSource and Dashboard for Raspi-monitoring are automatically provisioned.
 
-## Quick Start
+## Grafana dashboard
 
-```
-git clone https://github.com/geerlingguy/internet-monitoring
-cd internet-monitoring
-docker-compose up -d
-```
+is available at http://localhost:3030/d/o9mIe_Aik/Raspi-monitoring 
 
-Go to [http://localhost:3030/d/o9mIe_Aik/internet-connection](http://localhost:3030/d/o9mIe_Aik/internet-connection) (change `localhost` to your docker host ip/name).
+Login with `admin` and the password `monitoring_grafana_admin_password` you preconfigured in `config.yml`.
 
-## Configuration
+> Note: The `monitoring_grafana_admin_password` is only used the first time Grafana starts up; if you need to change it later, do it via Grafana's admin UI.
 
-To change what hosts you ping you change the `targets` section in [/prometheus/pinghosts.yaml](./prometheus/pinghosts.yaml) file.
+If you don't see any data on dashboard - try to change the time duration to something smaller. If this does not helps - check via **Portainer UI** that all the exporters containers are running:
 
-For speedtest the only relevant configuration is how often you want the check to happen. It is at 30 minutes by default which might be too much if you have limit on downloads. This is changed by editing `scrape_interval` under `speedtest` in [/prometheus/prometheus.yml](./prometheus/prometheus.yml).
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/portainer-run.png" alt="Running containers" width="350" border="1" />
 
-Once configurations are done, run the following command:
+Then debug **Prometheus targets** described in next partagraph.
 
-    $ docker-compose up -d
-
-That's it. docker-compose builds the entire Grafana and Prometheus stack automagically.
-
-The Grafana Dashboard is now accessible via: `http://<Host IP Address>:3030` for example http://localhost:3030
-
-username - admin
-password - wonka (Password is stored in the `config.monitoring` env file)
-
-The DataSource and Dashboard for Grafana are automatically provisioned.
-
-If all works it should be available at http://localhost:3030/d/o9mIe_Aik/internet-connection - if no data shows up try change the timeduration to something smaller.
-
-<center><img src="images/dashboard.png" width="4600" heighth="500"></center>
-
-## Interesting urls
+## Prometheus
 
 http://localhost:9090/targets shows status of monitored targets as seen from prometheus - in this case which hosts being pinged and speedtest. note: speedtest will take a while before it shows as UP as it takes about 30s to respond.
 
@@ -53,11 +34,14 @@ http://localhost:9115 blackbox exporter endpoint. Lets you see what have failed/
 
 http://localhost:9798/metrics speedtest exporter endpoint. Does take about 30 seconds to show its result as it runs an actual speedtest when requested.
 
-## Thanks and a disclaimer
+### Configuration
 
-Thanks to @maxandersen for making the original project this fork is based on.
+To change what hosts you ping you change the `targets` section in [/prometheus/pinghosts.yaml](./prometheus/pinghosts.yaml) file.
 
-Thanks to @vegasbrianc work on making a [super easy docker](https://github.com/vegasbrianc/github-monitoring) stack for running prometheus and grafana.
+For speedtest the only relevant configuration is how often you want the check to happen. It is at 30 minutes by default which might be too much if you have limit on downloads. This is changed by editing `scrape_interval` under `speedtest` in [/prometheus/prometheus.yml](./prometheus/prometheus.yml).
 
-This setup is not secured in any way, so please only use on non-public networks, or find a way to secure it on your own.
+## Kudos and Дякую to the original authorts
 
+Kudos to @maxandersen for making the [Internet Monitoring](https://github.com/maxandersen/internet-monitoring) project, which forked and expanded with functionality to build Rasbpi-Monitoring.
+
+**Grand Kudos** to Jeff Geerling aka [@geerlingguy](https://github.com/geerlingguy) for all his efforts to make us interesting in Raspberry Pi compiters and for [all his propaganda on youtube](https://www.youtube.com/c/JeffGeerling). Consider to like and subscribe ;)
