@@ -24,6 +24,8 @@ portainer_enable: false
 
 # OpenVPN configuration.
 ovpn_enable: true
+ovpnui_user: "admin"
+ovpnui_password: "gagaZush" #Change this password!
 
 # AirGradient configuration. (Also requires `monitoring_enable`)
 airgradient_enable: false
