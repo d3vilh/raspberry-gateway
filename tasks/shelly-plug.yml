@@ -25,7 +25,7 @@
 - name: Copy shelly dashboard config to grafana
   ansible.builtin.copy:
     src: files/power-consumption.json
-    dest: "{{ config_dir }}/rasbpi-monitoring/grafana/provisioning/dashboards/"
+    dest: "{{ config_dir }}/raspi-monitoring/grafana/provisioning/dashboards/"
     mode: 0644
   become: false
 
