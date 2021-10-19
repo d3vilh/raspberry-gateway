@@ -32,8 +32,8 @@ services:
        container_name: openvpn-ui
        image: d3vilh/openvpn-ui-arm32v7:latest
        environment:
-           - OPENVPN_ADMIN_USERNAME=admin
-           - OPENVPN_ADMIN_PASSWORD=PETROL
+           - OPENVPN_ADMIN_USERNAME={{ ovpnui_user }}
+           - OPENVPN_ADMIN_PASSWORD={{ ovpnui_password }}
        privileged: true
        ports:
            - "8080:8080/tcp"
