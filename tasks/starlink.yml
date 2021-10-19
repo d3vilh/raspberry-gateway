@@ -23,7 +23,7 @@
 - name: Copy starlink dashboard config to grafana.
   ansible.builtin.copy:
     src: files/starlink-overview.json
-    dest: "{{ config_dir }}/rasbpi-monitoring/grafana/provisioning/dashboards/"
+    dest: "{{ config_dir }}/raspi-monitoring/grafana/provisioning/dashboards/"
     mode: 0644
   become: false
 
