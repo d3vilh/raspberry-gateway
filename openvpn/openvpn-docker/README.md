@@ -6,8 +6,55 @@ There is already an existing docker-image for openvpn created by [kylemanna/dock
 Most of its documentation can be found in the [root](https://github.com/d3vilh/raspberry-gateway) directory, if you want to run it without anything else you'll have to edit the [dns-configuration](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn/config/server.conf#L20) (which currently points to the PiHole DNS Server) and
 if you don't want to use a custom dns-resolve at all you may also want to comment out [this line](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn/config/server.conf#L39).
 
+### Run this image using a `docker-compose.yml` file
 
-### Run this image using `docker` itself
+```yaml
+---
+version: "3.5"
+
+services:
+    openvpn:
+       container_name: openvpn
+       build: ./openvpn-docker
+       privileged: true
+       ports: 
+          - "1194:1194/udp"
+       environment:
+           - REQ_COUNTRY: UA
+           - REQ_PROVINCE: Kyiv
+           - REQ_CITY: Chayka
+           - REQ_ORG: CopyleftCertificateCo
+           - REQ_OU: ShantiShanti
+           - REQ_CN: MyOpenVPN
+       volumes:
+           - ./pki:/etc/openvpn/pki
+           - ./clients:/etc/openvpn/clients
+           - ./config:/etc/openvpn/config
+           - ./staticclients:/etc/openvpn/staticclients
+           - ./log:/var/log/openvpn
+       cap_add:
+           - NET_ADMIN
+       restart: always
+       depends_on:
+           - "openvpn-ui"
+
+    openvpn-ui:
+       container_name: openvpn-ui
+       image: d3vilh/openvpn-ui-arm32v7:latest
+       environment:
+           - OPENVPN_ADMIN_USERNAME='admin'
+           - OPENVPN_ADMIN_PASSWORD='gagaZush'
+       privileged: true
+       ports:
+           - "8080:8080/tcp"
+       volumes:
+           - ./:/etc/openvpn
+           - ./db:/opt/openvpn-gui/db
+           - ./pki:/usr/share/easy-rsa/pki
+       restart: always
+```
+
+### Run this image using the Docker itself
 
 First, build the images:
 ```sh
@@ -38,54 +85,6 @@ docker run \
 -e OPENVPN_ADMIN_PASSWORD='gagaZush' \
 -p 8080:8080/tcp \
 --privileged local/openvpn-ui
-```
-
-### Run this image using a `docker-compose.yml` file
-
-```yaml
----
-version: "3.5"
-
-services:
-    openvpn:
-       container_name: openvpn
-       build: ./openvpn-docker
-       privileged: true
-       ports: 
-          - "1194:1194/udp"
-       environment:
-           REQ_COUNTRY: UA
-           REQ_PROVINCE: Kyiv
-           REQ_CITY: Chayka
-           REQ_ORG: CopyleftCertificateCo
-           REQ_OU: ShantiShanti
-           REQ_CN: MyOpenVPN
-       volumes:
-           - ./pki:/etc/openvpn/pki
-           - ./clients:/etc/openvpn/clients
-           - ./config:/etc/openvpn/config
-           - ./staticclients:/etc/openvpn/staticclients
-           - ./log:/var/log/openvpn
-       cap_add:
-           - NET_ADMIN
-       restart: always
-       depends_on:
-           - "openvpn-ui"
-
-    openvpn-ui:
-       container_name: openvpn-ui
-       image: d3vilh/openvpn-ui-arm32v7:latest
-       environment:
-           - OPENVPN_ADMIN_USERNAME={{ ovpnui_user }}
-           - OPENVPN_ADMIN_PASSWORD={{ ovpnui_password }}
-       privileged: true
-       ports:
-           - "8080:8080/tcp"
-       volumes:
-           - ./:/etc/openvpn
-           - ./db:/opt/openvpn-gui/db
-           - ./pki:/usr/share/easy-rsa/pki
-       restart: always
 ```
 
 [**OpenVPN**](https://openvpn.net) as a server and **OpenVPN-web-ui** as a WEB UI screenshots:
@@ -218,6 +217,3 @@ All the Server and client configuration locates in Dockerfile volume and can be 
 |   |-- ta.key
 |-- staticclients
 ```
-
-
-
