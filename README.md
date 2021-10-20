@@ -1,6 +1,6 @@
 # Raspberry Gateway
 
-The Swiss knife in the world of home Internet gateways. It includes **OpenVPN server** with simple WEB UI, **Pi-hole** - the network-wide ad-blocking and local DNS, Internet and Raspberry Pi **monitoring bashboards** and finally - **Portainer** the lightweight *universal* management GUI for all Docker enviroments included into this project.
+The Swiss knife in the world of home Internet gateways. It includes **OpenVPN server** with simple WEB UI, **Pi-hole** - the network-wide ad-blocking local DNS, Internet and Raspberry **monitoring bashboards** and the **Portainer** a lightweight *universal* management GUI for all Docker enviroments which included into this project.
 
 ## Features
 
@@ -20,7 +20,7 @@ The Swiss knife in the world of home Internet gateways. It includes **OpenVPN se
 All this functionality based on [Grafana](https://grafana.com) and [Prometheus](http://prometheus.io/).
   > If you use the included Raspi Monitoring, it **will download a decently-large amount of data through your Internet connection on a daily basis**. You can completetly shutdown containers belongs to the `Raspi-monitoring stack` with **Portainer** or tune the `raspi-monitoring` setup to not run the speedtests as often.
 
-[**Portainer**](https://www.portainer.io) is a lightweight *universal* management interface that can be used to easily manage Docker or K8S containers and environments which included into [raspberry-gateway](https://github.com/d3vilh/raspberry-gateway) project:
+[**Portainer**](https://www.portainer.io) is a lightweight *universal* management interface that can be used to easily manage Docker or K8S containers and environments which included in this setup:
 
 ![Portainer](/images/portainer.png)
 
@@ -75,7 +75,7 @@ All this functionality based on [Grafana](https://grafana.com) and [Prometheus](
 
 ## Portainer
 
-Visit the Pi's IP address (*e.g. http://localhost:9000/ , change `localhost` to your Raspberry host ip/name*) it will ask to set new password during the first startup - don't forget it.
+Visit the Pi's IP address (*e.g. http://localhost:9000/ , change `localhost` to your Raspberry host ip/name*) it will ask to set new password during the first startup - save the password.
 
 ## Pi-hole
 
@@ -233,5 +233,3 @@ Kudos to @adamwalach for development of original [OpenVPN-WEB-UI](https://github
 Kudos to @maxandersen for making the [Internet Monitoring](https://github.com/maxandersen/internet-monitoring) project, which forked and expanded with functionality to build Rasbpi-Monitoring.
 
 **Grand Kudos** to Jeff Geerling aka [@geerlingguy](https://github.com/geerlingguy) for all his efforts to make us interesting in Raspberry Pi compiters and for [all his propaganda on youtube](https://www.youtube.com/c/JeffGeerling). Consider to like and subscribe ;)
-
-
