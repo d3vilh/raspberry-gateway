@@ -29,5 +29,5 @@
     mode: 0644
   become: false
   loop: "{{ airgradient_sensors }}"
-  notify: Restart Raspi-monitoring
+  notify: Restart raspi-monitoring
 
