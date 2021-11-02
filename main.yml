@@ -42,7 +42,7 @@
       ansible.builtin.import_tasks: tasks/openvpn.yml
       when: ovpn_enable
 
-    - name: Set up Rasbpi Monitoring.
+    - name: Set up Raspi Monitoring.
       ansible.builtin.import_tasks: tasks/raspi-monitoring.yml
       when: monitoring_enable
 

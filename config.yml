@@ -3,10 +3,10 @@
 config_dir: '~'
 
 # Porteiner configuration.
-portainer_enable: false
+portainer_enable: true
 
 # Pi-hole configuration.
-pihole_enable: false
+pihole_enable: true
 pihole_hostname: pihole
 pihole_timezone: Europe/Kiev
 pihole_password: "gagaZush" #Change this password!
@@ -17,7 +17,7 @@ ovpnui_user: "admin"
 ovpnui_password: "gagaZush" #Change this password!
 
 # Raspi-monitoring configuration.
-monitoring_enable: false
+monitoring_enable: true
 monitoring_grafana_admin_password: "admin" #Is only used the first time Grafana starts up
 monitoring_speedtest_interval: 60m
 monitoring_ping_interval: 5s
@@ -28,11 +28,11 @@ monitoring_ping_hosts:  # [URL];[HUMAN_READABLE_NAME]
   - https://d3.ru/;d3.ru
 
 # AirGradient configuration. (Also requires `monitoring_enable`)
-airgradient_enable: false
+airgradient_enable: true 
 airgradient_sensors:
   # ID Should be limited to no more than 38 characters, in the set a-z.
   - id: livingroom
-    port: 9925
+    port: 9926
 
 # Starlink configuration. (Also requires `monitoring_enable`)
 starlink_enable: false
