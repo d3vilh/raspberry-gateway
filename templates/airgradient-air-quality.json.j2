@@ -18,7 +18,6 @@
       }
     ]
   },
-  "description": "Dashboard for AirGradient DIY  monitoring station",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "gnetId": null,
@@ -34,6 +33,7 @@
             "mode": "thresholds"
           },
           "mappings": [],
+          "max": 3000,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -56,7 +56,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 10,
         "w": 6,
         "x": 0,
         "y": 0
@@ -120,7 +120,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 10,
         "w": 6,
         "x": 6,
         "y": 0
@@ -320,10 +320,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 6,
-        "w": 12,
+        "h": 11,
+        "w": 17,
         "x": 0,
-        "y": 6
+        "y": 10
       },
       "hiddenSeries": false,
       "id": 2,
@@ -436,10 +436,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 12,
+        "h": 9,
+        "w": 17,
         "x": 0,
-        "y": 12
+        "y": 21
       },
       "hiddenSeries": false,
       "id": 3,
@@ -543,27 +543,20 @@
       }
     }
   ],
-  "refresh": "1m",
+  "refresh": "",
   "schemaVersion": 31,
   "style": "dark",
-  "tags": [
-    "AirGradient",
-    "CO2",
-    "PM2",
-    "humidity",
-    "temp",
-    "raspberry"
-  ],
+  "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-2d",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
-  "title": "AirGradient - office",
+  "title": "AirGradient",
   "uid": "aglivingroom",
   "version": 1
 }
