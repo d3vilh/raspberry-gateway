@@ -19,7 +19,7 @@ cd /opt/app/easy-rsa
 cp /etc/openvpn/config/easy-rsa.vars ./vars
 
 # Revoke certificate
-./easyrsa revoke "client-$1"
+./easyrsa revoke "$1"
 
 echo 'Create new Create certificate revocation list (CRL)...'
 ./easyrsa gen-crl
