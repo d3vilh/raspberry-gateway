@@ -10,6 +10,9 @@ if [[ ! -f $DEST_FILE_PATH ]]; then
     exit 1
 fi
 
+# Fix index.txt by remove /name=$1
+sed -i'.bak' "s/\/name=${1}//" /opt/app/easy-rsa/pki/index.txt
+
 export EASYRSA_BATCH=1 # see https://superuser.com/questions/1331293/easy-rsa-v3-execute-build-ca-and-gen-req-silently
 
 echo 'Revoke certificate...'
@@ -31,4 +34,3 @@ cp -r ./pki/. /etc/openvpn/pki
 
 echo 'Done!'
 echo 'If you want to disconnect the user please restart the service using docker-compose restart openvpn.'
-
