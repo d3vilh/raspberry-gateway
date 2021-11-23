@@ -12,21 +12,20 @@ The Swiss knife in the world of home Internet gateways. It includes **OpenVPN se
 
 ![OpenVPN WEB UI](/images/OpenVPN-UI-Home.png)
 
+[**Portainer**](https://www.portainer.io) is a lightweight *universal* management interface that can be used to easily manage Docker or K8S containers and environments which included in this setup:
+
+![Portainer](/images/portainer.png)
+
 [**Raspi Monitoring**](https://github.com/d3vilh/raspberry-gateway/tree/master/raspi-monitoring) to monitor your Raspberry server utilisation (CPU,MEM,I/O, Tempriture, storage usage) and Internet connection. Internet connection statistics is based on [Speedtest.net exporter](https://github.com/MiguelNdeCarvalho/speedtest-exporter) results, ping stats and overall Internet availability tests based on HTTP push methods running by [Blackbox exporter](https://github.com/prometheus/blackbox_exporter) to the desired internet sites:
 
 ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/raspi-monitoring_1.png) 
 ![Raspberry Monitoring Dashboard in Grafana picture 2](/images/raspi-monitoring_2.png) 
 
-All this functionality based on [Grafana](https://grafana.com) and [Prometheus](http://prometheus.io/).
-  > If you use the included Raspi Monitoring, it **will download a decently-large amount of data through your Internet connection on a daily basis**. You can completetly shutdown containers belongs to the `Raspi-monitoring stack` with **Portainer** or tune the `raspi-monitoring` setup to not run the speedtests as often.
+[**AirGradient Monitoring**](https://www.airgradient.com): Installs an [`airgradient-prometheus` exporter](https://github.com/geerlingguy/airgradient-prometheus) and a Grafana dashboard, which tracks and displays air quality over time via a local [AirGradient DIY monitor](https://www.airgradient.com/diy/).
 
-[**Portainer**](https://www.portainer.io) is a lightweight *universal* management interface that can be used to easily manage Docker or K8S containers and environments which included in this setup:
-
-![Portainer](/images/portainer.png)
+![AirGradient Monitoring Dashboard in Grafana picture 1](/images/air-gradient_1.png) 
 
 ## Other features:
-
-  - [**AirGradient Monitoring**](https://www.airgradient.com): Installs an [`airgradient-prometheus` exporter](https://github.com/geerlingguy/airgradient-prometheus) and a Grafana dashboard, which tracks and displays air quality over time via a local [AirGradient DIY monitor](https://www.airgradient.com/diy/). (Disabled by default. Enable and configure using the `airgradient_enable` var in `config.yml`. See example configuration for ability to monitor multiple AirGradient DIY stations.)
   - **Starlink Monitoring**: Installs a [`starlink` prometheus exporter](https://github.com/danopstech/starlink_exporter) and a Grafana dashboard, which tracks and displays Starlink statistics. (Disabled by default)
   - **Shelly Plug Monitoring**: Installs a [`shelly-plug-prometheus` exporter](https://github.com/geerlingguy/shelly-plug-prometheus) and a Grafana dashboard, which tracks and displays power usage on a Shelly Plug running on the local network. (Disabled by default. Enable and configure using the `shelly_plug_*` vars in `config.yml`.)
 
