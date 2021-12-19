@@ -34,9 +34,9 @@ The Swiss knife in the world of home Internet gateways. It includes **OpenVPN se
 - [**Raspberry Pi Imager**](https://www.raspberrypi.com/software/) to simplify installation of Raspberry Pi OS Lite (32bit).
 - [**Raspios Lite (64bit)**](https://downloads.raspberrypi.org/raspios_lite_arm64/images/) however is recommended for this setup.
 - **16Gb SD Card**
-> You can run it on Raspberry-pi Zero-W board as well, but be ware, that it has no internal Ehernet adapter and has very limited performance resources, which limits you on the number of running containers and clients connected to your VPN server.
-
 > You can run it on CM4 board with 8Gb eMMC card. Full installation on top of latest [Raspios lite (64bit)](https://downloads.raspberrypi.org/raspios_lite_arm64/images/) will use 4,5Gb of your eMMC card.
+
+> You can run it on Raspberry-pi Zero-W board as well, but be ware, that it has no internal Ehernet adapter and has very limited performance resources, which limits you on the number of running containers and clients connected to your VPN server.
 
 # Installation
 
@@ -85,7 +85,7 @@ Visit the Pi's IP address (*e.g. http://localhost/ , change `localhost` to your 
 
 ## OpenVPN 
 
-**OpenVPN WEB UI** can be accessed on own port (*e.g. http://localhost:8080 , change `localhost` to your Raspberry host ip/name*), the default user and password is `admin/gagaZush` preconfigured in `config.yml` which you supposed to [set in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L28) `ovpnui_user` & `ovpnui_password` vars, just before the installation.
+**OpenVPN WEB UI** can be accessed on own port (*e.g. http://localhost:8080 , change `localhost` to your Raspberry host ip/name*), the default user and password is `admin/gagaZush` preconfigured in `config.yml` which you supposed to [set in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L44) `ovpnui_user` & `ovpnui_password` vars, just before the installation.
 
 The volume container will be inicialized by using the official OpenVPN `openvpn_openvpn` image with included scripts to automatically generate everything you need  on the first run:
  - Diffie-Hellman parameters
