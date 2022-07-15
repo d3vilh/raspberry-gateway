@@ -24,14 +24,16 @@ monitoring_ping_interval: 5s
 monitoring_ping_hosts:  # [URL];[HUMAN_READABLE_NAME]
   - http://www.google.com/;google.com
   - https://www.apple.com/;apple.com
-  - https://github.com/;github.com
-  - https://d3.ru/;d3.ru
+  - https://github.com/;github
+  - https://reddit.com/;reddit
 
 # AirGradient configuration. (Also requires `monitoring_enable`)
 airgradient_enable: true 
 airgradient_sensors:
   # ID Should be limited to no more than 38 characters, in the set a-z.
+  # AirGradient FW example ./files/AirGradient-DIY.ino 
   - id: livingroom
+    ip: "192.168.88.6"
     port: 9926
 
 # Starlink configuration. (Also requires `monitoring_enable`)
