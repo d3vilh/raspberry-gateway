@@ -16,7 +16,7 @@ AirGradient ag = AirGradient();
 // Config ----------------------------------------------------------------------
 
 // Optional.
-const char* deviceId = "";
+const char* deviceId = "livingroom";
 
 // set to 'F' to switch display from Celcius to Fahrenheit
 char temp_display = 'C';
@@ -27,8 +27,8 @@ const bool hasCO2 = true;
 const bool hasSHT = true;
 
 // WiFi and IP connection info.
-const char* ssid = "PleaseChangeMe!";
-const char* password = "PleaseChangeMe!";
+const char* ssid = "ChangeME!";
+const char* password = "ChangeME!";
 const int port = 9926;
 
 // Uncomment the line below to configure a static IP address.
@@ -132,7 +132,9 @@ String GenerateMetrics() {
 
   if (hasCO2) {
     int stat = ag.getCO2_Raw();
-
+    // fix for bad counters.
+    if (stat >= 10000) stat = 0;
+    if (stat < 0) stat = 0;
     message += "# HELP rco2 CO2 value, in ppm\n";
     message += "# TYPE rco2 gauge\n";
     message += "rco2";
@@ -143,12 +145,12 @@ String GenerateMetrics() {
 
   if (hasSHT) {
     TMP_RH stat = ag.periodicFetchData();
-
     message += "# HELP atmp Temperature, in degrees Celsius\n";
     message += "# TYPE atmp gauge\n";
     message += "atmp";
     message += idString;
-    message += String(stat.t);
+    // Dirty Temp adjust (-3 degrees)
+    message += String(stat.t - 3);
     message += "\n";
 
     message += "# HELP rhum Relative humidity, in percent\n";
@@ -208,6 +210,8 @@ void updateScreen(long now) {
       case 1:
         if (hasCO2) {
           int stat = ag.getCO2_Raw();
+          if (stat >= 10000) stat = 0;
+          if (stat < 0) stat = 0;
           showTextRectangle("CO2", String(stat), false);
         }
         break;
@@ -217,7 +221,7 @@ void updateScreen(long now) {
           if (temp_display == 'F' || temp_display == 'f') {
             showTextRectangle("TMP", String((stat.t * 9 / 5) + 32, 1) + "F", false);
           } else {
-            showTextRectangle("TMP", String(stat.t, 1) + "C", false);
+            showTextRectangle("TMP", String(stat.t - 3, 1) + "C", false);
           }
         }
         break;
