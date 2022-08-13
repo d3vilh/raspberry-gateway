@@ -27,8 +27,8 @@ const bool hasCO2 = true;
 const bool hasSHT = true;
 
 // WiFi and IP connection info.
-const char* ssid = "ChangeME!";
-const char* password = "ChangeME!";
+const char* ssid = "ChangeMe!";
+const char* password = "ChangeMe!";
 const int port = 9926;
 
 // Uncomment the line below to configure a static IP address.
@@ -45,6 +45,7 @@ const int updateFrequency = 5000;
 // For housekeeping.
 long lastUpdate;
 int counter = 0;
+int stat_prev = 0;
 
 // Config End ------------------------------------------------------------------
 
@@ -132,9 +133,8 @@ String GenerateMetrics() {
 
   if (hasCO2) {
     int stat = ag.getCO2_Raw();
-    // fix for bad counters.
-    if (stat >= 10000) stat = 0;
-    if (stat < 0) stat = 0;
+    if (stat <= 10000 || stat > 0) stat_prev = stat;   // saving not glitchy value
+    if (stat >= 10000 || stat < 0) stat = stat_prev;   // using previous not glitchy value if curent value is glitchy
     message += "# HELP rco2 CO2 value, in ppm\n";
     message += "# TYPE rco2 gauge\n";
     message += "rco2";
@@ -210,8 +210,8 @@ void updateScreen(long now) {
       case 1:
         if (hasCO2) {
           int stat = ag.getCO2_Raw();
-          if (stat >= 10000) stat = 0;
-          if (stat < 0) stat = 0;
+          if (stat <= 10000 || stat > 0) stat_prev = stat;   // saving not glitchy value
+          if (stat >= 10000 || stat < 0) stat = stat_prev;   // using previous not glitchy value if curent value is glitchy
           showTextRectangle("CO2", String(stat), false);
         }
         break;
