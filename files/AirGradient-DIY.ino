@@ -27,8 +27,8 @@ const bool hasCO2 = true;
 const bool hasSHT = true;
 
 // WiFi and IP connection info.
-const char* ssid = "ChangeMe!";
-const char* password = "ChangeMe!";
+const char* ssid = "NETCOM VIKTOR";
+const char* password = "58879016";
 const int port = 9926;
 
 // Uncomment the line below to configure a static IP address.
@@ -132,14 +132,19 @@ String GenerateMetrics() {
   }
 
   if (hasCO2) {
+    int statf = 0;
     int stat = ag.getCO2_Raw();
-    if (stat <= 10000 || stat > 0) stat_prev = stat;   // saving not glitchy value
-    if (stat >= 10000 || stat < 0) stat = stat_prev;   // using previous not glitchy value if curent value is glitchy
+       if (stat >= 0 && stat <= 10000) {
+         statf = stat;
+         stat_prev = statf; // saving not glitchy value
+       } else {
+         statf = stat_prev; // using previous not glitchy value if curent value is glitchy
+       }
     message += "# HELP rco2 CO2 value, in ppm\n";
     message += "# TYPE rco2 gauge\n";
     message += "rco2";
     message += idString;
-    message += String(stat);
+    message += String(statf);
     message += "\n";
   }
 
@@ -209,10 +214,15 @@ void updateScreen(long now) {
         break;
       case 1:
         if (hasCO2) {
+          int statf = 0;
           int stat = ag.getCO2_Raw();
-          if (stat <= 10000 || stat > 0) stat_prev = stat;   // saving not glitchy value
-          if (stat >= 10000 || stat < 0) stat = stat_prev;   // using previous not glitchy value if curent value is glitchy
-          showTextRectangle("CO2", String(stat), false);
+          if (stat >= 0 && stat <= 10000) {
+           statf = stat;
+           stat_prev = statf; // saving not glitchy value
+          } else {
+            statf = stat_prev; // using previous not glitchy value if curent value is glitchy
+          }
+          showTextRectangle("CO2", String(statf), false);
         }
         break;
       case 2:
