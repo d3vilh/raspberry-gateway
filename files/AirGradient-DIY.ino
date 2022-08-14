@@ -27,8 +27,8 @@ const bool hasCO2 = true;
 const bool hasSHT = true;
 
 // WiFi and IP connection info.
-const char* ssid = "NETCOM VIKTOR";
-const char* password = "58879016";
+const char* ssid = "ChangeMe!";
+const char* password = "ChangeMe!";
 const int port = 9926;
 
 // Uncomment the line below to configure a static IP address.
