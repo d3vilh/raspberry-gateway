@@ -27,8 +27,8 @@ const bool hasCO2 = true;
 const bool hasSHT = true;
 
 // WiFi and IP connection info.
-const char* ssid = "ChangeME!";
-const char* password = "ChangeME!";
+const char* ssid = "ChangeMe!";
+const char* password = "ChangeMe!";
 const int port = 9926;
 
 // Uncomment the line below to configure a static IP address.
@@ -45,7 +45,9 @@ const int updateFrequency = 5000;
 // For housekeeping.
 long lastUpdate;
 int counter = 0;
-int stat_prev = 0;
+int stat_prev_pm = 0;
+int stat_prev_co = 0;
+
 
 // Config End ------------------------------------------------------------------
 
@@ -121,30 +123,36 @@ String GenerateMetrics() {
   String idString = "{id=\"" + String(deviceId) + "\",mac=\"" + WiFi.macAddress().c_str() + "\"}";
 
   if (hasPM) {
+    int statf_pm = 0;
     int stat = ag.getPM2_Raw();
-
+       if (stat >= 0 && stat <= 10000) {
+         statf_pm = stat;
+         stat_prev_pm = statf_pm; // saving not glitchy value
+       } else {
+         statf_pm = stat_prev_pm; // using previous not glitchy value if curent value is glitchy
+       }
     message += "# HELP pm02 Particulate Matter PM2.5 value\n";
     message += "# TYPE pm02 gauge\n";
     message += "pm02";
     message += idString;
-    message += String(stat);
+    message += String(statf_pm);
     message += "\n";
   }
 
   if (hasCO2) {
-    int statf = 0;
+    int statf_co = 0;
     int stat = ag.getCO2_Raw();
        if (stat >= 0 && stat <= 10000) {
-         statf = stat;
-         stat_prev = statf; // saving not glitchy value
+         statf_co = stat;
+         stat_prev_co = statf_co; // saving not glitchy value
        } else {
-         statf = stat_prev; // using previous not glitchy value if curent value is glitchy
+         statf_co = stat_prev_co; // using previous not glitchy value if curent value is glitchy
        }
     message += "# HELP rco2 CO2 value, in ppm\n";
     message += "# TYPE rco2 gauge\n";
     message += "rco2";
     message += idString;
-    message += String(statf);
+    message += String(statf_co);
     message += "\n";
   }
 
@@ -208,21 +216,28 @@ void updateScreen(long now) {
     switch (counter) {
       case 0:
         if (hasPM) {
+          int statf_pm = 0;
           int stat = ag.getPM2_Raw();
-          showTextRectangle("PM2",String(stat),false);
+          if (stat >= 0 && stat <= 10000) {
+           statf_pm = stat;
+           stat_prev_pm = statf_pm; // saving not glitchy value
+          } else {
+            statf_pm = stat_prev_pm; // using previous not glitchy value if curent value is glitchy
+          }
+          showTextRectangle("PM2",String(statf_pm),false);
         }
         break;
       case 1:
         if (hasCO2) {
-          int statf = 0;
+          int statf_co = 0;
           int stat = ag.getCO2_Raw();
           if (stat >= 0 && stat <= 10000) {
-           statf = stat;
-           stat_prev = statf; // saving not glitchy value
+           statf_co = stat;
+           stat_prev_co = statf_co; // saving not glitchy value
           } else {
-            statf = stat_prev; // using previous not glitchy value if curent value is glitchy
+            statf_co = stat_prev_co; // using previous not glitchy value if curent value is glitchy
           }
-          showTextRectangle("CO2", String(statf), false);
+          showTextRectangle("CO2", String(statf_co), false);
         }
         break;
       case 2:
