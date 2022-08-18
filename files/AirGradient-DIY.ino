@@ -27,8 +27,8 @@ const bool hasCO2 = true;
 const bool hasSHT = true;
 
 // WiFi and IP connection info.
-const char* ssid = "ChangeMe!";
-const char* password = "ChangeMe!";
+const char* ssid = "NETCOM VIKTOR";
+const char* password = "58879016";
 const int port = 9926;
 
 // Uncomment the line below to configure a static IP address.
@@ -125,7 +125,7 @@ String GenerateMetrics() {
   if (hasPM) {
     int statf_pm = 0;
     int stat = ag.getPM2_Raw();
-       if (stat >= 0 && stat <= 10000) {
+       if (stat > 0 && stat <= 10000) {
          statf_pm = stat;
          stat_prev_pm = statf_pm; // saving not glitchy value
        } else {
@@ -218,7 +218,7 @@ void updateScreen(long now) {
         if (hasPM) {
           int statf_pm = 0;
           int stat = ag.getPM2_Raw();
-          if (stat >= 0 && stat <= 10000) {
+          if (stat > 0 && stat <= 10000) {
            statf_pm = stat;
            stat_prev_pm = statf_pm; // saving not glitchy value
           } else {
