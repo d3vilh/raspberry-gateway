@@ -3,6 +3,14 @@
  * tiny HTTP server to serve air quality metrics to Prometheus.
  */
 
+/*
+  PM1 and PM10 reporting for Plantower PMS5003 PM2.5 sensor enabled.
+  Workaround for glitchy CO2 and PM sensors reporting included.
+  For using this .ino you have to install improved AirGradient libraries, which supports PM1 and PM10 reporting: 
+  https://github.com/d3vilh/airgradient-improved
+*/
+
+
 #include <AirGradient.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
@@ -326,3 +334,4 @@ void updateScreen(long now) {
     lastUpdate = millis();
   }
 }
+
