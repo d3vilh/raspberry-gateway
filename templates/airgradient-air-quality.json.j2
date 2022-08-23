@@ -335,7 +335,7 @@
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
       },
-      "description": "M2.5 are fine particles that have a diameter less than 2.5 micrometers\nThe Indoor Air Hygiene Institute requires a PM2.5 level of 12 μg/m3 or less, with infrequent or no spikes of 35 μg/m3 or higher. \n\nIf the level goes to or above 35 μg/m3 during a 24-hour period, the air is considered unhealthy and can cause issues for people with existing breathing issues such as asthma. Prolonged exposure to levels above 50 μg/m3 can lead to serious health issues and premature mortality.\n\nIn areas with high outdoor pollution (above 35 μg/m3 in the outdoor air), windows to the building should be closed and outdoor air brought inside using HEPA filtration.\n",
+      "description": "M2.5 are fine particles that have a diameter in range of 1.0~2.5 microns (μm) -  Combustion particles, organic compounds, metals, etc. <2.5 um (microns) in diameter\n\nThe Indoor Air Hygiene Institute requires a PM2.5 level of 12 μg/m3 or less, with infrequent or no spikes of 35 μg/m3 or higher. \n\nIf the level goes to or above 35 μg/m3 during a 24-hour period, the air is considered unhealthy and can cause issues for people with existing breathing issues such as asthma. Prolonged exposure to levels above 50 μg/m3 can lead to serious health issues and premature mortality.\n\nIn areas with high outdoor pollution (above 35 μg/m3 in the outdoor air), windows to the building should be closed and outdoor air brought inside using HEPA filtration.\n",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -432,6 +432,200 @@
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
       },
+      "description": "PM1 dust is particulate matter with an aerodynamic diameter is in range of 0.3~1.0 microns (μm).\n\n\nThe Indoor Air Hygiene Institute requires a PM2.5 level of 12 μg/m3 or less, with infrequent or no spikes of 35 μg/m3 or higher. \n\nIf the level goes to or above 35 μg/m3 during a 24-hour period, the air is considered unhealthy and can cause issues for people with existing breathing issues such as asthma. Prolonged exposure to levels above 50 μg/m3 can lead to serious health issues and premature mortality.\n\nIn areas with high outdoor pollution (above 35 μg/m3 in the outdoor air), windows to the building should be closed and outdoor air brought inside using HEPA filtration.\n",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "scheme",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 3,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 17
+              },
+              {
+                "color": "red",
+                "value": 35
+              }
+            ]
+          },
+          "unit": "conμgm3"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 17,
+        "x": 0,
+        "y": 19
+      },
+      "id": 13,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "exemplar": true,
+          "expr": "pm01{job=\"airgradient-livingroom\"}",
+          "interval": "",
+          "legendFormat": "PM2.5",
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "title": "PM1 Over Time",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
+      },
+      "description": "PM10 is particulate matter that is in range of 2.5~10 microns (μm). It is a mixture of materials that can include soot, metals, salt, and dust, pollen, mold, etc. <10 um (microns) in diameter\n\nIn 1987, the EPA set new air-quality standards for PM10 of 150µg/m3 over a 24-hour period and an average of 50 µg/m3 annually. \n\nEPA revoked the annual PM10 standard in 2006 because the agency couldn’t show any adverse impact to human health.\n",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "scheme",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 3,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 17
+              },
+              {
+                "color": "red",
+                "value": 35
+              }
+            ]
+          },
+          "unit": "conμgm3"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 17,
+        "x": 0,
+        "y": 28
+      },
+      "id": 14,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "exemplar": true,
+          "expr": "pm10{job=\"airgradient-livingroom\"}",
+          "interval": "",
+          "legendFormat": "PM2.5",
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "title": "PM10 Over Time",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
+      },
       "description": "Carbon dioxide is a non-toxic gas.\n\nOutdoor levels are approximately 300 ppm.\n\nStudies have found negative effects begin as the levels get close to 1000 PPM and getting significantly worse as the levels go above 1000 PPM.\n\nAt concentrations of from 2,500 ppm to 5,000 ppm carbon dioxide can cause headaches.\n\nMost workplaces have exposure limits of 5,000 PPM, because CO2 at that level and higher can impact health. At levels above 40,000 PPM, exposure can lead to permanent brain damage, coma and even mortality.\n",
       "fieldConfig": {
         "defaults": {
@@ -451,7 +645,7 @@
               "viz": false
             },
             "lineInterpolation": "smooth",
-            "lineWidth": 3,
+            "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -467,6 +661,7 @@
             }
           },
           "mappings": [],
+          "max": 5000,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -493,7 +688,7 @@
         "h": 8,
         "w": 17,
         "x": 0,
-        "y": 19
+        "y": 37
       },
       "id": 2,
       "options": {
@@ -596,7 +791,7 @@
         "h": 8,
         "w": 17,
         "x": 0,
-        "y": 27
+        "y": 45
       },
       "id": 10,
       "options": {
@@ -696,7 +891,7 @@
         "h": 8,
         "w": 17,
         "x": 0,
-        "y": 35
+        "y": 53
       },
       "id": 12,
       "options": {
@@ -728,7 +923,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": false,
+  "refresh": "10s",
   "schemaVersion": 36,
   "style": "dark",
   "tags": [
@@ -743,7 +938,7 @@
     "list": []
   },
   "time": {
-    "from": "now-7d",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
