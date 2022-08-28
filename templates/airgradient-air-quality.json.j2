@@ -82,7 +82,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "9.0.5",
+      "pluginVersion": "9.1.0",
       "targets": [
         {
           "datasource": {
@@ -154,7 +154,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "9.0.5",
+      "pluginVersion": "9.1.0",
       "targets": [
         {
           "datasource": {
@@ -232,7 +232,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "9.0.5",
+      "pluginVersion": "9.1.0",
       "targets": [
         {
           "datasource": {
@@ -312,7 +312,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "9.0.5",
+      "pluginVersion": "9.1.0",
       "targets": [
         {
           "datasource": {
@@ -335,18 +335,20 @@
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
       },
-      "description": "M2.5 are fine particles that have a diameter in range of 1.0~2.5 microns (μm) -  Combustion particles, organic compounds, metals, etc. <2.5 um (microns) in diameter\n\nThe Indoor Air Hygiene Institute requires a PM2.5 level of 12 μg/m3 or less, with infrequent or no spikes of 35 μg/m3 or higher. \n\nIf the level goes to or above 35 μg/m3 during a 24-hour period, the air is considered unhealthy and can cause issues for people with existing breathing issues such as asthma. Prolonged exposure to levels above 50 μg/m3 can lead to serious health issues and premature mortality.\n\nIn areas with high outdoor pollution (above 35 μg/m3 in the outdoor air), windows to the building should be closed and outdoor air brought inside using HEPA filtration.\n",
+      "description": "* PM1 is particulate matter with an aerodynamic diameter is in range of 0.3-1.0 microns(μm).  \n* PM2.5 are fine particles that have a diameter in range of 1.0-2.5μm - Combustion particles, organic compounds, metals, etc.  \n* PM10 is particulate matter that is in range of 2.5-10μm. It is a mixture of materials that can include soot, metals, salt, and dust, pollen, mold, etc.  \nMore information see below.  ",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-GrYlRd"
+            "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 20,
+            "fillOpacity": 0,
             "gradientMode": "scheme",
             "hideFrom": {
               "legend": false,
@@ -354,7 +356,7 @@
               "viz": false
             },
             "lineInterpolation": "smooth",
-            "lineWidth": 3,
+            "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -366,7 +368,7 @@
               "mode": "none"
             },
             "thresholdsStyle": {
-              "mode": "area"
+              "mode": "off"
             }
           },
           "mappings": [],
@@ -376,20 +378,114 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 17
-              },
-              {
-                "color": "red",
-                "value": 35
               }
             ]
           },
           "unit": "conμgm3"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "PM01"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#F2495C",
+                  "mode": "thresholds",
+                  "seriesBy": "last"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "blue",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 15
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "PM2.5"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "thresholds",
+                  "seriesBy": "last"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "orange",
+                      "value": 17
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 30
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "PM10"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "semi-dark-purple",
+                      "value": null
+                    },
+                    {
+                      "color": "orange",
+                      "value": 50
+                    },
+                    {
+                      "color": "red",
+                      "value": 70
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "thresholds"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 9,
@@ -400,9 +496,12 @@
       "id": 3,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "max"
+          ],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single",
@@ -416,209 +515,43 @@
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "pm02{job=\"airgradient-livingroom\"}",
           "interval": "",
           "legendFormat": "PM2.5",
           "queryType": "randomWalk",
+          "range": true,
           "refId": "A"
-        }
-      ],
-      "title": "PM2.5 Over Time",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P1809F7CD0C75ACF3"
-      },
-      "description": "PM1 dust is particulate matter with an aerodynamic diameter is in range of 0.3~1.0 microns (μm).\n\n\nThe Indoor Air Hygiene Institute requires a PM2.5 level of 12 μg/m3 or less, with infrequent or no spikes of 35 μg/m3 or higher. \n\nIf the level goes to or above 35 μg/m3 during a 24-hour period, the air is considered unhealthy and can cause issues for people with existing breathing issues such as asthma. Prolonged exposure to levels above 50 μg/m3 can lead to serious health issues and premature mortality.\n\nIn areas with high outdoor pollution (above 35 μg/m3 in the outdoor air), windows to the building should be closed and outdoor air brought inside using HEPA filtration.\n",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "scheme",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 3,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": true,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "area"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 17
-              },
-              {
-                "color": "red",
-                "value": 35
-              }
-            ]
-          },
-          "unit": "conμgm3"
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 17,
-        "x": 0,
-        "y": 19
-      },
-      "id": 13,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "9.0.3",
-      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
-          "exemplar": true,
+          "editorMode": "code",
+          "exemplar": false,
           "expr": "pm01{job=\"airgradient-livingroom\"}",
+          "hide": false,
           "interval": "",
-          "legendFormat": "PM2.5",
-          "queryType": "randomWalk",
-          "refId": "A"
-        }
-      ],
-      "title": "PM1 Over Time",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P1809F7CD0C75ACF3"
-      },
-      "description": "PM10 is particulate matter that is in range of 2.5~10 microns (μm). It is a mixture of materials that can include soot, metals, salt, and dust, pollen, mold, etc. <10 um (microns) in diameter\n\nIn 1987, the EPA set new air-quality standards for PM10 of 150µg/m3 over a 24-hour period and an average of 50 µg/m3 annually. \n\nEPA revoked the annual PM10 standard in 2006 because the agency couldn’t show any adverse impact to human health.\n",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "scheme",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "smooth",
-            "lineWidth": 3,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": true,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "area"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 17
-              },
-              {
-                "color": "red",
-                "value": 35
-              }
-            ]
-          },
-          "unit": "conμgm3"
+          "legendFormat": "PM01",
+          "range": true,
+          "refId": "B"
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 17,
-        "x": 0,
-        "y": 28
-      },
-      "id": 14,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "9.0.3",
-      "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
-          "exemplar": true,
-          "expr": "pm10{job=\"airgradient-livingroom\"}",
-          "interval": "",
-          "legendFormat": "PM2.5",
-          "queryType": "randomWalk",
-          "refId": "A"
+          "editorMode": "builder",
+          "expr": "pm10",
+          "hide": false,
+          "legendFormat": "PM10",
+          "range": true,
+          "refId": "C"
         }
       ],
-      "title": "PM10 Over Time",
+      "title": "PM Over Time",
       "type": "timeseries"
     },
     {
@@ -626,13 +559,15 @@
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
       },
-      "description": "Carbon dioxide is a non-toxic gas.\n\nOutdoor levels are approximately 300 ppm.\n\nStudies have found negative effects begin as the levels get close to 1000 PPM and getting significantly worse as the levels go above 1000 PPM.\n\nAt concentrations of from 2,500 ppm to 5,000 ppm carbon dioxide can cause headaches.\n\nMost workplaces have exposure limits of 5,000 PPM, because CO2 at that level and higher can impact health. At levels above 40,000 PPM, exposure can lead to permanent brain damage, coma and even mortality.\n",
+      "description": "Carbon dioxide is a non-toxic gas.  \nOutdoor levels are approximately 300 ppm.  \nStudies have found negative effects begin as the levels get close to 1000 PPM and getting significantly worse as the levels go above 1000 PPM.  \nAt concentrations of from 2,500 ppm to 5,000 ppm carbon dioxide can cause headaches.  \nMost workplaces have exposure limits of 5,000 PPM, because CO2 at that level and higher can impact health.   At levels above 40,000 PPM, exposure can lead to permanent brain damage, coma and even mortality.  ",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "continuous-GrYlRd"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -688,14 +623,15 @@
         "h": 8,
         "w": 17,
         "x": 0,
-        "y": 37
+        "y": 19
       },
       "id": 2,
       "options": {
         "legend": {
           "calcs": [],
-          "displayMode": "hidden",
-          "placement": "bottom"
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
         },
         "tooltip": {
           "mode": "multi",
@@ -725,7 +661,7 @@
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
       },
-      "description": "Deafult temperature thresholds set as following:\n\nCold(blue) is below 22.5 Celsius.\n\nNormal(green) 21 to 32 Celsius.\n\nHot(amber) 32 to 40 Celsius.\n\nCritical(red) 40 Celsius and above.",
+      "description": "Default temperature thresholds set as following:  \n* Cold(blue) is below 22.5 Celsius.  \n* Normal(green) 21 to 32 Celsius.  \n* Hot(amber) 32 to 40 Celsius.  \n* Critical(red) 40 Celsius and above.  ",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -733,6 +669,8 @@
             "seriesBy": "last"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -791,14 +729,15 @@
         "h": 8,
         "w": 17,
         "x": 0,
-        "y": 45
+        "y": 27
       },
       "id": 10,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single",
@@ -827,13 +766,15 @@
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
       },
-      "description": "Relative humidity also measures water vapor but RELATIVE to the temperature of the air.\n\nRelative humidity used to describe indoor air quality, with a target of 40-60% humidity as the window to minimize growth of microbes, spores, and mold.\n\nWarm air can hold far more moisture than cold air meaning that the relative humidity of cold air would be far higher than warm air if their absolute humidity levels were equal.\n\nHumidity levels impact both comfort and health of building occupants.",
+      "description": "Relative humidity also measures water vapor but RELATIVE to the temperature of the air.  \nRelative humidity used to describe indoor air quality, with a target of 40-60% humidity as the window to minimize growth of microbes, spores, and mold.  \nWarm air can hold far more moisture than cold air meaning that the relative humidity of cold air would be far higher than warm air if their absolute humidity levels were equal.  \nHumidity levels impact both comfort and health of building occupants.  ",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "continuous-GrYlRd"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -891,14 +832,15 @@
         "h": 8,
         "w": 17,
         "x": 0,
-        "y": 53
+        "y": 35
       },
       "id": 12,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single",
@@ -921,10 +863,30 @@
       ],
       "title": "Humidity",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 17,
+        "x": 0,
+        "y": 43
+      },
+      "id": 14,
+      "options": {
+        "content": "## PM 1\nPM1 dust is particulate matter with an aerodynamic diameter is in range of 0.3~1.0 microns (μm).\n\n## PM 2.5\nPM2.5 are fine particles that have a diameter in range of 1.0~2.5 microns (μm).\nCombustion particles, organic compounds, metals, etc. \nThe Indoor Air Hygiene Institute requires a PM2.5 level of 12 μg/m3 or less, with infrequent or no spikes of 35 μg/m3 or higher.  \nIf the level goes to or above 35 μg/m3 during a 24-hour period, the air is considered unhealthy and can cause issues for people with existing breathing issues such as asthma.  \nProlonged exposure to levels above 50 μg/m3 can lead to serious health issues and premature mortality.  \nIn areas with high outdoor pollution (above 35 μg/m3 in the outdoor air), windows to the building should be closed and outdoor air brought inside using HEPA filtration.  \n\n## PM 10\nPM10 is particulate matter that is in range of 2.5~10 microns (μm).  \nIt is a mixture of materials that can include soot, metals, salt, and dust, pollen, mold, etc.\nIn 1987, the EPA set new air-quality standards for PM10 of 150µg/m3 over a 24-hour period and an average of 50 µg/m3 annually.  \nEPA revoked the annual PM10 standard in 2006 because the agency couldn’t show any adverse impact to human health.  ",
+        "mode": "markdown"
+      },
+      "pluginVersion": "9.1.0",
+      "title": "PM Level clarification",
+      "type": "text"
     }
   ],
-  "refresh": "10s",
-  "schemaVersion": 36,
+  "refresh": "1h",
+  "schemaVersion": 37,
   "style": "dark",
   "tags": [
     "airgrqdient",
@@ -938,13 +900,13 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-12h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "AirQuality - AirGradient",
   "uid": "aglivingroom",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
