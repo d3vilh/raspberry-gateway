@@ -24,6 +24,7 @@ The Swiss knife in the world of home Internet gateways. It includes **OpenVPN se
 [**AirGradient Monitoring**](https://www.airgradient.com): Installs an [`airgradient-prometheus` exporter](https://github.com/geerlingguy/airgradient-prometheus) and a Grafana dashboard, which tracks and displays air quality over time via a local [AirGradient DIY monitor](https://www.airgradient.com/diy/).
 
 ![AirGradient Monitoring Dashboard in Grafana picture 1](/images/air-gradient_1.png) 
+![AirGradient Monitoring Dashboard in Grafana picture 2](/images/air-gradient_2.png)
 
 ## Other features:
   - **Starlink Monitoring**: Installs a [`starlink` prometheus exporter](https://github.com/danopstech/starlink_exporter) and a Grafana dashboard, which tracks and displays Starlink statistics. (Disabled by default)
