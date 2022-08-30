@@ -33,7 +33,7 @@
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
       },
-      "description": "Carbon dioxide is a non-toxic gas.\n\nOutdoor levels are approximately 300 ppm.\n\nStudies have found negative effects begin as the levels get close to 1000 PPM and getting significantly worse as the levels go above 1000 PPM.\n\nAt concentrations of from 2,500 ppm to 5,000 ppm carbon dioxide can cause headaches.\n\nMost workplaces have exposure limits of 5,000 PPM, because CO2 at that level and higher can impact health. At levels above 40,000 PPM, exposure can lead to permanent brain damage, coma and even mortality.",
+      "description": "Carbon dioxide is a non-toxic gas.  \nOutdoor levels are approximately 300 ppm.  \nStudies have found negative effects begin as the levels get close to 1000 PPM and getting significantly worse as the levels go above 1000 PPM.  \nAt concentrations of from 2,500 ppm to 5,000 ppm carbon dioxide can cause headaches.  \nMost workplaces have exposure limits of 5,000 PPM, because CO2 at that level and higher can impact health. At levels above 40,000 PPM, exposure can lead to permanent brain damage, coma and even mortality.  ",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -82,7 +82,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "9.1.0",
+      "pluginVersion": "9.1.1",
       "targets": [
         {
           "datasource": {
@@ -154,7 +154,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "9.1.0",
+      "pluginVersion": "9.1.1",
       "targets": [
         {
           "datasource": {
@@ -177,7 +177,7 @@
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
       },
-      "description": "Deafult temperature thresholds set as following:\n\nCold(blue) is below 22.5 Celsius.\n\nNormal(green) 21 to 32 Celsius.\n\nHot(amber) 32 to 40 Celsius.\n\nCritical(red) 40 Celsius and above.",
+      "description": "Deafult temperature thresholds set as following:  \n* Cold(blue) is below 22.5 Celsius.  \n* Normal(green) 21 to 32 Celsius.\n* Hot(amber) 32 to 40 Celsius.\n* Critical(red) 40 Celsius and above.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -232,7 +232,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "9.1.0",
+      "pluginVersion": "9.1.1",
       "targets": [
         {
           "datasource": {
@@ -312,7 +312,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "9.1.0",
+      "pluginVersion": "9.1.1",
       "targets": [
         {
           "datasource": {
@@ -408,8 +408,12 @@
                       "value": null
                     },
                     {
-                      "color": "red",
-                      "value": 15
+                      "color": "orange",
+                      "value": 17
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 30
                     }
                   ]
                 }
@@ -497,7 +501,8 @@
       "options": {
         "legend": {
           "calcs": [
-            "max"
+            "max",
+            "mean"
           ],
           "displayMode": "list",
           "placement": "bottom",
@@ -661,7 +666,7 @@
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
       },
-      "description": "Default temperature thresholds set as following:  \n* Cold(blue) is below 22.5 Celsius.  \n* Normal(green) 21 to 32 Celsius.  \n* Hot(amber) 32 to 40 Celsius.  \n* Critical(red) 40 Celsius and above.  ",
+      "description": "Default temperature thresholds set as following:  \n* Cold(blue) is below 21 Celsius.  \n* Normal(green) 21 to 30 Celsius.  \n* Hot(amber) 30 to 40 Celsius.  \n* Critical(red) 40 Celsius and above.  ",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -695,7 +700,7 @@
               "mode": "none"
             },
             "thresholdsStyle": {
-              "mode": "off"
+              "mode": "area"
             }
           },
           "displayName": "Temperature",
@@ -704,7 +709,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "semi-dark-blue",
                 "value": null
               },
               {
@@ -712,8 +717,8 @@
                 "value": 21
               },
               {
-                "color": "#EAB839",
-                "value": 32
+                "color": "orange",
+                "value": 30
               },
               {
                 "color": "red",
@@ -869,23 +874,24 @@
         "type": "datasource",
         "uid": "grafana"
       },
+      "description": "",
       "gridPos": {
-        "h": 12,
+        "h": 26,
         "w": 17,
         "x": 0,
         "y": 43
       },
       "id": 14,
       "options": {
-        "content": "## PM 1\nPM1 dust is particulate matter with an aerodynamic diameter is in range of 0.3~1.0 microns (μm).\n\n## PM 2.5\nPM2.5 are fine particles that have a diameter in range of 1.0~2.5 microns (μm).\nCombustion particles, organic compounds, metals, etc. \nThe Indoor Air Hygiene Institute requires a PM2.5 level of 12 μg/m3 or less, with infrequent or no spikes of 35 μg/m3 or higher.  \nIf the level goes to or above 35 μg/m3 during a 24-hour period, the air is considered unhealthy and can cause issues for people with existing breathing issues such as asthma.  \nProlonged exposure to levels above 50 μg/m3 can lead to serious health issues and premature mortality.  \nIn areas with high outdoor pollution (above 35 μg/m3 in the outdoor air), windows to the building should be closed and outdoor air brought inside using HEPA filtration.  \n\n## PM 10\nPM10 is particulate matter that is in range of 2.5~10 microns (μm).  \nIt is a mixture of materials that can include soot, metals, salt, and dust, pollen, mold, etc.\nIn 1987, the EPA set new air-quality standards for PM10 of 150µg/m3 over a 24-hour period and an average of 50 µg/m3 annually.  \nEPA revoked the annual PM10 standard in 2006 because the agency couldn’t show any adverse impact to human health.  ",
+        "content": "## PM 1\nPM1 dust is particulate matter with an aerodynamic diameter is in range of 0.3~1.0 microns (μm).  \nIs strongly linked to the occurrence of cardiovascular disease (CVD). This is thought to be due to its higher surface area to volume ratio.  \nAccording to [latest](https://pubs.acs.org/doi/abs/10.1021/acs.estlett.9b00735) [studys](https://www.dovemed.com/current-medical-news/finer-particulate-matter-pm1-could-increase-cardiovascular-disease-risk/) every 10 μg/m3 increase in PM1, increased risk of cardiovascular disease for 0.29%, which was 21% higher than the risk related to PM2.5 (0.24%). The finer PM1 could more easily deposit in the lungs and circulation than larger particles, which might explain the increased health risks, the researchers say.\n## PM 2.5\nPM2.5 are fine particles that have a diameter in range of 1.0~2.5 microns (μm).\nCombustion particles, organic compounds, metals, etc. \nThe Indoor Air Hygiene Institute requires a PM2.5 level of 12 μg/m3 or less, with infrequent or no spikes of 35 μg/m3 or higher.  \nIf the level goes to or above 35 μg/m3 during a 24-hour period, the air is considered unhealthy and can cause issues for people with existing breathing issues such as asthma.  \nProlonged exposure to levels above 50 μg/m3 can lead to serious health issues and premature mortality.  \nIn areas with high outdoor pollution (above 35 μg/m3 in the outdoor air), windows to the building should be closed and outdoor air brought inside using HEPA filtration.  \n\n## PM 10\nPM10 is particulate matter that is in range of 2.5~10 microns (μm).  \nIt is a mixture of materials that can include soot, metals, salt, and dust, pollen, mold, etc.\nIn 1987, the EPA set new air-quality standards for PM10 of 150µg/m3 over a 24-hour period and an average of 50 µg/m3 annually.  \nEPA revoked the annual PM10 standard in 2006 because the agency couldn’t show any adverse impact to human health.  \n\n## CO2\nCarbon dioxide is a non-toxic gas.  \nOutdoor levels are approximately ~300 ppm.  \nStudies have found negative effects begin as the levels get close to 1000 PPM and getting significantly worse as the levels go above 1000 PPM.  \nAt concentrations of from 2,500 ppm to 5,000 ppm carbon dioxide can cause headaches.  \nMost workplaces have exposure limits of 5,000 PPM, because CO2 at that level and higher can impact health.  \nAt levels above 40,000 PPM, exposure can lead to permanent brain damage, coma and even mortality.  \n\n## Humidity\nRelative humidity also measures water vapor but RELATIVE to the temperature of the air.  \nRelative humidity used to describe indoor air quality, with a target of 40-60% humidity as the window to minimize growth of microbes, spores, and mold.  \nWarm air can hold far more moisture than cold air meaning that the relative humidity of cold air would be far higher than warm air if their absolute humidity levels were equal.  \nHumidity levels impact both comfort and health of building occupants.  \n\n## Temperature\nDefault temperature thresholds set as following:  \n* Cold(blue) is below 21 Celsius.  \n* Normal(green) 21 to 30 Celsius.  \n* Hot(amber) 30 to 40 Celsius.  \n* Critical(red) 40 Celsius and above.  ",
         "mode": "markdown"
       },
-      "pluginVersion": "9.1.0",
-      "title": "PM Level clarification",
+      "pluginVersion": "9.1.1",
+      "title": "Sensors clarification ",
       "type": "text"
     }
   ],
-  "refresh": "1h",
+  "refresh": "5s",
   "schemaVersion": 37,
   "style": "dark",
   "tags": [
@@ -900,13 +906,13 @@
     "list": []
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "AirQuality - AirGradient",
   "uid": "aglivingroom",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }
