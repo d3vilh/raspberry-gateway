@@ -3,7 +3,7 @@
 config_dir: '~'
 
 # Porteiner configuration.
-portainer_enable: false
+portainer_enable: true
 
 # Pi-hole configuration.
 pihole_enable: false
@@ -19,20 +19,29 @@ ovpnui_password: "gagaZush" #Change this password!
 # Raspi-monitoring configuration.
 monitoring_enable: false
 monitoring_grafana_admin_password: "admin" #Is only used the first time Grafana starts up
+monitoring_days_keep_interval: 60
 monitoring_speedtest_interval: 60m
 monitoring_ping_interval: 5s
 monitoring_ping_hosts:  # [URL];[HUMAN_READABLE_NAME]
   - http://www.google.com/;google.com
   - https://www.apple.com/;apple.com
-  - https://github.com/;github.com
-  - https://d3.ru/;d3.ru
+  - https://github.com/;github
+  - https://reddit.com/;reddit
+
+# PiKVM Prometheus monitoring.
+pikvm_prom_enable: false
+pikvm_target_ip: "192.168.88.3"
+pikvm_web_user: "admin"
+pikvm_web_password: "gagaZush" #Change this password!
 
 # AirGradient configuration. (Also requires `monitoring_enable`)
 airgradient_enable: false
 airgradient_sensors:
-  # ID Should be limited to no more than 38 characters, in the set a-z.
+  # ID is limited in set of "a-z" to not longer than 38 chars.
+  # AirGradient FW example ./files/AirGradient-DIY.ino 
   - id: livingroom
-    port: 9925
+    ip: "192.168.88.6"
+    port: 9926
 
 # Starlink configuration. (Also requires `monitoring_enable`)
 starlink_enable: false
