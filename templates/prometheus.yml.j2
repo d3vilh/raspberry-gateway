@@ -17,6 +17,19 @@ scrape_configs:
     static_configs:
       - targets: ['speedtest:9798']
 
+{% if pikvm_prom_enable %}
+  - job_name: 'pikvm'
+    metrics_path: /api/export/prometheus/metrics
+    basic_auth:
+      username: {{ pikvm_web_user }}
+      password: {{ pikvm_web_password }}
+    scheme: https
+    static_configs:
+    - targets: ['{{ pikvm_target_ip }}']
+    tls_config:
+      insecure_skip_verify: true # For self-signed certificate
+{% endif %}
+
 {% if shelly_plug_enable %}
   - job_name: 'shelly-plug'
     metrics_path: /metrics

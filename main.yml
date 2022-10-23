@@ -50,6 +50,10 @@
       ansible.builtin.import_tasks: tasks/airgradient.yml
       when: airgradient_enable
 
+    - name: Set up PiKVM Monitoring.
+      ansible.builtin.import_tasks: tasks/pikvm.yml
+      when: pikvm_prom_enable
+
     - name: Set up Shelly Plug Monitoring.
       ansible.builtin.import_tasks: tasks/shelly-plug.yml
       when: shelly_plug_enable
