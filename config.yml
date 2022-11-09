@@ -3,10 +3,10 @@
 config_dir: '~'
 
 # Porteiner configuration.
-portainer_enable: true
+portainer_enable: false
 
 # Pi-hole configuration.
-pihole_enable: true
+pihole_enable: false
 pihole_hostname: pihole
 pihole_timezone: Europe/Kiev
 pihole_password: "gagaZush"                     #!Change this password!
@@ -16,11 +16,11 @@ ovpn_enable: true
 ovpnui_user: "admin"
 ovpnui_password: "gagaZush"                     #!Change this password!
 ovpn_guest_subnet: "10.0.71.0/24"               #Subnet for guest OpenVPN Clients
-ovpn_home_subnet: "192.168.88.0/24"             #Your home network subnet
-ovpn_remote: "remote 185.253.254.94 12345 udp"  #OpenVPN client.ovpn profile connect line
+ovpn_home_subnet: "192.168.0.0/24"             #Your home network subnet
+ovpn_remote: "remote 123.154.221.23 12345 udp"  #OpenVPN client.ovpn profile connect line
 
 # Raspi-monitoring configuration.
-monitoring_enable: true
+monitoring_enable: false
 monitoring_grafana_admin_password: "admin"      #Is only used the first time Grafana starts up
 monitoring_days_keep_interval: 60d
 monitoring_speedtest_interval: 60m
@@ -32,18 +32,18 @@ monitoring_ping_hosts:                          # [URL];[HUMAN_READABLE_NAME]
   - https://reddit.com/;reddit
 
 # PiKVM Prometheus monitoring.
-pikvm_prom_enable: true
-pikvm_target_ip: "192.168.88.3"
+pikvm_prom_enable: false
+pikvm_target_ip: "192.168.0.33"
 pikvm_web_user: "admin"
 pikvm_web_password: "gagaZush"                  #!Change this password!
 
 # AirGradient configuration.                     #Requires `monitoring_enable`
-airgradient_enable: true 
+airgradient_enable:  false
 airgradient_sensors:
   # ID is limited in set of "a-z" to not longer than 38 chars.
   # AirGradient FW example ./files/AirGradient-DIY.ino 
   - id: livingroom
-    ip: "192.168.88.6"
+    ip: "192.168.0.66"
     port: 9926
 
 # Starlink configuration.                         #Requires `monitoring_enable`
