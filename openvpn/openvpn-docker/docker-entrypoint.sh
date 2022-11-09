@@ -51,8 +51,21 @@ echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf
 sysctl -p /etc/sysctl.conf
 
 echo 'Configuring iptables...'
+echo 'NAT for OpenVPN clients'
 iptables -t nat -A POSTROUTING -s 10.0.70.0/24 -o eth0 -j MASQUERADE
 iptables -t nat -A POSTROUTING -s 10.0.71.0/24 -o eth0 -j MASQUERADE
+
+echo 'Blocking ICMP for external clients'
+iptables -A FORWARD -p icmp -j DROP --icmp-type echo-request -s 10.0.71.0/24 
+iptables -A FORWARD -p icmp -j DROP --icmp-type echo-reply -s 10.0.71.0/24 
+
+echo 'Blocking internal home subnet to access from external openvpn clients (Internet still available)'
+iptables -A FORWARD -s 10.0.71.0/24 -d 192.168.88.0/24 -j DROP
+
+echo 'IPT MASQ Chains:'
+iptables -t nat -L | grep MASQ
+echo 'IPT FWD Chains:'
+iptables -v -x -n -L | grep DROP 
 
 echo 'Start openvpn process...'
 /usr/sbin/openvpn --cd /etc/openvpn --script-security 2 --config /etc/openvpn/config/server.conf
