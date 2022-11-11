@@ -2,9 +2,6 @@
 ---
 version: "3.5"
 
-networks:
-  back-tier:
-
 services:
 
     openvpn_exporter:
@@ -13,10 +10,10 @@ services:
        environment:
            - OVPN_STATUS_FILE=/etc/openvpn/log/openvpn-status.log
        privileged: true
+       expose:
+           - "9176"
        ports:
            - "9176:9176/tcp"
        volumes:
            - ../log:/etc/openvpn/log
        restart: always
-       networks:
-           - back-tier
