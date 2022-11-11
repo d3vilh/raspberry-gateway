@@ -31,6 +31,9 @@ monitoring_ping_hosts:                          # [URL];[HUMAN_READABLE_NAME]
   - https://github.com/;github
   - https://reddit.com/;reddit
 
+# OpenVPN Prometheus monitoring.
+openvpn_exporter_enable: false
+
 # PiKVM Prometheus monitoring.
 pikvm_prom_enable: false
 pikvm_target_ip: "192.168.0.33"

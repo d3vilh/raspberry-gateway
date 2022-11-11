@@ -30,6 +30,14 @@ scrape_configs:
       insecure_skip_verify: true # For self-signed certificate
 {% endif %}
 
+{% if openvpn_exporter_enable %}
+  - job_name: 'openvpn_exporter'
+    metrics_path: /metrics
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['openvpn_exporter:9176']
+{% endif %}
+
 {% if shelly_plug_enable %}
   - job_name: 'shelly-plug'
     metrics_path: /metrics
