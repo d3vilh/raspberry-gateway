@@ -46,6 +46,10 @@
       ansible.builtin.import_tasks: tasks/raspi-monitoring.yml
       when: monitoring_enable
 
+    - name: Set up OpenVPN Monitoring.
+      ansible.builtin.import_tasks: tasks/openvpn_exporter.yml
+      when: openvpn_exporter_enable
+
     - name: Set up Air Gradient Monitoring.
       ansible.builtin.import_tasks: tasks/airgradient.yml
       when: airgradient_enable
