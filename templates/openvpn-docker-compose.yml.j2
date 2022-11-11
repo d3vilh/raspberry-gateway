@@ -27,6 +27,7 @@ services:
        restart: always
        depends_on:
            - "openvpn-ui"
+           - "openvpn_exporter"
 
     openvpn-ui:
        container_name: openvpn-ui
@@ -43,3 +44,14 @@ services:
            - ./pki:/usr/share/easy-rsa/pki
        restart: always
 
+    openvpn_exporter:
+       container_name: openvpn_exporter
+       image: d3vilh/openvpn_exporter:latest
+       environment:
+           - OVPN_STATUS_FILE= /etc/openvpn/log/openvpn-status.log
+       privileged: true
+       ports:
+           - "9176:9176/tcp"
+       volumes:
+           - ./log:/etc/openvpn/log
+       restart: always
