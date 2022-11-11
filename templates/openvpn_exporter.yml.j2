@@ -13,5 +13,7 @@ services:
        ports:
            - "9176:9176/tcp"
        volumes:
-           - ./log:/etc/openvpn/log
+           - ../log:/etc/openvpn/log
        restart: always
+       networks:
+           - back-tier
