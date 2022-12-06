@@ -34,6 +34,278 @@
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
       },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 14,
+        "x": 0,
+        "y": 0
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "openvpn_bytes_received + openvpn_bytes_sent",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Panel Title",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 50
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 0,
+        "y": 8
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "9.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "editorMode": "builder",
+          "expr": "openvpn_connections",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Clients Connected",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 4,
+        "y": 8
+      },
+      "id": 8,
+      "options": {
+        "displayMode": "gradient",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "9.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "topk(6, sum by(common_name) (count_over_time(openvpn_connected_since[24h]))) > 1",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{common_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Top Clients",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 8,
+        "y": 8
+      },
+      "id": 10,
+      "options": {
+        "displayMode": "gradient",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "9.2.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "topk(6, sum by(common_name) (increase(openvpn_bytes_received[24h]))) + topk(6, sum by(common_name) (increase(openvpn_bytes_sent[1d])))",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{common_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Top Traffic",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
+      },
       "description": "Number of OpenVPN Connections",
       "fieldConfig": {
         "defaults": {
@@ -47,15 +319,18 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 25,
+            "fillOpacity": 100,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -91,7 +366,7 @@
         "h": 7,
         "w": 19,
         "x": 0,
-        "y": 0
+        "y": 16
       },
       "id": 2,
       "options": {
@@ -120,7 +395,7 @@
           "refId": "A"
         }
       ],
-      "title": "OpenVPN Connections",
+      "title": "Clients Connections",
       "type": "timeseries"
     },
     {
@@ -157,7 +432,7 @@
         "h": 9,
         "w": 19,
         "x": 0,
-        "y": 7
+        "y": 23
       },
       "id": 6,
       "options": {
@@ -214,15 +489,18 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 2,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -242,8 +520,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -259,7 +536,7 @@
         "h": 8,
         "w": 19,
         "x": 0,
-        "y": 16
+        "y": 32
       },
       "id": 4,
       "options": {
@@ -287,7 +564,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "legendFormat": "{{common_name}} sent",
+          "legendFormat": "{{common_name}} download",
           "range": true,
           "refId": "A"
         },
@@ -302,30 +579,35 @@
           "hide": false,
           "instant": false,
           "interval": "",
-          "legendFormat": "{{common_name}} receive",
+          "legendFormat": "{{common_name}} upload",
           "range": true,
           "refId": "B"
         }
       ],
-      "title": "Bytes",
+      "title": "Clients Traffic",
       "type": "timeseries"
     }
   ],
   "refresh": "5s",
   "schemaVersion": 37,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "openvpn",
+    "raspberry",
+    "raspberry-gateway",
+    "d3vilh"
+  ],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "OpenVPN",
   "uid": "58l7kyvVz",
-  "version": 13,
+  "version": 48,
   "weekStart": ""
 }

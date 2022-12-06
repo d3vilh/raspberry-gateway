@@ -1,9 +1,9 @@
 ---
 - name: Copy OpenVPN dashboard configs to Grafana.
-  ansible.builtin.template:
+  ansible.builtin.copy:
     src: templates/openvpn_exporter.json.j2
     dest: "{{ config_dir }}/raspi-monitoring/grafana/provisioning/dashboards/openvpn.json"
-    mode: 0644
+    mode: '0644'
   become: false
   notify: Restart raspi-monitoring
 
@@ -20,7 +20,7 @@
     dest: "{{ config_dir }}/openvpn/openvpn_exporter/docker-compose.yml"
     mode: '0640'
   become: false
-  notify: Restart openvpn
+  notify: Restart raspi-monitoring
 
 # TODO: The first time this playbook is run, the `pi` user may not be added
 # to the `docker` group, so this task may fail.
