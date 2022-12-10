@@ -56,7 +56,9 @@ The Swiss knife in the world of home Internet gateways. It includes **OpenVPN se
 
 ![OpenVPN WEB UI](/images/OpenVPN-UI-Home.png)
 
-<center><img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="700" border="1" /></center>
+<div style="text-align: center;">
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="700" border="1" />
+</div>
 
 [**Portainer**](https://www.portainer.io) is a lightweight *universal* management interface that can be used to easily manage Docker or K8S containers and environments which included in this setup:
 
