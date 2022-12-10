@@ -1,6 +1,7 @@
 # Raspberry Gateway
 
-**Simple Raspberry Pi based home Internet gateway**. Which includes **OpenVPN server** with simple WEB UI and VPN subnets support. **Pi-hole** - the network-wide ad-blocking local DNS solution. **Grafana Dashboards** for Internet speed, OpenVPN and Raspberry Pi hardware status monitoring. **Portainer** a lightweight *universal* management GUI for all Docker enviroments which included into this project. It also includes **AirGradient**, **StarLink** and **ShellyPlug** Grafana dashboards and necessary exporters to get data.
+**Simple Raspberry Pi based home Internet gateway**. Which includes 
+[**OpenVPN container**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn/openvpn-docker) with simple [**WEB UI**](https://github.com/d3vilh/openvpn-web-ui) and VPN subnets support. [**Pi-hole**](https://pi-hole.net) - the network-wide ad-blocking local DNS solution. [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/raspi-monitoring) for Internet speed, OpenVPN and Raspberry Pi hardware status monitoring. [**Portainer**](https://www.portainer.io) a lightweight *universal* management GUI for all Docker enviroments which included into this project. It also includes **AirGradient**, **StarLink** and **ShellyPlug** Grafana dashboards and necessary exporters to get data.
 
 # Requirements
 - [**Raspberry Pi 4**](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/), [**Raspberry Pi CM4**](https://www.raspberrypi.com/products/compute-module-4/?variant=raspberry-pi-cm4001000) **and** [**CM4 I/O Board**](https://www.raspberrypi.com/products/compute-module-4-io-board/) or [**Raspberry Pi 3**](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) board, all with 2-4Gb RAM minimum.
@@ -55,7 +56,7 @@
 ![OpenVPN WEB UI](/images/OpenVPN-UI-Home.png)
 
 <p align="center">
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="700" border="1" />
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="600" border="1" />
 </p>
 
 [**Portainer**](https://www.portainer.io) is a lightweight *universal* management interface that can be used to easily manage Docker or K8S containers and environments which included in this setup:
