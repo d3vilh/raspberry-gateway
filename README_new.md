@@ -1,15 +1,13 @@
 # Raspberry Gateway
 
-Simple Raspberry Pi based home Internet gateway. Which includes **OpenVPN server** with simple WEB UI and VPN subnets support. **Pi-hole** - the network-wide ad-blocking local DNS solution. **Grafana Dashboards** for Internet speed, OpenVPN and Raspberry Pi hardware status monitoring. **Portainer** a lightweight *universal* management GUI for all Docker enviroments which included into this project. It also includes **AirGradient**, **StarLink** and **ShellyPlug** Grafana dashboards and necessary exporters to get data.
+**Simple Raspberry Pi based home Internet gateway**. Which includes **OpenVPN server** with simple WEB UI and VPN subnets support. **Pi-hole** - the network-wide ad-blocking local DNS solution. **Grafana Dashboards** for Internet speed, OpenVPN and Raspberry Pi hardware status monitoring. **Portainer** a lightweight *universal* management GUI for all Docker enviroments which included into this project. It also includes **AirGradient**, **StarLink** and **ShellyPlug** Grafana dashboards and necessary exporters to get data.
 
 # Requirements
 - [**Raspberry Pi 4**](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/), [**Raspberry Pi CM4**](https://www.raspberrypi.com/products/compute-module-4/?variant=raspberry-pi-cm4001000) **and** [**CM4 I/O Board**](https://www.raspberrypi.com/products/compute-module-4-io-board/) or [**Raspberry Pi 3**](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) board, all with 2-4Gb RAM minimum.
 - [**Raspberry Pi Imager**](https://www.raspberrypi.com/software/) to simplify installation of Raspberry Pi OS Lite (x64 or i686 bit).
 - [**Raspios Lite (64bit)**](https://downloads.raspberrypi.org/raspios_lite_arm64/images/) however is recommended for this setup.
 - **16Gb SD Card**
-> You can run it on CM4 board with 8Gb eMMC card. Full installation on top of latest [Raspios lite (64bit)](https://downloads.raspberrypi.org/raspios_lite_arm64/images/) will use 4,5Gb of your eMMC card.
-
-> You can run it on Raspberry-pi Zero-W (or W2) board as well, but be aware, that it has no internal Ehernet adapter and very limited by avilable CPU & RAM resources, what limits the number of running containers and clients connected to VPN server.
+> You can run it on CM4 board with 8Gb eMMC card. Full installation on top of latest [Raspios lite (64bit)](https://downloads.raspberrypi.org/raspios_lite_arm64/images/) will use 4,5Gb of your eMMC card. Raspberry-pi Zero-W, or W2 boards supported as well, but be aware, that it has no internal Ehernet adapter and very limited by avilable CPU & RAM resources, what limits the number of running containers and clients connected to VPN server.
 
 # Installation
 
