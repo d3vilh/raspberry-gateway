@@ -1,43 +1,14 @@
 # Raspberry Gateway
 
-The Swiss knife in the world of home Internet gateways. It includes **OpenVPN server** with simple WEB UI, **Pi-hole** - the network-wide ad-blocking local DNS, Internet and Raspberry **monitoring bashboards** and the **Portainer** a lightweight *universal* management GUI for all Docker enviroments which included into this project.
-
-## Features
-
-[**Pi-hole**](https://pi-hole.net) the network-wide ad-blocking solution integrated with own local DNS and DHCP servers:
-
-![Pi-hole on the Internet Pi](/images/pi-hole.png)
-
-[**OpenVPN**](https://openvpn.net) server and **OpenVPN-web-ui** as lightweight web administration interface:
-
-![OpenVPN WEB UI](/images/OpenVPN-UI-Home.png)
-
-[**Portainer**](https://www.portainer.io) is a lightweight *universal* management interface that can be used to easily manage Docker or K8S containers and environments which included in this setup:
-
-![Portainer](/images/portainer.png)
-
-[**Raspi Monitoring**](https://github.com/d3vilh/raspberry-gateway/tree/master/raspi-monitoring) to monitor your Raspberry server utilisation (CPU,MEM,I/O, Tempriture, storage usage) and Internet connection. Internet connection statistics is based on [Speedtest.net exporter](https://github.com/MiguelNdeCarvalho/speedtest-exporter) results, ping stats and overall Internet availability tests based on HTTP push methods running by [Blackbox exporter](https://github.com/prometheus/blackbox_exporter) to the desired internet sites:
-
-![Raspberry Monitoring Dashboard in Grafana picture 1](/images/raspi-monitoring_1.png) 
-![Raspberry Monitoring Dashboard in Grafana picture 2](/images/raspi-monitoring_2.png) 
-
-[**AirGradient Monitoring**](https://www.airgradient.com): Installs an [`airgradient-prometheus` exporter](https://github.com/geerlingguy/airgradient-prometheus) and a Grafana dashboard, which tracks and displays air quality over time via a local [AirGradient DIY monitor](https://www.airgradient.com/diy/).
-
-![AirGradient Monitoring Dashboard in Grafana picture 1](/images/air-gradient_1.png) 
-![AirGradient Monitoring Dashboard in Grafana picture 2](/images/air-gradient_2.png)
-
-## Other features:
-  - **Starlink Monitoring**: Installs a [`starlink` prometheus exporter](https://github.com/danopstech/starlink_exporter) and a Grafana dashboard, which tracks and displays Starlink statistics. (Disabled by default)
-  - **Shelly Plug Monitoring**: Installs a [`shelly-plug-prometheus` exporter](https://github.com/geerlingguy/shelly-plug-prometheus) and a Grafana dashboard, which tracks and displays power usage on a Shelly Plug running on the local network. (Disabled by default. Enable and configure using the `shelly_plug_*` vars in `config.yml`.)
+**Simple Raspberry Pi based home Internet gateway**. Which includes 
+[**OpenVPN container**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn/openvpn-docker) with simple [**WEB UI**](https://github.com/d3vilh/openvpn-web-ui) and VPN subnets support. [**Pi-hole**](https://pi-hole.net) - the network-wide ad-blocking local DNS solution. [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/raspi-monitoring) for Internet speed, OpenVPN and Raspberry Pi hardware status monitoring. [**Portainer**](https://www.portainer.io) a lightweight *universal* management GUI for all Docker enviroments which included into this project. It also includes **AirGradient**, **StarLink** and **ShellyPlug** Grafana dashboards and necessary exporters to get data.
 
 # Requirements
 - [**Raspberry Pi 4**](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/), [**Raspberry Pi CM4**](https://www.raspberrypi.com/products/compute-module-4/?variant=raspberry-pi-cm4001000) **and** [**CM4 I/O Board**](https://www.raspberrypi.com/products/compute-module-4-io-board/) or [**Raspberry Pi 3**](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) board, all with 2-4Gb RAM minimum.
-- [**Raspberry Pi Imager**](https://www.raspberrypi.com/software/) to simplify installation of Raspberry Pi OS Lite (32bit).
+- [**Raspberry Pi Imager**](https://www.raspberrypi.com/software/) to simplify installation of Raspberry Pi OS Lite (x64 or i686 bit).
 - [**Raspios Lite (64bit)**](https://downloads.raspberrypi.org/raspios_lite_arm64/images/) however is recommended for this setup.
 - **16Gb SD Card**
-> You can run it on CM4 board with 8Gb eMMC card. Full installation on top of latest [Raspios lite (64bit)](https://downloads.raspberrypi.org/raspios_lite_arm64/images/) will use 4,5Gb of your eMMC card.
-
-> You can run it on Raspberry-pi Zero-W board as well, but be ware, that it has no internal Ehernet adapter and has very limited performance resources, which limits you on the number of running containers and clients connected to your VPN server.
+> You can run it on CM4 board with 8Gb eMMC card. Full installation on top of latest [Raspios lite (64bit)](https://downloads.raspberrypi.org/raspios_lite_arm64/images/) will use 4,5Gb of your eMMC card. Raspberry-pi Zero-W, or W2 boards supported as well, but be aware, that it has no internal Ehernet adapter and very limited by avilable CPU & RAM resources, what limits the number of running containers and clients connected to VPN server.
 
 # Installation
 
@@ -73,6 +44,38 @@ The Swiss knife in the world of home Internet gateways. It includes **OpenVPN se
      ansible-playbook main.yml
      ```
 > **If running locally on the Pi**: You may have error like `Error while fetching server API version`. You have to relogin (or reboot your Pi) and then run the playbook again.
+
+## Features
+
+[**Pi-hole**](https://pi-hole.net) the network-wide ad-blocking solution integrated with own local DNS and DHCP servers:
+
+![Pi-hole on the Internet Pi](/images/pi-hole.png)
+
+[**OpenVPN**](https://openvpn.net) server with subnets support and **OpenVPN-web-ui** as lightweight web administration interface:
+
+![OpenVPN WEB UI](/images/OpenVPN-UI-Home.png)
+
+<p align="center">
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="600" border="1" />
+</p>
+
+[**Portainer**](https://www.portainer.io) is a lightweight *universal* management interface that can be used to easily manage Docker or K8S containers and environments which included in this setup:
+
+![Portainer](/images/portainer.png)
+
+[**Raspi Monitoring**](https://github.com/d3vilh/raspberry-gateway/tree/master/raspi-monitoring) to monitor your Raspberry server utilisation (CPU,MEM,I/O, Tempriture, storage usage) and Internet connection. Internet connection statistics is based on [Speedtest.net exporter](https://github.com/MiguelNdeCarvalho/speedtest-exporter) results, ping stats and overall Internet availability tests based on HTTP push methods running by [Blackbox exporter](https://github.com/prometheus/blackbox_exporter) to the desired internet sites:
+
+![Raspberry Monitoring Dashboard in Grafana picture 1](/images/raspi-monitoring_1.png) 
+![Raspberry Monitoring Dashboard in Grafana picture 2](/images/raspi-monitoring_2.png) 
+
+[**AirGradient Monitoring**](https://www.airgradient.com): Installs an [`airgradient-prometheus` exporter](https://github.com/geerlingguy/airgradient-prometheus) and a Grafana dashboard, which tracks and displays air quality over time via a local [AirGradient DIY monitor](https://www.airgradient.com/diy/).
+
+![AirGradient Monitoring Dashboard in Grafana picture 1](/images/air-gradient_1.png) 
+![AirGradient Monitoring Dashboard in Grafana picture 2](/images/air-gradient_2.png)
+
+## Other features:
+  - **Starlink Monitoring**: Installs a [`starlink` prometheus exporter](https://github.com/danopstech/starlink_exporter) and a Grafana dashboard, which tracks and displays Starlink statistics. (Disabled by default)
+  - **Shelly Plug Monitoring**: Installs a [`shelly-plug-prometheus` exporter](https://github.com/geerlingguy/shelly-plug-prometheus) and a Grafana dashboard, which tracks and displays power usage on a Shelly Plug running on the local network. (Disabled by default. Enable and configure using the `shelly_plug_*` vars in `config.yml`.)
 
 # Usage
 
