@@ -15,6 +15,7 @@ pihole_password: "gagaZush"                     # !Change this password!
 ovpn_enable: true
 ovpnui_user: "admin"
 ovpnui_password: "gagaZush"                     # !Change this password!
+ovpn_trusted_subnet: "10.0.70.0/24"
 ovpn_guest_subnet: "10.0.71.0/24"               # Subnet for guest OpenVPN Clients
 ovpn_home_subnet: "192.168.0.0/24"              # Your home network subnet
 ovpn_remote: "remote 123.154.221.23 12345 udp"  # OpenVPN client.ovpn profile connect line
