@@ -38,6 +38,8 @@
       dest: prometheus/prometheus.yml
     - src: prometheus-pinghosts.yaml.j2
       dest: prometheus/pinghosts.yaml
+    - src: prometheus-exporters-docker-compose.yaml.j2
+      dest: docker-compose.yml
   notify: Restart raspi-monitoring
   become: false
 
