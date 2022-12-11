@@ -20,6 +20,9 @@
     src: templates/openvpn-docker-compose.yml.j2
     dest: "{{ config_dir }}/openvpn/docker-compose.yml"
     mode: '0640'
+  loop:
+    - src: templates/openvpn-docker-entrypoint.sh.j2
+      dest: "{{ config_dir }}/openvpn/openvpn-docker/docker-entrypoint.sh"
   become: false
   notify: Restart openvpn
 
