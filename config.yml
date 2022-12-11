@@ -22,7 +22,7 @@ ovpn_remote: "remote 123.154.221.23 12345 udp"  # OpenVPN client.ovpn profile co
 # Raspi-monitoring configuration.
 monitoring_enable: false
 monitoring_grafana_admin_password: "admin"      # Is only used the first time Grafana starts up
-monitoring_days_keep_interval: 60d
+monitoring_days_keep_interval: 60d              # How long we should keep monitoring history in DB
 monitoring_speedtest_interval: 60m
 monitoring_ping_interval: 5s
 monitoring_ping_hosts:                          # [URL];[HUMAN_READABLE_NAME]
