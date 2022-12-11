@@ -17,10 +17,12 @@
 
 - name: Copy OpenVPN docker-compose template to Pi.
   ansible.builtin.template:
-    src: templates/openvpn-docker-compose.yml.j2
-    dest: "{{ config_dir }}/openvpn/docker-compose.yml"
+    src: templates/{{ item.src }}
+    dest: "{{ config_dir }}/openvpn/{{ item.dest }}"
     mode: '0640'
   loop:
+    - src: openvpn-docker-compose.yml.j2
+      dest: docker-compose.yml
     - src: openvpn-docker-entrypoint.sh.j2
       dest: openvpn-docker/docker-entrypoint.sh
   become: false
