@@ -68,9 +68,9 @@
 ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/raspi-monitoring_1.png) 
 ![Raspberry Monitoring Dashboard in Grafana picture 2](/images/raspi-monitoring_2.png) 
 
-[**AirGradient Monitoring**](https://www.airgradient.com): Installs an [`airgradient-prometheus` exporter](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/prometheus.yml.j2#L49) and a Grafana dashboard, which tracks and displays air quality over time via a local [AirGradient DIY monitor](https://www.airgradient.com/diy/). 
+[**AirGradient Monitoring**](https://www.airgradient.com): Configures [`Prometheus`](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/prometheus.yml.j2#L49) to get all necessary data directly from your [AirGradient](https://www.airgradient.com/diy/) device and installs a [Grafana dashboard](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/airgradient-air-quality.json.j2), which tracks and displays air quality over time. 
 
-> Your AirGradient device must have alternative [airgradient-improved](https://github.com/d3vilh/airgradient-improved) firmware flashed into EEPROM to support this feature.
+> Your AirGradient device **must** have alternative [airgradient-improved](https://github.com/d3vilh/airgradient-improved) firmware flashed into EEPROM to support this feature.
 
 ![AirGradient Monitoring Dashboard in Grafana picture 1](/images/air-gradient_1.png) 
 ![AirGradient Monitoring Dashboard in Grafana picture 2](/images/air-gradient_2.png)
@@ -147,16 +147,16 @@ sudo docker-compose restart openvpn
 ### OpenVPN client subnets. Guest and Home users
 
 [Raspberry-Gateway](https://github.com/d3vilh/raspberry-gateway/) OpenVPN server uses `10.0.70.0/24` **"Trusted"** subnet for dynamic clients by default and all the clients connected by default will have full access to your Home network, as well as your home Internet.
-However you can be desired to share VPN access with your friends and restrict access to your Home network for this type of clients, allow them to use Internet connection over your VPN only. Such guest clients needs to live in special **"Guest users"** subnet - `10.0.71.0/24`:
+However you can be desired to share VPN access with your friends and restrict access to your Home network for them, but allow to use Internet connection over your VPN. This type of guest clients needs to live in special **"Guest users"** subnet - `10.0.71.0/24`:
 
 <p align="center">
 <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="700" border="1" />
 </p>
 
 To assign desired subnet to the specific client, you have to define static IP address for this client after you generate .OVPN profile for it.
-To define statip IP go to `~/openvpn/staticclients` directory and create text file with the name on your new cliets and one ifrconfig-push option for desired IP/subnet `ifconfig-push 10.0.71.2 255.255.255.0`.
+To define static IP, go to `~/openvpn/staticclients` directory and create text file with the name of your client and insert into it one ifrconfig-push option with static IP and mask: `ifconfig-push 10.0.71.2 255.255.255.0`.
 
-For example, if you would like to restrict Home subnet access to your best fried Slava you should do this:
+For example, if you would like to restrict Home subnet access to your best friend Slava, you should do this:
 
 ```shell
 slava@Ukraini:~/openvpn/staticclients $ pwd
@@ -233,7 +233,7 @@ All the Server and client configuration locates in Dockerfile volume and can be 
 ```
 
 ### OpenVPN activity dashboard
-[Raspberry-Gateway](https://github.com/d3vilh/raspberry-gateway/) setup includes Prometheus [OpenVPN-exporter](https://github.com/d3vilh/openvpn_exporter) and OpenVPN [Grafana dashboard](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/openvpn_exporter.json.j2) which you can [enable in set in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) by enabling `openvpn_exporter_enable` option.
+[Raspberry-Gateway](https://github.com/d3vilh/raspberry-gateway/) setup includes Prometheus [OpenVPN-exporter](https://github.com/d3vilh/openvpn_exporter) and OpenVPN [Grafana dashboard](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/openvpn_exporter.json.j2) which you can [enable in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) by setting `openvpn_exporter_enable` option to `true`.
 
 ![OpenVPN Grafana Dashboard](/images/OVPN_Dashboard.png)
 
