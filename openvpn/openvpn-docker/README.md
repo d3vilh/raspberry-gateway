@@ -3,7 +3,7 @@
 There is already an existing docker-image for openvpn created by [kylemanna/docker-openvpn](https://github.com/kylemanna/docker-openvpn) - With over [216](https://github.com/kylemanna/docker-openvpn/issues) issues,
 [40](https://github.com/kylemanna/docker-openvpn/pulls) open PR's and last commit done in March 2020 I decided to tread this image as not maintained anymore, also It was a good way for me to make myself more familiar with building and setting up docker iamges so that's why I created my own.
 
-Most of its documentation can be found in the [root](https://github.com/d3vilh/raspberry-gateway) directory, if you want to run it without anything else you'll have to edit the [dns-configuration](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn/config/server.conf#L20) (which currently points to the PiHole DNS Server) and
+Most of its documentation can be found in the [root](https://github.com/d3vilh/raspberry-gateway), if you want to run it without anything else you'll have to edit the [dns-configuration](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn/config/server.conf#L20) (which currently points to the PiHole DNS Server) and
 if you don't want to use a custom dns-resolve at all you may also want to comment out [this line](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn/config/server.conf#L39).
 
 ### Run this image using a `docker-compose.yml` file
@@ -20,12 +20,12 @@ services:
        ports: 
           - "1194:1194/udp"
        environment:
-           - REQ_COUNTRY: UA
-           - REQ_PROVINCE: Kyiv
-           - REQ_CITY: Chayka
-           - REQ_ORG: CopyleftCertificateCo
-           - REQ_OU: ShantiShanti
-           - REQ_CN: MyOpenVPN
+           REQ_COUNTRY: UA
+           REQ_PROVINCE: Kyiv
+           REQ_CITY: Chayka
+           REQ_ORG: CopyleftCertificateCo
+           REQ_OU: ShantiShanti
+           REQ_CN: MyOpenVPN
        volumes:
            - ./pki:/etc/openvpn/pki
            - ./clients:/etc/openvpn/clients
@@ -37,13 +37,15 @@ services:
        restart: always
        depends_on:
            - "openvpn-ui"
-
+``` 
+Alternatevly you can add OpenVPN-UI container for WEB UI:
+```yaml
     openvpn-ui:
        container_name: openvpn-ui
        image: d3vilh/openvpn-ui-arm32v7:latest
        environment:
-           - OPENVPN_ADMIN_USERNAME='admin'
-           - OPENVPN_ADMIN_PASSWORD='gagaZush'
+           - OPENVPN_ADMIN_USERNAME={{ ovpnui_user }}
+           - OPENVPN_ADMIN_PASSWORD={{ ovpnui_password }}
        privileged: true
        ports:
            - "8080:8080/tcp"
@@ -87,25 +89,8 @@ docker run \
 --privileged local/openvpn-ui
 ```
 
-[**OpenVPN**](https://openvpn.net) as a server and **OpenVPN-web-ui** as a WEB UI screenshots:
-
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Login.png" alt="OpenVPN-UI Login screen" width="1000" border="1" />
-
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Home.png" alt="OpenVPN-UI Home screen" width="1000" border="1" />
-
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Certs.png" alt="OpenVPN-UI Certificates screen" width="1000" border="1" />
-
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Logs.png" alt="OpenVPN-UI Logs screen" width="1000" border="1" />
-
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Config.png" alt="OpenVPN-UI Configuration screen" width="1000" border="1" />
-
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Server-config.png" alt="OpenVPN-UI Server Configuration screen" width="1000" border="1" />
-
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Profile.png" alt="OpenVPN-UI User Profile" width="1000" border="1" />
-
 ## Configuration
-
-**OpenVPN WEB UI** can be accessed on own port (*e.g. http://localhost:8080 , change `localhost` to your Raspberry host ip/name*), the default user and password is `admin/gagaZush` preconfigured in `config.yml` which you supposed to [set in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L28) `ovpnui_user` & `ovpnui_password` vars, just before the installation.
+**OpenVPN WEB UI** can be accessed on own port (*e.g. http://localhost:8080 , change `localhost` to your Raspberry host ip/name*), the default user and password is `admin/gagaZush` preconfigured in `config.yml` which you supposed to [set in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L18) `ovpnui_user` & `ovpnui_password` vars, just before the installation.
 
 The volume container will be inicialized by using the official OpenVPN `openvpn_openvpn` image with included scripts to automatically generate everything you need  on the first run:
  - Diffie-Hellman parameters
@@ -118,11 +103,9 @@ This setup use `tun` mode, because it works on the widest range of devices. tap 
 
 The topology used is `subnet`, because it works on the widest range of OS. p2p, for instance, does not work on Windows.
 
-The UDP server uses `10.0.70.0/24` for dynamic clients by default, because I have a grey cat.
+The server config [specifies](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn/config/server.conf#L40) `push redirect-gateway def1 bypass-dhcp`, meaning that after establishing the VPN connection, all traffic will go through the VPN. This might cause problems if you use local DNS recursors which are not directly reachable, since you will try to reach them through the VPN and they might not answer to you. If that happens, use public DNS resolvers like those of OpenDNS (`208.67.222.222` and `208.67.220.220`) or Google (`8.8.4.4` and `8.8.8.8`).
 
-The server config [specifies](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn/config/server.conf#L39) `push redirect-gateway def1 bypass-dhcp`, meaning that after establishing the VPN connection, all traffic will go through the VPN. This might cause problems if you use local DNS recursors which are not directly reachable, since you will try to reach them through the VPN and they might not answer to you. If that happens, use public DNS resolvers like those of OpenDNS (`208.67.222.222` and `208.67.220.220`) or Google (`8.8.4.4` and `8.8.8.8`).
-
-If you wish to use your local Pi-Hole as a DNS server (the one which comes with this setup), you have to modify a [dns-configuration](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn/config/server.conf#L20) with your local Pi-Hole IP address.
+If you wish to use your local Pi-Hole as a DNS server (the one which comes with this setup), you have to modify a [dns-configuration](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn/config/server.conf#L21) with your local Pi-Hole IP address.
 
 ### Generating .OVPN client profiles
 
@@ -141,12 +124,49 @@ To download .OVPN client configuration file, press on the `Client Name` you just
 <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_New_Client_download.png" alt="download OVPN" width="350" border="1" />
 
 If you use NAT and different port for all the external connections on your network router, you may need to change server port in .OVPN file. For that, just open it in any text editor (emax?) and update `1194` port with the desired one in this line: `remote 178.248.232.12 1194 udp`.
+This line also can be [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L23) `config.yml` file in var `ovpn_remote`.
 
 Install [Official OpenVPN client](https://openvpn.net/vpn-client/) to your client device.
 
 Deliver .OVPN profile to the client device and import it as a FILE, then connect with new profile to enjoy your free VPN:
 
 <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_Palm_import.png" alt="PalmTX Import" width="350" border="1" /> <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_Palm_connected.png" alt="PalmTX Connected" width="350" border="1" />
+
+### Revoking .OVPN profiles
+
+If you would like to prevent client to use yor VPN connection, you have to revoke client certificate and restart the OpenVPN daemon.
+You can do it via OpenVPN WEB UI `"Certificates"` menue, by pressing Revoke red button: 
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Revoke.png" alt="Revoke Certificate" width="600" border="1" />
+
+Revoked certificates won't kill active connections, you'll have to restart the service if you want the user to immediately disconnect. It can be done via Portainer GUI or CLI:
+```shell
+sudo docker-compose restart openvpn
+```
+
+### OpenVPN client subnets. Guest and Home users
+
+[Raspberry-Gateway](https://github.com/d3vilh/raspberry-gateway/) OpenVPN server uses `10.0.70.0/24` **"Trusted"** subnet for dynamic clients by default and all the clients connected by default will have full access to your Home network, as well as your home Internet.
+However you can be desired to share VPN access with your friends and restrict access to your Home network for this type of clients, allow them to use Internet connection over your VPN only. Such guest clients needs to live in special **"Guest users"** subnet - `10.0.71.0/24`:
+
+<p align="center">
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="700" border="1" />
+</p>
+
+To assign desired subnet to the specific client, you have to define static IP address for this client after you generate .OVPN profile for it.
+To define statip IP go to `~/openvpn/staticclients` directory and create text file with the name on your new cliets and one ifrconfig-push option for desired IP/subnet `ifconfig-push 10.0.71.2 255.255.255.0`.
+
+For example, if you would like to restrict Home subnet access to your best fried Slava you should do this:
+
+```shell
+slava@Ukraini:~/openvpn/staticclients $ pwd
+/home/slava/openvpn/staticclients
+slava@Ukraini:~/openvpn/staticclients $ ls -lrt | grep Slava
+-rw-r--r-- 1 slava heroi 38 Nov  9 20:53 Slava
+slava@Ukraini:~/openvpn/staticclients $ cat Slava
+ifconfig-push 10.0.71.2 255.255.255.0
+```
+
+> Keep in mind, by default, all the clients have full access, so you don't need to specifically configure static IP for your own devices, such alwaws will land to **"Trusted"** subnet by default. 
 
 ### Alternative CLI way to generate .OVPN profiles
 
@@ -155,21 +175,14 @@ Execute following command. Password as second argument is optional:
 sudo docker exec openvpn bash /opt/app/bin/genclient.sh <name> <?password?>
 ```
 
-You can find you .ovpn file under `/openvpn/clients/<name>.ovpn`, make sure to check and modify the `remote ip-address`, `port` and `protocol`.
+You can find you .ovpn file under `/openvpn/clients/<name>.ovpn`, make sure to check and modify the `remote ip-address`, `port` and `protocol`. It also will appear in `"Certificates"` menue of OpenVPN WEB UI.
 
-### Revoking .OVPN profiles
-
-If you would like to prevent client to use yor VPN connection, you have to revoke client certificate and restart the OpenVPN daemon.
+### Alternative CLI way to revoke .OVPN profiles
 
 Revoking of old .OVPN files is not availabe via the GUI and you have to deal with it via the CLI by running following:
 
 ```shell
 sudo docker exec openvpn bash /opt/app/bin/rmclient.sh <clientname>
-```
-
-Revoked certificates won't kill active connections, you'll have to restart the service if you want the user to immediately disconnect. It can be done via Portainer GUI or CLI:
-```shell
-sudo docker-compose restart openvpn
 ```
 
 All the Server and client configuration locates in Dockerfile volume and can be easly tuned. Here are tree of volume content:
@@ -217,3 +230,24 @@ All the Server and client configuration locates in Dockerfile volume and can be 
 |   |-- ta.key
 |-- staticclients
 ```
+
+### OpenVPN activity dashboard
+[Raspberry-Gateway](https://github.com/d3vilh/raspberry-gateway/) setup includes Prometheus [OpenVPN-exporter](https://github.com/d3vilh/openvpn_exporter) and OpenVPN [Grafana dashboard](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/openvpn_exporter.json.j2) which you can [enable in set in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) by enabling `openvpn_exporter_enable` option.
+
+![OpenVPN Grafana Dashboard](/images/OVPN_Dashboard.png)
+
+[**OpenVPN**](https://openvpn.net) as a server and **OpenVPN-web-ui** as a WEB UI screenshots:
+
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Login.png" alt="OpenVPN-UI Login screen" width="1000" border="1" />
+
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Home.png" alt="OpenVPN-UI Home screen" width="1000" border="1" />
+
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Certs.png" alt="OpenVPN-UI Certificates screen" width="1000" border="1" />
+
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Logs.png" alt="OpenVPN-UI Logs screen" width="1000" border="1" />
+
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Config.png" alt="OpenVPN-UI Configuration screen" width="1000" border="1" />
+
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Server-config.png" alt="OpenVPN-UI Server Configuration screen" width="1000" border="1" />
+
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Profile.png" alt="OpenVPN-UI User Profile" width="1000" border="1" />
