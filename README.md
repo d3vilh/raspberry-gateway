@@ -135,7 +135,7 @@ Deliver .OVPN profile to the client device and import it as a FILE, then connect
 
 If you would like to prevent client to use yor VPN connection, you have to revoke client certificate and restart the OpenVPN daemon.
 You can do it via OpenVPN WEB UI `"Certificates"` menue, by pressing Revoke red button: 
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Revoke.png" alt="Revoke Certificate" width="350" border="1" />
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Revoke.png" alt="Revoke Certificate" width="600" border="1" />
 
 Revoked certificates won't kill active connections, you'll have to restart the service if you want the user to immediately disconnect. It can be done via Portainer GUI or CLI:
 ```shell
