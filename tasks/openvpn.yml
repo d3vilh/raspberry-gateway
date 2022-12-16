@@ -19,17 +19,14 @@
   ansible.builtin.template:
     src: templates/{{ item.src }}
     dest: "{{ config_dir }}/openvpn/{{ item.dest }}"
-    mode: {{ item.own }}
+    mode: 0740
   loop:
     - src: openvpn-docker-compose.yml.j2
       dest: docker-compose.yml
-      own: 0640
     - src: openvpn-docker-entrypoint.sh.j2
       dest: openvpn-docker/docker-entrypoint.sh
-      own: 0740
     - src: openvpn_client.conf.j2
       dest: config/client.conf
-      own: 0640
   become: false
   notify: Restart openvpn
 
