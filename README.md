@@ -70,7 +70,7 @@
 
 [**AirGradient Monitoring**](https://www.airgradient.com): Installs an [`airgradient-prometheus` exporter](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/prometheus.yml.j2#L49) and a Grafana dashboard, which tracks and displays air quality over time via a local [AirGradient DIY monitor](https://www.airgradient.com/diy/). 
 
-Your AirGradient device must have alternative [airgradient-improved](https://github.com/d3vilh/airgradient-improved) firmware flashed into EEPROM to support this feature.
+> Your AirGradient device must have alternative [airgradient-improved](https://github.com/d3vilh/airgradient-improved) firmware flashed into EEPROM to support this feature.
 
 ![AirGradient Monitoring Dashboard in Grafana picture 1](/images/air-gradient_1.png) 
 ![AirGradient Monitoring Dashboard in Grafana picture 2](/images/air-gradient_2.png)
@@ -146,7 +146,7 @@ sudo docker-compose restart openvpn
 
 ### OpenVPN client subnets. Guest and Home users
 
-Raspberry-gateway OpenVPN server uses `10.0.70.0/24` **"Trusted"** subnet for dynamic clients by default and all the clients connected by default will have full access to your Home network, as well as your home Internet.
+[Raspberry-Gateway](https://github.com/d3vilh/raspberry-gateway/) OpenVPN server uses `10.0.70.0/24` **"Trusted"** subnet for dynamic clients by default and all the clients connected by default will have full access to your Home network, as well as your home Internet.
 However you can be desired to share VPN access with your friends and restrict access to your Home network for this type of clients, allow them to use Internet connection over your VPN only. Such guest clients needs to live in special **"Guest users"** subnet - `10.0.71.0/24`:
 
 <p align="center">
