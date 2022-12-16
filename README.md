@@ -153,6 +153,7 @@ However you can be desired to share VPN access with your friends and restrict ac
 
 To assign desired subnet to the specific client, you have to define static IP address for this client after you generate .OVPN profile for it.
 To define statip IP go to `~/openvpn/staticclients` directory and create text file with the name on your new cliets and one ifrconfig-push option for desired IP/subnet `ifconfig-push 10.0.71.2 255.255.255.0`.
+
 For example, if you would like to restrict Home subnet access to your best fried Slava you should do this:
 
 ```shell
@@ -228,6 +229,11 @@ All the Server and client configuration locates in Dockerfile volume and can be 
 |   |-- ta.key
 |-- staticclients
 ```
+
+### OpenVPN activity dashboard
+[Raspberry-Gateway](https://github.com/d3vilh/raspberry-gateway/) setup includes Prometheus [OpenVPN-exporter](https://github.com/d3vilh/openvpn_exporter) and OpenVPN [Grafana dashboard](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/openvpn_exporter.json.j2) which you can [enable in set in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L36) by enabling `openvpn_exporter_enable` option.
+
+![OpenVPN Grafana Dashboard](/images/OVPN_Dashboard.png)
 
 ## Raspi-monitoring
 
