@@ -68,7 +68,9 @@
 ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/raspi-monitoring_1.png) 
 ![Raspberry Monitoring Dashboard in Grafana picture 2](/images/raspi-monitoring_2.png) 
 
-[**AirGradient Monitoring**](https://www.airgradient.com): Installs an [`airgradient-prometheus` exporter](https://github.com/geerlingguy/airgradient-prometheus) and a Grafana dashboard, which tracks and displays air quality over time via a local [AirGradient DIY monitor](https://www.airgradient.com/diy/).
+[**AirGradient Monitoring**](https://www.airgradient.com): Installs an [`airgradient-prometheus` exporter](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/prometheus.yml.j2#L49) and a Grafana dashboard, which tracks and displays air quality over time via a local [AirGradient DIY monitor](https://www.airgradient.com/diy/). 
+
+Your AirGradient device must have alternative [airgradient-improved](https://github.com/d3vilh/airgradient-improved) firmware flashed into EEPROM to support this feature.
 
 ![AirGradient Monitoring Dashboard in Grafana picture 1](/images/air-gradient_1.png) 
 ![AirGradient Monitoring Dashboard in Grafana picture 2](/images/air-gradient_2.png)
