@@ -144,14 +144,27 @@ sudo docker-compose restart openvpn
 
 ### OpenVPN client subnets. Guest and Home users
 
-Raspberry-gateway OpenVPN server uses `10.0.70.0/24` "Trusted" subnet for dynamic clients by default and all the clients connected by default will have full access to your Home network, as well as your home Internet.
-However you can be desired to share VPN access with your friends and restrict access to your Home network for this type of clients, allow them to use Internet connection over your VPN only. Such guest clients needs to live in special "Guest users" subnet - `10.0.71.0/24`:
+Raspberry-gateway OpenVPN server uses `10.0.70.0/24` **"Trusted"** subnet for dynamic clients by default and all the clients connected by default will have full access to your Home network, as well as your home Internet.
+However you can be desired to share VPN access with your friends and restrict access to your Home network for this type of clients, allow them to use Internet connection over your VPN only. Such guest clients needs to live in special **"Guest users"** subnet - `10.0.71.0/24`:
 
 <p align="center">
 <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="600" border="1" />
 </p>
 
-To assign desired subnet to specific client you have to define static IP address for the client (keep in mind, by default, all the clients have full access, so you don't need to do so for your own "Trusted" devices). To do so you need to generate .OVPN profile
+To assign desired subnet to the specific client, you have to define static IP address for this client after you generate .OVPN profile for it.
+To define statip IP go to `~/openvpn/staticclients` directory and create text file with the name on your new cliets and one ifrconfig-push option for desired IP/subnet `ifconfig-push 10.0.71.2 255.255.255.0`.
+For example, if you would like to restrict Home subnet access to your best fried Slava you should do this:
+
+```shell
+slava@Ukraini:~/openvpn/staticclients $ pwd
+/home/philipp/openvpn/staticclients
+slava@Ukraini:~/openvpn/staticclients $ ls -lrt | grep Slava
+-rw-r--r-- 1 slava heroi 38 Nov  9 20:53 Slava
+slava@Ukraini:~/openvpn/staticclients $ cat Slava
+ifconfig-push 10.0.71.2 255.255.255.0
+```
+
+> Keep in mind, by default, all the clients have full access, so you don't need to specifically configure static IP for your own devices, such alwaws will land to **"Trusted"** subnet by default. 
 
 ### Alternative CLI way to generate .OVPN profiles
 
