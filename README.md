@@ -148,7 +148,7 @@ Raspberry-gateway OpenVPN server uses `10.0.70.0/24` **"Trusted"** subnet for dy
 However you can be desired to share VPN access with your friends and restrict access to your Home network for this type of clients, allow them to use Internet connection over your VPN only. Such guest clients needs to live in special **"Guest users"** subnet - `10.0.71.0/24`:
 
 <p align="center">
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="600" border="1" />
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="700" border="1" />
 </p>
 
 To assign desired subnet to the specific client, you have to define static IP address for this client after you generate .OVPN profile for it.
@@ -157,7 +157,7 @@ For example, if you would like to restrict Home subnet access to your best fried
 
 ```shell
 slava@Ukraini:~/openvpn/staticclients $ pwd
-/home/philipp/openvpn/staticclients
+/home/slava/openvpn/staticclients
 slava@Ukraini:~/openvpn/staticclients $ ls -lrt | grep Slava
 -rw-r--r-- 1 slava heroi 38 Nov  9 20:53 Slava
 slava@Ukraini:~/openvpn/staticclients $ cat Slava
@@ -257,7 +257,7 @@ http://localhost:9115 blackbox exporter endpoint. Lets you see what have failed/
 
 http://localhost:9798/metrics speedtest exporter endpoint. Does take about 30 seconds to show its result as it runs an actual speedtest when requested.
 
-## Kudos and Дякую to the original authorts
+## Дякую and Kudos to the original authorts
 
 Kudos to @vegasbrianc for [super easy docker](https://github.com/vegasbrianc/github-monitoring) stack used to build this project.
 
