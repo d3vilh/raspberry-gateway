@@ -41,4 +41,5 @@ services:
            - ./:/etc/openvpn
            - ./db:/opt/openvpn-gui/db
            - ./pki:/usr/share/easy-rsa/pki
+           - /var/run/docker.sock:/var/run/docker.sock:ro
        restart: always
