@@ -136,10 +136,12 @@ Deliver .OVPN profile to the client device and import it as a FILE, then connect
 ### Revoking .OVPN profiles
 
 If you would like to prevent client to use yor VPN connection, you have to revoke client certificate and restart the OpenVPN daemon.
-You can do it via OpenVPN WEB UI `"Certificates"` menue, by pressing Revoke red button: 
+You can do it via OpenVPN WEB UI `"Certificates"` menue, by pressing Revoke red button:
+
 <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Revoke.png" alt="Revoke Certificate" width="600" border="1" />
 
 Revoked certificates won't kill active connections, you'll have to restart the service if you want the user to immediately disconnect. It can be done via Portainer or OpenVPN WEB UI from the same `"Certificates"` page, by pressing Restart red button:
+
 <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Restart.png" alt="OpenVPN Restart" width="600" border="1" />
 
 ### OpenVPN client subnets. Guest and Home users
@@ -272,7 +274,7 @@ http://localhost:9798/metrics speedtest exporter endpoint. Does take about 30 se
 
 Kudos to @vegasbrianc for [super easy docker](https://github.com/vegasbrianc/github-monitoring) stack used to build this project.
 
-Kudos to @adamwalach for development of original [OpenVPN-WEB-UI](https://github.com/adamwalach/openvpn-web-ui) interface of x86 computers which was ported for arm32v7 with expanded functionality as part of this project.
+Kudos to @adamwalach for development of original [OpenVPN-WEB-UI](https://github.com/adamwalach/openvpn-web-ui) interface of x86 computers which was ported for arm32v7 and arm64V8 with expanded functionality as part of this project.
 
 Kudos to @maxandersen for making the [Internet Monitoring](https://github.com/maxandersen/internet-monitoring) project, which forked and expanded with functionality to build Rasbpi-Monitoring.
 
