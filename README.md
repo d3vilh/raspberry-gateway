@@ -139,10 +139,8 @@ If you would like to prevent client to use yor VPN connection, you have to revok
 You can do it via OpenVPN WEB UI `"Certificates"` menue, by pressing Revoke red button: 
 <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Revoke.png" alt="Revoke Certificate" width="600" border="1" />
 
-Revoked certificates won't kill active connections, you'll have to restart the service if you want the user to immediately disconnect. It can be done via Portainer GUI or CLI:
-```shell
-sudo docker-compose restart openvpn
-```
+Revoked certificates won't kill active connections, you'll have to restart the service if you want the user to immediately disconnect. It can be done via Portainer or OpenVPN WEB UI from the same `"Certificates"` page, by pressing Restart red button:
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Restart.png" alt="OpenVPN Restart" width="600" border="1" />
 
 ### OpenVPN client subnets. Guest and Home users
 
@@ -169,24 +167,29 @@ ifconfig-push 10.0.71.2 255.255.255.0
 
 > Keep in mind, by default, all the clients have full access, so you don't need to specifically configure static IP for your own devices, such alwaws will land to **"Trusted"** subnet by default. 
 
-### Alternative CLI way to generate .OVPN profiles
+### Alternative, CLI ways to deal with OpenVPN configuration
 
-Execute following command. Password as second argument is optional:
+To generate new .OVPN profile execute following command. Password as second argument is optional:
 ```shell
 sudo docker exec openvpn bash /opt/app/bin/genclient.sh <name> <?password?>
 ```
 
 You can find you .ovpn file under `/openvpn/clients/<name>.ovpn`, make sure to check and modify the `remote ip-address`, `port` and `protocol`. It also will appear in `"Certificates"` menue of OpenVPN WEB UI.
 
-### Alternative CLI way to revoke .OVPN profiles
-
-Revoking of old .OVPN files is not availabe via the GUI and you have to deal with it via the CLI by running following:
+Revoking of old .OVPN files can be done via CLI by running following:
 
 ```shell
 sudo docker exec openvpn bash /opt/app/bin/rmclient.sh <clientname>
 ```
 
-All the Server and client configuration locates in Dockerfile volume and can be easly tuned. Here are tree of volume content:
+Restart of OpenVPN container can be done via the CLI by running following:
+```shell
+sudo docker-compose restart openvpn
+```
+
+### OpenVPN Pstree structure
+
+All the Server and Client configuration located in Docker volume and can be easely tuned. Here are tree of volume content:
 
 ```shell
 |-- clients
@@ -229,7 +232,7 @@ All the Server and client configuration locates in Dockerfile volume and can be 
 |   |-- safessl-easyrsa.cnf
 |   |-- serial
 |   |-- ta.key
-|-- staticclients
+|-- staticclients //Directory where stored all the satic clients configuration
 ```
 
 ### OpenVPN activity dashboard
