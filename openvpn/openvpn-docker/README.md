@@ -154,8 +154,8 @@ However you can be desired to share VPN access with your friends and restrict ac
 <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="700" border="1" />
 </p>
 
-To assign desired subnet to the specific client, you have to define static IP address for this client after you generate .OVPN profile for it.
-To define static IP, go to `~/openvpn/staticclients` directory and create text file with the name of your client and insert into it one ifrconfig-push option with static IP and mask: `ifconfig-push 10.0.71.2 255.255.255.0`.
+To assign desired subnet policy to the specific client, you have to define static IP address for this client after you generate .OVPN profile.
+To define static IP, go to `~/openvpn/staticclients` directory and create text file with the name of your client and insert into this file ifrconfig-push option with the desired static IP and mask: `ifconfig-push 10.0.71.2 255.255.255.0`.
 
 For example, if you would like to restrict Home subnet access to your best friend Slava, you should do this:
 
@@ -168,7 +168,7 @@ slava@Ukraini:~/openvpn/staticclients $ cat Slava
 ifconfig-push 10.0.71.2 255.255.255.0
 ```
 
-> Keep in mind, by default, all the clients have full access, so you don't need to specifically configure static IP for your own devices, such alwaws will land to **"Trusted"** subnet by default. 
+> Keep in mind, by default, all the clients have full access, so you don't need to specifically configure static IP for your own devices, your home devices always will land to **"Trusted"** subnet by default. 
 
 ### Alternative, CLI ways to deal with OpenVPN configuration
 
