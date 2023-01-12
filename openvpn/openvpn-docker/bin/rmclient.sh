@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Exit immediately if a command exits with a non-zero status
 set -e
 
@@ -12,8 +11,8 @@ if [[ ! -f $DEST_FILE_PATH ]]; then
     exit 1
 fi
 
-# Modify the index.txt file by removing the /name=$1 line
-sed -i'.bak' "s/\/name=${1}//" /opt/app/easy-rsa/pki/index.txt
+# Modify the index.txt file by removing everything after pattern "/name=$1" in the line
+sed -i'.bak' "s/\/name=${1}.*//" /usr/share/easy-rsa/pki/index.txt
 
 # Set the EASYRSA_BATCH variable to enable non-interactive mode for easy-rsa
 export EASYRSA_BATCH=1 # see https://superuser.com/questions/1331293/easy-rsa-v3-execute-build-ca-and-gen-req-silently
@@ -21,7 +20,7 @@ export EASYRSA_BATCH=1 # see https://superuser.com/questions/1331293/easy-rsa-v3
 echo 'Revoke certificate...'
 
 # Change to the easy-rsa directory and copy the easy-rsa variables file
-cd /opt/app/easy-rsa
+cd /usr/share/easy-rsa
 cp /etc/openvpn/config/easy-rsa.vars ./vars
 
 # Revoke the specified user's certificate
@@ -36,7 +35,7 @@ chmod +r ./pki/crl.pem
 
 echo 'Sync pki directory...'
 # Remove all files in the /etc/openvpn/pki directory
-rm -rf /etc/openvpn/pki/*
+#rm -rf /etc/openvpn/pki/*
 
 # Copy all files from the easy-rsa PKI directory to the OpenVPN PKI directory
 cp -r ./pki/. /etc/openvpn/pki
