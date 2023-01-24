@@ -153,19 +153,8 @@ However you can be desired to share VPN access with your friends and restrict ac
 <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="700" border="1" />
 </p>
 
-To assign desired subnet policy to the specific client, you have to define static IP address for this client after you generate .OVPN profile.
-To define static IP, go to `~/openvpn/staticclients` directory and create text file with the name of your client and insert into this file ifrconfig-push option with the desired static IP and mask: `ifconfig-push 10.0.71.2 255.255.255.0`.
-
-For example, if you would like to restrict Home subnet access to your best friend Slava, you should do this:
-
-```shell
-slava@Ukraini:~/openvpn/staticclients $ pwd
-/home/slava/openvpn/staticclients
-slava@Ukraini:~/openvpn/staticclients $ ls -lrt | grep Slava
--rw-r--r-- 1 slava heroi 38 Nov  9 20:53 Slava
-slava@Ukraini:~/openvpn/staticclients $ cat Slava
-ifconfig-push 10.0.71.2 255.255.255.0
-```
+To assign desired subnet policy to the specific client, you have to define static IP address for this client when you'll be generate new .OVPN profile.
+To do that, just enter `"Static IP (optional)"` field in `"Certificates"` page and press `"Create"` button.
 
 > Keep in mind, by default, all the clients have full access, so you don't need to specifically configure static IP for your own devices, your home devices always will land to **"Trusted"** subnet by default. 
 
@@ -187,6 +176,20 @@ sudo docker exec openvpn bash /opt/app/bin/rmclient.sh <clientname>
 Restart of OpenVPN container can be done via the CLI by running following:
 ```shell
 sudo docker-compose restart openvpn
+```
+
+To assign desired subnet policy to the specific client, you have to define static IP address for this client after you generate .OVPN profile.
+To define static IP, go to `~/openvpn/staticclients` directory and create text file with the name of your client and insert into this file ifrconfig-push option with the desired static IP and mask: `ifconfig-push 10.0.71.2 255.255.255.0`.
+
+For example, if you would like to restrict Home subnet access to your best friend Slava, you should do this:
+
+```shell
+slava@Ukraini:~/openvpn/staticclients $ pwd
+/home/slava/openvpn/staticclients
+slava@Ukraini:~/openvpn/staticclients $ ls -lrt | grep Slava
+-rw-r--r-- 1 slava heroi 38 Nov  9 20:53 Slava
+slava@Ukraini:~/openvpn/staticclients $ cat Slava
+ifconfig-push 10.0.71.2 255.255.255.0
 ```
 
 ### OpenVPN Pstree structure
