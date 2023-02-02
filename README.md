@@ -135,7 +135,7 @@ Deliver .OVPN profile to the client device and import it as a FILE, then connect
 
 <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_Palm_import.png" alt="PalmTX Import" width="350" border="1" /> <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_Palm_connected.png" alt="PalmTX Connected" width="350" border="1" />
 
-### Revoking .OVPN profiles
+### Revoking and deleting .OVPN profiles and Clients certificates
 
 If you would like to prevent client to use yor VPN connection, you have to revoke client certificate and restart the OpenVPN daemon.
 You can do it via OpenVPN WEB UI `"Certificates"` menue, by pressing **Revoke** amber button:
