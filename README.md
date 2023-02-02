@@ -124,8 +124,10 @@ To download .OVPN client configuration file, press on the `Client Name` you just
 
 <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_New_Client_download.png" alt="download OVPN" width="350" border="1" />
 
-If you use NAT and different port for all the external connections on your network router, you may need to change server port in .OVPN file. For that, just open it in any text editor (emax?) and update `1194` port with the desired one in this line: `remote 178.248.232.12 1194 udp`.
-This line also can be [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L23) `config.yml` file in var `ovpn_remote`.
+You may need to change server port in .OVPN file. For that, just open it in any text editor (emax?) and update IP and port with the desired one in this line: `remote 178.248.232.12 1194 udp`.
+This parameters also can be [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L23) `config.yml` file in var `ovpn_remote`.
+
+### Using .OVPN client profile with OpenVPN client
 
 Install [Official OpenVPN client](https://openvpn.net/vpn-client/) to your client device.
 
