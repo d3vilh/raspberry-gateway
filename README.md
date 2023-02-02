@@ -116,7 +116,7 @@ For this go to `"Configuration > Settings"`:
 
 <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_ext_serv_ip1.png" alt="Configuration > Settings" width="350" border="1" />
 
-And then update `"Server Address (external)"` field with your external Internet IP. Then go to `"Certificates"`, enter new VPN client name in the field at the page below and press `"Create"` to generate new Client certificate:
+And then update `"Server Address (external)"` field with your external Internet IP. Then go to `"Certificates"`, enter new VPN **client name**,  **Passphrase**(optional) and **Static IP**(optional) in the field at the page below and press `"Create"` to generate new Client certificate:
 
 <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_ext_serv_ip2.png" alt="Server Address" width="350" border="1" />  <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_New_Client.png" alt="Create Certificate" width="350" border="1" />
 
