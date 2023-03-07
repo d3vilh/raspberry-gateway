@@ -58,9 +58,14 @@ airgradient_sensors:
 # Starlink configuration.                       # Requires `monitoring_enable`
 starlink_enable: false
 
+starlink_ip: "10.10.10.1"
+starlink_port: 9817
+
 # Shelly Plug configuration.                    # Requires `monitoring_enable`
 shelly_plug_enable: false
 
 shelly_plug_hostname: my-shelly-plug-host-or-ip
+shelly_ip: "192.168.88.66"
+shelly_port: 9924
 shelly_plug_http_username: username
 shelly_plug_http_password: "gagaZush"

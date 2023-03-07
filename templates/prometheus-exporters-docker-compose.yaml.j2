@@ -74,6 +74,7 @@ services:
 
   nodeexp:
     privileged: true
+    restart: always
     image: prom/node-exporter
     volumes:
       - /proc:/host/proc:ro
@@ -81,11 +82,19 @@ services:
       - /:/rootfs:ro
     ports:
       - 9100:9100
-    restart: always
     command:
       - '--path.procfs=/host/proc'
       - '--path.sysfs=/host/sys'
       - --collector.filesystem.ignored-mount-points
       - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
+    networks:
+      - back-tier
+
+  rpi_exporter:
+    privileged: true
+    restart: always
+    image: d3vilh/rpi_exporter-arm64:latest
+    ports:
+       - "9110:9110/tcp"
     networks:
       - back-tier
