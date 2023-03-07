@@ -1,0 +1,350 @@
+apiVersion: 1
+groups:
+    - orgId: 1
+      name: H1
+      folder: RaspberryHW
+      interval: 1m
+      rules:
+        - uid: be6r8QbVk
+          title: CPU Temp
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 300
+                to: 0
+              datasourceUid: P1809F7CD0C75ACF3
+              model:
+                datasource:
+                    type: prometheus
+                    uid: P1809F7CD0C75ACF3
+                exemplar: true
+                expr: '{sensor="temp0"}'
+                interval: ""
+                intervalMs: 60000
+                legendFormat: Temp 0
+                maxDataPoints: 43200
+                refId: A
+            - refId: B
+              relativeTimeRange:
+                from: 300
+                to: 0
+              datasourceUid: P1809F7CD0C75ACF3
+              model:
+                datasource:
+                    type: prometheus
+                    uid: P1809F7CD0C75ACF3
+                exemplar: true
+                expr: '{sensor="temp1"}'
+                hide: false
+                interval: ""
+                intervalMs: 60000
+                legendFormat: Temp 1
+                maxDataPoints: 43200
+                refId: B
+            - refId: C
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 40
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - A
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                    - evaluator:
+                        params:
+                            - 40
+                            - 0
+                        type: gt
+                      operator:
+                        type: or
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    name: Expression
+                    type: __expr__
+                    uid: __expr__
+                expression: ""
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: classic_conditions
+          dashboardUid: rvk35ERRz
+          panelId: 16
+          noDataState: OK
+          execErrState: OK
+          for: 2m
+          annotations:
+            __dashboardUid__: rvk35ERRz
+            __panelId__: "16"
+            description: 'CY: Raspberry CPU Temperature alert!'
+            runbook_url: http://192.168.88.2:3030/d/rvk35ERRz/raspbi-monitoring?orgId=1&viewPanel=16
+          isPaused: false
+        - uid: n80JQQx4k
+          title: Free FS root
+          condition: B
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 300
+                to: 0
+              datasourceUid: P1809F7CD0C75ACF3
+              model:
+                editorMode: code
+                expr: node_filesystem_free_bytes
+                hide: false
+                intervalMs: 1000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: true
+                refId: A
+            - refId: B
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1.024e+09
+                            - 0
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - A
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    name: Expression
+                    type: __expr__
+                    uid: __expr__
+                expression: ""
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: B
+                type: classic_conditions
+          dashboardUid: rvk35ERRz
+          panelId: 46
+          noDataState: NoData
+          execErrState: Error
+          for: 5m
+          annotations:
+            __dashboardUid__: rvk35ERRz
+            __panelId__: "46"
+            description: 'CY: File system is almost full.'
+            runbook_url: http://192.168.88.2:3030/d/rvk35ERRz/raspbi-monitoring?orgId=1&viewPanel=46
+          isPaused: false
+        - uid: tmpY63bVk
+          title: CPU Usage
+          condition: B
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 300
+                to: 0
+              datasourceUid: P1809F7CD0C75ACF3
+              model:
+                datasource:
+                    type: prometheus
+                    uid: P1809F7CD0C75ACF3
+                exemplar: true
+                expr: 100 - (rate(node_cpu_seconds_total{job="nodeexp",mode="idle"}[30s])) * 100
+                instant: false
+                interval: ""
+                intervalMs: 15000
+                legendFormat: CPU{{cpu}}
+                maxDataPoints: 43200
+                refId: A
+            - refId: B
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 99
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - A
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    name: Expression
+                    type: __expr__
+                    uid: __expr__
+                expression: ""
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: B
+                type: classic_conditions
+          dashboardUid: rvk35ERRz
+          panelId: 18
+          noDataState: NoData
+          execErrState: Error
+          for: 2m
+          annotations:
+            __dashboardUid__: rvk35ERRz
+            __panelId__: "18"
+            description: 'CY: High CPU usage'
+            runbook_url: http://192.168.88.2:3030/d/rvk35ERRz/raspbi-monitoring?orgId=1&viewPanel=18
+          isPaused: false
+    - orgId: 1
+      name: A1
+      folder: AirGradient
+      interval: 1m
+      rules:
+        - uid: l1zO8Qb4z
+          title: CO2 Over Time
+          condition: B
+          data:
+            - refId: A
+              queryType: randomWalk
+              relativeTimeRange:
+                from: 300
+                to: 0
+              datasourceUid: P1809F7CD0C75ACF3
+              model:
+                datasource:
+                    type: prometheus
+                    uid: P1809F7CD0C75ACF3
+                exemplar: true
+                expr: rco2{job="airgradient-livingroom"}
+                interval: ""
+                intervalMs: 15000
+                legendFormat: CO2
+                maxDataPoints: 43200
+                queryType: randomWalk
+                refId: A
+            - refId: B
+              relativeTimeRange:
+                from: 300
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1000
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - A
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    name: Expression
+                    type: __expr__
+                    uid: __expr__
+                expression: ""
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: B
+                type: classic_conditions
+          dashboardUid: aglivingroom
+          panelId: 2
+          noDataState: NoData
+          execErrState: Error
+          for: 5m
+          annotations:
+            __dashboardUid__: aglivingroom
+            __panelId__: "2"
+            description: 'CY: Пора проветрить (CO2)!'
+            runbook_url: http://192.168.88.2:3030/d/aglivingroom/airquality-airgradient?orgId=1&viewPanel=2
+          isPaused: false
+        - uid: qAyx8Qb4z
+          title: PM Over Time
+          condition: B
+          data:
+            - refId: A
+              queryType: randomWalk
+              relativeTimeRange:
+                from: 300
+                to: 0
+              datasourceUid: P1809F7CD0C75ACF3
+              model:
+                datasource:
+                    type: prometheus
+                    uid: P1809F7CD0C75ACF3
+                editorMode: code
+                exemplar: true
+                expr: pm02{job="airgradient-livingroom"}
+                interval: ""
+                intervalMs: 15000
+                legendFormat: PM2.5
+                maxDataPoints: 43200
+                queryType: randomWalk
+                range: true
+                refId: A
+            - refId: B
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 30
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - A
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    name: Expression
+                    type: __expr__
+                    uid: __expr__
+                expression: ""
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: B
+                type: classic_conditions
+          dashboardUid: aglivingroom
+          panelId: 3
+          noDataState: NoData
+          execErrState: Error
+          for: 2m
+          annotations:
+            __dashboardUid__: aglivingroom
+            __panelId__: "3"
+            description: 'CY: Pollution level (PM25). 17μg/m3 is high. 35 μg/m3 - critical levels.'
+            runbook_url: http://192.168.88.2:3030/d/aglivingroom/airquality-airgradient?orgId=1&viewPanel=3
+          isPaused: false
