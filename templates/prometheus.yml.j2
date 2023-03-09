@@ -17,7 +17,7 @@ scrape_configs:
     static_configs:
       - targets: ['speedtest:9798']
 
-{% if pikvm_prom_enable %}
+{% if pikvm_monitoring_enable %}
   - job_name: 'pikvm'
     metrics_path: /api/export/prometheus/metrics
     basic_auth:
@@ -30,7 +30,7 @@ scrape_configs:
       insecure_skip_verify: true # For self-signed certificate
 {% endif %}
 
-{% if openvpn_exporter_enable %}
+{% if openvpn_monitoring_enable %}
   - job_name: 'openvpn_exporter'
     metrics_path: /metrics
     scrape_interval: 1m
@@ -38,7 +38,7 @@ scrape_configs:
       - targets: ['openvpn_exporter:9176']
 {% endif %}
 
-{% if shelly_plug_enable %}
+{% if shelly_plug_monitoring_enable %}
   - job_name: 'shelly-plug'
     metrics_path: /metrics
     scrape_interval: 1m
@@ -46,7 +46,7 @@ scrape_configs:
       - targets: ['{{ shelly_ip }}:{{ shelly_port }}']
 {% endif %}
 
-{% if airgradient_enable %}
+{% if airgradient_monitoring_enable %}
 {% for sensor in airgradient_sensors %}
   - job_name: 'airgradient-{{ sensor.id }}'
     metrics_path: /metrics
@@ -56,7 +56,7 @@ scrape_configs:
 {% endfor %}
 {% endif %}
 
-{% if starlink_enable %}
+{% if starlink_monitoring_enable %}
   - job_name: 'starlink'
     metrics_path: /metrics
     static_configs:

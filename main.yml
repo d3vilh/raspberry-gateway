@@ -48,20 +48,20 @@
 
     - name: Set up OpenVPN Monitoring.
       ansible.builtin.import_tasks: tasks/openvpn_exporter.yml
-      when: openvpn_exporter_enable
+      when: openvpn_monitoring_enable
 
     - name: Set up Air Gradient Monitoring.
       ansible.builtin.import_tasks: tasks/airgradient.yml
-      when: airgradient_enable
+      when: airgradient_monitoring_enable
 
     - name: Set up PiKVM Monitoring.
       ansible.builtin.import_tasks: tasks/pikvm.yml
-      when: pikvm_prom_enable
+      when: pikvm_monitoring_enable
 
     - name: Set up Shelly Plug Monitoring.
       ansible.builtin.import_tasks: tasks/shelly-plug.yml
-      when: shelly_plug_enable
+      when: shelly_plug_monitoring_enable
 
     - name: Set up Starlink Monitoring.
       ansible.builtin.import_tasks: tasks/starlink.yml
-      when: starlink_enable
+      when: starlink_monitoring_enable
