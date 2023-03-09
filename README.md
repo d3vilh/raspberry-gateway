@@ -245,7 +245,7 @@ ifconfig-push 10.0.71.2 255.255.255.0
 ```
 
 ### OpenVPN activity dashboard
-[Raspberry-Gateway](https://github.com/d3vilh/raspberry-gateway/) setup includes Prometheus [OpenVPN-exporter](https://github.com/d3vilh/openvpn_exporter) and OpenVPN [Grafana dashboard](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/openvpn_exporter.json.j2) which you can [enable in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) by setting `openvpn_exporter_enable` option to `true`.
+[Raspberry-Gateway](https://github.com/d3vilh/raspberry-gateway/) setup includes Prometheus [OpenVPN-exporter](https://github.com/d3vilh/openvpn_exporter) and OpenVPN [Grafana dashboard](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/openvpn_exporter.json.j2) which you can [enable in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) by setting `openvpn_monitoring_enable` option to `true`.
 
 ![OpenVPN Grafana Dashboard](/images/OVPN_Dashboard.png)
 

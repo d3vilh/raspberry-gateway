@@ -1,0 +1,60 @@
+{
+  "template_files": {
+    "tgshortbody": "{{ define \"tgshortbody\" }}{{ range . }} <b>{{ or .Annotations.message .Labels.alertname }}</b>\n{{ range .Annotations.SortedPairs }}{{ if eq .Name \"description\" }}{{ .Value }}\n{{ end }}{{ end }}\n{{ with .ValueString }}{{ reReplaceAll \"[[][^]]*metric='{?([^}']*)}?'[^]]*value=([0-9]*([.][0-9]{,3})?)[^]]*](, )?\" \"$1: <b>$2</b>\\n\" . }}\n{{ end }}{{ end }}{{ end }}\n{{ define \"tgshort\" }}{{ with .Alerts.Firing }}⚠️{{ template \"tgshortbody\" . }}{{ end }}{{ with .Alerts.Resolved }}✅{{ template \"tgshortbody\" . }}{{ end }}{{ with .CommonAnnotations.runbook_url }}<a href=\"{{ . }}\">View Panel</a>{{ end }}{{ end }}"
+  },
+  "template_file_provenances": {},
+  "alertmanager_config": {
+    "route": {
+      "receiver": "grafana-default-email",
+      "group_by": [
+        "grafana_folder",
+        "alertname"
+      ],
+      "routes": [
+        {
+          "receiver": "Telegram"
+        }
+      ]
+    },
+    "templates": [
+      "tgshortbody"
+    ],
+    "receivers": [
+      {
+        "name": "grafana-default-email",
+        "grafana_managed_receiver_configs": [
+          {
+            "uid": "pPkBywx4k",
+            "name": "email receiver",
+            "type": "email",
+            "disableResolveMessage": false,
+            "settings": {
+              "addresses": "<glory@ukraine.com>"
+            },
+            "secureFields": {}
+          }
+        ]
+      },
+      {
+        "name": "Telegram",
+        "grafana_managed_receiver_configs": [
+          {
+            "uid": "llzfyQxVk",
+            "name": "Telegram",
+            "type": "telegram",
+            "disableResolveMessage": false,
+            "settings": {
+              "chatid": "{{ telegram_bot_chatid }}",
+              "disable_notification": false,
+              "bottoken": "{{ telegram_bot_token }}",
+              "message": "{{ template \"tgshort\" . }}"
+            },
+            "secureFields": {
+              "bottoken": true
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
