@@ -37,15 +37,15 @@ const bool hasCO2 = true;
 const bool hasSHT = true;
 
 // WiFi and IP connection info.
-const char* ssid = "NETCOM VIKTOR";
-const char* password = "58879016";
+const char* ssid = "CY-Capsule";
+const char* password = "Glory2Ukraine!";
 const int port = 9926;
 
 // Uncomment the line below to configure a static IP address.
 // #define staticip
 #ifdef staticip
-IPAddress static_ip(192, 168, 88, 100);
-IPAddress gateway(192, 168, 88, 249);
+IPAddress static_ip(192, 168, 88, 6);
+IPAddress gateway(192, 168, 88, 1);
 IPAddress subnet(255, 255, 255, 0);
 #endif
 
@@ -208,8 +208,8 @@ String GenerateMetrics() {
     message += "# TYPE atmp gauge\n";
     message += "atmp";
     message += idString;
-    // Dirty Temp adjust (-3 degrees)
-    message += String(stat.t - 3);
+    // Dirty Temp adjust (-4 degrees)
+    message += String(stat.t - 4);
     message += "\n";
 
     message += "# HELP rhum Relative humidity, in percent\n";
@@ -283,7 +283,7 @@ void updateScreen(long now) {
           } else {
             statf_pm2 = stat_prev_pm2; // using previous not glitchy value if curent value is glitchy
           }
-          showTextRectangle("PM2",String(statf_pm2),false);
+          showTextRectangle("PM2.5",String(statf_pm2),false);
         }
         break;
       case 2:
@@ -318,7 +318,7 @@ void updateScreen(long now) {
           if (temp_display == 'F' || temp_display == 'f') {
             showTextRectangle("TMP", String((stat.t * 9 / 5) + 32, 1) + "F", false);
           } else {
-            showTextRectangle("TMP", String(stat.t - 3, 1) + "C", false);
+            showTextRectangle("TMP", String(stat.t - 4, 1) + "C", false); // dirty temp adjust
           }
         }
         break;
@@ -334,4 +334,3 @@ void updateScreen(long now) {
     lastUpdate = millis();
   }
 }
-
