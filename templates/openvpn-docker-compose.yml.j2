@@ -30,7 +30,7 @@ services:
 
     openvpn-ui:
        container_name: openvpn-ui
-       image: d3vilh/openvpn-ui-arm32v7:latest
+       image: d3vilh/openvpn-ui-arm:latest
        environment:
            - OPENVPN_ADMIN_USERNAME={{ ovpnui_user }}
            - OPENVPN_ADMIN_PASSWORD={{ ovpnui_password }}
