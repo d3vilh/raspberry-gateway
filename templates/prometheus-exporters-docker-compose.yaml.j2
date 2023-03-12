@@ -11,6 +11,7 @@ networks:
 
 services:
   prometheus:
+    container_name: prometheus
     image: prom/prometheus:latest
     restart: always
     command:
@@ -31,6 +32,7 @@ services:
       - back-tier
 
   grafana:
+    container_name: grafana
     image: grafana/grafana
     restart: always
     volumes:
@@ -47,6 +49,7 @@ services:
       - front-tier
 
   ping:
+    container_name: ping
     image: prom/blackbox-exporter
     restart: always
     command:
@@ -63,6 +66,7 @@ services:
       - back-tier
 
   speedtest:
+    container_name: speedtest
     image: miguelndecarvalho/speedtest-exporter
     restart: always
     expose:
@@ -73,6 +77,7 @@ services:
       - back-tier
 
   nodeexp:
+    container_name: nodeexp
     image: prom/node-exporter
     restart: always
     privileged: true
@@ -91,6 +96,7 @@ services:
       - back-tier
 
   rpi_exporter:
+    container_name: rpi_exporter
     image: d3vilh/rpi_exporter-arm64:latest
     restart: always
     privileged: true
@@ -100,13 +106,14 @@ services:
       - back-tier
 
   cadvisor:
+    container_name: cadvisor
     image: d3vilh/cadvisor-arm:latest
     restart: unless-stopped
     privileged: true
     command:
       - '--raw_cgroup_prefix_whitelist=/docker/'
       - '--docker_only=true'
-      - '--disable_metrics=memory_numa,advtcp,cpuset,referenced_memory,cpu_topology,disk,diskIO,tcp,udp,percpu,process,hugetlb,sched'
+      - '--disable_metrics=memory_numa,advtcp,cpuset,referenced_memory,cpu_topology,tcp,udp,percpu,process,hugetlb,sched'
       - '--housekeeping_interval=30s'
     volumes:
       - /:/rootfs:ro
