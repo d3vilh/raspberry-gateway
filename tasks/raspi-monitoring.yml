@@ -43,9 +43,36 @@
   notify: Restart raspi-monitoring
   become: false
 
+- name: Check if cgroup_enable=cpuset option is present
+  become: true
+  command: grep -q 'cgroup_enable=cpuset' /boot/cmdline.txt
+  register: cpuset_present
+  ignore_errors: true
+
+- name: Add cgroup_enable=cpuset option if it is absent
+  become: true
+  lineinfile:
+    path: /boot/cmdline.txt
+    line: "cgroup_enable=cpuset"
+    state: present
+  when: cpuset_present.rc != 0
+
+- name: Check if cgroup_enable=memory option is present
+  become: true
+  command: grep -q 'cgroup_enable=memory' /boot/cmdline.txt
+  register: memory_present
+  ignore_errors: true
+  
+- name: Add cgroup_enable=memory option if it is absent
+  become: true
+  lineinfile:
+    path: /boot/cmdline.txt
+    line: "cgroup_enable=memory"
+    state: present
+  when: memory_present.rc != 0
+
 - name: Ensure raspi-monitoring environment is running.
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/raspi-monitoring/"
     build: false
   become: false
-
