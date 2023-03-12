@@ -3208,7 +3208,7 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 9,
+        "w": 10,
         "x": 4,
         "y": 103
       },
@@ -3217,7 +3217,7 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom",
+          "placement": "right",
           "showLegend": true
         },
         "tooltip": {
@@ -3305,8 +3305,8 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 11,
-        "x": 13,
+        "w": 10,
+        "x": 14,
         "y": 103
       },
       "id": 86,
@@ -3352,6 +3352,7 @@
           "custom": {
             "axisCenteredZero": false,
             "axisColorMode": "text",
+            "axisGridShow": true,
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -3363,8 +3364,11 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1.5,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -3392,7 +3396,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "bytes"
         },
         "overrides": []
       },
@@ -3426,21 +3431,10 @@
           "legendFormat": "{{name}}",
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "editorMode": "code",
-          "expr": "container_memory_usage_bytes{name=~\".+\"}",
-          "hide": false,
-          "legendFormat": "{{ name }}",
-          "range": true,
-          "refId": "B"
         }
       ],
       "title": "RSS memory usage per container",
+      "transparent": true,
       "type": "timeseries"
     },
     {
@@ -3472,7 +3466,7 @@
             "lineStyle": {
               "fill": "solid"
             },
-            "lineWidth": 1,
+            "lineWidth": 1.5,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -3503,27 +3497,7 @@
           },
           "unit": "bytes"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byFrameRefID",
-              "options": "A"
-            },
-            "properties": [
-              {
-                "id": "custom.drawStyle",
-                "value": "line"
-              },
-              {
-                "id": "custom.lineStyle"
-              },
-              {
-                "id": "custom.gradientMode",
-                "value": "none"
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -3540,60 +3514,10 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "none",
-          "sort": "none"
+          "mode": "single",
+          "sort": "asc"
         }
       },
-      "styles": [
-        {
-          "alias": "Used memory",
-          "align": "auto",
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "Value #A",
-          "thresholds": [],
-          "type": "number",
-          "unit": "bytes"
-        },
-        {
-          "alias": "Available memory",
-          "align": "auto",
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "Value #B",
-          "thresholds": [],
-          "type": "number",
-          "unit": "bytes"
-        },
-        {
-          "alias": "Limit memory",
-          "align": "auto",
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "Value #C",
-          "thresholds": [],
-          "type": "number",
-          "unit": "bytes"
-        }
-      ],
       "targets": [
         {
           "datasource": {
@@ -3601,37 +3525,14 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "editorMode": "code",
-          "expr": "max(container_memory_usage_bytes{name!=\"\"}) by (name)",
+          "expr": "container_memory_usage_bytes{name!=\"\"}",
           "legendFormat": "{{name}}",
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "editorMode": "code",
-          "expr": "max(container_memory_max_usage_bytes{name!=\"\"}-container_memory_usage_bytes{name!=\"\"})by (name)",
-          "hide": false,
-          "legendFormat": "{{name}}",
-          "range": true,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "editorMode": "code",
-          "expr": "max(container_memory_max_usage_bytes{name!=\"\"}) by (name)",
-          "hide": false,
-          "legendFormat": "{{name}}",
-          "range": true,
-          "refId": "C"
         }
       ],
       "title": "Used Memory per Container",
+      "transparent": true,
       "type": "timeseries"
     },
     {
@@ -3873,6 +3774,6 @@
   "timezone": "browser",
   "title": "Raspberry Monitoring",
   "uid": "rvk35ERRz",
-  "version": 4,
+  "version": 8,
   "weekStart": ""
 }
