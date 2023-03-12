@@ -94,3 +94,9 @@ scrape_configs:
     scrape_interval: 15s
     static_configs:
       - targets: ['rpi_exporter:9110']
+
+  - job_name: 'cadvisor'
+    metrics_path: /metrics
+    scrape_interval: 30s
+    static_configs:
+      - targets: ['cadvisor:8080']

@@ -13,15 +13,15 @@ services:
   prometheus:
     image: prom/prometheus:latest
     restart: always
-    volumes:
-      - ./prometheus/:/etc/prometheus/
-      - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
       - '--storage.tsdb.retention.time={{ monitoring_days_keep_interval }}'
       - '--web.console.libraries=/usr/share/prometheus/console_libraries'
       - '--web.console.templates=/usr/share/prometheus/consoles'
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
     ports:
       - 9090:9090
     links:
@@ -47,54 +47,77 @@ services:
       - front-tier
 
   ping:
+    image: prom/blackbox-exporter
+    restart: always
+    command:
+      - '--config.file=/config/blackbox.yml'
+    volumes:
+      - ./blackbox/config:/config
     tty: true
     stdin_open: true
     expose:
       - 9115
     ports:
       - 9115:9115
-    image: prom/blackbox-exporter
-    restart: always
-    volumes:
-      - ./blackbox/config:/config
-    command:
-      - '--config.file=/config/blackbox.yml'
     networks:
       - back-tier
 
   speedtest:
+    image: miguelndecarvalho/speedtest-exporter
+    restart: always
     expose:
       - 9798
     ports:
       - 9798:9798
-    image: miguelndecarvalho/speedtest-exporter
-    restart: always
     networks:
       - back-tier
 
   nodeexp:
-    privileged: true
-    restart: always
     image: prom/node-exporter
+    restart: always
+    privileged: true
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points'
+      - '^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)'
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
       - /:/rootfs:ro
     ports:
       - 9100:9100
-    command:
-      - '--path.procfs=/host/proc'
-      - '--path.sysfs=/host/sys'
-      - --collector.filesystem.ignored-mount-points
-      - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
     networks:
       - back-tier
 
   rpi_exporter:
-    privileged: true
-    restart: always
     image: d3vilh/rpi_exporter-arm64:latest
+    restart: always
+    privileged: true
     ports:
        - "9110:9110/tcp"
+    networks:
+      - back-tier
+
+  cadvisor:
+    image: d3vilh/cadvisor-arm:latest
+    restart: unless-stopped
+    privileged: true
+    command:
+      - '--raw_cgroup_prefix_whitelist=/docker/'
+      - '--docker_only=true'
+      - '--disable_metrics=memory_numa,advtcp,cpuset,referenced_memory,cpu_topology,disk,diskIO,tcp,udp,percpu,process,hugetlb,sched'
+      - '--housekeeping_interval=30s'
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys/fs/cgroup:/cgroup:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /etc/machine-id:/etc/machine-id:ro
+    devices:
+      - '/dev/kmsg:/dev/kmsg'
+    ports:
+      - '8081:8080/tcp'
     networks:
       - back-tier
