@@ -6,7 +6,7 @@
     mode: 0755
   become: false
 
-- name: Synchronize openvpn directory.
+- name: Synchronize WireGuard directory.
   ansible.posix.synchronize:
     src: wireguard
     dest: "{{ config_dir }}/"
@@ -23,8 +23,6 @@
   loop:
     - src: wireguard-docker-compose.yml.j2
       dest: docker-compose.yml
-    - src: wireguard.conf.j2
-      dest: wg0.conf
   become: false
   notify: Restart wireguard
 
