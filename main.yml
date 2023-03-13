@@ -65,3 +65,8 @@
     - name: Set up Starlink Monitoring.
       ansible.builtin.import_tasks: tasks/starlink.yml
       when: starlink_monitoring_enable
+
+# UNDER TESTING - DO NOT USE
+#    - name: Set up WireGuard.
+#      ansible.builtin.import_tasks: tasks/wireguard.yml
+#      when: wireguard_enable
