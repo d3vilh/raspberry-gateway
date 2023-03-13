@@ -45,7 +45,7 @@ monitoring_enable: true                         # Set true or false
 monitoring_grafana_admin_password: "admin"      # Is only used the first time Grafana starts up
 monitoring_days_keep_interval: 90d              # How long to keep data for (don't change without purpose)
 monitoring_speedtest_interval: 60m              # How often to run speedtest (don't change without purpose)
-monitoring_ping_interval: 5s                    # How often to ping hosts (don't change without purpose)
+monitoring_ping_interval: 30s                   # How often to ping hosts (don't change without purpose)
 monitoring_ping_hosts:                          # [URL];[HUMAN_READABLE_NAME]
   - http://www.google.com/;google.com
   - https://www.apple.com/;apple.com
@@ -88,3 +88,8 @@ shelly_ip: "192.168.88.66"
 shelly_port: 9924
 shelly_plug_http_username: username
 shelly_plug_http_password: "gagaZush"
+
+# WireGuard configuration. !DOES NOT WORK! DONT EVEN TRY IT!
+wireguard_enable: true                           # Set true or false
+wireguard_user: "admin"
+wireguard_password: "gagaZush"                   # !Change this password!
