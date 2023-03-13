@@ -17,12 +17,12 @@ services:
       - WGUI_USERNAME={{ wireguard_user }}
       - WGUI_PASSWORD={{ wireguard_password }}
       - WG_CONF_TEMPLATE
-      - WGUI_MANAGE_START=false
-      - WGUI_MANAGE_RESTART=false
+      - WGUI_MANAGE_START=true
+      - WGUI_MANAGE_RESTART=true
     logging:
       driver: json-file
       options:
         max-size: 50m
     volumes:
       - ./db:/app/db
-      - ./config:/etc/wireguard
+      - ./db:/etc/wireguard
