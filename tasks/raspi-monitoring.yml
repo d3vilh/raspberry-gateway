@@ -43,35 +43,37 @@
   notify: Restart raspi-monitoring
   become: false
 
-- name: Check if cgroup_enable=cpuset option is present
+- name: Add cgroup_enable=cpuset to /boot/cmdline.txt
   become: true
-  command: grep -q 'cgroup_enable=cpuset' /boot/cmdline.txt
-  register: cpuset_present
-  ignore_errors: true
+  vars:
+    content: "cgroup_enable=cpuset"
+    file_path: "/boot/cmdline.txt"
+  shell: |
+    if [ ! -s {{ file_path }} ]; then
+      echo "{{ content }}" >> {{ file_path }}
+      echo "The file was empty. Added the line"
+    elif ! grep -q -m 1 -E 'cgroup_enable=cpuset' {{ file_path }}; then
+      sed -i "1s/$/ {{ content }}/" {{ file_path }}
+      echo "The line has been added"
+    else
+      echo "The line is already present"
+    fi
 
-- name: Add cgroup_enable=cpuset option if it is absent
+- name: Add cgroup_enable=memory to /boot/cmdline.txt
   become: true
-  lineinfile:
-    path: /boot/cmdline.txt
-    line: "cgroup_enable=cpuset"
-    insertafter: EOF
-    state: present
-  when: cpuset_present.rc != 0
-
-- name: Check if cgroup_enable=memory option is present
-  become: true
-  command: grep -q 'cgroup_enable=memory' /boot/cmdline.txt
-  register: memory_present
-  ignore_errors: true
-  
-- name: Add cgroup_enable=memory option if it is absent
-  become: true
-  lineinfile:
-    path: /boot/cmdline.txt
-    line: "cgroup_enable=memory"
-    insertafter: EOF
-    state: present
-  when: memory_present.rc != 0
+  vars:
+    content: "cgroup_enable=memory"
+    file_path: "/boot/cmdline.txt"
+  shell: |
+    if [ ! -s {{ file_path }} ]; then
+      echo "{{ content }}" >> {{ file_path }}
+      echo "The file was empty. Added the line"
+    elif ! grep -q -m 1 -E 'cgroup_enable=memory' {{ file_path }}; then
+      sed -i "1s/$/ {{ content }}/" {{ file_path }}
+      echo "The line has been added"
+    else
+      echo "The line is already present"
+    fi
 
 - name: Ensure raspi-monitoring environment is running.
   community.docker.docker_compose:
