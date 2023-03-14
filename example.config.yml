@@ -90,7 +90,7 @@ shelly_plug_http_username: username
 shelly_plug_http_password: "gagaZush"
 
 # WireGuard configuration. !TESTING IN PROGRESS! PLEASE OPEN ISSUES FOR BUGS
-wireguard_enable: true                          # Set true or false
+wireguard_enable: false                         # Set true or false
 
 wireguard_user: "admin"
 wireguard_password: "gagaZush"                  # !Change this password!
