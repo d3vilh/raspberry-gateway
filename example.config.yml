@@ -89,7 +89,10 @@ shelly_port: 9924
 shelly_plug_http_username: username
 shelly_plug_http_password: "gagaZush"
 
-# WireGuard configuration. !DOES NOT WORK! DONT EVEN TRY IT!
+# WireGuard configuration. !TESTING IN PROGRESS! PLEASE OPEN ISSUES FOR BUGS
 wireguard_enable: true                          # Set true or false
+
 wireguard_user: "admin"
 wireguard_password: "gagaZush"                  # !Change this password!
+wireguard_tz: "Europe/Kiev"
+wireguard_serverurl: "wg.example.com"

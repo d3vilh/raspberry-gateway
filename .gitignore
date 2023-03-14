@@ -1,3 +1,4 @@
 .DS_Store
 config.yml
 inventory.ini
+templates/back_wireguard-docker-compose.yml copy.j2

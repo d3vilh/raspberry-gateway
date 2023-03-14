@@ -3,26 +3,28 @@ version: "3.5"
 
 services:
   wireguard-ui:
-    #build: .
     image: d3vilh/wireguard-ui-arm:latest
     container_name: wireguard-ui
     cap_add:
       - NET_ADMIN
-    network_mode: host
+      - SYS_MODULE
     environment:
-      - SENDGRID_API_KEY
-      - EMAIL_FROM_ADDRESS
-      - EMAIL_FROM_NAME
-      - SESSION_SECRET
+      - PUID=1000
+      - PGID=1000
+      - TZ={{ wireguard_tz }}
+      - SERVERURL={{ wireguard_serverurl }}
       - WGUI_USERNAME={{ wireguard_user }}
       - WGUI_PASSWORD={{ wireguard_password }}
-      - WG_CONF_TEMPLATE
+      - WGUI_SERVER_LISTEN_PORT=51820
       - WGUI_MANAGE_START=true
       - WGUI_MANAGE_RESTART=true
-    logging:
-      driver: json-file
-      options:
-        max-size: 50m
     volumes:
       - ./db:/app/db
-      - ./db:/etc/wireguard
+      - ./config:/etc/wireguard
+      - /lib/modules:/lib/modules
+    ports:
+      - '5000:5000'
+      - '51820:51820/udp'
+    sysctls:
+       - net.ipv4.conf.all.src_valid_mark=1
+    restart: unless-stopped
