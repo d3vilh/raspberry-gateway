@@ -28,6 +28,18 @@ ovpn_guest_subnet: "10.0.71.0/24"               # Guest users subnet
 ovpn_home_subnet: "192.168.0.0/24"              # Your home network subnet
 ovpn_remote: "remote 123.234.123.12 12345 udp"  # OpenVPN client.ovpn profile connect line. You
 
+#    _ _ _ _         _____               _ 
+#   | | | |_|___ ___|   __|_ _ ___ ___ _| |
+#   | | | | |  _| -_|  |  | | | .'|  _| . |
+#   |_____|_|_| |___|_____|___|__,|_| |___|
+# WireGuard configuration. !TESTING IN PROGRESS! PLEASE OPEN ISSUES FOR BUGS
+wireguard_enable: false                         # Set true or false
+
+wireguard_user: "admin"
+wireguard_password: "gagaZush"                  # !Change this password!
+wireguard_tz: "Europe/Kiev"
+wireguard_serverurl: "wg.example.com"
+
 #    _____         _       _ 
 #   |  _  |___ ___| |_ ___|_|___ ___ ___ 
 #   |   __| . |  _|  _| .'| |   | -_|  _|
@@ -88,11 +100,3 @@ shelly_ip: "192.168.88.66"
 shelly_port: 9924
 shelly_plug_http_username: username
 shelly_plug_http_password: "gagaZush"
-
-# WireGuard configuration. !TESTING IN PROGRESS! PLEASE OPEN ISSUES FOR BUGS
-wireguard_enable: false                         # Set true or false
-
-wireguard_user: "admin"
-wireguard_password: "gagaZush"                  # !Change this password!
-wireguard_tz: "Europe/Kiev"
-wireguard_serverurl: "wg.example.com"
