@@ -1,0 +1,21 @@
+---
+- name: Create qbitTorrent folder on Pi.
+  ansible.builtin.file:
+    path: "{{ config_dir }}/qbittorrent"
+    state: directory
+    mode: 0755
+  become: false
+
+- name: Copy qbitTorrent docker-compose template to Pi.
+  ansible.builtin.template:
+    src: templates/qbittorrent-docker-compose.yml.j2
+    dest: "{{ config_dir }}/qbittorrent/docker-compose.yml"
+    mode: '0640'
+  become: false
+  notify: Restart portainer
+
+- name: Ensure QbitTorrent is running.
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/qbittorrent/"
+    build: false
+  become: false

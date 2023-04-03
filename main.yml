@@ -42,6 +42,15 @@
       ansible.builtin.import_tasks: tasks/openvpn.yml
       when: ovpn_enable
 
+    - name: Set up WireGuard.
+      ansible.builtin.import_tasks: tasks/wireguard.yml
+      when: wireguard_enable
+
+# Experimental. Testintg. Better not to use.
+    - name: Set up qbitTorrent.
+      ansible.builtin.import_tasks: tasks/qbittorrent.yml
+      when: qbittorrent_enable
+
     - name: Set up Raspi Monitoring.
       ansible.builtin.import_tasks: tasks/raspi-monitoring.yml
       when: monitoring_enable
@@ -65,7 +74,3 @@
     - name: Set up Starlink Monitoring.
       ansible.builtin.import_tasks: tasks/starlink.yml
       when: starlink_monitoring_enable
-
-    - name: Set up WireGuard.
-      ansible.builtin.import_tasks: tasks/wireguard.yml
-      when: wireguard_enable
