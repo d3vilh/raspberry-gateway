@@ -7,7 +7,7 @@
 * [**Portainer**](https://www.portainer.io) a lightweight *universal* management GUI for all Docker enviroments which included into this project. 
 * [**qBittorrent**](https://www.qbittorrent.org) -  an open-source software alternative to µTorrent. 
 * [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/raspi-monitoring) for Internet speed, OpenVPN and Raspberry Pi hardware status monitoring. 
-* Various Prometheus exporters: **cAdviser**, **AirGradient**, **StarLink**, **ShellyPlug** and others. Also Grafana dashboards and necessary exporters to get data.
+* **Various Prometheus exporters**: cAdviser, **AirGradient**, **StarLink**, **ShellyPlug** and others. 
 
 # Requirements
 - [**Raspberry Pi 4**](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/), [**Raspberry Pi CM4**](https://www.raspberrypi.com/products/compute-module-4/?variant=raspberry-pi-cm4001000) **and** [**CM4 I/O Board**](https://www.raspberrypi.com/products/compute-module-4-io-board/) or [**Raspberry Pi 3**](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) board, all with 2-4Gb RAM minimum.
@@ -88,16 +88,19 @@
 # Usage
 
 ## Portainer
-
-Visit the Pi's IP address (*e.g. http://localhost:9000/ , change `localhost` to your Raspberry host ip/name*) it will ask to set new password during the first startup - save the password.
+Visit the Pi's IP address (*e.g. `http://localhost:9000/` , change `localhost` to your Raspberry host ip/name*) it will ask to set new password during the first startup - save the password.
 
 ## Pi-hole
+Visit the Pi's IP address (*e.g. `http://localhost/` , change `localhost` to your Raspberry host ip/name*) the default password is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L14) `config.yml` file in var `pihole_password`. Consider to change it before the installation as security must be secure.
 
-Visit the Pi's IP address (*e.g. http://localhost/ , change `localhost` to your Raspberry host ip/name*) the default password is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L13) `config.yml` file in var `pihole_password`. Consider to change it before the installation as security must be secure.
+## qBittorrent
+To access qBittorrent Web-ui, visit the Pi's IP address (*e.g. `http://localhost:8090/` , change `localhost` to your Raspberry host ip/name*) with default credentials - `admin/adminadmin`, which **must** be changed via web interface on first login. All the downloaded files will be stored in the `~/qbittorrent/downloads` directory.
+
+## WireGuard
+To access WireGuard Web-ui, visit the Pi's IP address (*e.g. `http://localhost:5000/` , change `localhost` to your Raspberry host ip/name*) with default credentials - `admin/gagaZush`, it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) `config.yml` file in var `wireguard_password`. Consider to change it before the installation as security must be secure.
 
 ## OpenVPN 
-
-**OpenVPN WEB UI** can be accessed on own port (*e.g. http://localhost:8080 , change `localhost` to your Raspberry host ip/name*), the default user and password is `admin/gagaZush` preconfigured in `config.yml` which you supposed to [set in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L18) `ovpnui_user` & `ovpnui_password` vars, just before the installation.
+**OpenVPN WEB UI** can be accessed on own port (*e.g. `http://localhost:8080` , change `localhost` to your Raspberry host ip/name*), the default user and password is `admin/gagaZush` preconfigured in `config.yml` which you supposed to [set in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L25) `ovpnui_user` & `ovpnui_password` vars, just before the installation.
 
 The volume container will be inicialized by using the official OpenVPN `openvpn_openvpn` image with included scripts to automatically generate everything you need  on the first run:
  - Diffie-Hellman parameters
@@ -110,9 +113,9 @@ This setup use `tun` mode, because it works on the widest range of devices. tap 
 
 The topology used is `subnet`, because it works on the widest range of OS. p2p, for instance, does not work on Windows.
 
-The server config [specifies](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn/config/server.conf#L40) `push redirect-gateway def1 bypass-dhcp`, meaning that after establishing the VPN connection, all traffic will go through the VPN. This might cause problems if you use local DNS recursors which are not directly reachable, since you will try to reach them through the VPN and they might not answer to you. If that happens, use public DNS resolvers like those of OpenDNS (`208.67.222.222` and `208.67.220.220`) or Google (`8.8.4.4` and `8.8.8.8`).
+The server config [specifies](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn/config/server.conf#L34) `push redirect-gateway def1 bypass-dhcp`, meaning that after establishing the VPN connection, all traffic will go through the VPN. This might cause problems if you use local DNS recursors which are not directly reachable, since you will try to reach them through the VPN and they might not answer to you. If that happens, use public DNS resolvers like those of OpenDNS (`208.67.222.222` and `208.67.220.220`) or Google (`8.8.4.4` and `8.8.8.8`).
 
-If you wish to use your local Pi-Hole as a DNS server (the one which comes with this setup), you have to modify a [dns-configuration](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn/config/server.conf#L21) with your local Pi-Hole IP address.
+If you wish to use your local Pi-Hole as a DNS server (the one which comes with this setup), you have to modify a [dns-configuration](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn/config/server.conf#L20) with your local Pi-Hole IP address.
 
 ### Generating .OVPN client profiles
 
