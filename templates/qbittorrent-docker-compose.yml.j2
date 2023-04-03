@@ -10,8 +10,8 @@ services:
       - TZ=Etc/UTC
       - WEBUI_PORT={{ qbittorrent_webui_port }}
     volumes:
-      - .qbittorrent/config:/config
-      - .qbittorrent/downloads:/downloads
+      - ./qbittorrent/config:/config
+      - ./qbittorrent/downloads:/downloads
     ports:
       - {{ qbittorrent_webui_port }}:{{ qbittorrent_webui_port }}
       - 6881:6881
