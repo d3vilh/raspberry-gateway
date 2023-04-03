@@ -14,7 +14,7 @@
   become: false
   notify: Restart qbitTorrent
 
-- name: Ensure QbitTorrent is running.
+- name: Ensure qbitTorrent is running.
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/qbittorrent/"
     build: false
