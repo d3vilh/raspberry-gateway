@@ -47,3 +47,10 @@
     build: false
     restarted: true
   become: false
+
+- name: Restart qbitTorrent
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/qbittorrent/"
+    build: false
+    restarted: true
+  become: false

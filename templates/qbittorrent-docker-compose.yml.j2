@@ -8,12 +8,12 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
-      - WEBUI_PORT={{ qbittorrent_web-ui_port }}
+      - WEBUI_PORT={{ qbittorrent_webui_port }}
     volumes:
       - .qbittorrent/config:/config
       - .qbittorrent/downloads:/downloads
     ports:
-      - {{ qbittorrent_web-ui_port }}:{{ qbittorrent_web-ui_port }}
+      - {{ qbittorrent_webui_port }}:{{ qbittorrent_webui_port }}
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped
