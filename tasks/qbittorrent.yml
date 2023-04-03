@@ -12,7 +12,7 @@
     dest: "{{ config_dir }}/qbittorrent/docker-compose.yml"
     mode: '0640'
   become: false
-  notify: Restart portainer
+  notify: Restart qbitTorrent
 
 - name: Ensure QbitTorrent is running.
   community.docker.docker_compose:
