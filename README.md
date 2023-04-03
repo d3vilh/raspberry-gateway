@@ -6,7 +6,7 @@
 * [**Pi-hole**](https://pi-hole.net) - the network-wide ad-blocking local DNS solution. 
 * [**Portainer**](https://www.portainer.io) a lightweight *universal* management GUI for all Docker enviroments which included into this project. 
 * [**qBittorrent**](https://www.qbittorrent.org) -  an open-source software alternative to µTorrent. 
-* [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/raspi-monitoring) for Internet speed, OpenVPN and Raspberry Pi hardware status monitoring. 
+* [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/raspi-monitoring) for Internet speed, OpenVPN, Raspberry Pi hardware and running Docker containers status monitoring. 
 * **Various Prometheus exporters**: cAdviser, **AirGradient**, **StarLink**, **ShellyPlug** and others. 
 
 # Requirements
