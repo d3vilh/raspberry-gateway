@@ -54,7 +54,7 @@ portainer_enable: true                          # Set true or false
 #     |_|                                         
 # QbitTorrent configuration.
 qbittorrent_enable: false                       # Set true or false
-qbittorrent_webui_port: 8081                    # Better to keep as is
+qbittorrent_webui_port: 8090                    # Better to keep as is
 qbittorrent_tz: "Europe/Kyiv"                   # Your timezone
 qbittorrent_default_password: admin/adminadmin  # !Change this password wia WebUI!
 
