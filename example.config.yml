@@ -7,7 +7,7 @@ config_dir: '~'
 #   |   __| |     | . | | -_|
 #   |__|  |_|__|__|___|_|___|
 # Pi-hole configuration.
-pihole_enable: true                             # Set true or false
+pihole_enable: false                            # Set true or false
 
 pihole_hostname: pihole
 pihole_timezone: Europe/Kyiv
@@ -19,7 +19,7 @@ pihole_password: "gagaZush"                     # !Change this password!
 #   |_____|  _|___|_|_|\___/|__|  |_|___|
 #         |_|
 # OpenVPN configuration.
-ovpn_enable: true                               # Set true or false
+ovpn_enable: false                              # Set true or false
 
 ovpnui_user: "admin"
 ovpnui_password: "gagaZush"                     # !Change this password!
@@ -53,9 +53,9 @@ portainer_enable: true                          # Set true or false
 #   |_  |_____|_|_|   |_| |___|_| |_| |___|_|_|_|  
 #     |_|                                         
 # QbitTorrent configuration.
-qbittorrent_enable: false                        # Set true or false
-qbittorrent_web-ui_port: 8081                    # Better to keep as is
-qbittorrent_tz: "Europe/Kyiv"                    # Your timezone
+qbittorrent_enable: false                       # Set true or false
+qbittorrent_web-ui_port: 8081                   # Better to keep as is
+qbittorrent_tz: "Europe/Kyiv"                   # Your timezone
 
 #    _____         _ _               
 #   |     |___ ___|_| |_ ___ ___ ___ 
