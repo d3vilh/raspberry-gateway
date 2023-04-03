@@ -1,7 +1,13 @@
 # Raspberry Gateway
 
 **Simple Raspberry Pi based home Internet gateway**. Which includes 
-[**OpenVPN container**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn/openvpn-docker) with simple [**WEB UI**](https://github.com/d3vilh/openvpn-web-ui) and VPN subnets support. [**WireGuard**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) container with own UI. [**Pi-hole**](https://pi-hole.net) - the network-wide ad-blocking local DNS solution. [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/raspi-monitoring) for Internet speed, OpenVPN and Raspberry Pi hardware status monitoring. [**Portainer**](https://www.portainer.io) a lightweight *universal* management GUI for all Docker enviroments which included into this project. [**qBittorrent**](https://www.qbittorrent.org) -  an open-source software alternative to µTorrent. It also includes **AirGradient**, **StarLink** and **ShellyPlug** Grafana dashboards and necessary exporters to get data.
+* [**OpenVPN container**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn/openvpn-docker) with simple [**WEB UI**](https://github.com/d3vilh/openvpn-web-ui) and VPN subnets support. 
+* [**WireGuard**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) container with own UI. 
+* [**Pi-hole**](https://pi-hole.net) - the network-wide ad-blocking local DNS solution. 
+* [**Portainer**](https://www.portainer.io) a lightweight *universal* management GUI for all Docker enviroments which included into this project. 
+* [**qBittorrent**](https://www.qbittorrent.org) -  an open-source software alternative to µTorrent. 
+* [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/raspi-monitoring) for Internet speed, OpenVPN and Raspberry Pi hardware status monitoring. 
+* Various Prometheus exporters: **cAdviser**, **AirGradient**, **StarLink**, **ShellyPlug** and others. Also Grafana dashboards and necessary exporters to get data.
 
 # Requirements
 - [**Raspberry Pi 4**](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/), [**Raspberry Pi CM4**](https://www.raspberrypi.com/products/compute-module-4/?variant=raspberry-pi-cm4001000) **and** [**CM4 I/O Board**](https://www.raspberrypi.com/products/compute-module-4-io-board/) or [**Raspberry Pi 3**](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) board, all with 2-4Gb RAM minimum.
