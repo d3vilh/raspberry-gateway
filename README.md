@@ -1,6 +1,6 @@
 # Raspberry Gateway
 **Simple Raspberry Pi based home Internet gateway**. Which includes 
-  * [**OpenVPN container**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn/openvpn-docker) with simple [**WEB UI**](https://github.com/d3vilh/openvpn-web-ui) and VPN subnets support. 
+  * [**OpenVPN container**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn/openvpn-docker) with simple [**WEB UI**](https://github.com/d3vilh/openvpn-ui) and VPN subnets support. 
   * [**WireGuard**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) container with own UI. 
   * [**Pi-hole**](https://pi-hole.net) - the network-wide ad-blocking local DNS solution. 
   * [**Portainer**](https://www.portainer.io) a lightweight *universal* management GUI for all Docker enviroments which included into this project. 
@@ -52,15 +52,23 @@
 # Features
 [**Pi-hole**](https://pi-hole.net) the network-wide ad-blocking solution integrated with own local DNS and DHCP servers:
 
-  ![Pi-hole on the Internet Pi](/images/pi-hole.png)
+![Pi-hole on the Internet Pi](/images/pi-hole.png)
 
-  [**OpenVPN**](https://openvpn.net) server with subnets support and **OpenVPN-web-ui** as lightweight web administration interface:
+[**OpenVPN**](https://openvpn.net) server with subnets support and **OpenVPN-web-ui** as lightweight web administration interface:
 
-  ![OpenVPN WEB UI](/images/OpenVPN-UI-Home.png)
+![OpenVPN WEB UI](/images/OpenVPN-UI-Home.png)
 
 <p align="center">
 <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="600" border="1" />
 </p>
+
+[**WireGuard**](https://www.wireguard.com) server - an extremely simple yet fast and modern VPN with own **web-ui** as lightweight web administration interface:
+
+![WireGuard WEB UI](https://user-images.githubusercontent.com/37958026/177041280-e3e7ca16-d4cf-4e95-9920-68af15e780dd.png)
+
+[**qBittorrent**](https://www.qbittorrent.org) an open-source software alternative to µTorrent, with lightweight web administration interface:
+
+![qBittorrent WEB UI](/images/qBittorrent-web-ui.png)
 
 [**Portainer**](https://www.portainer.io) is a lightweight *universal* management interface that can be used to easily manage Docker or K8S containers and environments which included in this setup:
 
@@ -70,6 +78,10 @@
 
 ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/raspi-monitoring_1.png) 
 ![Raspberry Monitoring Dashboard in Grafana picture 2](/images/raspi-monitoring_2.png) 
+![Raspberry Monitoring Dashboard in Grafana picture 3](/images/raspi-monitoring_3.png) 
+![Raspberry Monitoring Dashboard in Grafana picture 4](/images/raspi-monitoring_4.png) 
+![Raspberry Monitoring Dashboard in Grafana picture 5](/images/raspi-monitoring_5.png) 
+![Raspberry Monitoring Dashboard in Grafana picture 6](/images/raspi-monitoring_6.png) 
 
 [**AirGradient Monitoring**](https://www.airgradient.com): Configures [`Prometheus`](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/prometheus.yml.j2#L49) to get all necessary data directly from your [AirGradient](https://www.airgradient.com/diy/) device and installs a [Grafana dashboard](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/airgradient-air-quality.json.j2), which tracks and displays air quality over time. 
 
@@ -78,8 +90,7 @@
 ![AirGradient Monitoring Dashboard in Grafana picture 1](/images/air-gradient_1.png) 
 ![AirGradient Monitoring Dashboard in Grafana picture 2](/images/air-gradient_2.png)
 
-## OpenVPN activity dashboard
-[Raspberry-Gateway](https://github.com/d3vilh/raspberry-gateway/) setup includes Prometheus [OpenVPN-exporter](https://github.com/d3vilh/openvpn_exporter) and OpenVPN [Grafana dashboard](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/openvpn_exporter.json.j2) which you can [enable in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) by setting `openvpn_monitoring_enable` option to `true`.
+[**OpenVPN activity dashboard**](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/openvpn_exporter.json.j2) and [OpenVPN-exporter](https://github.com/d3vilh/openvpn_exporter) which you can be [enable in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L82) by setting `openvpn_monitoring_enable` option to `true`.
 
 ![OpenVPN Grafana Dashboard](/images/OVPN_Dashboard.png)
 
@@ -108,7 +119,7 @@
   ## Raspi-monitoring
   The DataSources and Dashboards for are automatically provisioned.
 
-    ### Grafana dashboards
+   ### Grafana dashboards
    To access Grafana, visit the Pi's IP address (*e.g. `http://localhost:3030/` , change `localhost` to your Raspberry host ip/name*) with default credentials - `admin/admin`, it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L68) `config.yml` file in var `monitoring_grafana_admin_password`. Consider to change it before the installation as security must be secure.
    >**Note**: The `monitoring_grafana_admin_password` is only used the first time Grafana starts up; if you need to change it later, do it via Grafana's admin UI.
 
