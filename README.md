@@ -1,20 +1,19 @@
 # Raspberry Gateway
-
 **Simple Raspberry Pi based home Internet gateway**. Which includes 
-* [**OpenVPN container**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn/openvpn-docker) with simple [**WEB UI**](https://github.com/d3vilh/openvpn-web-ui) and VPN subnets support. 
-* [**WireGuard**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) container with own UI. 
-* [**Pi-hole**](https://pi-hole.net) - the network-wide ad-blocking local DNS solution. 
-* [**Portainer**](https://www.portainer.io) a lightweight *universal* management GUI for all Docker enviroments which included into this project. 
-* [**qBittorrent**](https://www.qbittorrent.org) -  an open-source software alternative to µTorrent. 
-* [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/raspi-monitoring) for Internet speed, OpenVPN, Raspberry Pi hardware and running Docker containers status monitoring. 
-* **Various Prometheus exporters**: cAdviser, **AirGradient**, **StarLink**, **ShellyPlug** and others. 
+  * [**OpenVPN container**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn/openvpn-docker) with simple [**WEB UI**](https://github.com/d3vilh/openvpn-web-ui) and VPN subnets support. 
+  * [**WireGuard**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) container with own UI. 
+  * [**Pi-hole**](https://pi-hole.net) - the network-wide ad-blocking local DNS solution. 
+  * [**Portainer**](https://www.portainer.io) a lightweight *universal* management GUI for all Docker enviroments which included into this project. 
+  * [**qBittorrent**](https://www.qbittorrent.org) -  an open-source software alternative to µTorrent. 
+  * [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/raspi-monitoring) for Internet speed, OpenVPN, Raspberry Pi hardware and running Docker containers status monitoring. 
+  * **Various Prometheus exporters**: cAdviser, **AirGradient**, **StarLink**, **ShellyPlug** and others. 
 
 # Requirements
-- [**Raspberry Pi 4**](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/), [**Raspberry Pi CM4**](https://www.raspberrypi.com/products/compute-module-4/?variant=raspberry-pi-cm4001000) **and** [**CM4 I/O Board**](https://www.raspberrypi.com/products/compute-module-4-io-board/) or [**Raspberry Pi 3**](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) board, all with 2-4Gb RAM minimum.
-- [**Raspberry Pi Imager**](https://www.raspberrypi.com/software/) to simplify installation of Raspberry Pi OS Lite (x64 or i686 bit).
-- [**Raspios Lite (64bit)**](https://downloads.raspberrypi.org/raspios_lite_arm64/images/) however is recommended for this setup.
-- **16Gb SD Card**
-> You can run it on CM4 board with 8Gb eMMC card. Full installation on top of latest [Raspios lite (64bit)](https://downloads.raspberrypi.org/raspios_lite_arm64/images/) will use 4,5Gb of your eMMC card. Raspberry-pi Zero-W, or W2 boards supported as well, but be aware, that it has no internal Ehernet adapter and very limited by avilable CPU & RAM resources, what limits the number of running containers and clients connected to VPN server.
+  - [**Raspberry Pi 4**](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/), [**Raspberry Pi CM4**](https://www.raspberrypi.com/products/compute-module-4/?variant=raspberry-pi-cm4001000) **and** [**CM4 I/O Board**](https://www.raspberrypi.com/products/compute-module-4-io-board/) or [**Raspberry Pi 3**](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) board, all with 2-4Gb RAM minimum.
+  - [**Raspberry Pi Imager**](https://www.raspberrypi.com/software/) to simplify installation of Raspberry Pi OS Lite (x64 or i686 bit).
+  - [**Raspios Lite (64bit)**](https://downloads.raspberrypi.org/raspios_lite_arm64/images/) however is recommended for this setup.
+  - **16Gb SD Card**
+    > You can run it on CM4 board with 8Gb eMMC card. Full installation on top of latest [Raspios lite (64bit)](https://downloads.raspberrypi.org/raspios_lite_arm64/images/) will use 4,5Gb of your eMMC card. Raspberry-pi Zero-W, or W2 boards supported as well, but be aware, that it has no internal Ehernet adapter and very limited by avilable CPU & RAM resources, what limits the number of running containers and clients connected to VPN server.
 
 # Installation
   1. Install [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html):
@@ -48,16 +47,16 @@
      ```shell
      ansible-playbook main.yml
      ```
-> **If running locally on the Pi**: You may have error like `Error while fetching server API version`. You have to relogin (or reboot your Pi) and then run the playbook again.
+     > **If running locally on the Pi**: You may have error like `Error while fetching server API version`. You have to relogin (or reboot your Pi) and then run the playbook again.
 
-## Features
+# Features
 [**Pi-hole**](https://pi-hole.net) the network-wide ad-blocking solution integrated with own local DNS and DHCP servers:
 
-![Pi-hole on the Internet Pi](/images/pi-hole.png)
+  ![Pi-hole on the Internet Pi](/images/pi-hole.png)
 
-[**OpenVPN**](https://openvpn.net) server with subnets support and **OpenVPN-web-ui** as lightweight web administration interface:
+  [**OpenVPN**](https://openvpn.net) server with subnets support and **OpenVPN-web-ui** as lightweight web administration interface:
 
-![OpenVPN WEB UI](/images/OpenVPN-UI-Home.png)
+  ![OpenVPN WEB UI](/images/OpenVPN-UI-Home.png)
 
 <p align="center">
 <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="600" border="1" />
@@ -133,9 +132,9 @@ Targets status can be checked on `http://localhost:9090/targets`.
 
 #### Here is list of available exporters/targets:
 
-* **Node exporter** - Standard Linux server metrics (CPU,RAM,I/O,FS,PROC). `http://nodeexp:9100/metrics`
+* **Node exporter** - Standard Linux server monitoring (CPU,RAM,I/O,FS,PROC). `http://nodeexp:9100/metrics`
 * **cAdvisor exporter** - Docker containers monitoring. `http://cadvisor:8080/metrics`
-* **rpi_exporter** - RaspberryPI HW metrics. `http://rpi_exporter:9110/metrics`
+* **rpi_exporter** - RaspberryPI HW monitoring. `http://rpi_exporter:9110/metrics`
 * **Speedtest exporter** - Up/down speed and latency. `http://speedtest:9798/metrics` 
 * **Blackbox exporter** - Desired sites avilability. `http://ping:9115/probe`
 * **OpenVPN exporter** - OpenVPN activity monitoring. `http://openvpn:9176/metrics`
