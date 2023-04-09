@@ -33,21 +33,21 @@
      ```shell
      ansible-galaxy collection install -r requirements.yml
      ```
-     > If you see `ansible-galaxy: command not found`, you have to relogin (or reboot your Pi) and then try again.
+     > **Note**: If you see `ansible-galaxy: command not found`, you have to relogin (or reboot your Pi) and then try again.
   5. Make copies of the configuration files and modify them for your enviroment:
      ```shell
      yes | cp -p example.inventory.ini inventory.ini 
      yes | cp -p example.config.yml config.yml
      ```
   6. Modify `inventory.ini` by replace of IP address with your Pi's IP, or comment that line and uncomment the `connection=local` line if you're running it on the Pi you're setting up.
-  7. Modify `config.yml` to enabe or disable desired containers to be installed on your Pi:
+  7. Modify `config.yml` to **enabe or disable desired containers** to be installed on your Pi:
 
      **To enable** Prtainer container change `enable_portainer false` option to `enable_portainer true` and vs to disable.
   9. Run installation playbook:
      ```shell
      ansible-playbook main.yml
      ```
-     > **If running locally on the Pi**: You may have error like `Error while fetching server API version`. You have to relogin (or reboot your Pi) and then run the playbook again.
+     > **Note**: **If running locally on the Pi**: You may have error like `Error while fetching server API version`. You have to relogin (or reboot your Pi) and then run the playbook again.
 
 # Features
 [**Pi-hole**](https://pi-hole.net) the network-wide ad-blocking solution integrated with own local DNS and DHCP servers:
@@ -60,7 +60,7 @@
 <img src="/images/OpenVPN-UI-Home.1.png" alt="OpenVPN WEB UI" width="410"> <img src="/images/WireGuard-UI-Home.2.png" alt="WireGuard WEB UI" width="410">
 </p>
 <p align="center">
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="600" border="1" />
+<img src="/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="600">
 </p>
 
 [**qBittorrent**](https://www.qbittorrent.org) an open-source software alternative to µTorrent, with lightweight web administration interface:
@@ -82,12 +82,12 @@
 
 [**AirGradient Monitoring**](https://www.airgradient.com): Configures [`Prometheus`](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/prometheus.yml.j2#L49) to get all necessary data directly from your [AirGradient](https://www.airgradient.com/diy/) device and installs a [Grafana dashboard](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/airgradient-air-quality.json.j2), which tracks and displays air quality over time. 
 
-> Your AirGradient device **must** have alternative [airgradient-improved](https://github.com/d3vilh/airgradient-improved) firmware flashed into EEPROM to support this feature.
+> **Note**: Your AirGradient device **must** have alternative [airgradient-improved](https://github.com/d3vilh/airgradient-improved) firmware flashed into EEPROM to support this feature.
 
 ![AirGradient Monitoring Dashboard in Grafana picture 1](/images/air-gradient_1.png) 
 ![AirGradient Monitoring Dashboard in Grafana picture 2](/images/air-gradient_2.png)
 
-[**OpenVPN activity dashboard**](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/openvpn_exporter.json.j2) and [OpenVPN-exporter](https://github.com/d3vilh/openvpn_exporter) which you can be [enable in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L82) by setting `openvpn_monitoring_enable` option to `true`.
+[**OpenVPN activity dashboard**](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/openvpn_exporter.json.j2) and [OpenVPN-exporter](https://github.com/d3vilh/openvpn_exporter) which you can be [enable in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L96) by setting `openvpn_monitoring_enable` option to `true`.
 
 ![OpenVPN Grafana Dashboard](/images/OVPN_Dashboard.png)
 
@@ -106,10 +106,10 @@
   To access qBittorrent Web-ui, visit the Pi's IP address (*e.g. `http://localhost:8090/` , change `localhost` to your Raspberry host ip/name*) with **default credentials** - `admin/adminadmin`, which **must** be changed via web interface on first login. All the downloaded files will be stored in the `~/qbittorrent/downloads` directory.
 
   ## WireGuard
-  To access WireGuard Web-ui, visit the Pi's IP address (*e.g. `http://localhost:5000/` , change `localhost` to your Raspberry host ip/name*) with default credentials - `admin/gagaZush`, it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) `config.yml` file in var `wireguard_password`. Consider to change it before the installation as security must be secure.
+  To access WireGuard Web-ui, visit the Pi's IP address (*e.g. `http://localhost:5000/` , change `localhost` to your Raspberry host ip/name*) with default credentials - `admin/gagaZush`, it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L53) `config.yml` file in var `wireguard_password`. Consider to change it before the installation as security must be secure.
 
   ## OpenVPN 
-  **OpenVPN and WEB UI** can be accessed on own port (*e.g. `http://localhost:8080` , change `localhost` to your Raspberry host ip/name*), the default user and password is `admin/gagaZush` preconfigured in `config.yml` which you supposed to [set in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L25) `ovpnui_user` & `ovpnui_password` vars, just before the installation.
+  **OpenVPN and WEB UI** can be accessed on own port (*e.g. `http://localhost:8080` , change `localhost` to your Raspberry host ip/name*), the default user and password is `admin/gagaZush` preconfigured in `config.yml` which you supposed to [set in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) `ovpnui_user` & `ovpnui_password` vars, just before the installation.
 
   All the [**documentation**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn/README.md) and How-to can be found [**here**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn/README.md)
 
@@ -117,7 +117,7 @@
   The DataSources and Dashboards for are automatically provisioned.
 
    ### Grafana dashboards
-   To access Grafana, visit the Pi's IP address (*e.g. `http://localhost:3030/` , change `localhost` to your Raspberry host ip/name*) with default credentials - `admin/admin`, it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L68) `config.yml` file in var `monitoring_grafana_admin_password`. The `monitoring_grafana_admin_password` is only used the first time Grafana starts up; if you need to change it later, do it via Grafana's admin UI.
+   To access Grafana, visit the Pi's IP address (*e.g. `http://localhost:3030/` , change `localhost` to your Raspberry host ip/name*) with default credentials - `admin/admin`, it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L82) `config.yml` file in var `monitoring_grafana_admin_password`. The `monitoring_grafana_admin_password` is only used the first time Grafana starts up; if you need to change it later, do it via Grafana's admin UI.
 
    #### Here is list of available dashboards:
    * **Raspberry Pi Monitoring**: Shows CPU, memory, and disk usage, as well as network traffic, temperature and Docker containers utilisation. `http://localhost:3030/d/rvk35ERRz/raspberry-monitoring`
@@ -125,11 +125,11 @@
    * **AirGradient Monitoring** - Air quality dashboard. `http://localhost:3030/d/aglivingroom/airquality-airgradient`
    * **Starlink Monitoring**: Starlink monitoring dashboard. `http://localhost:3030/d/GG3mnflGz/starlink-overview`
    * **Shelly Plug Monitoring**: Shelly Plug dashboard. `http://localhost:3030/d/i_aeo-uMz/power-consumption`
-   >**Note**: Change `localhost` to your Raspberry ip/hostname.
+   > **Note**: Change `localhost` to your Raspberry ip/hostname.
 
   If you don't see any data on dashboard - try to change the time duration to something smaller. If this does not helps - check via **Portainer UI** that all the exporters and containers are running:
 
-  <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/portainer-run.png" alt="Running containers" width="350" border="1" />
+  <img src="/images/portainer-run.png" alt="Running containers" width="350" border="1" />
 
   Then debug **Prometheus targets** described in next partagraph.
 
