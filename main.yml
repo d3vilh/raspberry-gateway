@@ -46,7 +46,6 @@
       ansible.builtin.import_tasks: tasks/wireguard.yml
       when: wireguard_enable
 
-# Experimental. Testintg. Better not to use.
     - name: Set up qbitTorrent.
       ansible.builtin.import_tasks: tasks/qbittorrent.yml
       when: qbittorrent_enable
@@ -74,3 +73,8 @@
     - name: Set up Starlink Monitoring.
       ansible.builtin.import_tasks: tasks/starlink.yml
       when: starlink_monitoring_enable
+
+# Experimental. Testintg. Better not to use.
+    - name: Set up Technitium DNS Server.
+      ansible.builtin.import_tasks: tasks/tech-dns.yml
+      when: tech_dns_enable

@@ -54,3 +54,10 @@
     build: false
     restarted: true
   become: false
+
+- name: Restart Technitium DNS Server
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/tech-dns/"
+    build: false
+    restarted: true
+  become: false
