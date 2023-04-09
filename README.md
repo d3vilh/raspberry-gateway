@@ -3,8 +3,8 @@
   * [**OpenVPN container**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn/openvpn-docker) with simple [**WEB UI**](https://github.com/d3vilh/openvpn-ui) and VPN subnets support. 
   * [**WireGuard**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) container with own UI. 
   * [**Pi-hole**](https://pi-hole.net) - the network-wide ad-blocking local DNS solution. 
-  * [**Portainer**](https://www.portainer.io) a lightweight *universal* management GUI for all Docker enviroments which included into this project. 
   * [**qBittorrent**](https://www.qbittorrent.org) -  an open-source software alternative to µTorrent. 
+  * [**Portainer**](https://www.portainer.io) a lightweight *universal* management GUI for all Docker enviroments which included into this project. 
   * [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/raspi-monitoring) for Internet speed, OpenVPN, Raspberry Pi hardware and running Docker containers status monitoring. 
   * **Various Prometheus exporters**: cAdviser, **AirGradient**, **StarLink**, **ShellyPlug** and others. 
 
@@ -120,8 +120,7 @@
   The DataSources and Dashboards for are automatically provisioned.
 
    ### Grafana dashboards
-   To access Grafana, visit the Pi's IP address (*e.g. `http://localhost:3030/` , change `localhost` to your Raspberry host ip/name*) with default credentials - `admin/admin`, it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L68) `config.yml` file in var `monitoring_grafana_admin_password`. Consider to change it before the installation as security must be secure.
-   >**Note**: The `monitoring_grafana_admin_password` is only used the first time Grafana starts up; if you need to change it later, do it via Grafana's admin UI.
+   To access Grafana, visit the Pi's IP address (*e.g. `http://localhost:3030/` , change `localhost` to your Raspberry host ip/name*) with default credentials - `admin/admin`, it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L68) `config.yml` file in var `monitoring_grafana_admin_password`. The `monitoring_grafana_admin_password` is only used the first time Grafana starts up; if you need to change it later, do it via Grafana's admin UI.
 
    #### Here is list of available dashboards:
    * **Raspberry Pi Monitoring**: Shows CPU, memory, and disk usage, as well as network traffic, temperature and Docker containers utilisation. `http://localhost:3030/d/rvk35ERRz/raspberry-monitoring`
@@ -131,7 +130,7 @@
    * **Shelly Plug Monitoring**: Shelly Plug dashboard. `http://localhost:3030/d/i_aeo-uMz/power-consumption`
    >**Note**: Change `localhost` to your Raspberry ip/hostname.
 
-  If you don't see any data on dashboard - try to change the time duration to something smaller. If this does not helps - check via **Portainer UI** that all the exporters containers are running:
+  If you don't see any data on dashboard - try to change the time duration to something smaller. If this does not helps - check via **Portainer UI** that all the exporters and containers are running:
 
   <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/portainer-run.png" alt="Running containers" width="350" border="1" />
 
