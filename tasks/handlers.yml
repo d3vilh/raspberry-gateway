@@ -8,7 +8,7 @@
 
 - name: Restart raspi-monitoring
   community.docker.docker_compose:
-    project_src: "{{ config_dir }}/raspi-monitoring/"
+    project_src: "{{ config_dir }}/monitoring/"
     build: false
     restarted: true
   become: false

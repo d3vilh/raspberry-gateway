@@ -2,7 +2,7 @@
 - name: Copy airgradient dashboard configs to Grafana.
   ansible.builtin.template:
     src: templates/airgradient-air-quality.json.j2
-    dest: "{{ config_dir }}/raspi-monitoring/grafana/provisioning/dashboards/airgradient-{{ item.id }}.json"
+    dest: "{{ config_dir }}/monitoring/grafana/provisioning/dashboards/airgradient-{{ item.id }}.json"
     mode: 0644
   become: false
   loop: "{{ airgradient_sensors }}"

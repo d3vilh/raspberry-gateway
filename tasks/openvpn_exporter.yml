@@ -2,7 +2,7 @@
 - name: Copy OpenVPN dashboard configs to Grafana.
   ansible.builtin.copy:
     src: templates/openvpn_exporter.json.j2
-    dest: "{{ config_dir }}/raspi-monitoring/grafana/provisioning/dashboards/openvpn.json"
+    dest: "{{ config_dir }}/monitoring/grafana/provisioning/dashboards/openvpn.json"
     mode: '0644'
   become: false
   notify: Restart raspi-monitoring

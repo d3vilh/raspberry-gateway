@@ -2,7 +2,7 @@
 - name: Copy PiKVM dashboard configs to Grafana.
   ansible.builtin.template:
     src: templates/pikvm.json.j2
-    dest: "{{ config_dir }}/raspi-monitoring/grafana/provisioning/dashboards/pikvm.json"
+    dest: "{{ config_dir }}/monitoring/grafana/provisioning/dashboards/pikvm.json"
     mode: 0644
   become: false
   notify: Restart raspi-monitoring
