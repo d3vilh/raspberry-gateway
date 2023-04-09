@@ -14,6 +14,8 @@ bdapi-ads.realmemobile.com
 bdapi-in-ads.realmemobile.com
 business-api.tiktok.com
 c.bigmir.net
+cdpbeacon.lgtvcommon.com
+cdpsvc.lgtvcommon.com
 ck.ads.oppomobile.com
 claritybt.freshmarketer.com
 click.oneplus.cn
@@ -26,6 +28,8 @@ extmaps-api.yandex.net
 freshmarketer.com
 fwtracks.freshmarketer.com
 grs.hicloud.com
+homeprv.lgtvcommon.com
+lgsmartad.com
 log.byteoversea.com
 logbak.hicloud.com
 logservice.hicloud.com
@@ -33,7 +37,11 @@ logservice1.hicloud.com
 metrics.data.hicloud.com
 metrics2.data.hicloud.com
 metrika.yandex.ru
+nudge.lgtvcommon.com
 offerwall.yandex.net
+rdl.lgtvcommon.com
+recommend.lgtvcommon.com
+service.lgtvcommon.com
 tsyndicate.com
 udc.yahoo.com
 udcm.yahoo.com
