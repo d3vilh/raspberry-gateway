@@ -57,7 +57,7 @@
 [**OpenVPN**](https://openvpn.net) server with subnets support and [**openvpn-ui**](https://github.com/d3vilh/openvpn-ui) as lightweight web administration interface or
 [**WireGuard**](https://www.wireguard.com) server - an extremely simple yet fast and modern VPN with own **web-ui** as lightweight web administration interface:
 <p align="center">
-<img src="/images/OpenVPN-UI-Home.1.png" alt="OpenVPN WEB UI" width="410"> <img src="/images/WireGuard-UI-Home.1.png" alt="WireGuard WEB UI" width="410">
+<img src="/images/OpenVPN-UI-Home.1.png" alt="OpenVPN WEB UI" width="410"> <img src="/images/WireGuard-UI-Home.2.png" alt="WireGuard WEB UI" width="410">
 </p>
 <p align="center">
 <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="600" border="1" />
