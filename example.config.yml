@@ -126,4 +126,3 @@ tech_dns_ipv6: false                            # Enable IPv6 support
 tech_dns_blocking: true                         # Sets DNS server to block domain names using Blocked Zone and Block List Zone.
 tech_dns_forwarders: "1.1.1.1, 8.8.8.8"         # List of DNS servers to forward DNS queries to.
 tech_dns_forwarder_proto: "Https"               # Forwarder protocol options: Udp, Tcp, Tls, Https, HttpsJson.
-#tech_dns_blocklist: "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"  # List of DNS servers to forward DNS queries to.
