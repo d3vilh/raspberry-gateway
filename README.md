@@ -99,19 +99,22 @@
 
 # Usage
   ## Portainer
-  Visit the Pi's IP address (*e.g. `http://localhost:9000/` , change `localhost` to your Raspberry host ip/name*) it will ask to set new password during the first startup - save the password.
+  Visit the Pi's IP address `http://localhost:9000/`, (*change `localhost` to your Raspberry host ip/name*) it will ask to set new password during the first startup - save the password.
 
   ## Pi-hole
-  Visit the Pi's IP address (*e.g. `http://localhost/` , change `localhost` to your Raspberry host ip/name*) the default password is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L14) `config.yml` file in var `pihole_password`. Consider to change it before the installation as security must be secure.
+  Visit the Pi's IP address `http://localhost/`, (*change `localhost` to your Raspberry host ip/name*) the default password is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L14) `config.yml` file in var `pihole_password`. Consider to change it before the installation as security must be secure.
+
+  ## Technitium DNS Server
+  To access Technitium DNS Web-ui visit the Pi's IP address `http://localhost:5380/`, (*change `localhost` to your Raspberry host ip/name*) the default password is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L22) `config.yml` file in var `tech_dns_password`. Consider to change it before the installation.
 
   ## qBittorrent
-  To access qBittorrent Web-ui, visit the Pi's IP address (*e.g. `http://localhost:8090/` , change `localhost` to your Raspberry host ip/name*) with **default credentials** - `admin/adminadmin`, which **must** be changed via web interface on first login. All the downloaded files will be stored in the `~/qbittorrent/downloads` directory.
+  To access qBittorrent Web-ui, visit the Pi's IP address `http://localhost:8090/`, (*change `localhost` to your Raspberry host ip/name*) with **default credentials** - `admin/adminadmin`, which **must** be changed via web interface on first login. All the downloaded files will be stored in the `~/qbittorrent/downloads` directory.
 
   ## WireGuard
-  To access WireGuard Web-ui, visit the Pi's IP address (*e.g. `http://localhost:5000/` , change `localhost` to your Raspberry host ip/name*) with default credentials - `admin/gagaZush`, it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L53) `config.yml` file in var `wireguard_password`. Consider to change it before the installation as security must be secure.
+  To access WireGuard Web-ui, visit the Pi's IP address `http://localhost:5000/`, (*change `localhost` to your Raspberry host ip/name*) with default credentials - `admin/gagaZush`, it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L53) `config.yml` file in var `wireguard_password`. Consider to change it before the installation.
 
   ## OpenVPN 
-  **OpenVPN and WEB UI** can be accessed on own port (*e.g. `http://localhost:8080` , change `localhost` to your Raspberry host ip/name*), the default user and password is `admin/gagaZush` preconfigured in `config.yml` which you supposed to [set in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) `ovpnui_user` & `ovpnui_password` vars, just before the installation.
+  **OpenVPN and WEB UI** can be accessed on own port (*e.g. `http://localhost:8080/` , change `localhost` to your Raspberry host ip/name*), the default user and password is `admin/gagaZush` preconfigured in `config.yml` which you supposed to [set in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) `ovpnui_user` & `ovpnui_password` vars, just before the installation.
 
   All the [**documentation**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn/README.md) and How-to can be found [**here**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn/README.md)
 
@@ -119,7 +122,7 @@
   The DataSources and Dashboards for are automatically provisioned.
 
    ### Grafana dashboards
-   To access Grafana, visit the Pi's IP address (*e.g. `http://localhost:3030/` , change `localhost` to your Raspberry host ip/name*) with default credentials - `admin/admin`, it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L82) `config.yml` file in var `monitoring_grafana_admin_password`. The `monitoring_grafana_admin_password` is only used the first time Grafana starts up; if you need to change it later, do it via Grafana's admin UI.
+   To access Grafana, visit the Pi's IP address `http://localhost:3030/` (*change `localhost` to your Raspberry host ip/name*) with default credentials - `admin/admin`, it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L82) `config.yml` file in var `monitoring_grafana_admin_password`. The `monitoring_grafana_admin_password` is only used the first time Grafana starts up; if you need to change it later, do it via Grafana's admin UI.
 
    #### Here is list of available dashboards:
    * **Raspberry Pi Monitoring**: Shows CPU, memory, and disk usage, as well as network traffic, temperature and Docker containers utilisation. `http://localhost:3030/d/rvk35ERRz/raspberry-monitoring`
@@ -136,7 +139,7 @@
   Then debug **Prometheus targets** described in next partagraph.
 
 ### Prometheus
-Prometheus is available on `http://localhost:9090` (*e.g. `http://localhost:9090/` , change `localhost` to your Raspberry host ip/name*). It is used to collect metrics from exporters and provide them to Grafana.
+Prometheus is available on `http://localhost:9090/` (*change `localhost` to your Raspberry host ip/name*). It is used to collect metrics from exporters and provide them to Grafana.
 Targets status can be checked on `http://localhost:9090/targets`.
 
 #### Here is list of available exporters/targets:
