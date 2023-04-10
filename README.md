@@ -50,14 +50,16 @@
      > **Note**: **If running locally on the Pi**: You may have error like `Error while fetching server API version`. You have to relogin (or reboot your Pi) and then run the playbook again.
 
 # Features
-[**Pi-hole**](https://pi-hole.net) the network-wide ad-blocking solution integrated with own local DNS and DHCP servers:
+[**Pi-hole**](https://pi-hole.net) or [**Technitium-dns**](https://technitium.com/dns/) as the network-wide ad-blocking solution integrated with own local DNS and DHCP servers:
 
-![Pi-hole on the Internet Pi](/images/pi-hole.png)
+<p align="center">
+<img src="/images/Pi-hole.1.png" alt="Pi-hole" width="410"> <img src="/images/Technitium-dns.1.png" alt="Technitium" width="410">
+</p>
 
 [**OpenVPN**](https://openvpn.net) server with subnets support and [**openvpn-ui**](https://github.com/d3vilh/openvpn-ui) as fast and lightweight web administration interface or
 [**WireGuard**](https://www.wireguard.com) server - an extremely simple yet fast and modern VPN with own web administration interface:
 <p align="center">
-<img src="/images/OpenVPN-UI-Home.1.png" alt="OpenVPN WEB UI" width="410"> <img src="/images/WireGuard-UI-Home.2.png" alt="WireGuard WEB UI" width="410">
+<img src="/images/OpenVPN-UI-Home.1.png" alt="OpenVPN WEB UI" width="410"> <img src="/images/WireGuard-UI-Home.1.png" alt="WireGuard WEB UI" width="410">
 </p>
 <p align="center">
 <img src="/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="600">
@@ -158,5 +160,4 @@ Kudos to @adamwalach for development of original [OpenVPN-WEB-UI](https://github
 
 Kudos to @maxandersen for making the [Internet Monitoring](https://github.com/maxandersen/internet-monitoring) project, which forked and expanded with functionality to build Rasbpi-Monitoring.
 
-**Grand Kudos** to Jeff Geerling aka [@geerlingguy](https://github.com/geerlingguy) for all his efforts to make us interesting in Raspberry Pi compiters and for [all his propaganda on youtube](https://www.youtube.com/c/JeffGeerling). Consider to like and subscribe ;)
-
+**Grand Kudos** to Jeff Geerling aka [@geerlingguy](https://github.com/geerlingguy) for all his efforts to make us interesting in Raspberry Pi compiters and for [all his propaganda on youtube](https://www.youtube.com/c/JeffGeerling). Like and subscribe.
