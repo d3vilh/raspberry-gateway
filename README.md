@@ -6,15 +6,15 @@
   * [**Technitium-dns**](https://technitium.com/dns/) - Self host DNS server. Block ads & malware at DNS level for your entire network.
   * [**qBittorrent**](https://www.qbittorrent.org) -  an open-source software alternative to µTorrent. 
   * [**Portainer**](https://www.portainer.io) a lightweight *universal* management GUI for all Docker enviroments which included into this project. 
-  * [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/raspi-monitoring) for Internet speed, OpenVPN, Raspberry Pi hardware and running Docker containers status monitoring. 
-  * **Various Prometheus exporters**: cAdviser, **AirGradient**, **StarLink**, **ShellyPlug** and others. 
+  * [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/raspi-monitoring) for Internet speed, OpenVPN, Raspberry Pi hardware and Docker containers status monitoring. 
+  * **Various Prometheus exporters**: cAdviser, AirGradient, StarLink, ShellyPlug and others. 
 
 # Requirements
   - [**Raspberry Pi 4**](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/), [**Raspberry Pi CM4**](https://www.raspberrypi.com/products/compute-module-4/?variant=raspberry-pi-cm4001000) **and** [**CM4 I/O Board**](https://www.raspberrypi.com/products/compute-module-4-io-board/) or [**Raspberry Pi 3**](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) board, all with 2-4Gb RAM minimum.
   - [**Raspberry Pi Imager**](https://www.raspberrypi.com/software/) to simplify installation of Raspberry Pi OS Lite (x64 or i686 bit).
   - [**Raspios Lite (64bit)**](https://downloads.raspberrypi.org/raspios_lite_arm64/images/) however is recommended for this setup.
   - **16Gb SD Card**
-    > You can run it on CM4 board with 8Gb eMMC card. Full installation on top of latest [Raspios lite (64bit)](https://downloads.raspberrypi.org/raspios_lite_arm64/images/) will use 4,5Gb of your eMMC card. Raspberry-pi Zero-W, or W2 boards supported as well, but be aware, that it has no internal Ehernet adapter and very limited by avilable CPU & RAM resources, what limits the number of running containers and clients connected to VPN server.
+    > **Note**: You can run it on CM4 board with 8Gb eMMC card. Full installation on top of latest [Raspios lite (64bit)](https://downloads.raspberrypi.org/raspios_lite_arm64/images/) will use 4,5Gb of your eMMC card. Raspberry Pi **Zero-W** or **W2** boards can also be used, but it's important to note that they lack an internal Ethernet adapter and have limited CPU and RAM resources. This can restrict the number of containers that can be run and the number of clients that can connect to the VPN server.
 
 # Installation
   1. Install [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html):
@@ -40,10 +40,9 @@
      yes | cp -p example.inventory.ini inventory.ini 
      yes | cp -p example.config.yml config.yml
      ```
-  6. Modify `inventory.ini` by replace of IP address with your Pi's IP, or comment that line and uncomment the `connection=local` line if you're running it on the Pi you're setting up.
+  6. Modify `inventory.ini` by replace of IP address with your Pi's IP, or comment that line and uncomment the `connection=local` line if you're running it on the Pi you're setting up. Double check that the `ansible_user` is correct for your setup.
   7. Modify `config.yml` to **enabe or disable desired containers** to be installed on your Pi:
-
-     **To enable** Prtainer container change `enable_portainer false` option to `enable_portainer true` and vs to disable.
+     **To enable** Prtainer - change `enable_portainer: false` option to `enable_portainer: true` and vs to disable.
   9. Run installation playbook:
      ```shell
      ansible-playbook main.yml
@@ -100,27 +99,28 @@
 
 # Usage
   ## Portainer
-  Visit the Pi's IP address `http://localhost:9000/`, (*change `localhost` to your Raspberry host ip/name*) it will ask to set new password during the first startup - save the password.
+  To access Portainer web-ui, visit the Pi's IP address `http://localhost:9000/`, (*change `localhost` to your Raspberry host ip/name*) it will ask to set new password during the first startup - save the password.
 
   ## Pi-hole
-  Visit the Pi's IP address `http://localhost/`, (*change `localhost` to your Raspberry host ip/name*) the default password is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L14) `config.yml` file in var `pihole_password`. Consider to change it before the installation as security must be secure.
+  For Pi-hole ui, visit the Pi's IP address `http://localhost/`, (*change `localhost` to your Raspberry host ip/name*) the default password is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L14) `config.yml` file in var `pihole_password`. Consider to change it before the installation as security must be secure.
 
   ## Technitium DNS Server
-  To access Technitium DNS Web-ui visit the Pi's IP address `http://localhost:5380/`, (*change `localhost` to your Raspberry host ip/name*) the default password is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L22) `config.yml` file in var `tech_dns_password`. Consider to change it before the installation.
+  To access Technitium DNS Web-ui visit `http://localhost:5380/`, (*change `localhost` to your Raspberry host ip/name*) the default password is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L22) `config.yml` file in var `tech_dns_password`. Consider to change it before the installation.
 
   ## qBittorrent
-  To access qBittorrent Web-ui, visit the Pi's IP address `http://localhost:8090/`, (*change `localhost` to your Raspberry host ip/name*) with **default credentials** - `admin/adminadmin`, which **must** be changed via web interface on first login. All the downloaded files will be stored in the `~/qbittorrent/downloads` directory.
-
-  ## WireGuard
-  To access WireGuard Web-ui, visit the Pi's IP address `http://localhost:5000/`, (*change `localhost` to your Raspberry host ip/name*) with default credentials - `admin/gagaZush`, it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L53) `config.yml` file in var `wireguard_password`. Consider to change it before the installation.
+  To access qBittorrent Web-ui, visit `http://localhost:8090/`, (*change `localhost` to your Raspberry host ip/name*) with **default credentials** - `admin/adminadmin`, which **must** be changed via web interface on first login. All the downloaded files will be stored in the `~/qbittorrent/downloads` directory.
 
   ## OpenVPN 
-  **OpenVPN and WEB UI** can be accessed on own port (*e.g. `http://localhost:8080/` , change `localhost` to your Raspberry host ip/name*), the default user and password is `admin/gagaZush` preconfigured in `config.yml` which you supposed to [set in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) `ovpnui_user` & `ovpnui_password` vars, just before the installation.
+  **OpenVPN and WEB UI** can be accessed on the port `8080`, e.g. `http://localhost:8080/`, (*change `localhost` to your Raspberry host ip/name*), the default user and password is `admin/gagaZush` preconfigured in `config.yml` which you supposed to [set in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) `ovpnui_user` & `ovpnui_password` vars, just before the installation.
 
   All the [**documentation**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn/README.md) and How-to can be found [**here**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn/README.md)
+   > **Note**: If you are looking for x86_64 version of OpenVPN and openvpn-ui containers, please check [**openvpn-aws**](https://github.com/d3vilh/openvpn-aws)
+
+  ## WireGuard
+  To access WireGuard Web-ui, visit the `http://localhost:5000/`, (*change `localhost` to your Raspberry host ip/name*) with default credentials - `admin/gagaZush`, it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L53) `config.yml` file in var `wireguard_password`. Consider to change it before the installation.
 
   ## Raspi-monitoring
-  The DataSources and Dashboards for are automatically provisioned.
+  All the Data sources, Dashboards and exporters are automatically provisioned. Below you can find the list of available dashboards and their URLs.
 
    ### Grafana dashboards
    To access Grafana, visit the Pi's IP address `http://localhost:3030/` (*change `localhost` to your Raspberry host ip/name*) with default credentials - `admin/admin`, it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L82) `config.yml` file in var `monitoring_grafana_admin_password`. The `monitoring_grafana_admin_password` is only used the first time Grafana starts up; if you need to change it later, do it via Grafana's admin UI.
@@ -139,29 +139,27 @@
 
   Then debug **Prometheus targets** described in next partagraph.
 
-### Prometheus
-Prometheus is available on `http://localhost:9090/` (*change `localhost` to your Raspberry host ip/name*). It is used to collect metrics from exporters and provide them to Grafana.
-Targets status can be checked on `http://localhost:9090/targets`.
+  ### Prometheus
+  Prometheus is available on `http://localhost:9090/` (*change `localhost` to your Raspberry host ip/name*). It is used to collect metrics from exporters and provide them to Grafana.
+  Targets status can be checked on `http://localhost:9090/targets`.
 
-#### Here is list of available exporters/targets:
+   #### Here is list of available exporters/targets:
 
-* **Node exporter** - Standard Linux server monitoring (CPU,RAM,I/O,FS,PROC). `http://nodeexp:9100/metrics`
-* **cAdvisor exporter** - Docker containers monitoring. `http://cadvisor:8080/metrics`
-* **rpi_exporter** - RaspberryPI HW monitoring. `http://rpi_exporter:9110/metrics`
-* **Speedtest exporter** - Up/down speed and latency. `http://speedtest:9798/metrics` 
-* **Blackbox exporter** - Desired sites avilability. `http://ping:9115/probe`
-* **OpenVPN exporter** - OpenVPN activity monitoring. `http://openvpn:9176/metrics`
-* **AirGradient exporter** - AirQuality monitoring. `http://remote-AirGradient-ip:9926/metrics`
-* **PiKVM exporter** - PiKVM utilisation and temp monitoring. `https://remote-PiKVM-ip/api/export/prometheus/metrics`
-* **Starlink exporter** - Starlink monitoring. `http://starlink:9817/metrics`
-* **Shelly exporter** - Shelly Plug power consumption monitoring. `http://shelly:9924/metrics`
+   * **Node exporter** - Standard Linux server monitoring (CPU,RAM,I/O,FS,PROC). `http://nodeexp:9100/metrics`
+   * **cAdvisor exporter** - Docker containers monitoring. `http://cadvisor:8080/metrics`
+   * **rpi_exporter** - RaspberryPI HW monitoring. `http://rpi_exporter:9110/metrics`
+   * **Speedtest exporter** - Up/down speed and latency. `http://speedtest:9798/metrics` 
+   * **Blackbox exporter** - Desired sites avilability. `http://ping:9115/probe`
+   * **OpenVPN exporter** - OpenVPN activity monitoring. `http://openvpn:9176/metrics`
+   * **AirGradient exporter** - AirQuality monitoring. `http://remote-AirGradient-ip:9926/metrics`
+   * **PiKVM exporter** - PiKVM utilisation and temp monitoring. `https://remote-PiKVM-ip/api/export/prometheus/metrics`
+   * **Starlink exporter** - Starlink monitoring. `http://starlink:9817/metrics`
+   * **Shelly exporter** - Shelly Plug power consumption monitoring. `http://shelly:9924/metrics`
 
 ## Дякую and Kudos to all the envolved peole
 
 Kudos to @vegasbrianc for [super easy docker](https://github.com/vegasbrianc/github-monitoring) stack used to build this project.
+Kudos to @maxandersen for making the [Internet Monitoring](https://github.com/maxandersen/internet-monitoring) project, which was forked to extend its functionality and now part of **Raspi-monitoring**.
+Kudos to folks maintaining [**Pi-hole**](https://pi-hole.net), [**Technitium-dns**](https://technitium.com/dns/), [**qBittorrent**](https://www.qbittorrent.org), [**Portainer**](https://www.portainer.io), [**wireguard-ui**](https://github.com/ngoduykhanh/wireguard-ui), [**cAdviser**](https://github.com/d3vilh/cadvisor) and other pieces of software used in this project.
 
-Kudos to @adamwalach for development of original [OpenVPN-WEB-UI](https://github.com/adamwalach/openvpn-web-ui) interface of x86 computers which was ported for arm32v7 and arm64V8 with expanded functionality as part of this project.
-
-Kudos to @maxandersen for making the [Internet Monitoring](https://github.com/maxandersen/internet-monitoring) project, which forked and expanded with functionality to build Rasbpi-Monitoring.
-
-**Grand Kudos** to Jeff Geerling aka [@geerlingguy](https://github.com/geerlingguy) for all his efforts to make us interesting in Raspberry Pi compiters and for [all his propaganda on youtube](https://www.youtube.com/c/JeffGeerling). Like and subscribe.
+**Grand Kudos** to Jeff Geerling aka [@geerlingguy](https://github.com/geerlingguy) for all his efforts to keep us interesting in Raspberry Pi compiters and for [all his videos on youtube](https://www.youtube.com/c/JeffGeerling). Like and subscribe.
