@@ -1,6 +1,6 @@
 # Raspi-monitoring
 
-[**Raspi Monitoring**](https://github.com/d3vilh/raspberry-gateway/tree/master/raspi-monitoring) for monitor your Raspberry server utilisation (CPU,MEM,I/O, Tempriture, storage usage) and Internet connection. Internet connection statistics is based on [Speedtest.net exporter](https://github.com/MiguelNdeCarvalho/speedtest-exporter) results, ping stats and overall Internet availability tests based on HTTP push methods running by [Blackbox exporter](https://github.com/prometheus/blackbox_exporter) to the desired internet sites:
+[**Raspi Monitoring**](https://github.com/d3vilh/raspberry-gateway/tree/master/monitoring) for monitor your Raspberry server utilisation (CPU,MEM,I/O, Tempriture, storage usage) and Internet connection. Internet connection statistics is based on [Speedtest.net exporter](https://github.com/MiguelNdeCarvalho/speedtest-exporter) results, ping stats and overall Internet availability tests based on HTTP push methods running by [Blackbox exporter](https://github.com/prometheus/blackbox_exporter) to the desired internet sites:
 
 ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/raspi-monitoring_1.png) 
 ![Raspberry Monitoring Dashboard in Grafana picture 2](/images/raspi-monitoring_2.png) 
