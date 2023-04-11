@@ -1,7 +1,7 @@
 # Raspberry Gateway
 **Simple Raspberry Pi based home Internet gateway**. Which includes 
-  * [**OpenVPN container**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn/openvpn-docker) with simple [**WEB UI**](https://github.com/d3vilh/openvpn-ui) and VPN subnets support. 
-  * [**WireGuard**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) container with own UI. 
+  * [**OpenVPN Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn/openvpn-docker) contaner with simple [**WEB UI**](https://github.com/d3vilh/openvpn-ui) and VPN subnets support. 
+  * [**WireGuard Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) container with own UI. 
   * [**Pi-hole**](https://pi-hole.net) - the network-wide ad-blocking local DNS & DHCP solution. 
   * [**Technitium-dns**](https://technitium.com/dns/) - Self host DNS server. Block ads & malware at DNS level for your entire network.
   * [**qBittorrent**](https://www.qbittorrent.org) -  an open-source software alternative to µTorrent. 

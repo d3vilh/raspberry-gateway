@@ -38,6 +38,10 @@
       ansible.builtin.import_tasks: tasks/pi-hole.yml
       when: pihole_enable
 
+    - name: Set up Technitium DNS Server.
+      ansible.builtin.import_tasks: tasks/tech-dns.yml
+      when: tech_dns_enable
+
     - name: Set up OpenVPN
       ansible.builtin.import_tasks: tasks/openvpn.yml
       when: ovpn_enable
@@ -73,8 +77,3 @@
     - name: Set up Starlink Monitoring.
       ansible.builtin.import_tasks: tasks/starlink.yml
       when: starlink_monitoring_enable
-
-# Experimental. Testintg. Better not to use.
-    - name: Set up Technitium DNS Server.
-      ansible.builtin.import_tasks: tasks/tech-dns.yml
-      when: tech_dns_enable
