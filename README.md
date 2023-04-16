@@ -1,6 +1,6 @@
 # Raspberry Gateway
 **Simple Raspberry Pi based home Internet gateway**. Which includes 
-  * [**OpenVPN Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn/openvpn-docker) contaner with simple [**WEB UI**](https://github.com/d3vilh/openvpn-ui) and VPN subnets support. 
+  * [**OpenVPN Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-server/openvpn-docker) contaner with simple [**WEB UI**](https://github.com/d3vilh/openvpn-ui) and VPN subnets support. 
   * [**WireGuard Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) container with own UI. 
   * [**Pi-hole**](https://pi-hole.net) - the network-wide ad-blocking local DNS & DHCP solution. 
   * [**Technitium-dns**](https://technitium.com/dns/) - Self host DNS server. Block ads & malware at DNS level for your entire network.
@@ -113,7 +113,7 @@
   ## OpenVPN 
   **OpenVPN and WEB UI** can be accessed on the port `8080`, e.g. `http://localhost:8080/`, (*change `localhost` to your Raspberry host ip/name*), the default user and password is `admin/gagaZush` preconfigured in `config.yml` which you supposed to [set in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) `ovpnui_user` & `ovpnui_password` vars, just before the installation.
 
-  All the [**documentation**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn/README.md) and How-to can be found [**here**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn/README.md)
+  All the [**documentation**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md) and How-to can be found [**here**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md)
    > **Note**: If you are looking for x86_64 version of OpenVPN and openvpn-ui containers, please check [**openvpn-aws**](https://github.com/d3vilh/openvpn-aws)
 
   ## WireGuard
