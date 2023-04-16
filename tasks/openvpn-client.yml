@@ -24,7 +24,7 @@
     - src: ovpn_client-docker-compose.yml.j2
       dest: docker-compose.yml
   become: false
-  notify: Restart openvpn client
+  notify: Restart OpenVPN client
 
 - name: Ensure OpenVPN client is running.
   community.docker.docker_compose:
