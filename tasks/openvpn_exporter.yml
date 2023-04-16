@@ -9,7 +9,7 @@
 
 - name: Create OpenVPN exporter folder on Pi.
   ansible.builtin.file:
-    path: "{{ config_dir }}/openvpn/openvpn_exporter"
+    path: "{{ config_dir }}/openvpn-server/openvpn_exporter"
     state: directory
     mode: 0755
   become: false
@@ -17,13 +17,13 @@
 - name: Copy OpenVPN exporter template to Pi.
   ansible.builtin.template:
     src: templates/openvpn_exporter.yml.j2
-    dest: "{{ config_dir }}/openvpn/openvpn_exporter/docker-compose.yml"
+    dest: "{{ config_dir }}/openvpn-server/openvpn_exporter/docker-compose.yml"
     mode: '0640'
   become: false
   notify: Restart raspi-monitoring
 
 - name: Ensure OpenVPN Exporter is running.
   community.docker.docker_compose:
-    project_src: "{{ config_dir }}/openvpn/openvpn_exporter/"
+    project_src: "{{ config_dir }}/openvpn-server/openvpn_exporter/"
     build: false
   become: false

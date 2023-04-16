@@ -1,7 +1,7 @@
 ---
 - name: Create OpenVPN folder on Pi.
   ansible.builtin.file:
-    path: "{{ config_dir }}/openvpn"
+    path: "{{ config_dir }}/openvpn-server"
     state: directory
     mode: 0755
   become: false
@@ -18,7 +18,7 @@
 - name: Copy OpenVPN docker-compose template to Pi.
   ansible.builtin.template:
     src: templates/{{ item.src }}
-    dest: "{{ config_dir }}/openvpn/{{ item.dest }}"
+    dest: "{{ config_dir }}/openvpn-server/{{ item.dest }}"
     mode: 0740
   loop:
     - src: openvpn-docker-compose.yml.j2
@@ -34,6 +34,6 @@
 # to the `docker` group, so this task may fail.
 - name: Ensure OpenVPN is running.
   community.docker.docker_compose:
-    project_src: "{{ config_dir }}/openvpn/"
+    project_src: "{{ config_dir }}/openvpn-server/"
     build: false
   become: false
