@@ -39,4 +39,7 @@ services:
     restart: unless-stopped
     sysctls:
       - net.ipv4.ip_local_port_range=1024 65000
+{% if tech_dns_inside_vpn %}
+    network_mode: "container:openvpn-client"
+{% endif %}
  

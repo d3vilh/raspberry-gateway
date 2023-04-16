@@ -1,0 +1,33 @@
+---
+- name: Create OpenVPN client folder on Pi.
+  ansible.builtin.file:
+    path: "{{ config_dir }}/openvpn-client"
+    state: directory
+    mode: 0755
+  become: false
+
+- name: Synchronize openvpn client directory.
+  ansible.posix.synchronize:
+    src: openvpn-client
+    dest: "{{ config_dir }}/"
+    delete: false
+    recursive: true
+    perms: false
+  become: false
+
+- name: Copy OpenVPN client docker-compose template to Pi.
+  ansible.builtin.template:
+    src: templates/{{ item.src }}
+    dest: "{{ config_dir }}/openvpn-client/{{ item.dest }}"
+    mode: 0740
+  loop:
+    - src: ovpn_client-docker-compose.yml.j2
+      dest: docker-compose.yml
+  become: false
+  notify: Restart openvpn client
+
+- name: Ensure OpenVPN client is running.
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/openvpn-client/"
+    build: false
+  become: false

@@ -1,0 +1,21 @@
+---
+version: "3"
+
+services:
+  openvpn-client:
+    image: d3vilh/openvpn-client:arm64v8
+    container_name: openvpn-client
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      - ALLOWED_SUBNETS={{ ovpn_client_allowed_subnet }}
+{% if ovpn_client_secret_use %}
+      - AUTH_SECRET={{ ovpn_client_secret }}
+{% endif %}
+      - CONFIG_FILE={{ ovpn_client_cert }}
+      - KILL_SWITCH={{ ovpn_client_killswitch }}
+    volumes:
+      - ./:/config
+    restart: unless-stopped
