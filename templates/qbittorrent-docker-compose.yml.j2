@@ -17,3 +17,6 @@ services:
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped
+{% if qbittorrent_inside_vpn %}
+    network_mode: "container:openvpn-client"
+{% endif %}

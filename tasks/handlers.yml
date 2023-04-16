@@ -41,6 +41,13 @@
     restarted: true
   become: false
 
+- name: Restart openvpn client
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/openvpn-client/"
+    build: false
+    restarted: true
+  become: false
+
 - name: Restart wireguard
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/wireguard/"

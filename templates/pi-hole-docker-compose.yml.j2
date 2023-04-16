@@ -26,3 +26,6 @@ services:
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
+{% if pihole_inside_vpn %}
+    network_mode: "container:openvpn-client"
+{% endif %}

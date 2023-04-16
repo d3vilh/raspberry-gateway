@@ -43,8 +43,13 @@
       when: tech_dns_enable
 
     - name: Set up OpenVPN
-      ansible.builtin.import_tasks: tasks/openvpn.yml
-      when: ovpn_enable
+      ansible.builtin.import_tasks: tasks/openvpn-server.yml
+      when: ovpn_server_enable
+
+# !TESTING! DO NOT USE THIS YET!
+#    - name: Set up OpenVPN client
+#      ansible.builtin.import_tasks: tasks/openvpn-client.yml
+#      when: ovpn_client_enable
 
     - name: Set up WireGuard.
       ansible.builtin.import_tasks: tasks/wireguard.yml

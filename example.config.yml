@@ -12,6 +12,8 @@ pihole_enable: false                            # Set true or false. Don't use w
 pihole_hostname: pihole
 pihole_timezone: Europe/Kyiv
 pihole_password: "gagaZush"                     # !Change this password!
+# TESTING. DO NOT USE IN PRODUCTION!
+# pihole_inside_vpn: false                        # Set true to route PiHole traffic via VPN client
 
 #      _____         _     ____  _____ _____   
 #     |_   _|___ ___| |_  |    \|   | |   __|  
@@ -27,14 +29,16 @@ tech_dns_ipv6: false                            # Enable IPv6 support
 tech_dns_blocking: true                         # Sets DNS server to block domain names using Blocked Zone and Block List Zone.
 tech_dns_forwarders: "1.1.1.1, 8.8.8.8"         # List of DNS servers to forward DNS queries to.
 tech_dns_forwarder_proto: "Https"               # Forwarder protocol options: Udp, Tcp, Tls, Https, HttpsJson.
+# TESTING. DO NOT USE IN PRODUCTION!
+# tech_dns_inside_vpn: false                      # Set true to route TechDNS traffic via VPN client
 
 #    _____             _____ _____ _____ 
 #   |     |___ ___ ___|  |  |  _  |   | |
 #   |  |  | . | -_|   |  |  |   __| | | |
 #   |_____|  _|___|_|_|\___/|__|  |_|___|
 #         |_|
-# OpenVPN configuration.
-ovpn_enable: false                              # Set true or false
+# OpenVPN Server configuration.
+ovpn_server_enable: false                       # Set true or false
 
 ovpnui_user: "admin"
 ovpnui_password: "gagaZush"                     # !Change this password!
@@ -42,6 +46,15 @@ ovpn_trusted_subnet: "10.0.70.0/24"             # Trusted users subnet
 ovpn_guest_subnet: "10.0.71.0/24"               # Guest users subnet
 ovpn_home_subnet: "192.168.0.0/24"              # Your home network subnet
 ovpn_remote: "remote 123.234.123.12 12345 udp"  # OpenVPN client.ovpn profile connect line. You
+
+# TESTING. DO NOT USE IN PRODUCTION!
+# OpenVPN Client configuration.
+ovpn_client_enable: false                       # Set true or false
+ovpn_client_cert: "example-client.opvn"         # Set your ovpn-client certificate name
+ovpn_client_secret_use: false                   # Set if your ovpn-client certificate has user and password
+ovpn_client_secret: "example-credentials.txt"   # File which stors ovpn-client certificate user and password
+ovpn_client_allowed_subnet: "192.168.88.0/24"   # Allowed subnet for ovpn-client
+ovpn_client_killswitch: false                   # Disable Internet access if no VPN connection established
 
 #    _ _ _ _         _____               _ 
 #   | | | |_|___ ___|   __|_ _ ___ ___ _| |
@@ -72,6 +85,8 @@ qbittorrent_enable: false                       # Set true or false
 qbittorrent_webui_port: 8090                    # Better to keep as is
 qbittorrent_tz: "Europe/Kyiv"                   # Your timezone
 qbittorrent_default_password: admin/adminadmin  # !Change this password wia WebUI!
+# TESTING. DO NOT USE IN PRODUCTION!
+# qbittorrent_inside_vpn: false                   # Set true to route qBitTorrent traffic via VPN client
 
 #    _____         _ _               
 #   |     |___ ___|_| |_ ___ ___ ___ 
