@@ -34,6 +34,15 @@
       ansible.builtin.import_tasks: tasks/portainer.yml
       when: portainer_enable
 
+# !TESTING! DO NOT USE THIS YET!
+#    - name: Set up OpenVPN client
+#      ansible.builtin.import_tasks: tasks/openvpn-client.yml
+#      when: ovpn_client_enable
+
+    - name: Set up OpenVPN
+      ansible.builtin.import_tasks: tasks/openvpn-server.yml
+      when: ovpn_server_enable
+
     - name: Set up Pi Hole.
       ansible.builtin.import_tasks: tasks/pi-hole.yml
       when: pihole_enable
@@ -41,15 +50,6 @@
     - name: Set up Technitium DNS Server.
       ansible.builtin.import_tasks: tasks/tech-dns.yml
       when: tech_dns_enable
-
-    - name: Set up OpenVPN
-      ansible.builtin.import_tasks: tasks/openvpn-server.yml
-      when: ovpn_server_enable
-
-# !TESTING! DO NOT USE THIS YET!
-#    - name: Set up OpenVPN client
-#      ansible.builtin.import_tasks: tasks/openvpn-client.yml
-#      when: ovpn_client_enable
 
     - name: Set up WireGuard.
       ansible.builtin.import_tasks: tasks/wireguard.yml
