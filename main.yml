@@ -1,5 +1,5 @@
 ---
-- hosts: raspberry-gateway
+- hosts: raspberry_gateway
   become: true
 
   pre_tasks:
