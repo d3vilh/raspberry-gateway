@@ -51,10 +51,9 @@ ovpn_remote: "remote 123.234.123.12 12345 udp"  # OpenVPN client.ovpn profile co
 # OpenVPN Client configuration.
 ovpn_client_enable: false                       # Set true or false
 ovpn_client_cert: "example-client.opvn"         # Set your ovpn-client certificate name
-ovpn_client_secret_use: false                   # Set if your ovpn-client certificate has user and password
-ovpn_client_secret: "example-credentials.txt"   # File which stors ovpn-client certificate user and password
+ovpn_client_secret: ""                          # Filename which stors ovpn-client certificate user and password, "example-credentials.txt"
 ovpn_client_allowed_subnet: "192.168.88.0/24"   # Allowed subnet for ovpn-client
-ovpn_client_killswitch: false                   # Disable Internet access if no VPN connection established
+ovpn_client_killswitch: true                    # Allow access fallowed subnets only
 
 #    _ _ _ _         _____               _ 
 #   | | | |_|___ ___|   __|_ _ ___ ___ _| |

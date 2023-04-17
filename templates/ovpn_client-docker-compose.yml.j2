@@ -1,6 +1,4 @@
 ---
-version: "3"
-
 services:
   openvpn-client:
     image: d3vilh/openvpn-client:arm64v8
@@ -11,11 +9,20 @@ services:
       - /dev/net/tun:/dev/net/tun
     environment:
       - ALLOWED_SUBNETS={{ ovpn_client_allowed_subnet }}
-{% if ovpn_client_secret_use %}
       - AUTH_SECRET={{ ovpn_client_secret }}
-{% endif %}
       - CONFIG_FILE={{ ovpn_client_cert }}
       - KILL_SWITCH={{ ovpn_client_killswitch }}
     volumes:
       - ./:/config
+    ports:
+      - 8090:8090
+      - 6881:6881
+      - 6881:6881/udp
+    networks:
+      vpn-net:
     restart: unless-stopped
+
+networks:
+  vpn-net:
+    ipam:
+      driver: default
