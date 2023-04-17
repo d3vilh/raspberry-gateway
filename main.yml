@@ -34,10 +34,9 @@
       ansible.builtin.import_tasks: tasks/portainer.yml
       when: portainer_enable
 
-# !TESTING! DO NOT USE THIS YET!
-#    - name: Set up OpenVPN client
-#      ansible.builtin.import_tasks: tasks/openvpn-client.yml
-#      when: ovpn_client_enable
+    - name: Set up OpenVPN client
+      ansible.builtin.import_tasks: tasks/openvpn-client.yml
+      when: ovpn_client_enable
 
     - name: Set up OpenVPN
       ansible.builtin.import_tasks: tasks/openvpn-server.yml
