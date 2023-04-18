@@ -64,7 +64,7 @@
          * `ovpn_client_enable: false` or `true` - **disabled** or enabled OpenVPN Client installation.
          * Put your OpenVPN connection profile `*.ovpn` into `openvpn-client` directory before installation and update its name in `ovpn_client_cert: "example-client.opvn"` option before installation.
          * `ovpn_client_secret: ""` - filename with your OpenVPN connection profile user and password if you have any.
-         * `ovpn_client_allowed_subnet: "192.168.0.0/24" ` - Your local subnet that you want to access via OpenVPN Client container.
+         * `ovpn_client_allowed_subnet: "192.168.0.0/24" ` - Your local subnet from which you want to access qBitTorrent web-ui when VPN Client connection is active.
 
       * **WireGuard Server** 
          * `wireguard_server_enable: false` or `true` - **disabled** or enabled WireGuard Server installation.
@@ -72,7 +72,7 @@
       * **Portainer** 
          * `portainer_enable: true` or `false` - **enabled** or disabled Portainer containers management web-ui installation.
 
-      * **qBittorrent** 
+      * **qBitTorrent** 
          * `qbittorrent_enable: false` or `true` - **disabled** or enabled qBittorrent installation.
          * `qbittorrent_inside_vpn: false` or `true` - configure qBittorrent to use your [OpenVPN Client](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) subnet instead of public Internet.
 
