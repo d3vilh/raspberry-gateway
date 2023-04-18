@@ -61,6 +61,24 @@
   notify: Restart raspi-monitoring
   when: pikvm_monitoring_enable
 
+- name: CopyAirGradient dashboard config to Grafana.
+  ansible.builtin.template:
+    src: templates/airgradient-air-quality.json.j2
+    dest: "{{ config_dir }}/monitoring/grafana/provisioning/dashboards/airgradient-{{ item.id }}.json"
+    mode: 0644
+  become: false
+  loop: "{{ airgradient_sensors }}"
+  notify: Restart raspi-monitoring
+  when: airgradient_monitoring_enable
+
+- name: Copy Starlink dashboard config to Grafana.
+  ansible.builtin.copy:
+    src: files/starlink-overview.json
+    dest: "{{ config_dir }}/monitoring/grafana/provisioning/dashboards/"
+    mode: 0644
+  become: false
+  when: starlink_monitoring_enable
+
 - name: Add cgroup_enable=cpuset to /boot/cmdline.txt
   become: true
   vars:

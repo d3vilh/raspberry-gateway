@@ -3,13 +3,13 @@
   become: true
 
   pre_tasks:
-    - name: Load configuration (with defaults from example file).
+    - name: Load configuration (with defaults from example file)
       ansible.builtin.include_vars: "{{ item }}"
       loop:
         - example.config.yml
         - config.yml
 
-    - name: Ensure apt cache is up to date.
+    - name: Ensure apt cache is up to date
       ansible.builtin.apt:
         update_cache: true
         cache_valid_time: 3600
@@ -23,53 +23,45 @@
         - ansible_facts.os_family == "Archlinux"
 
   handlers:
-    - name: Include handlers.
+    - name: Include handlers
       ansible.builtin.import_tasks: tasks/handlers.yml
 
   tasks:
-    - name: Setup Docker.
+    - name: Setup Docker
       ansible.builtin.import_tasks: tasks/docker.yml
 
     - name: Setup Portainer
       ansible.builtin.import_tasks: tasks/portainer.yml
       when: portainer_enable
 
-    - name: Setup OpenVPN client
+    - name: Setup OpenVPN Client
       ansible.builtin.import_tasks: tasks/openvpn-client.yml
       when: ovpn_client_enable
 
-    - name: Setup OpenVPN
+    - name: Setup OpenVPN Server
       ansible.builtin.import_tasks: tasks/openvpn-server.yml
       when: ovpn_server_enable
 
-    - name: Setup Pi Hole.
+    - name: Setup Pi Hole
       ansible.builtin.import_tasks: tasks/pi-hole.yml
       when: pihole_enable
 
-    - name: Setup Technitium DNS Server.
+    - name: Setup Technitium DNS Server
       ansible.builtin.import_tasks: tasks/tech-dns.yml
       when: tech_dns_enable
 
-    - name: Setup WireGuard Server.
+    - name: Setup WireGuard Server
       ansible.builtin.import_tasks: tasks/wireguard.yml
       when: wireguard_server_enable
 
-    - name: Setup qbitTorrent.
+    - name: Setup qBitTorrent
       ansible.builtin.import_tasks: tasks/qbittorrent.yml
       when: qbittorrent_enable
 
-    - name: Setup Raspi Monitoring.
+    - name: Setup Raspi Monitoring
       ansible.builtin.import_tasks: tasks/raspi-monitoring.yml
       when: monitoring_enable
 
-    - name: Setup Air Gradient Monitoring.
-      ansible.builtin.import_tasks: tasks/airgradient.yml
-      when: airgradient_monitoring_enable
-
-    - name: Setup Shelly Plug Monitoring.
+    - name: Setup Shelly Plug Monitoring
       ansible.builtin.import_tasks: tasks/shelly-plug.yml
       when: shelly_plug_monitoring_enable
-
-    - name: Setup Starlink Monitoring.
-      ansible.builtin.import_tasks: tasks/starlink.yml
-      when: starlink_monitoring_enable
