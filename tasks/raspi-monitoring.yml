@@ -43,6 +43,24 @@
   notify: Restart raspi-monitoring
   become: false
 
+- name: Copy OpenVPN monitoring dashboard config to Grafana.
+  ansible.builtin.copy:
+    src: templates/openvpn_exporter.json.j2
+    dest: "{{ config_dir }}/monitoring/grafana/provisioning/dashboards/openvpn.json"
+    mode: '0644'
+  become: false
+  notify: Restart raspi-monitoring
+  when: openvpn_monitoring_enable
+
+- name: Copy PiKVM monitoring dashboard config to Grafana.
+  ansible.builtin.template:
+    src: templates/pikvm.json.j2
+    dest: "{{ config_dir }}/monitoring/grafana/provisioning/dashboards/pikvm.json"
+    mode: 0644
+  become: false
+  notify: Restart raspi-monitoring
+  when: pikvm_monitoring_enable
+
 - name: Add cgroup_enable=cpuset to /boot/cmdline.txt
   become: true
   vars:
