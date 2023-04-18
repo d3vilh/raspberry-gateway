@@ -12,7 +12,8 @@ pihole_enable: false                            # Set true or false. Don't use w
 pihole_hostname: pihole
 pihole_timezone: Europe/Kyiv
 pihole_password: "gagaZush"                     # !Change this password!
-# TESTING. DO NOT USE IN PRODUCTION!
+# TESTING. DO NOT USE BELOW VPN OPTION ON PRODUCTION YET!
+# Local VPN configuration. Allows Pi-Hole runs through VPN client connection.
 # pihole_inside_vpn: false                        # Set true to route PiHole traffic via VPN client
 
 #      _____         _     ____  _____ _____   
@@ -29,7 +30,8 @@ tech_dns_ipv6: false                            # Enable IPv6 support
 tech_dns_blocking: true                         # Sets DNS server to block domain names using Blocked Zone and Block List Zone.
 tech_dns_forwarders: "1.1.1.1, 8.8.8.8"         # List of DNS servers to forward DNS queries to.
 tech_dns_forwarder_proto: "Https"               # Forwarder protocol options: Udp, Tcp, Tls, Https, HttpsJson.
-# TESTING. DO NOT USE IN PRODUCTION!
+# TESTING. DO NOT USE BELOW VPN OPTION ON PRODUCTION YET!
+# Local VPN configuration. Allows Technitium DNS runs through VPN client connection.
 # tech_dns_inside_vpn: false                      # Set true to route TechDNS traffic via VPN client
 
 #    _____             _____ _____ _____ 
@@ -47,20 +49,19 @@ ovpn_guest_subnet: "10.0.71.0/24"               # Guest users subnet
 ovpn_home_subnet: "192.168.0.0/24"              # Your home network subnet
 ovpn_remote: "remote 123.234.123.12 12345 udp"  # OpenVPN client.ovpn profile connect line. You
 
-# TESTING. DO NOT USE IN PRODUCTION!
-# OpenVPN Client configuration.
+# OpenVPN Client configuration for Docker instances only.
 ovpn_client_enable: false                       # Set true or false
 ovpn_client_cert: "example-client.opvn"         # Set your ovpn-client certificate name
-ovpn_client_secret: ""                          # Filename which stors ovpn-client certificate user and password, "example-credentials.txt"
-ovpn_client_allowed_subnet: "192.168.88.0/24"   # Allowed subnet for ovpn-client
-ovpn_client_killswitch: true                    # Allow access fallowed subnets only
+ovpn_client_secret: ""                          # Filename with ovpn-client certificate user and password, "example-credentials.txt"
+ovpn_client_allowed_subnet: "192.168.0.0/24"   # Allowed subnet for ovpn-client. You must have your local network defined here.
+ovpn_client_killswitch: true                    # Allow subnet access and block all other traffic if ovpn-client is down
 
 #    _ _ _ _         _____               _ 
 #   | | | |_|___ ___|   __|_ _ ___ ___ _| |
 #   | | | | |  _| -_|  |  | | | .'|  _| . |
 #   |_____|_|_| |___|_____|___|__,|_| |___|
-# WireGuard configuration.
-wireguard_enable: false                         # Set true or false
+# WireGuard Server configuration.
+wireguard_server_enable: false                  # Set true or false
 
 wireguard_user: "admin"
 wireguard_password: "gagaZush"                  # !Change this password!
@@ -84,15 +85,15 @@ qbittorrent_enable: false                       # Set true or false
 qbittorrent_webui_port: 8090                    # Better to keep as is
 qbittorrent_tz: "Europe/Kyiv"                   # Your timezone
 qbittorrent_default_password: admin/adminadmin  # !Change this password wia WebUI!
-# TESTING. DO NOT USE IN PRODUCTION!
-# qbittorrent_inside_vpn: false                   # Set true to route qBitTorrent traffic via VPN client
+# Local VPN configuration. Allows qBittorrent runs through VPN client connection.
+qbittorrent_inside_vpn: false                   # Set true to route qBitTorrent traffic via Docker OpenVPN client
 
 #    _____         _ _               
 #   |     |___ ___|_| |_ ___ ___ ___ 
 #   | | | | . |   | |  _| . |  _|_ -|
 #   |_|_|_|___|_|_|_|_| |___|_| |___|
 # Raspberry-monitoring configuration.
-monitoring_enable: true                         # Set true or false
+monitoring_enable: false                         # Set true or false
 
 monitoring_grafana_admin_password: "admin"      # Is only used the first time Grafana starts up
 monitoring_grafana_public_dashboard: false      # Enable public dashboard for Grafana available in internet
