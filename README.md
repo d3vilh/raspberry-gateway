@@ -50,39 +50,39 @@
       <summary>List of available configuration options</summary>
 
       * **Pi-Hole** 
-         * `pihole_enable: true` or `false` - **enabled** or disabled Pi-Hole container installation
-         * `pihole_inside_vpn: false` or `true` - configure Pi-Hole container to use your [OpenVPN Client](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) subnet instead of public Internet.
+         * `pihole_enable: true` or `false` - **enabled** or disabled Pi-Hole installation
+         * `pihole_inside_vpn: false` or `true` - configure Pi-Hole to use your [OpenVPN Client](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) subnet instead of public Internet.
 
       * **Technitium DNS** 
-         * `tech_dns_enable: false` or `true` - **disabled** or enabled Technitium DNS container installation. 
-         * `tech_dns_inside_vpn: false` or `true` - configure Technitium DNS container to use your [OpenVPN Client](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) subnet instead of public Internet.
+         * `tech_dns_enable: false` or `true` - **disabled** or enabled Technitium DNS installation. 
+         * `tech_dns_inside_vpn: false` or `true` - configure Technitium DNS to use your [OpenVPN Client](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) subnet instead of public Internet.
 
       * **OpenVPN Server** 
-         * `ovpn_server_enable: false` or `true` - **disabled** or enabled OpenVPN Server container installation.
+         * `ovpn_server_enable: false` or `true` - **disabled** or enabled OpenVPN Server installation.
 
       * **OpenVPN Client** 
-         * `ovpn_client_enable: false` or `true` - **disabled** or enabled OpenVPN Client container installation.
+         * `ovpn_client_enable: false` or `true` - **disabled** or enabled OpenVPN Client installation.
          * Put your OpenVPN connection profile `*.ovpn` into `openvpn-client` directory before installation and update its name in `ovpn_client_cert: "example-client.opvn"` option before installation.
          * `ovpn_client_secret: ""` - filename with your OpenVPN connection profile user and password if you have any.
          * `ovpn_client_allowed_subnet: "192.168.0.0/24" ` - Your local subnet that you want to access via OpenVPN Client container.
 
       * **WireGuard Server** 
-         * `wireguard_server_enable: false` or `true` - **disabled** or enabled WireGuard Server container installation.
+         * `wireguard_server_enable: false` or `true` - **disabled** or enabled WireGuard Server installation.
 
       * **Portainer** 
-         * `portainer_enable: true` or `false` - **enabled** or disabled Portainer container installation.
+         * `portainer_enable: true` or `false` - **enabled** or disabled Portainer containers management web-ui installation.
 
       * **qBittorrent** 
-         * `qbittorrent_enable: false` or `true` - **disabled** or enabled qBittorrent container installation.
-         * `qbittorrent_inside_vpn: false` or `true` - configure qBittorrent container to use your [OpenVPN Client](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) subnet instead of public Internet.
+         * `qbittorrent_enable: false` or `true` - **disabled** or enabled qBittorrent installation.
+         * `qbittorrent_inside_vpn: false` or `true` - configure qBittorrent to use your [OpenVPN Client](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) subnet instead of public Internet.
 
       * **Raspberry Monitoring** 
-         * `monitoring_enable: true` or `false` - **enabled** or disabled Raspberry Monitoring container installation.
-         * `openvpn_monitoring_enable: true` or `false` - **disabled** or enabled OpenVPN Monitoring container installation.
-         * `pikvm_monitoring_enable: true` or `false` - **disabled** or enabled Pi-KVM Monitoring container installation.
-         * `airgradient_monitoring_enable: true` or `false` - **disabled** or enabled AirGradient Monitoring container installation.
-         * `starlink_monitoring_enable: true` or `false` - **disabled** or enabled StarLink Monitoring container installation.
-         * `shellyplug_monitoring_enable: true` or `false` - **disabled** or enabled ShellyPlug Monitoring container installation.
+         * `monitoring_enable: true` or `false` - **enabled** or disabled general Raspberry Monitoring feature.
+         * `openvpn_monitoring_enable: true` or `false` - **disabled** or enabled OpenVPN monitoring.
+         * `pikvm_monitoring_enable: true` or `false` - **disabled** or enabled Pi-KVM monitoring.
+         * `airgradient_monitoring_enable: true` or `false` - **disabled** or enabled AirGradient monitoring.
+         * `starlink_monitoring_enable: true` or `false` - **disabled** or enabled StarLink monitoring.
+         * `shellyplug_monitoring_enable: true` or `false` - **disabled** or enabled ShellyPlug monitoring.
       </details>
 
       > **Note**: Default configuration options are bold.
@@ -110,7 +110,7 @@
 </p>
 
 [**OpenVPN Client**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) container for using external OpenVPN server connection for selected containers of this project. 
-> **Note**: qBitTorrent can be configured to use OpenVPN Client container as a proxy to download torrents via VPN.
+> **Note**: qBitTorrent can be configured to use OpenVPN Client as a proxy to download torrents via VPN!
 
 [**qBittorrent**](https://www.qbittorrent.org) an open-source software alternative to µTorrent, with lightweight web administration interface:
 
