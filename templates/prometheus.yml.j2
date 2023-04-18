@@ -13,7 +13,7 @@ scrape_configs:
   - job_name: 'speedtest'
     metrics_path: /metrics
     scrape_interval: {{ monitoring_speedtest_interval }}
-    scrape_timeout: 60s  # running speedtest needs time to complete
+    scrape_timeout: 1m  # running speedtest needs time to complete
     static_configs:
       - targets: ['speedtest:9798']
 

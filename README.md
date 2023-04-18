@@ -1,7 +1,8 @@
 # Raspberry Gateway
 **Simple Raspberry Pi based home Internet gateway**. Which includes 
   * [**OpenVPN Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-server/openvpn-docker) contaner with simple [**WEB UI**](https://github.com/d3vilh/openvpn-ui) and VPN subnets support. 
-  * [**WireGuard Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) container with own UI. 
+  * [**OpenVPN Client**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) container to connect other containers to external OpenVPN server.
+  * [**WireGuard Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) container with own WEB UI. 
   * [**Pi-hole**](https://pi-hole.net) - the network-wide ad-blocking local DNS & DHCP solution. 
   * [**Technitium-dns**](https://technitium.com/dns/) - Self host DNS server. Block ads & malware at DNS level for your entire network.
   * [**qBittorrent**](https://www.qbittorrent.org) -  an open-source software alternative to µTorrent. 
@@ -36,13 +37,56 @@
      ```
      > **Note**: If you see `ansible-galaxy: command not found`, you have to relogin (or reboot your Pi) and then try again.
   5. Make copies of the configuration files and modify them for your enviroment:
-     ```shell
-     yes | cp -p example.inventory.ini inventory.ini 
-     yes | cp -p example.config.yml config.yml
-     ```
-  6. Modify `inventory.ini` by replace of IP address with your Pi's IP, or comment that line and uncomment the `connection=local` line if you're running it on the Pi you're setting up. Double check that the `ansible_user` is correct for your setup.
+      ```shell
+      yes | cp -p example.inventory.ini inventory.ini 
+      yes | cp -p example.config.yml config.yml
+      ```
+  6. Modify `inventory.ini` by replace of IP address with your Pi's IP, or comment that line and uncomment the `connection=local` line if you're running it on the Pi you're setting up. **Double check** that the `ansible_user` is correct for your setup.
   7. Modify `config.yml` to **enabe or disable desired containers** to be installed on your Pi:
      **To enable** Prtainer - change `enable_portainer: false` option to `enable_portainer: true` and vs to disable.
+      > **Note**: To make all necesary changes: `nano config.yml`, save the file - `Ctrl+O` and `Ctrl+X` to exit.
+
+      <details>
+      <summary>List of available configuration options</summary>
+
+      * **Pi-Hole** 
+         * `pihole_enable: true` or `false` - **enabled** or disabled Pi-Hole container installation
+         * `pihole_inside_vpn: false` or `true` - configure Pi-Hole container to use your [OpenVPN Client](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) subnet instead of public Internet.
+
+      * **Technitium DNS** 
+         * `tech_dns_enable: false` or `true` - **disabled** or enabled Technitium DNS container installation. 
+         * `tech_dns_inside_vpn: false` or `true` - configure Technitium DNS container to use your [OpenVPN Client](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) subnet instead of public Internet.
+
+      * **OpenVPN Server** 
+         * `ovpn_server_enable: false` or `true` - **disabled** or enabled OpenVPN Server container installation.
+
+      * **OpenVPN Client** 
+         * `ovpn_client_enable: false` or `true` - **disabled** or enabled OpenVPN Client container installation.
+         * Put your OpenVPN connection profile `*.ovpn` into `openvpn-client` directory before installation and update its name in `ovpn_client_cert: "example-client.opvn"` option before installation.
+         * `ovpn_client_secret: ""` - filename with your OpenVPN connection profile user and password if you have any.
+         * `ovpn_client_allowed_subnet: "192.168.0.0/24" ` - Your local subnet that you want to access via OpenVPN Client container.
+
+      * **WireGuard Server** 
+         * `wireguard_server_enable: false` or `true` - **disabled** or enabled WireGuard Server container installation.
+
+      * **Portainer** 
+         * `portainer_enable: true` or `false` - **enabled** or disabled Portainer container installation.
+
+      * **qBittorrent** 
+         * `qbittorrent_enable: false` or `true` - **disabled** or enabled qBittorrent container installation.
+         * `qbittorrent_inside_vpn: false` or `true` - configure qBittorrent container to use your [OpenVPN Client](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) subnet instead of public Internet.
+
+      * **Raspberry Monitoring** 
+         * `monitoring_enable: true` or `false` - **enabled** or disabled Raspberry Monitoring container installation.
+         * `openvpn_monitoring_enable: true` or `false` - **disabled** or enabled OpenVPN Monitoring container installation.
+         * `pikvm_monitoring_enable: true` or `false` - **disabled** or enabled Pi-KVM Monitoring container installation.
+         * `airgradient_monitoring_enable: true` or `false` - **disabled** or enabled AirGradient Monitoring container installation.
+         * `starlink_monitoring_enable: true` or `false` - **disabled** or enabled StarLink Monitoring container installation.
+         * `shellyplug_monitoring_enable: true` or `false` - **disabled** or enabled ShellyPlug Monitoring container installation.
+      </details>
+
+      > **Note**: Default configuration options are bold.
+
   9. Run installation playbook:
      ```shell
      ansible-playbook main.yml
@@ -56,7 +100,7 @@
 <img src="/images/Pi-hole.1.png" alt="Pi-hole" width="410"> <img src="/images/Technitium-dns.1.png" alt="Technitium" width="410">
 </p>
 
-[**OpenVPN**](https://openvpn.net) server with subnets support and [**openvpn-ui**](https://github.com/d3vilh/openvpn-ui) as fast and lightweight web administration interface or
+[**OpenVPN Server**](https://openvpn.net) with subnets support and [**openvpn-ui**](https://github.com/d3vilh/openvpn-ui) as fast and lightweight web administration interface or
 [**WireGuard**](https://www.wireguard.com) server - an extremely simple yet fast and modern VPN with own web administration interface:
 <p align="center">
 <img src="/images/OpenVPN-UI-Home.1.png" alt="OpenVPN WEB UI" width="410"> <img src="/images/WireGuard-UI-Home.1.png" alt="WireGuard WEB UI" width="410">
@@ -64,6 +108,9 @@
 <p align="center">
 <img src="/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="600">
 </p>
+
+[**OpenVPN Client**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) container for using external OpenVPN server connection for selected containers of this project. 
+> **Note**: qBitTorrent can be configured to use OpenVPN Client container as a proxy to download torrents via VPN.
 
 [**qBittorrent**](https://www.qbittorrent.org) an open-source software alternative to µTorrent, with lightweight web administration interface:
 
@@ -150,7 +197,7 @@
    * **rpi_exporter** - RaspberryPI HW monitoring. `http://rpi_exporter:9110/metrics`
    * **Speedtest exporter** - Up/down speed and latency. `http://speedtest:9798/metrics` 
    * **Blackbox exporter** - Desired sites avilability. `http://ping:9115/probe`
-   * **OpenVPN exporter** - OpenVPN activity monitoring. `http://openvpn:9176/metrics`
+   * **OpenVPN exporter** - OpenVPN activity monitoring. `http://ovpn_exporter:9176/metrics`
    * **AirGradient exporter** - AirQuality monitoring. `http://remote-AirGradient-ip:9926/metrics`
    * **PiKVM exporter** - PiKVM utilisation and temp monitoring. `https://remote-PiKVM-ip/api/export/prometheus/metrics`
    * **Starlink exporter** - Starlink monitoring. `http://starlink:9817/metrics`
