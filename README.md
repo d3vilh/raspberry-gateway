@@ -157,13 +157,22 @@
   ## qBittorrent
   To access qBittorrent Web-ui, visit `http://localhost:8090/`, (*change `localhost` to your Raspberry host ip/name*) with **default credentials** - `admin/adminadmin`, which **must** be changed via web interface on first login. All the downloaded files will be stored in the `~/qbittorrent/downloads` directory.
 
-  ## OpenVPN 
+  ## OpenVPN Server
   **OpenVPN and WEB UI** can be accessed on the port `8080`, e.g. `http://localhost:8080/`, (*change `localhost` to your Raspberry host ip/name*), the default user and password is `admin/gagaZush` preconfigured in `config.yml` which you supposed to [set in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) `ovpnui_user` & `ovpnui_password` vars, just before the installation.
 
   All the [**documentation**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md) and How-to can be found [**here**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md)
    > **Note**: If you are looking for x86_64 version of OpenVPN and openvpn-ui containers, please check [**openvpn-aws**](https://github.com/d3vilh/openvpn-aws)
 
-  ## WireGuard
+  ## OpenVPN Client
+  It is configured as a container which will automatically connect to the external OpenVPN server on startup. 
+  * The OpenVPN configuration file must be located in the `~/openvpn-client` directory. You can use the [**example-client.ovpn**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-client/example-client.ovpn#L1) as a refference of all necessary options.
+  * For authentification with user and password on top of *.ovpn, you have to put text file in `~/openvpn-client/example-credentials.txt` which must contain two lines: the first line is the username, the second line is the password. [refference file](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-client/example-credentials.txt#L1). Then update `ovpn_client_secret` option of [config.yml](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L55) file with the filename containg credentials.
+  * `ovpn_client_allowed_subnet: "192.168.0.0/24" ` - Your local subnet from which you want to access qBitTorrent, Pi-Hole or TechDNS WEB-UIs when VPN Client connection is active.
+  * `ovpn_client_killswitch: true` - If set to `true`, it will block all the traffic when VPN is connected, except the one from the `ovpn_client_allowed_subnet` subnet.
+
+  For more documentation and How-to, please check [**openvpn-client**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) manual.
+
+  ## WireGuard Server
   To access WireGuard Web-ui, visit the `http://localhost:5000/`, (*change `localhost` to your Raspberry host ip/name*) with default credentials - `admin/gagaZush`, it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L53) `config.yml` file in var `wireguard_password`. Consider to change it before the installation.
 
   ## Raspi-monitoring
