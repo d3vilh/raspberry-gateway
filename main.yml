@@ -62,17 +62,9 @@
       ansible.builtin.import_tasks: tasks/raspi-monitoring.yml
       when: monitoring_enable
 
-    - name: Setup OpenVPN Monitoring.
-      ansible.builtin.import_tasks: tasks/openvpn_exporter.yml
-      when: openvpn_monitoring_enable
-
     - name: Setup Air Gradient Monitoring.
       ansible.builtin.import_tasks: tasks/airgradient.yml
       when: airgradient_monitoring_enable
-
-    - name: Setup PiKVM Monitoring.
-      ansible.builtin.import_tasks: tasks/pikvm.yml
-      when: pikvm_monitoring_enable
 
     - name: Setup Shelly Plug Monitoring.
       ansible.builtin.import_tasks: tasks/shelly-plug.yml

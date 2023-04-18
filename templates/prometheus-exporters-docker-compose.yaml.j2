@@ -35,6 +35,8 @@ services:
     container_name: grafana
     image: grafana/grafana
     restart: always
+    env_file:
+      - ./grafana/config.monitoring
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning/:/etc/grafana/provisioning/
@@ -42,8 +44,6 @@ services:
       - prometheus
     ports:
       - 3030:3000
-    env_file:
-      - ./grafana/config.monitoring
     networks:
       - back-tier
       - front-tier
@@ -52,12 +52,12 @@ services:
     container_name: ping
     image: prom/blackbox-exporter
     restart: always
+    tty: true
+    stdin_open: true
     command:
       - '--config.file=/config/blackbox.yml'
     volumes:
       - ./blackbox/config:/config
-    tty: true
-    stdin_open: true
     expose:
       - 9115
     ports:
@@ -128,3 +128,19 @@ services:
       - '8081:8080/tcp'
     networks:
       - back-tier
+
+{% if openvpn_monitoring_enable %}
+  ovpn_exporter:
+    container_name: ovpn_exporter
+    image: d3vilh/openvpn_exporter:latest
+    restart: always
+    privileged: true
+    environment:
+       - OVPN_STATUS_FILE=/etc/openvpn/log/openvpn-status.log
+    volumes:
+       - ../log:/etc/openvpn/log
+    ports:
+       - "9176:9176/tcp"
+    networks:
+      - back-tier
+{% endif %}
