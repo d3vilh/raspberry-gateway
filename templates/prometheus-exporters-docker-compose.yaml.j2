@@ -144,3 +144,13 @@ services:
     networks:
       - back-tier
 {% endif %}
+
+{% if starlink_monitoring_enable %}
+services:
+  starlink-exporter:
+    container_name: starlink-exporter
+    image: danopstech/starlink_exporter
+    ports:
+      - "9817:9817"
+    restart: unless-stopped
+{% endif %}
