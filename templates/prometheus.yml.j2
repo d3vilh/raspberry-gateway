@@ -31,11 +31,11 @@ scrape_configs:
 {% endif %}
 
 {% if openvpn_monitoring_enable %}
-  - job_name: 'openvpn_exporter'
+  - job_name: 'ovpn_exporter'
     metrics_path: /metrics
     scrape_interval: 1m
     static_configs:
-      - targets: ['openvpn_exporter:9176']
+      - targets: ['ovpn_exporter:9176']
 {% endif %}
 
 {% if shelly_plug_monitoring_enable %}
