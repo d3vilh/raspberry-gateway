@@ -41,6 +41,13 @@ For **Pi-hole** and **Technitium DNS** you need to set `pihole_inside_vpn` and `
 To verify that the openvpn-client container is functioning properly, you can run the following command:
 
 ```bash
-sudo docker exec qbittorrent wget -qO - ifconfig.me
+sudo docker exec openvpn-client wget -qO - ifconfig.me
 ```
 This command should return the public IP address of the openvpn-client container. If the IP address matches the one provided by your VPN provider, then the openvpn-client container is functioning properly.
+
+To confirm other continers are using the VPN, you can run the following command (qbittorrent in this example):
+
+```bash
+sudo docker exec qbittorrent wget -qO - ifconfig.me
+```
+This should return the public IP address of the VPN provider, same as openvpn-client container.
