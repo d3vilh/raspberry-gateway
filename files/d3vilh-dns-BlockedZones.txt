@@ -1,0 +1,63 @@
+# Title: d3vilh/hosts with the WebOS, LG-TV, Samsung-TV, Xiaomi-TV and RU zone counters.
+#
+# This hosts file is a merged collection of hosts from own sources,
+# with a dash of crowd sourcing via GitHub
+#
+# Date: 23 April 2023 16:32:50 (EST)
+# Extensions added to this file: webos LG-TV Samsung-TV Xiaomi-TV and RU zone counters.
+# Number of unique domains: 48
+#
+# Fetch the latest version of this file: https://raw.githubusercontent.com/d3vilh/raspberry-gateway/master/files/tech-dns-BlockedZones.txt
+# Project home page: https://github.com/d3vilh/raspberry-gateway
+# Project releases: https://github.com/d3vilh/raspberry-gateway/releases
+#
+# ===============================================================
+
+0.0.0.0 adfox.yandex.ru
+0.0.0.0 adfstat.yandex.ru
+0.0.0.0 ads-api.tiktok.com
+0.0.0.0 adtech.yahooinc.com
+0.0.0.0 advertising-api-eu.amazon.com
+0.0.0.0 analytics-api.samsunghealthcn.com
+0.0.0.0 analytics-sg.tiktok.com
+0.0.0.0 analytics.s3.amazonaws.com
+0.0.0.0 analyticsengine.s3.amazonaws.com
+0.0.0.0 api.bugsnag.com
+0.0.0.0 app.bugsnag.com
+0.0.0.0 appmetrica.yandex.ru
+0.0.0.0 bdapi-ads.realmemobile.com
+0.0.0.0 bdapi-in-ads.realmemobile.com
+0.0.0.0 business-api.tiktok.com
+0.0.0.0 c.bigmir.net
+0.0.0.0 cdpbeacon.lgtvcommon.com
+0.0.0.0 cdpsvc.lgtvcommon.com
+0.0.0.0 ck.ads.oppomobile.com
+0.0.0.0 claritybt.freshmarketer.com
+0.0.0.0 click.oneplus.cn
+0.0.0.0 cm.g.doubleclick.ne
+0.0.0.0 counter.yadro.ru
+0.0.0.0 data.mistat.india.xiaomi.com
+0.0.0.0 data.mistat.rus.xiaomi.com
+0.0.0.0 events.reddit.com
+0.0.0.0 extmaps-api.yandex.net
+0.0.0.0 freshmarketer.com
+0.0.0.0 fwtracks.freshmarketer.com
+0.0.0.0 grs.hicloud.com
+0.0.0.0 homeprv.lgtvcommon.com
+0.0.0.0 lgsmartad.com
+0.0.0.0 log.byteoversea.com
+0.0.0.0 logbak.hicloud.com
+0.0.0.0 logservice.hicloud.com
+0.0.0.0 logservice1.hicloud.com
+0.0.0.0 metrics.data.hicloud.com
+0.0.0.0 metrics2.data.hicloud.com
+0.0.0.0 metrika.yandex.ru
+0.0.0.0 nudge.lgtvcommon.com
+0.0.0.0 offerwall.yandex.net
+0.0.0.0 rdl.lgtvcommon.com
+0.0.0.0 recommend.lgtvcommon.com
+0.0.0.0 service.lgtvcommon.com
+0.0.0.0 tsyndicate.com
+0.0.0.0 udc.yahoo.com
+0.0.0.0 udcm.yahoo.com
+0.0.0.0 widgets.pinterest.com
