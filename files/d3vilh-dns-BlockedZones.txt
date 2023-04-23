@@ -7,7 +7,7 @@
 # Extensions added to this file: webos LG-TV Samsung-TV Xiaomi-TV and RU zone counters.
 # Number of unique domains: 48
 #
-# Fetch the latest version of this file: https://raw.githubusercontent.com/d3vilh/raspberry-gateway/master/files/tech-dns-BlockedZones.txt
+# Fetch the latest version of this file: https://raw.githubusercontent.com/d3vilh/raspberry-gateway/master/files/d3vilh-dns-BlockedZones.txt
 # Project home page: https://github.com/d3vilh/raspberry-gateway
 # Project releases: https://github.com/d3vilh/raspberry-gateway/releases
 #
