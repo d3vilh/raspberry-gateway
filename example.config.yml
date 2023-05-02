@@ -12,9 +12,6 @@ pihole_enable: true                            # Set true or false. Don't use wi
 pihole_hostname: pihole
 pihole_timezone: Europe/Kyiv
 pihole_password: "gagaZush"                     # !Change this password!
-# TESTING. DO NOT USE BELOW VPN OPTION ON PRODUCTION YET!
-# Local VPN configuration. Allows Pi-Hole runs through VPN client connection.
-# pihole_inside_vpn: false                        # Set true to route PiHole traffic via VPN client
 
 #      _____         _     ____  _____ _____   
 #     |_   _|___ ___| |_  |    \|   | |   __|  
@@ -30,9 +27,6 @@ tech_dns_ipv6: false                            # Enable IPv6 support
 tech_dns_blocking: true                         # Sets DNS server to block domain names using Blocked Zone and Block List Zone.
 tech_dns_forwarders: "1.1.1.1, 8.8.8.8"         # List of DNS servers to forward DNS queries to.
 tech_dns_forwarder_proto: "Https"               # Forwarder protocol options: Udp, Tcp, Tls, Https, HttpsJson.
-# TESTING. DO NOT USE BELOW VPN OPTION ON PRODUCTION YET!
-# Local VPN configuration. Allows Technitium DNS runs through VPN client connection.
-# tech_dns_inside_vpn: false                      # Set true to route TechDNS traffic via VPN client
 
 #    _____             _____ _____ _____ 
 #   |     |___ ___ ___|  |  |  _  |   | |
