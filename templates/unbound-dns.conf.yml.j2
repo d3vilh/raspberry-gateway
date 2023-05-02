@@ -4,6 +4,7 @@ server:
 
     auto-trust-anchor-file: "/etc/unbound/root.key"
     interface: 0.0.0.0
+    port: 5335
 
     do-ip4: {{ unbound_dns_ipv4 }}
     do-udp: yes
