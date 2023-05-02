@@ -11,7 +11,4 @@ services:
       - "./etc-unbound/unbound.conf:/etc/unbound/unbound.conf"
     cap_add:
       - NET_ADMIN
-    sysctls:
-      - net.core.rmem_max=33554432
-      - net.core.wmem_max=33554432
-    restart: unless-stop
+    restart: unless-stopped
