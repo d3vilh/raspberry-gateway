@@ -1,7 +1,7 @@
 ---
 - name: Create Unbound DNS configuration directory
   ansible.builtin.file:
-    path: "{{ config_dir }}/unbound-dns/etc-unbound"
+    path: "{{ config_dir }}/unbound-dns/etc-unbound/"
     state: directory
     mode: 0755
   become: false
@@ -18,7 +18,7 @@
   become: true
 
 - name: Download Unbound DNS named.cache file
-  become: true
+  become: false
   shell: "wget -S https://www.internic.net/domain/named.cache -O {{ config_dir }}/unbound-dns/etc-unbound/root.hints"
 
 - name: Copy Unbound DNS docker-compose template

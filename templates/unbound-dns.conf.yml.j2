@@ -105,7 +105,7 @@ server:
     # One thread should be sufficient, can be increased on beefy machines. In reality for
     # most users running on small networks or on a single machine, it should be unnecessary
     # to seek performance enhancement by increasing num-threads above 1.
-    num-threads: {{ unbound_num_threads }}
+    num-threads: {{ unbound_dns_num_threads }}
 
     # more cache memory. rrset-cache-size should twice what msg-cache-size is.
     msg-cache-size: 50m
