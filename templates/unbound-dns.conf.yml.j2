@@ -1,14 +1,14 @@
 server:
-	# verbosity level 0-4 of logging
-	verbosity: 0
+    # verbosity level 0-4 of logging
+    verbosity: 0
 
-	auto-trust-anchor-file: "/etc/unbound/root.key"
-	interface: 0.0.0.0
+    auto-trust-anchor-file: "/etc/unbound/root.key"
+    interface: 0.0.0.0
 
     do-ip4: {{ unbound_dns_ipv4 }}
     do-udp: yes
     do-tcp: yes
-	
+
     # May be set to yes if you have IPv6 connectivity
     do-ip6: {{ unbound_dns_ipv6 }}
 
@@ -16,33 +16,33 @@ server:
     # Terredo tunnels your web browser should favor IPv4 for the same reasons
     prefer-ip6: {{ unbound_dns_ipv6 }}
 
-	# Use this only when you downloaded the list of primary root servers!
-    # Read  the  root  hints from this file. Make sure to 
+    # Use this only when you downloaded the list of primary root servers!
+    # Read  the  root  hints from this file. Make sure to
     # update root.hints evry 5-6 months.
-	root-hints: "/etc/unbound/root.hints"
+    root-hints: "/etc/unbound/root.hints"
 
     # Trust glue only if it is within the servers authority
     harden-glue: yes
-    
+
     # Ignore very large queries.
     harden-large-queries: yes
-    
+
     # Require DNSSEC data for trust-anchored zones, if such data is absent, the zone becomes BOGUS
     # If you want to disable DNSSEC, set harden-dnssec stripped: no
     harden-dnssec-stripped: yes
-    
+
     # Number of bytes size to advertise as the EDNS reassembly buffer
     # size. This is the value put into  datagrams over UDP towards
     # peers. The actual buffer size is determined by msg-buffer-size
     # (both for TCP and UDP).
     edns-buffer-size: 1232
-    
-    # Rotates RRSet order in response (the pseudo-random 
-    # number is taken from Ensure privacy of local IP 
-    # ranges the query ID, for speed and thread safety).  
+
+    # Rotates RRSet order in response (the pseudo-random
+    # number is taken from Ensure privacy of local IP
+    # ranges the query ID, for speed and thread safety).
     # private-address: 192.168.0.0/16
     rrset-roundrobin: yes
-    
+
     # Time to live minimum for RRsets and messages in the cache. If the minimum
     # kicks in, the data is cached for longer than the domain owner intended,
     # and thus less queries are made to look up the data. Zero makes sure the
@@ -51,37 +51,37 @@ server:
     # the cache does not match up with the actual data anymore
     cache-min-ttl: 300
     cache-max-ttl: 86400
-    
+
     # Have unbound attempt to serve old responses from cache with a TTL of 0 in
     # the response without waiting for the actual resolution to finish. The
-    # actual resolution answer ends up in the cache later on. 
+    # actual resolution answer ends up in the cache later on.
     serve-expired: yes
-    
+
     # Harden against algorithm downgrade when multiple algorithms are
     # advertised in the DS record.
     harden-algo-downgrade: yes
-    
+
     # Ignore very small EDNS buffer sizes from queries.
     harden-short-bufsize: yes
-    
+
     # Refuse id.server and hostname.bind queries
     hide-identity: yes
-    
+
     # Report this identity rather than the hostname of the server.
     identity: "Server"
-    
+
     # Refuse version.server and version.bind queries
     hide-version: yes
-    
+
     # Prevent the unbound server from forking into the background as a daemon
     do-daemonize: no
-    
+
     # Number  of  bytes size of the aggressive negative cache.
     neg-cache-size: 4m
-    
+
     # Send minimum amount of information to upstream servers to enhance privacy
     qname-minimisation: yes
-    
+
     # Deny queries of type ANY with an empty response.
     # Works only on version 1.8 and above
     deny-any: yes
@@ -91,18 +91,18 @@ server:
     # significantly, and may avoid TCP fallback for some responses. This may
     # cause a slight speedup
     minimal-responses: yes
-    
+
     # Perform prefetching of close to expired message cache entries
     # This only applies to domains that have been frequently queried
     # This flag updates the cached domains
     prefetch: yes
-    
+
     # Fetch the DNSKEYs earlier in the validation process, when a DS record is
     # encountered. This lowers the latency of requests at the expense of little
     # more CPU usage.
     prefetch-key: yes
-    
-    # One thread should be sufficient, can be increased on beefy machines. In reality for 
+
+    # One thread should be sufficient, can be increased on beefy machines. In reality for
     # most users running on small networks or on a single machine, it should be unnecessary
     # to seek performance enhancement by increasing num-threads above 1.
     num-threads: 1
@@ -110,14 +110,14 @@ server:
     # more cache memory. rrset-cache-size should twice what msg-cache-size is.
     msg-cache-size: 50m
     rrset-cache-size: 100m
-   
+
     # Faster UDP with multithreading (only on Linux).
     so-reuseport: yes
-    
+
     # Ensure kernel buffer is large enough to not lose messages in traffix spikes
     so-rcvbuf: 4m
     so-sndbuf: 4m
-    
+
     # Set the total number of unwanted replies to keep track of in every thread.
     # When it reaches the threshold, a defensive action of clearing the rrset
     # and message caches is taken, hopefully flushing away any poison.
@@ -134,9 +134,9 @@ server:
     # Do not print log lines to inform about local zone actions
     log-local-actions: no
     # Logfile path
-	logfile: "/var/log/unbound.log"
+    logfile: "/var/log/unbound.log"
 
-	access-control: 0.0.0.0/0 allow
-	access-control: ::/0 allow
+    access-control: 0.0.0.0/0 allow
+    access-control: ::/0 allow
 
 remote-control:
