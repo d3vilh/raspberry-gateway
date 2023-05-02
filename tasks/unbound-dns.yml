@@ -1,0 +1,49 @@
+---
+- name: Create Unbound DNS configuration directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+  with_items:
+    - "{{ config_dir }}/unbound-dns/etc-unbound/"
+    - "{{ config_dir }}/unbound-dns/log-unbound/"
+  become: false
+
+- name: Set net.core.rmem_max and net.core.wmem_max kernel parameters to 32MB
+  ansible.builtin.sysctl:
+    name: "{{ item }}"
+    value: "33554432"
+    state: present
+    reload: yes
+  loop:
+    - "net.core.rmem_max"
+    - "net.core.wmem_max"
+  become: true
+
+- name: Download Unbound DNS named.cache file
+  become: false
+  shell: "wget -S https://www.internic.net/domain/named.cache -O {{ config_dir }}/unbound-dns/etc-unbound/root.hints"
+
+- name: Copy Unbound DNS docker-compose template
+  ansible.builtin.template:
+    src: templates/{{ item.src }}
+    dest: "{{ config_dir }}/unbound-dns/{{ item.dest }}"
+    mode: "{{ item.mode }}"
+  loop:
+    - src: unbound-dns-docker-compose.yml.j2
+      dest: docker-compose.yml
+      mode: "0640"
+    - src: unbound-dns.conf.yml.j2
+      dest: etc-unbound/unbound.conf
+      mode: "0640"
+    - src: unbound-dns.log.j2
+      dest: log-unbound/unbound.log
+      mode: "0666"
+  become: false
+  notify: Restart unbound
+
+- name: Ensure Unbound DNS is running
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/unbound-dns/"
+    build: false
+  become: false
