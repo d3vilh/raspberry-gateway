@@ -1,0 +1,34 @@
+---
+- name: Create Unbound DNS configuration directory.
+  ansible.builtin.file:
+    path: "{{ config_dir }}/unbound-dns"
+    state: directory
+    mode: 0755
+  become: false
+
+- name: Synchronize Unbound DNS config directory.
+  ansible.posix.synchronize:
+    src: unbound-dns
+    dest: "{{ config_dir }}/"
+    delete: false
+    recursive: true
+    perms: false
+  become: false
+
+- name: Download named.cache file
+  become: true
+  shell: "wget -S https://www.internic.net/domain/named.cache -O {{ config_dir }}/unbound-dns/root.hints"
+
+- name: Copy Unbound DNS docker-compose template.
+  ansible.builtin.template:
+    src: templates/unbound-dns-docker-compose.yml.j2
+    dest: "{{ config_dir }}/unbound-dns/docker-compose.yml"
+    mode: '0640'
+  become: false
+  notify: Restart unbound
+
+- name: Ensure Unbound DNS is running.
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/unbound-dns/"
+    build: false
+  become: false
