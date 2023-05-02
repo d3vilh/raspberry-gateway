@@ -1,4 +1,11 @@
 ---
+- name: Restart unbound
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/unbound-dns/"
+    build: false
+    restarted: true
+  become: false
+
 - name: Restart pi-hole
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/pi-hole/"
@@ -65,13 +72,6 @@
 - name: Restart Technitium DNS Server
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/tech-dns/"
-    build: false
-    restarted: true
-  become: false
-
-- name: Restart unbound
-  community.docker.docker_compose:
-    project_src: "{{ config_dir }}/unbound-dns/"
     build: false
     restarted: true
   become: false

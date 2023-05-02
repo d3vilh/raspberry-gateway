@@ -2,19 +2,11 @@
 # Location where configuration files will be stored.
 config_dir: '~'
 
-#    _____ _ _____     _     
-#   |  _  |_|  |  |___| |___ 
-#   |   __| |     | . | | -_|
-#   |__|  |_|__|__|___|_|___| Dont't use with .Tech.DNS at the same time!
-# Pi-hole configuration.
-pihole_enable: true                             # Set true or false. Don't use with Technition DNS at the same time!
-
-pihole_via_unbound: true                        # Use local Unbound DNS as upstream DNS server.
-pihole_hostname: pihole
-pihole_timezone: Europe/Kyiv
-pihole_password: "gagaZush"                     # !Change this password!
-pihole_inside_vpn: false                        # keeping it for a while
-# Unbound DNS configuration testing.
+#    _____     _                 _   ____  _____ _____ 
+#   |  |  |___| |_ ___ _ _ ___ _| | |    \|   | |   __|
+#   |  |  |   | . | . | | |   | . |_|  |  | | | |__   |
+#   |_____|_|_|___|___|___|_|_|___|_|____/|_|___|_____| Dont't use with .Tech.DNS at the same time!
+# Unbound DNS configuration.
 unbound_dns_enable: true                        # Set true or false. Don't use with Technition DNS at the same time!
 
 unbound_dns_identitiy: "unbound"                # Report this identity rather than the hostname of the server.
@@ -22,6 +14,19 @@ unbound_dns_hide: "yes"                         # Send minimum information to up
 unbound_dns_ipv4: "yes"                         # enable ipv4 support.
 unbound_dns_ipv6: "no"                          # enable ipv6 support
 unbound_dns_num_threads: "1"                    # Keep 1, unless understand you really need it.
+unbound_dns_upstream_4_pihole: "127.0.0.1#5335" # Use local Unbound DNS as upstream DNS server IP.
+
+#    _____ _ _____     _     
+#   |  _  |_|  |  |___| |___ 
+#   |   __| |     | . | | -_|
+#   |__|  |_|__|__|___|_|___| Dont't use with .Tech.DNS at the same time!
+# Pi-hole configuration.
+pihole_enable: true                             # Set true or false. Don't use with Technition DNS at the same time!
+
+pihole_with_unbound: true                        # Use local Unbound DNS as upstream DNS server.
+pihole_hostname: pihole
+pihole_timezone: Europe/Kyiv
+pihole_password: "gagaZush"                     # !Change this password!
 
 #      _____         _     ____  _____ _____   
 #     |_   _|___ ___| |_  |    \|   | |   __|  
