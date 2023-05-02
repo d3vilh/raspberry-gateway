@@ -3,7 +3,7 @@ version: "3"
 services:
   unbound:
     container_name: unbound
-    image: local/unbound:latest
+    image: d3vilh/unbound-docker:latest
     ports:
       - "5335:53/tcp"
       - "5335:53/udp"
@@ -11,4 +11,7 @@ services:
       - "./etc-unbound/unbound.conf:/etc/unbound/unbound.conf"
     cap_add:
       - NET_ADMIN
-    restart: unless-stopped
+    sysctls:
+      - net.core.rmem_max=33554432
+      - net.core.wmem_max=33554432
+    restart: unless-stoppe
