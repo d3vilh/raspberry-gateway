@@ -6,8 +6,8 @@ services:
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
+{% if not pihole_with_unbound %}
     hostname: '{{ pihole_hostname }}'
-{% if not pihole_via_unbound %}
     ports:
       - "53:53/tcp"
       - "53:53/udp"
@@ -19,20 +19,20 @@ services:
       TZ: '{{ pihole_timezone }}'
       WEBPASSWORD: '{{ pihole_password }}'
       ServerIP: '{{ ansible_facts['default_ipv4']['address'] }}'
-{% if pihole_via_unbound %}
+{% if pihole_with_unbound %}
       PIHOLE_DNS_: '{{ unbound_dns_upstream_4_pihole }}'
 {% endif %}
-{% if not pihole_via_unbound %}
+{% if not pihole_with_unbound %}
     dns:
       - 127.0.0.1
       - 8.8.8.8
+    cap_add:
+      - NET_ADMIN
 {% endif %}
     volumes:
       - './etc-pihole/:/etc/pihole/'
       - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
-    cap_add:
-      - NET_ADMIN
     restart: unless-stopped
-{% if pihole_via_unbound %}
+{% if pihole_with_unbound %}
     network_mode: "container:unbound"
 {% endif %}
