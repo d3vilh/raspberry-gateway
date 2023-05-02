@@ -65,13 +65,13 @@ server:
     harden-short-bufsize: yes
 
     # Refuse id.server and hostname.bind queries
-    hide-identity: yes
+    hide-identity: {{ unbound_dns_hide }}
 
     # Report this identity rather than the hostname of the server.
-    identity: "Server"
+    identity: {{ unbound_dns_identitiy }}
 
     # Refuse version.server and version.bind queries
-    hide-version: yes
+    hide-version: {{ unbound_dns_hide }}
 
     # Prevent the unbound server from forking into the background as a daemon
     do-daemonize: no
@@ -80,7 +80,7 @@ server:
     neg-cache-size: 4m
 
     # Send minimum amount of information to upstream servers to enhance privacy
-    qname-minimisation: yes
+    qname-minimisation: {{ unbound_dns_hide }}
 
     # Deny queries of type ANY with an empty response.
     # Works only on version 1.8 and above
@@ -90,7 +90,7 @@ server:
     # those sections are not required. This reduces response size
     # significantly, and may avoid TCP fallback for some responses. This may
     # cause a slight speedup
-    minimal-responses: yes
+    minimal-responses: {{ unbound_dns_hide }}
 
     # Perform prefetching of close to expired message cache entries
     # This only applies to domains that have been frequently queried
@@ -105,7 +105,7 @@ server:
     # One thread should be sufficient, can be increased on beefy machines. In reality for
     # most users running on small networks or on a single machine, it should be unnecessary
     # to seek performance enhancement by increasing num-threads above 1.
-    num-threads: 1
+    num-threads: {{ unbound_num_threads }}
 
     # more cache memory. rrset-cache-size should twice what msg-cache-size is.
     msg-cache-size: 50m
@@ -136,6 +136,7 @@ server:
     # Logfile path
     logfile: "/var/log/unbound.log"
 
+    # Allow everything
     access-control: 0.0.0.0/0 allow
     access-control: ::/0 allow
 
