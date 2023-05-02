@@ -7,8 +7,9 @@ config_dir: '~'
 #   |   __| |     | . | | -_|
 #   |__|  |_|__|__|___|_|___| Dont't use with .Tech.DNS at the same time!
 # Pi-hole configuration.
-pihole_enable: true                            # Set true or false. Don't use with Technition DNS at the same time!
+pihole_enable: true                             # Set true or false. Don't use with Technition DNS at the same time!
 
+pihole_via_unbound: true                        # Use local Unbound DNS as upstream DNS server.
 pihole_hostname: pihole
 pihole_timezone: Europe/Kyiv
 pihole_password: "gagaZush"                     # !Change this password!
