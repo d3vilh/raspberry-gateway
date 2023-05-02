@@ -1,0 +1,14 @@
+---
+version: "3"
+services:
+  unbound:
+    container_name: unbound
+    image: local/unbound:latest
+    ports:
+      - "5335:53/tcp"
+      - "5335:53/udp"
+    volumes:
+      - "./etc-unbound/unbound.conf:/etc/unbound/unbound.conf"
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped

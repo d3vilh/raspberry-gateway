@@ -68,3 +68,10 @@
     build: false
     restarted: true
   become: false
+
+- name: Restart unbound
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/unbound-dns/"
+    build: false
+    restarted: true
+  become: false
