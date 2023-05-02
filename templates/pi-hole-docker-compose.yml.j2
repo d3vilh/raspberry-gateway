@@ -34,5 +34,7 @@ services:
       - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
     restart: unless-stopped
 {% if pihole_with_unbound %}
+    depends_on:
+       - 'unbound'
     network_mode: "container:unbound"
 {% endif %}
