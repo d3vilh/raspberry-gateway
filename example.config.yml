@@ -13,6 +13,11 @@ pihole_hostname: pihole
 pihole_timezone: Europe/Kyiv
 pihole_password: "gagaZush"                     # !Change this password!
 
+# Unbound DNS configuration.
+unbound_dns_enable: true                           # Set true or false. Don't use with Technition DNS at the same time!
+unbound_dns_ipv4: "yes"
+unbound_dns_ipv6: "no"
+
 #      _____         _     ____  _____ _____   
 #     |_   _|___ ___| |_  |    \|   | |   __|  
 #    _  | | | -_|  _|   |_|  |  | | | |__   |_ 
