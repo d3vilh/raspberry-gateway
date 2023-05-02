@@ -13,7 +13,7 @@ pihole_via_unbound: true                        # Use local Unbound DNS as upstr
 pihole_hostname: pihole
 pihole_timezone: Europe/Kyiv
 pihole_password: "gagaZush"                     # !Change this password!
-
+pihole_inside_vpn: false                        # keeping it for a while
 # Unbound DNS configuration testing.
 unbound_dns_enable: true                        # Set true or false. Don't use with Technition DNS at the same time!
 
