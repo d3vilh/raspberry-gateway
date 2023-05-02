@@ -19,7 +19,7 @@
   ansible.builtin.template:
     src: templates/{{ item.src }}
     dest: "{{ config_dir }}/wireguard/{{ item.dest }}"
-    mode: 0740
+    mode: 0640
   loop:
     - src: wireguard-docker-compose.yml.j2
       dest: docker-compose.yml
