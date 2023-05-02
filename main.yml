@@ -42,13 +42,13 @@
       ansible.builtin.import_tasks: tasks/openvpn-server.yml
       when: ovpn_server_enable
 
-    - name: Setup Pi Hole
-      ansible.builtin.import_tasks: tasks/pi-hole.yml
-      when: pihole_enable
-
     - name: Setup Unbound DNS
       ansible.builtin.import_tasks: tasks/unbound-dns.yml
       when: unbound_dns_enable
+
+    - name: Setup Pi Hole
+      ansible.builtin.import_tasks: tasks/pi-hole.yml
+      when: pihole_enable
 
     - name: Setup Technitium DNS Server
       ansible.builtin.import_tasks: tasks/tech-dns.yml
