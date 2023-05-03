@@ -2,7 +2,7 @@
 version: "3"
 services:
   unbound:
-    container_name: unbound
+    container_name: unbound-dns
     image: d3vilh/unbound-docker:latest
     volumes:
       - "./etc-unbound/unbound.conf:/etc/unbound/unbound.conf"

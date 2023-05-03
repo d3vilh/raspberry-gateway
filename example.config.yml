@@ -23,7 +23,7 @@ unbound_dns_upstream_4_pihole: "127.0.0.1#5335" # Use local Unbound DNS as upstr
 # Pi-hole configuration.
 pihole_enable: true                             # Set true or false. Don't use with Technition DNS at the same time!
 
-pihole_with_unbound: true                        # Use local Unbound DNS as upstream DNS server.
+pihole_with_unbound: true                       # Use local Unbound DNS as upstream DNS server.
 pihole_hostname: pihole
 pihole_timezone: Europe/Kyiv
 pihole_password: "gagaZush"                     # !Change this password!
@@ -62,7 +62,7 @@ ovpn_remote: "remote 123.234.123.12 12345 udp"  # OpenVPN client.ovpn profile co
 ovpn_client_enable: false                       # Set true or false
 ovpn_client_cert: "example-client.opvn"         # Set your ovpn-client certificate name
 ovpn_client_secret: ""                          # Filename with ovpn-client certificate user and password, "example-credentials.txt"
-ovpn_client_allowed_subnet: "192.168.0.0/24"   # Allowed subnet for ovpn-client. You must have your local network defined here.
+ovpn_client_allowed_subnet: "192.168.0.0/24"    # Allowed subnet for ovpn-client. You must have your local network defined here.
 ovpn_client_killswitch: true                    # Allow subnet access and block all other traffic if ovpn-client is down
 
 #    _ _ _ _         _____               _ 
