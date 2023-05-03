@@ -22,6 +22,9 @@ fi
 # Set the EASYRSA_BATCH variable to enable non-interactive mode for easy-rsa
 export EASYRSA_BATCH=1 # see https://superuser.com/questions/1331293/easy-rsa-v3-execute-build-ca-and-gen-req-silently
 
+echo 'Patching easy-rsa.3.1.1 openssl-easyrsa.cnf...' 
+sed -i '/serialNumber_default/d' /usr/share/easy-rsa/pki/openssl-easyrsa.cnf
+
 echo 'Generating client certificate...'
 
 # Change to the easy-rsa directory and copy the easy-rsa variables file

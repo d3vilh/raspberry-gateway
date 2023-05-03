@@ -32,5 +32,4 @@ ENTRYPOINT ./docker-entrypoint.sh \
                 "$REQ_CITY" \
                 "$REQ_ORG" \
                 "$REQ_OU" \
-                "$REQ_CN" \
-                "$KEY_CN"
+                "$REQ_CN" 
