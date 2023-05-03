@@ -7,8 +7,7 @@ COPY . /opt/app
 # Set the working directory to /opt/app
 WORKDIR /opt/app
 
-RUN apk --no-cache --no-progress upgrade && \
-    apk --no-cache --no-progress add bash bind-tools curl wget ip6tables iptables openvpn easy-rsa
+RUN apk --no-cache --no-progress upgrade && apk --no-cache --no-progress add bash bind-tools curl wget ip6tables iptables openvpn easy-rsa
 #Install Latest RasyRSA Version
 RUN chmod 755 /usr/share/easy-rsa/*
 
@@ -32,4 +31,4 @@ ENTRYPOINT ./docker-entrypoint.sh \
                 "$REQ_CITY" \
                 "$REQ_ORG" \
                 "$REQ_OU" \
-                "$REQ_CN" 
+                "$REQ_CN"
