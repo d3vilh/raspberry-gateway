@@ -7,22 +7,6 @@ if [[ ! -f /etc/openvpn/pki/ca.crt ]]; then
     cp /etc/openvpn/config/easy-rsa.vars ./vars
 
     # Building the CA
-    echo 'ls -lrt easyrsa:'
-    ls -lrt easyrsa
-    echo 'whcih easyrsa:'
-    which easyrsa
-    echo 'pwd:'
-    #/opt/app/easy-rsa
-    pwd
-    echo 'ls -lrt:'
-    ls -lrt
-    # total 12
-    #-rwxr-xr-x    1 root     root          5214 May  2 20:51 openssl-easyrsa.cnf
-    #-rwxr-xr-x    1 root     root           237 May  3 18:19 vars
-    echo 'find / -name easyrsa:'
-    find / -name easyrsa
-    #/usr/share/easy-rsa/easyrsa
-
     echo 'Setting up public key infrastructure...'
     /usr/share/easy-rsa/easyrsa init-pki
 
