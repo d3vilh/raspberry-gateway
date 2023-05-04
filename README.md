@@ -1,5 +1,6 @@
-# Raspberry Gateway
-**Simple yet powerfull Raspberry Pi based home Internet gateway**. Which includes 
+![Raspberry Monitoring Dashboard in Grafana picture 1](/images/Raspberry-Gateway-logo.png) 
+This project provides a simple yet powerful solution for managing your home internet gateway using a Raspberry Pi. The gateway includes a range of Docker containers, each serving a specific purpose to enhance your internet experience:
+
   * [**Portainer**](https://www.portainer.io) a lightweight *universal* management GUI for all Docker containers which included into this project. 
   * [**OpenVPN Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-server/openvpn-docker) container with OpenVPN, simple [**WEB UI**](https://github.com/d3vilh/openvpn-ui) and VPN subnets support. 
   * [**OpenVPN Client**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) container for qBittorrent connection to the external VPN server.
@@ -11,6 +12,9 @@
   * [**WireGuard Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) container with own WEB UI. 
   * **Various Prometheus exporters**: cAdviser, AirGradient, StarLink, ShellyPlug and others. 
 
+Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive solution for managing and monitoring your home internet experience with ease.
+
+[![latest version](https://img.shields.io/github/v/release/d3vilh/raspberry-gateway?color=%2344cc11&label=Latest%20release&style=for-the-badge)](https://github.com/d3vilh/raspberry-gateway/releases/tag/0.13)
 # Requirements
   - [**Raspberry Pi 4**](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/), [**Raspberry Pi CM4**](https://www.raspberrypi.com/products/compute-module-4/?variant=raspberry-pi-cm4001000) **and** [**CM4 I/O Board**](https://www.raspberrypi.com/products/compute-module-4-io-board/) or [**Raspberry Pi 3**](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) board, with 1-2Gb RAM.
   - [**Raspberry Pi Imager**](https://www.raspberrypi.com/software/) to simplify installation of Raspberry Pi OS Lite (x64 or i686 bit).
