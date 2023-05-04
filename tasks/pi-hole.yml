@@ -28,12 +28,6 @@
     state: started
   when: pihole_with_unbound == true and container_id.rc == 1
 
-# Docker-compose timeout bug workaround https://github.com/docker/compose/issues/3927
-- name: Docker-compose timeout WA
-  shell: 'export DOCKER_CLIENT_TIMEOUT=180 && export COMPOSE_HTTP_TIMEOUT=180'
-  ignore_errors: true
-  when: pihole_with_unbound == true
-
 - name: Ensure Pi-hole is running.
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/pi-hole/"
