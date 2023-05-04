@@ -25,6 +25,11 @@
     state: started
     enabled: true
 
+# docker-compose timeout bug workaround https://github.com/docker/compose/issues/3927
+- name: Apply docker-compose timeout WA
+    shell: 'export DOCKER_CLIENT_TIMEOUT=180 && export COMPOSE_HTTP_TIMEOUT=180'
+    ignore_errors: true
+
 - name: Ensure dependencies are installed (Debian).
   ansible.builtin.apt:
     name:
