@@ -9,7 +9,7 @@
     - "{{ config_dir }}/unbound-dns/log-unbound/"
   become: false
 
-- name: Set net.core.rmem_max and net.core.wmem_max kernel parameters to 32MB
+- name: Set net.core.rmem_max and net.core.wmem_max kernel parameters to 32MB. Necessary for Unbound DNS
   ansible.builtin.sysctl:
     name: "{{ item }}"
     value: "33554432"
