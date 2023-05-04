@@ -4,15 +4,15 @@
   * [**OpenVPN Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-server/openvpn-docker) container with OpenVPN, simple [**WEB UI**](https://github.com/d3vilh/openvpn-ui) and VPN subnets support. 
   * [**OpenVPN Client**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) container for qBittorrent connection to the external VPN server.
   * [**qBittorrent**](https://www.qbittorrent.org) -  an open-source software alternative to µTorrent. 
-  * [**Pi-hole**](https://pi-hole.net) container with network-wide ad-blocking, local DNS & DHCP solution. Can be paried with Unbound DNS.
-  * [**Unbound DNS**](https://nlnetlabs.nl/projects/unbound/about/) container with the validating, recursive, caching DNS resolver. It is designed to be fast and lean.
-  * [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/monitoring) for Internet speed, OpenVPN, Raspberry Pi hardware and Docker containers status monitoring. 
-  * [**Technitium-dns**](https://technitium.com/dns/) container with self host DNS server. Block ads & malware at DNS level for your entire network.
+  * [**Pi-hole**](https://pi-hole.net) container with network-wide ad-blocking&local DNS solution. Can be paried with Unbound.
+  * [**Unbound DNS**](https://nlnetlabs.nl/projects/unbound/about/) container with the validating, recursive, caching DNS resolver. Designed to be fast and lean.
+  * [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/monitoring) for Internet speed, VPN, Raspberry Pi hardware and Docker containers monitoring. 
+  * [**Technitium-dns**](https://technitium.com/dns/) container. Self host DNS server to block ads & malware at DNS level for your network.
   * [**WireGuard Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) container with own WEB UI. 
   * **Various Prometheus exporters**: cAdviser, AirGradient, StarLink, ShellyPlug and others. 
 
 # Requirements
-  - [**Raspberry Pi 4**](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/), [**Raspberry Pi CM4**](https://www.raspberrypi.com/products/compute-module-4/?variant=raspberry-pi-cm4001000) **and** [**CM4 I/O Board**](https://www.raspberrypi.com/products/compute-module-4-io-board/) or [**Raspberry Pi 3**](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) board, all with 2-4Gb RAM minimum.
+  - [**Raspberry Pi 4**](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/), [**Raspberry Pi CM4**](https://www.raspberrypi.com/products/compute-module-4/?variant=raspberry-pi-cm4001000) **and** [**CM4 I/O Board**](https://www.raspberrypi.com/products/compute-module-4-io-board/) or [**Raspberry Pi 3**](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) board, with 1-2Gb RAM.
   - [**Raspberry Pi Imager**](https://www.raspberrypi.com/software/) to simplify installation of Raspberry Pi OS Lite (x64 or i686 bit).
   - [**Raspios Lite (64bit)**](https://downloads.raspberrypi.org/raspios_lite_arm64/images/) however is recommended for this setup.
   - **16Gb SD Card**
@@ -88,7 +88,6 @@
 
       > **Note**: Default configuration options are bold.
   8. Modify advanced configuration options in `advanced.config.yml` if needed.
-     > **Note**: Default configuration options are bold.
   9. Run installation playbook:
      ```shell
      ansible-playbook main.yml
@@ -112,7 +111,7 @@
 </p>
 
 [**OpenVPN Client**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) container for using external OpenVPN server connection for selected containers of this project. 
-> **Note**: qBitTorrent can be configured to use OpenVPN Client as a proxy to download torrents via VPN!
+> **Note**: qBitTorrent can be configured to use OpenVPN Client connection to download torrents the way your ISP will not recognize!
 
 [**qBittorrent**](https://www.qbittorrent.org) an open-source software alternative to µTorrent, with lightweight web administration interface:
 
@@ -122,7 +121,7 @@
 
 ![Portainer](/images/portainer.png)
 
-[**Raspi Monitoring**](https://github.com/d3vilh/raspberry-gateway/tree/master/monitoring) to monitor your Raspberry server utilisation (CPU,MEM,I/O, Tempriture, storage usage) and Internet connection. Internet connection statistics is based on [Speedtest.net exporter](https://github.com/MiguelNdeCarvalho/speedtest-exporter) results, ping stats and overall Internet availability tests based on HTTP push methods running by [Blackbox exporter](https://github.com/prometheus/blackbox_exporter) to the desired internet sites:
+[**Raspi Monitoring**](https://github.com/d3vilh/raspberry-gateway/tree/master/monitoring) The simple yet powerfull monitoring solution for your Raspberry server. Covers performance utilisation (CPU,MEM,I/O, Tempriture, storage usage), Hardware utilisation (Voltage, Power States, Devices Clock), Docker containers and Internet connection monitoring:
 
 ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/raspi-monitoring_1.png) 
 ![Raspberry Monitoring Dashboard in Grafana picture 2](/images/raspi-monitoring_2.png) 
@@ -138,13 +137,13 @@
 ![AirGradient Monitoring Dashboard in Grafana picture 1](/images/air-gradient_1.png) 
 ![AirGradient Monitoring Dashboard in Grafana picture 2](/images/air-gradient_2.png)
 
-[**OpenVPN activity dashboard**](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/openvpn_exporter.json.j2) and [OpenVPN-exporter](https://github.com/d3vilh/openvpn_exporter) which you can be [enable in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L90) by setting `openvpn_monitoring_enable` option to `true`.
+[**OpenVPN activity dashboard**](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/openvpn_exporter.json.j2) and [OpenVPN-exporter](https://github.com/d3vilh/openvpn_exporter) which shows OpenVPN client connetions status, duration and consumed traffic:
 
 ![OpenVPN Grafana Dashboard](/images/OVPN_Dashboard.png)
 
 ## Other features:
-  - **Starlink Monitoring**: Installs a [`starlink` prometheus exporter](https://github.com/danopstech/starlink_exporter) and a Grafana dashboard, which tracks and displays Starlink statistics. (Disabled by default)
-  - **Shelly Plug Monitoring**: Installs a [`shelly-plug-prometheus` exporter](https://github.com/geerlingguy/shelly-plug-prometheus) and a Grafana dashboard, which tracks and displays power usage on a Shelly Plug running on the local network. (Disabled by default. Enable and configure using the `shelly_plug_*` vars in `config.yml`.)
+  - [**Starlink Monitoring**](https://github.com/danopstech/starlink_exporter): For StarLink dishy tracking and statisitcs. 
+  - [**Shelly Plug Monitoring**](https://github.com/geerlingguy/shelly-plug-prometheus): Tracks and displays power usage on a Shelly Plug running on the local network.
 
 # Usage
   ## Portainer
