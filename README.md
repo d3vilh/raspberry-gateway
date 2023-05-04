@@ -1,13 +1,14 @@
 # Raspberry Gateway
 **Simple Raspberry Pi based home Internet gateway**. Which includes 
-  * [**OpenVPN Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-server/openvpn-docker) container with simple [**WEB UI**](https://github.com/d3vilh/openvpn-ui) and VPN subnets support. 
-  * [**OpenVPN Client**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) container to connect selected containers to external VPN server.
-  * [**WireGuard Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) container with own WEB UI. 
-  * [**Pi-hole**](https://pi-hole.net) - the network-wide ad-blocking local DNS & DHCP solution. 
-  * [**Technitium-dns**](https://technitium.com/dns/) - Self host DNS server. Block ads & malware at DNS level for your entire network.
+  * [**Portainer**](https://www.portainer.io) a lightweight *universal* management GUI for all Docker containers which included into this project. 
+  * [**OpenVPN Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-server/openvpn-docker) container with OpenVPN, simple [**WEB UI**](https://github.com/d3vilh/openvpn-ui) and VPN subnets support. 
+  * [**OpenVPN Client**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) container for qBittorrent connection to the external VPN server.
   * [**qBittorrent**](https://www.qbittorrent.org) -  an open-source software alternative to µTorrent. 
-  * [**Portainer**](https://www.portainer.io) a lightweight *universal* management GUI for all Docker enviroments which included into this project. 
+  * [**Pi-hole**](https://pi-hole.net) container with network-wide ad-blocking, local DNS & DHCP solution. Can be paried with Unbound DNS.
+  * [**Unbound DNS**](https://nlnetlabs.nl/projects/unbound/about/) container with the validating, recursive, caching DNS resolver. It is designed to be fast and lean.
   * [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/monitoring) for Internet speed, OpenVPN, Raspberry Pi hardware and Docker containers status monitoring. 
+  * [**Technitium-dns**](https://technitium.com/dns/) container with self host DNS server. Block ads & malware at DNS level for your entire network.
+  * [**WireGuard Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) container with own WEB UI. 
   * **Various Prometheus exporters**: cAdviser, AirGradient, StarLink, ShellyPlug and others. 
 
 # Requirements
@@ -86,7 +87,8 @@
       </details>
 
       > **Note**: Default configuration options are bold.
-
+  8. Modify advanced configuration options in `advanced.config.yml` if needed.
+     > **Note**: Default configuration options are bold.
   9. Run installation playbook:
      ```shell
      ansible-playbook main.yml
@@ -146,21 +148,57 @@
 
 # Usage
   ## Portainer
-  To access Portainer web-ui, visit the Pi's IP address `http://localhost:9000/`, (*change `localhost` to your Raspberry host ip/name*) it will ask to set new password during the first startup - save the password.
+   #### Portainer facts:
+   * **UI access port** `http://localhost:9000/` (*change `localhost` to your Raspberry host ip/name*)
+   * **Default password** will be set during the first login
+   * **External ports** used by container: `8000`, `9000`
 
   ## Pi-hole
-  For Pi-hole ui, visit the Pi's IP address `http://localhost/`, (*change `localhost` to your Raspberry host ip/name*) the default password is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L14) `config.yml` file in var `pihole_password`. Consider to change it before the installation as security must be secure.
+   #### Pi-hole facts:
+   * **UI access port** `http://localhost:80/` (*change `localhost` to your Raspberry host ip/name*)
+   * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L14) `config.yml` file in var `pihole_password`
+   * **Unbound DNS passthroe** is enabled [here](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L14) by default in `config.yml`, the option - `pihole_with_unbound: true`
+   * **External ports** used by container: `53`, `67`, `80`, `443`
+
+  > **Note**: If you would like to add Unbound functionality to Pi-Hole, you have to stop and remove old Pi-Hole setup and re-install it again.
+
+  ## Unbound DNS Server
+   #### Unbound-DNS facts:
+   * **UI access port** no UI available, running in Back-End.
+   * **Default password** password is not required.
+   * **Pi-Hole pair** to enable, [you have to set](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L14) `pihole_with_unbound: true` in `config.yml` before the installation.
+   * **External ports** used by container: `5335`
+   * **Configuration file** is available after the installation and located in `~/unbound-dns/etc-unbound/unbound.conf`
+   * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L14) before the installation
+
+  > **Note**: If you would like to add Unbound functionality to Pi-Hole, you have to stop and remove old Pi-Hole setup and re-install it again.
 
   ## Technitium DNS Server
-  To access Technitium DNS Web-ui visit `http://localhost:5380/`, (*change `localhost` to your Raspberry host ip/name*) the default password is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L22) `config.yml` file in var `tech_dns_password`. Consider to change it before the installation.
+   #### Tech-DNS facts:
+   * **UI access port** `http://localhost:5380/`, (*change `localhost` to your Raspberry host ip/name*)
+   * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L14) `config.yml` file in var `tech_dns_password`
+   * **External ports** used by container: `53`, `5380`
+   * **Configuration files** are available after the installation and located in `~/tech-dns/config/` directory
+   * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L14) before the installation
 
   ## qBittorrent
-  To access qBittorrent Web-ui, visit `http://localhost:8090/`, (*change `localhost` to your Raspberry host ip/name*) with **default credentials** - `admin/adminadmin`, which **must** be changed via web interface on first login. All the downloaded files will be stored in the `~/qbittorrent/downloads` directory.
+   #### qBittorrent facts:
+   * **UI access port** `http://localhost:8090/`, (*change `localhost` to your Raspberry host ip/name*)
+   * **Default password** is `admin/adminadmin`, which **must** be changed via web interface on first login.
+   * **External ports** used by container: `8090`, `6881:tcp`, `6881:udp`
+   * **Configuration files** are available after the installation and located in `~/tech-dns/config/` directory
+   * **Downloaded files** will be stored in the `~/qbittorrent/downloads` directory.
+   * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L14) before the installation
 
   ## OpenVPN Server
-  **OpenVPN and WEB UI** can be accessed on the port `8080`, e.g. `http://localhost:8080/`, (*change `localhost` to your Raspberry host ip/name*), the default user and password is `admin/gagaZush` preconfigured in `config.yml` which you supposed to [set in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) `ovpnui_user` & `ovpnui_password` vars, just before the installation.
+   #### OpenVPN Server facts:
+   * **UI access port** `http://localhost:8080/`, (*change `localhost` to your Raspberry host ip/name*)
+   * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L14) `config.yml` file in var `ovpnui_password`
+   * **External ports** used by container, by default: `8080`, `1194:tcp`, `1194:udp`
+   * **Configuration files** are available after the installation and located in `~/tech-dns/config/` directory
+   * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L14) before the installation
 
-  All the [**documentation**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md) and How-to can be found [**here**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md)
+  All the [**OpenVPN Server documentation**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md) and HOW-TOs can be found [**here**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md)
    > **Note**: If you are looking for x86_64 version of OpenVPN and openvpn-ui containers, please check [**openvpn-aws**](https://github.com/d3vilh/openvpn-aws)
 
   ## OpenVPN Client
