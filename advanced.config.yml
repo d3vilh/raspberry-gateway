@@ -8,8 +8,6 @@ config_dir: '~'
 #   For most cases you are not interested to change this file.
 #
 
-ur_timezone: "Europe/Kyiv" # Your timezone for all services
-
 #    _____     _                 _   ____  _____ _____ 
 #   |  |  |___| |_ ___ _ _ ___ _| | |    \|   | |   __|
 #   |  |  |   | . | . | | |   | . |_|  |  | | | |__   |
