@@ -55,9 +55,7 @@ ovpn_home_subnet: "192.168.0.0/24"              # Your home network subnet
 ovpn_remote: "remote 123.234.123.12 12345 udp"  # OpenVPN client.ovpn profile connect line. You
 
 # OpenVPN Client configuration for Docker instances only.
-ovpn_client_cert: "example-client.opvn"         # Set your ovpn-client certificate name
 ovpn_client_secret: ""                          # Filename with ovpn-client certificate user and password, "example-credentials.txt"
-ovpn_client_allowed_subnet: "192.168.0.0/24"    # Allowed subnet for ovpn-client. You must have your local network defined here.
 ovpn_client_killswitch: true                    # Allow subnet access and block all other traffic if ovpn-client is down
 
 #    _ _ _ _         _____               _ 
