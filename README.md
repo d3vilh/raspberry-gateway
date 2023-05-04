@@ -155,7 +155,7 @@
   ## Pi-hole
    #### Pi-hole facts:
    * **UI access port** `http://localhost:80/` (*change `localhost` to your Raspberry host ip/name*)
-   * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L31) `config.yml` file in var `pihole_password`
+   * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L31) `config.yml` file in `pihole_password` var
    * **Unbound DNS passthroe** is enabled [here](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L30) by default in `config.yml`, the option - `pihole_with_unbound: true`
    * **External ports** used by container: `53`, `67`, `80`, `443`
    * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L28) before the installation
@@ -176,7 +176,7 @@
   ## Technitium DNS Server
    #### Tech-DNS facts:
    * **UI access port** `http://localhost:5380/`, (*change `localhost` to your Raspberry host ip/name*)
-   * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) `config.yml` file in var `tech_dns_password`
+   * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) `config.yml` file in the `tech_dns_password` var
    * **External ports** used by container: `53`, `5380`
    * **Configuration files** are available after the installation and located in `~/tech-dns/config/` directory
    * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L35) before the installation
@@ -193,7 +193,7 @@
   ## OpenVPN Server
    #### OpenVPN Server facts:
    * **UI access port** `http://localhost:8080/`, (*change `localhost` to your Raspberry host ip/name*)
-   * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L48) `config.yml` file in var `ovpnui_password`
+   * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L48) `config.yml` file in the `ovpnui_password` var
    * **External ports** used by container, by default: `8080`, `1194:tcp`, `1194:udp`
    * **Configuration files** are available after the installation and located in `~/openvpn-server/*` directory
    * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L49) before the installation
@@ -221,7 +221,7 @@
   ## WireGuard Server
    #### WireGuard facts:
    * **UI access port** `http://localhost:5000/`, (*change `localhost` to your Raspberry host ip/name*)
-   * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L61) `config.yml` file in var `wireguard_password`
+   * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L61) `config.yml` file in the `wireguard_password` var
    * **External ports** used by container: `8090`, `6881:tcp`, `6881:udp`
    * **Configuration files** are available after the installation and located in `~/tech-dns/config/` directory
    * **Advanced Configuration** Before the installation, can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L65). WebUi username and WireGuard external server URL can be changed.
@@ -257,7 +257,7 @@
    * **External ports** used by container: `9090`, various exporters ports (see below)
    * **Configuration files** are available after the installation and located in `~/monitoring/prometeus/` directory
    * **Advanced Configuration** Before the installation, can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L83)
-   * **Targets** status can be checked on `http://localhost:9090/targets`.
+   * **Targets** status can be checked on `http://localhost:9090/targets`
 
    #### Here is list of available exporters/targets:
 
