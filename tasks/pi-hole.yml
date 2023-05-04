@@ -1,12 +1,12 @@
 ---
-- name: Create Pi-hole folder on Pi.
+- name: Create Pi-hole folder on Pi
   ansible.builtin.file:
     path: "{{ config_dir }}/pi-hole"
     state: directory
     mode: 0755
   become: false
 
-- name: Copy Pi-hole docker-compose template to Pi.
+- name: Copy Pi-hole docker-compose template to Pi
   ansible.builtin.template:
     src: templates/pi-hole-docker-compose.yml.j2
     dest: "{{ config_dir }}/pi-hole/docker-compose.yml"
@@ -28,8 +28,15 @@
     state: started
   when: pihole_with_unbound == true and container_id.rc == 1
 
+# Docker-compose timeout bug workaround https://github.com/docker/compose/issues/3927
+- name: Docker-compose timeout WA
+  shell: 'export DOCKER_CLIENT_TIMEOUT=180 && export COMPOSE_HTTP_TIMEOUT=180'
+  ignore_errors: true
+  when: pihole_with_unbound == true
+
 - name: Ensure Pi-hole is running.
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/pi-hole/"
     build: false
+    timeout: 180
   become: false
