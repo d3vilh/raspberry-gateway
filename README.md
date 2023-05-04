@@ -14,7 +14,7 @@ This project provides a simple yet powerful solution for managing your home inte
 
 Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive solution for managing and monitoring your home internet experience with ease.
 
-[![latest version](https://img.shields.io/github/v/release/d3vilh/raspberry-gateway?color=%2344cc11&label=Latest%20release&style=for-the-badge)](https://github.com/d3vilh/raspberry-gateway/releases/tag/0.13)
+[![latest version](https://img.shields.io/github/v/release/d3vilh/raspberry-gateway?color=%2344cc11&label=Latest%20release&style=for-the-badge)](https://github.com/d3vilh/raspberry-gateway/releases/tag/latest)
 # Requirements
   - [**Raspberry Pi 4**](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/), [**Raspberry Pi CM4**](https://www.raspberrypi.com/products/compute-module-4/?variant=raspberry-pi-cm4001000) **and** [**CM4 I/O Board**](https://www.raspberrypi.com/products/compute-module-4-io-board/) or [**Raspberry Pi 3**](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/) board, with 1-2Gb RAM.
   - [**Raspberry Pi Imager**](https://www.raspberrypi.com/software/) to simplify installation of Raspberry Pi OS Lite (x64 or i686 bit).
