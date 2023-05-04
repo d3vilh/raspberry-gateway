@@ -1,5 +1,5 @@
 # Raspberry Gateway
-**Simple Raspberry Pi based home Internet gateway**. Which includes 
+**Simple yet powerfull Raspberry Pi based home Internet gateway**. Which includes 
   * [**Portainer**](https://www.portainer.io) a lightweight *universal* management GUI for all Docker containers which included into this project. 
   * [**OpenVPN Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-server/openvpn-docker) container with OpenVPN, simple [**WEB UI**](https://github.com/d3vilh/openvpn-ui) and VPN subnets support. 
   * [**OpenVPN Client**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) container for qBittorrent connection to the external VPN server.
