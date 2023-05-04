@@ -1,12 +1,12 @@
 ---
-- name: Create Pi-hole folder on Pi.
+- name: Create Pi-hole folder on Pi
   ansible.builtin.file:
     path: "{{ config_dir }}/pi-hole"
     state: directory
     mode: 0755
   become: false
 
-- name: Copy Pi-hole docker-compose template to Pi.
+- name: Copy Pi-hole docker-compose template to Pi
   ansible.builtin.template:
     src: templates/pi-hole-docker-compose.yml.j2
     dest: "{{ config_dir }}/pi-hole/docker-compose.yml"
@@ -14,8 +14,23 @@
   become: false
   notify: Restart pi-hole
 
+- name: Check if Unbound-dns is running
+  shell: 'docker ps --filter name=unbound-dns --format \{\{\.ID\}\}'
+  register: container_id
+  ignore_errors: true
+  when: pihole_with_unbound == true
+
+- name: Wait 15 sec. for Unbound-dns to start
+  wait_for:
+    timeout: 15
+    host: "{{ inventory_hostname }}"
+    port: 15
+    state: started
+  when: pihole_with_unbound == true and container_id.rc == 1
+
 - name: Ensure Pi-hole is running.
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/pi-hole/"
     build: false
+    timeout: 180
   become: false
