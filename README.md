@@ -138,7 +138,7 @@
 ![AirGradient Monitoring Dashboard in Grafana picture 1](/images/air-gradient_1.png) 
 ![AirGradient Monitoring Dashboard in Grafana picture 2](/images/air-gradient_2.png)
 
-[**OpenVPN activity dashboard**](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/openvpn_exporter.json.j2) and [OpenVPN-exporter](https://github.com/d3vilh/openvpn_exporter) which you can be [enable in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L96) by setting `openvpn_monitoring_enable` option to `true`.
+[**OpenVPN activity dashboard**](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/openvpn_exporter.json.j2) and [OpenVPN-exporter](https://github.com/d3vilh/openvpn_exporter) which you can be [enable in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L90) by setting `openvpn_monitoring_enable` option to `true`.
 
 ![OpenVPN Grafana Dashboard](/images/OVPN_Dashboard.png)
 
@@ -156,9 +156,10 @@
   ## Pi-hole
    #### Pi-hole facts:
    * **UI access port** `http://localhost:80/` (*change `localhost` to your Raspberry host ip/name*)
-   * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L14) `config.yml` file in var `pihole_password`
-   * **Unbound DNS passthroe** is enabled [here](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L14) by default in `config.yml`, the option - `pihole_with_unbound: true`
+   * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L31) `config.yml` file in var `pihole_password`
+   * **Unbound DNS passthroe** is enabled [here](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L30) by default in `config.yml`, the option - `pihole_with_unbound: true`
    * **External ports** used by container: `53`, `67`, `80`, `443`
+   * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L28) before the installation
 
   > **Note**: If you would like to add Unbound functionality to Pi-Hole, you have to stop and remove old Pi-Hole setup and re-install it again.
 
@@ -166,20 +167,20 @@
    #### Unbound-DNS facts:
    * **UI access port** no UI available, running in Back-End.
    * **Default password** password is not required.
-   * **Pi-Hole pair** to enable, [you have to set](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L14) `pihole_with_unbound: true` in `config.yml` before the installation.
+   * **Pi-Hole pair** to enable, [you have to set](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L30) `pihole_with_unbound: true` in `config.yml` before the installation.
    * **External ports** used by container: `5335`
    * **Configuration file** is available after the installation and located in `~/unbound-dns/etc-unbound/unbound.conf`
-   * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L14) before the installation
+   * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L16) before the installation
 
   > **Note**: If you would like to add Unbound functionality to Pi-Hole, you have to stop and remove old Pi-Hole setup and re-install it again.
 
   ## Technitium DNS Server
    #### Tech-DNS facts:
    * **UI access port** `http://localhost:5380/`, (*change `localhost` to your Raspberry host ip/name*)
-   * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L14) `config.yml` file in var `tech_dns_password`
+   * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) `config.yml` file in var `tech_dns_password`
    * **External ports** used by container: `53`, `5380`
    * **Configuration files** are available after the installation and located in `~/tech-dns/config/` directory
-   * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L14) before the installation
+   * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L35) before the installation
 
   ## qBittorrent
    #### qBittorrent facts:
@@ -188,15 +189,15 @@
    * **External ports** used by container: `8090`, `6881:tcp`, `6881:udp`
    * **Configuration files** are available after the installation and located in `~/tech-dns/config/` directory
    * **Downloaded files** will be stored in the `~/qbittorrent/downloads` directory.
-   * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L14) before the installation
+   * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L74) before the installation
 
   ## OpenVPN Server
    #### OpenVPN Server facts:
    * **UI access port** `http://localhost:8080/`, (*change `localhost` to your Raspberry host ip/name*)
-   * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L14) `config.yml` file in var `ovpnui_password`
+   * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L48) `config.yml` file in var `ovpnui_password`
    * **External ports** used by container, by default: `8080`, `1194:tcp`, `1194:udp`
    * **Configuration files** are available after the installation and located in `~/openvpn-server/` directory
-   * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L14) before the installation
+   * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L49) before the installation
 
   All the [**OpenVPN Server documentation**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md) and HOW-TOs can be found [**here**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md)
    > **Note**: If you are looking for x86_64 version of OpenVPN and openvpn-ui containers, please check [**openvpn-aws**](https://github.com/d3vilh/openvpn-aws)
@@ -210,9 +211,9 @@
    * **Configuration Options** necessary for the installation (defined in `config.yml` file)`):
      * `ovpn_client_cert: "example-client.opvn"` - file with your OpenVPN connection profile (`*.ovpn`). You have to put it into `~/raspberry-gateway/openvpn-client/` directory before installation and update its name in `ovpn_client_cert`. Use the [**example-client.ovpn**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-client/example-client.ovpn#L1) as a refference of all necessary options and file format. After the installation your `*.ovpn` file will be moved to `~/openvpn-client/*.ovpn` and used by container. If for some reason you need to change it, you have to put new file with the same name in `~/openvpn-client/` directory and restart openvpn-client container (`docker openvpn-client restart`).
      * `ovpn_client_allowed_subnet: "192.168.88.0/24" ` - Your local newtwork (WiFi or whatever), from which you want to access qBitTorrent WEB-UI when VPN Client connection is active.
-   * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L14) before the installation:
-     * `ovpn_client_killswitch: true` - If set to `true`, it will block all the traffic when VPN is connected, except the one from the `ovpn_client_allowed_subnet` subnet.
+   * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L56) before the installation:
      * `ovpn_client_secret: "filename.txt"` - filename with your OpenVPN connection profile user and password if you have any. You have to put it into `~/raspberry-gaveway/openvpn-client/` directory before installation and update its name in `ovpn_client_secret`. Use the [**example-credentials.txt**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-client/example-credentials.txt#L1) as refference.
+     * `ovpn_client_killswitch: true` - If set to `true`, it will block all the traffic when VPN is connected, except the one from the `ovpn_client_allowed_subnet` subnet.
 
   For more documentation and How-to, please check [**openvpn-client**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) manual.
 
@@ -221,20 +222,20 @@
   ## WireGuard Server
    #### WireGuard facts:
    * **UI access port** `http://localhost:5000/`, (*change `localhost` to your Raspberry host ip/name*)
-   * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L53) `config.yml` file in var `wireguard_password`
+   * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L61) `config.yml` file in var `wireguard_password`
    * **External ports** used by container: `8090`, `6881:tcp`, `6881:udp`
    * **Configuration files** are available after the installation and located in `~/tech-dns/config/` directory
-   * **Advanced Configuration** Before the installation, can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L14). WebUi username and WireGuard external server URL can be changed.
+   * **Advanced Configuration** Before the installation, can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L65). WebUi username and WireGuard external server URL can be changed.
 
   ## Raspi-monitoring
   All the Data sources, Dashboards and exporters are automatically provisioned. Below you can find the list of available dashboards and their URLs.
 
    ### Grafana
    * **UI access port** `http://localhost:3030/`, (*change `localhost` to your Raspberry host ip/name*)
-   * **Default password** is `admin/admin`, it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L82) `config.yml` file and only used the first time Grafana starts up
+   * **Default password** is `admin/admin`, it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L87) `config.yml` file and only used the first time Grafana starts up
    * **External ports** used by container: `3030`
    * **Configuration files** are available after the installation and located in `~/monitoring/grafana/` directory
-   * **Advanced Configuration** Before the installation, can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L14).
+   * **Advanced Configuration** Before the installation, can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L82).
 
    #### Here is list of available Grafana dashboards:
    * **Raspberry Pi Monitoring**: Shows CPU, memory, and disk usage, as well as network traffic, temperature and Docker containers utilisation. `http://localhost:3030/d/rvk35ERRz/raspberry-monitoring`
@@ -253,10 +254,10 @@
   ### Prometheus
    It is used to collect metrics from exporters and provide them to Grafana.
    * **UI access port** `http://localhost:9090/`, (*change `localhost` to your Raspberry host ip/name*)
-   * **Default password** is `admin/admin`, it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L82) `config.yml` file and only used the first time Grafana starts up
+   * **Default password** password is not set by default!
    * **External ports** used by container: `9090`, various exporters ports (see below)
    * **Configuration files** are available after the installation and located in `~/monitoring/prometeus/` directory
-   * **Advanced Configuration** Before the installation, can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L14)
+   * **Advanced Configuration** Before the installation, can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L83)
    * **Targets** status can be checked on `http://localhost:9090/targets`.
 
    #### Here is list of available exporters/targets:
