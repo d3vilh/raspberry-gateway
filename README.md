@@ -187,7 +187,7 @@
    * **UI access port** `http://localhost:8090/`, (*change `localhost` to your Raspberry host ip/name*)
    * **Default password** is `admin/adminadmin`, which **must** be changed via web interface on first login.
    * **External ports** used by container: `8090`, `6881:tcp`, `6881:udp`
-   * **Configuration files** are available after the installation and located in `~/tech-dns/config/` directory
+   * **Configuration files** are available after the installation and located in `~/qbittorrent/config/qBittorrent/` directory
    * **Downloaded files** will be stored in the `~/qbittorrent/downloads` directory.
    * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L74) before the installation
 
@@ -196,7 +196,7 @@
    * **UI access port** `http://localhost:8080/`, (*change `localhost` to your Raspberry host ip/name*)
    * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L48) `config.yml` file in var `ovpnui_password`
    * **External ports** used by container, by default: `8080`, `1194:tcp`, `1194:udp`
-   * **Configuration files** are available after the installation and located in `~/openvpn-server/` directory
+   * **Configuration files** are available after the installation and located in `~/openvpn-server/*` directory
    * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L49) before the installation
 
   All the [**OpenVPN Server documentation**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md) and HOW-TOs can be found [**here**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md)
@@ -273,10 +273,17 @@
    * **Starlink exporter** - Starlink monitoring. `http://starlink:9817/metrics`
    * **Shelly exporter** - Shelly Plug power consumption monitoring. `http://shelly:9924/metrics`
 
-## Дякую and Kudos to all the envolved peole
+## Дякую and Kudos to all the envolved people:
+  * [**Max Rydahl Andersen**](https://github.com/maxandersen) for the [Internet Monitoring](https://github.com/maxandersen/internet-monitoring).
+  * [**Ryan Armstrong**](https://github.com/cavaliercoder) for [rpi-exporter](https://github.com/cavaliercoder/rpi_export)
+  * [**Jeff Geerling**](https://github.com/geerlingguy) aka [@geerlingguy](https://github.com/geerlingguy) for all his efforts to keep us interesting in Raspberry Pi compiters and for [all his videos on youtube](https://www.youtube.com/c/JeffGeerling). Cosider to Like and Subscribe 🧐
 
-Kudos to @vegasbrianc for [super easy docker](https://github.com/vegasbrianc/github-monitoring) stack used to build this project.
-Kudos to @maxandersen for making the [Internet Monitoring](https://github.com/maxandersen/internet-monitoring) project, which was forked to extend its functionality and now part of **Raspi-monitoring**.
-Kudos to folks maintaining [**Pi-hole**](https://pi-hole.net), [**Technitium-dns**](https://technitium.com/dns/), [**qBittorrent**](https://www.qbittorrent.org), [**Portainer**](https://www.portainer.io), [**wireguard-ui**](https://github.com/ngoduykhanh/wireguard-ui), [**cAdviser**](https://github.com/d3vilh/cadvisor) and other pieces of software used in this project.
-
-**Grand Kudos** to Jeff Geerling aka [@geerlingguy](https://github.com/geerlingguy) for all his efforts to keep us interesting in Raspberry Pi compiters and for [all his videos on youtube](https://www.youtube.com/c/JeffGeerling). Like and subscribe.
+### Kudos to all folks maintaining:
+  * [**Pi-hole**](https://pi-hole.net)
+  * [**Unbound DNS**](https://nlnetlabs.nl/projects/unbound/about/)
+  * [**Technitium-dns**](https://technitium.com/dns/)
+  * [**qBittorrent**](https://www.qbittorrent.org)
+  * [**Portainer**](https://www.portainer.io)
+  * [**wireguard-ui**](https://github.com/ngoduykhanh/wireguard-ui)
+  * [**cAdviser**](https://github.com/d3vilh/cadvisor) and 
+  * other pieces of software used in this project.
