@@ -16,7 +16,7 @@ services:
       - "443:443/tcp"
 {% endif %}
     environment:
-      TZ: '{{ pihole_timezone }}'
+      TZ: '{{ ur_timezone }}'
       WEBPASSWORD: '{{ pihole_password }}'
       ServerIP: '{{ ansible_facts['default_ipv4']['address'] }}'
 {% if pihole_with_unbound %}
