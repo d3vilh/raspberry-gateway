@@ -7,6 +7,13 @@ config_dir: '~'
 #   For advanced configuration see `advanced.config.yml`
 #
 
+#    _____ _           _____             
+#   |_   _|_|_____ ___|__   |___ ___ ___ 
+#     | | | |     | -_|   __| . |   | -_|
+#     |_| |_|_|_|_|___|_____|___|_|_|___|
+# Your timezone for all services.
+ur_timezone: "Europe/Kyiv"
+
 #    _____     _                 _   ____  _____ _____ 
 #   |  |  |___| |_ ___ _ _ ___ _| | |    \|   | |   __|
 #   |  |  |   | . | . | | |   | . |_|  |  | | | |__   |
@@ -43,7 +50,7 @@ ovpnui_password: "gagaZush"                     # !Change this password!
 # OpenVPN Client configuration for qBittorrent only. OpenVPN server is not required.
 ovpn_client_enable: false                       # Set true to enable internal OpenVPN client used for qBittorrent. OpenVPN server is not required.
 ovpn_client_cert: "example-client.ovpn"         # Set your ovpn-client certificate name
-ovpn_client_allowed_subnet: "192.168.0.0/24"    # Allowed subnet for ovpn-client. You must have your local network defined here.
+ovpn_client_allowed_subnet: "192.168.88.0/24"   # Allowed subnet for ovpn-client. You must have your local network defined here.
 
 #    _ _ _ _         _____               _ 
 #   | | | |_|___ ___|   __|_ _ ___ ___ _| |
