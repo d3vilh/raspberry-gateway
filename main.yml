@@ -22,11 +22,6 @@
       when:
         - ansible_facts.os_family == "Archlinux"
 
-    # Docker-compose timeout bug workaround https://github.com/docker/compose/issues/3927
-    - name: Docker-compose timeout WA
-      shell: 'export DOCKER_CLIENT_TIMEOUT=180 && export COMPOSE_HTTP_TIMEOUT=180'
-      ignore_errors: true
-
   handlers:
     - name: Include handlers
       ansible.builtin.import_tasks: tasks/handlers.yml
