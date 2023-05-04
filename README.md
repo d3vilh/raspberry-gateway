@@ -258,7 +258,7 @@
    * **External ports** used by container: `9090:tcp`, various exporters ports (see below)
    * **Configuration files** are available after the installation and located in `~/monitoring/prometeus/` directory
    * **Advanced Configuration** Before the installation, can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L83)
-   * **Targets** status can be checked on `http://localhost:9090/targets` (*you know what2do with `localhost`* 🧐)
+   * **Targets** can be checked on `http://localhost:9090/targets` (*you know what2do with `localhost`* 🧐)
 
    #### Here is list of available exporters/targets:
 
