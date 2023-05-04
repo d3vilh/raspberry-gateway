@@ -1,0 +1,119 @@
+---
+# Location where configuration files will be stored.
+config_dir: '~'
+
+#    _____     _                 _   ____  _____ _____ 
+#   |  |  |___| |_ ___ _ _ ___ _| | |    \|   | |   __|
+#   |  |  |   | . | . | | |   | . |_|  |  | | | |__   |
+#   |_____|_|_|___|___|___|_|_|___|_|____/|_|___|_____| Dont't use with .Tech.DNS at the same time!
+# Advanced Unbound DNS configuration.
+unbound_dns_identitiy: "unbound"                # Report this identity rather than the hostname of the server.
+unbound_dns_hide: "yes"                         # Send minimum information to upstream servers, reduce responce size, refuse .id and .version queries
+unbound_dns_ipv4: "yes"                         # enable ipv4 support.
+unbound_dns_ipv6: "no"                          # enable ipv6 support
+unbound_dns_num_threads: "1"                    # Keep 1, unless understand you really need it.
+unbound_dns_upstream_4_pihole: "127.0.0.1#5335" # Use local Unbound DNS as upstream DNS server IP.
+
+#    _____ _ _____     _     
+#   |  _  |_|  |  |___| |___ 
+#   |   __| |     | . | | -_|
+#   |__|  |_|__|__|___|_|___| Dont't use with .Tech.DNS at the same time!
+# Advanced i-hole configuration.
+pihole_hostname: pihole
+pihole_timezone: Europe/Kyiv
+
+#      _____         _     ____  _____ _____   
+#     |_   _|___ ___| |_  |    \|   | |   __|  
+#    _  | | | -_|  _|   |_|  |  | | | |__   |_ 
+#   |_| |_| |___|___|_|_|_|____/|_|___|_____|_|  Don't use with PiHole at the same time!
+# Advanced Technitium DNS Server configuration.
+tech_dns_hostname: tech-dns
+tech_dns_server: tech-dns                       # The primary domain name used by this DNS Server to identify itself.
+tech_dns_ipv6: false                            # Enable IPv6 support
+tech_dns_blocking: true                         # Sets DNS server to block domain names using Blocked Zone and Block List Zone.
+tech_dns_forwarders: "1.1.1.1, 8.8.8.8"         # List of DNS servers to forward DNS queries to.
+tech_dns_forwarder_proto: "Https"               # Forwarder protocol options: Udp, Tcp, Tls, Https, HttpsJson.
+
+#    _____             _____ _____ _____ 
+#   |     |___ ___ ___|  |  |  _  |   | |
+#   |  |  | . | -_|   |  |  |   __| | | |
+#   |_____|  _|___|_|_|\___/|__|  |_|___|
+#         |_|
+# Advanced OpenVPN Server configuration.
+
+ovpnui_user: "admin"
+ovpn_trusted_subnet: "10.0.70.0/24"             # Trusted users subnet
+ovpn_guest_subnet: "10.0.71.0/24"               # Guest users subnet
+ovpn_home_subnet: "192.168.0.0/24"              # Your home network subnet
+ovpn_remote: "remote 123.234.123.12 12345 udp"  # OpenVPN client.ovpn profile connect line. You
+
+# OpenVPN Client configuration for Docker instances only.
+ovpn_client_cert: "example-client.opvn"         # Set your ovpn-client certificate name
+ovpn_client_secret: ""                          # Filename with ovpn-client certificate user and password, "example-credentials.txt"
+ovpn_client_allowed_subnet: "192.168.0.0/24"    # Allowed subnet for ovpn-client. You must have your local network defined here.
+ovpn_client_killswitch: true                    # Allow subnet access and block all other traffic if ovpn-client is down
+
+#    _ _ _ _         _____               _ 
+#   | | | |_|___ ___|   __|_ _ ___ ___ _| |
+#   | | | | |  _| -_|  |  | | | .'|  _| . |
+#   |_____|_|_| |___|_____|___|__,|_| |___|
+# Advanced WireGuard Server configuration.
+
+wireguard_user: "admin"
+wireguard_tz: "Europe/Kyiv"
+wireguard_serverurl: "wg.example.com"
+
+#        _____ _ _   _____                     _   
+#    ___| __  |_| |_|_   _|___ ___ ___ ___ ___| |_ 
+#   | . | __ -| |  _| | | | . |  _|  _| -_|   |  _|
+#   |_  |_____|_|_|   |_| |___|_| |_| |___|_|_|_|  
+#     |_|                                         
+# Advanced QbitTorrent configuration.
+qbittorrent_webui_port: 8090                    # Better to keep as is
+qbittorrent_tz: "Europe/Kyiv"                   # Your timezone
+
+#    _____         _ _               
+#   |     |___ ___|_| |_ ___ ___ ___ 
+#   | | | | . |   | |  _| . |  _|_ -|
+#   |_|_|_|___|_|_|_|_| |___|_| |___|
+# Advanced Raspberry-monitoring configuration.
+
+monitoring_grafana_public_dashboard: false      # Enable public dashboard for Grafana available in internet
+monitoring_days_keep_interval: 90d              # How long to keep data for (don't change without purpose)
+monitoring_speedtest_interval: 60m              # How often to run speedtest (don't change without purpose)
+monitoring_ping_interval: 30s                   # How often to ping hosts (don't change without purpose)
+monitoring_ping_hosts:                          # [URL];[HUMAN_READABLE_NAME]
+  - http://google.com/;google.com
+  - https://apple.com/;apple.com
+  - https://github.com/;github
+  - https://reddit.com/;reddit
+telegram_bot_chatid: "-508236451"               # Used for sending notifications to Telegram bot !Change this token!
+telegram_bot_token: "5705452771:AAEPOxb7_rSQZ8p4sZYzITBFqD3YvMs_O-e"  # Used for sending notifications to Telegram bot !Change this token!
+
+# Advanced PiKVM monitoring configuration.               # Requires `monitoring_enable`
+
+pikvm_target_ip: "192.168.88.3"
+pikvm_web_user: "admin"
+pikvm_web_password: "gagaZush"                  # !Change this password!
+
+# Advanced AirGradient monitoring configuration.         # Requires `monitoring_enable`
+
+airgradient_sensors:
+  # ID is limited in set of "a-z" to not longer than 38 chars.
+  # AirGradient FW example ./files/AirGradient-DIY.ino
+  - id: livingroom
+    ip: "192.168.88.6"
+    port: 9926
+
+# Advanced Starlink monitoring configuration.            # Requires `monitoring_enable`
+
+starlink_ip: "10.10.10.1"
+starlink_port: 9817
+
+# Advanced Shelly Plug monitoring configuration.         # Requires `monitoring_enable`
+
+shelly_plug_hostname: my-shelly-plug-host-or-ip
+shelly_ip: "192.168.88.66"
+shelly_port: 9924
+shelly_plug_http_username: username
+shelly_plug_http_password: "gagaZush"
