@@ -1,4 +1,4 @@
-![Raspberry Monitoring Dashboard in Grafana picture 1](/images/RGW-blob.0.2.png) 
+![Raspberry Monitoring Dashboard in Grafana picture 1](/images/Raspberry-Gateway-logo.png) 
 This project provides a simple yet powerful solution for managing your home internet gateway using a Raspberry Pi. The gateway includes a range of Docker containers, each serving a specific purpose to enhance your internet experience:
 
   * [**Portainer**](https://www.portainer.io) a lightweight *universal* management GUI for all Docker containers which included into this project. 
