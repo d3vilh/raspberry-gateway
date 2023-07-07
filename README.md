@@ -42,7 +42,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
      ```
      > **Note**: If you see `ansible-galaxy: command not found`, you have to relogin (or reboot your Pi) and then try again.
   <details>
-    <summary>Continue with WebUI Installation</summary>
+    <summary>Continue Installation with WebUI</summary>
    
   5. Run Webinstall binary:
      ```shell
@@ -51,19 +51,21 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
      Installation logs: webinstall.log
      2023/07/07 18:01:03 Starting web server on http://10.10.10.18:8088
      ```
-  6. Copy server address (`http://10.10.10.18:8088` on example above)  from the log and paste into your browser, then press Enter. Raspberry-Gateway configuration window will appear:
+  6. Copy server address (`http://10.10.10.18:8088` as above example) from the console and paste into your browser, then press Enter. Raspberry-Gateway webinstall window will appear:
      ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/Webinstall-01.png)
   7. Choose all the components you would like to install and change all the passwords (keep them in mind).
-  8. Press "Save" button. When your configuration will be ready:
+  8. Press "Save" button. When your configuration is ready:
      ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/Webinstall-02.png)
   9. Then press "Install" button. It will initiate installation in background:
      ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/Webinstall-03.png)
   10. The installation process will take some time.
       Once that's done, it'll be like you have a new **Raspberry Gateway** up and running.
+
       You can close browser window and anjoy your new Raspberry Gateway.
   </details>
 
   Afraid of GUI? Need more control?
+  
   <details>
     <summary>Install everything with CLI</summary>
    
