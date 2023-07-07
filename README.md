@@ -44,21 +44,25 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
   <details>
     <summary>Continue Installation with WebUI</summary>
    
-  5. Run Webinstall binary:
+   **This is still under testing!** If you afraid of it - just skip to CLI installation.
+
+  5. Modify `inventory.ini` by replace of IP address with your Pi's IP, or comment that line and uncomment the `connection=local` line if you're running it on the Pi you're setting up. **Double check** that the `ansible_user` is correct for your setup.
+
+  6. Run Webinstall binary:
      ```shell
      secret@rpgw:~/raspberry-gateway $ ./webinstall
      2023/07/07 18:01:03 Welcome! The web interface will guide you on installation process.
      Installation logs: webinstall.log
      2023/07/07 18:01:03 Starting web server on http://10.10.10.18:8088
      ```
-  6. Copy server address (`http://10.10.10.18:8088` as above example) from the console and paste into your browser, then press Enter. Raspberry-Gateway webinstall window will appear:
+  7. Copy server address (`http://10.10.10.18:8088` as above example) from the console and paste into your browser, then press Enter. Raspberry-Gateway webinstall window will appear:
      ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/Webinstall-01.png)
-  7. Choose all the components you would like to install and change all the passwords (keep them in mind).
-  8. Press "Save" button. When your configuration is ready:
+  8. Choose all the components you would like to install and change all the passwords (keep them in mind).
+  9. Press "Save" button. When your configuration is ready:
      ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/Webinstall-02.png)
-  9. Then press "Install" button. It will initiate installation in background:
+  10. Then press "Install" button. It will initiate installation in background:
      ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/Webinstall-03.png)
-  10. The installation process will take some time.
+  11. The installation process will take some time.
       Once that's done, it'll be like you have a new **Raspberry Gateway** up and running.
 
       You can scroll down for `Quick Links` or close browser window and anjoy your new Raspberry Gateway.
@@ -69,6 +73,8 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
   <details>
     <summary>Install everything with CLI</summary>
    
+   **Safiest option**. Tested may times and works like a charm.
+
   5. Make copies of the configuration files and modify them for your enviroment:
       ```shell
       yes | cp -p example.inventory.ini inventory.ini 
