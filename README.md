@@ -61,11 +61,11 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
   10. The installation process will take some time.
       Once that's done, it'll be like you have a new **Raspberry Gateway** up and running.
 
-      You can close browser window and anjoy your new Raspberry Gateway.
+      You can scroll down for `Quick Links`` or close browser window and anjoy your new Raspberry Gateway.
   </details>
 
   Afraid of GUI? Need more control?
-  
+
   <details>
     <summary>Install everything with CLI</summary>
    
