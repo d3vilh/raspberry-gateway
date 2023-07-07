@@ -51,20 +51,21 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
      Installation logs: webinstall.log
      2023/07/07 18:01:03 Starting web server on http://10.10.10.18:8088
      ```
-  6. Copy server address (`http://10.10.10.18:8088` on example above)  from the log and paste into your browser address field, then press Enter. Raspberry-Gateway configuration window will appear:
-     ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/raspi-monitoring_1.png)
-  7. Choose all the components you would like to install and change all the passwords (keep them in mind):
-  8. Press "Save" button. Your configuration will be saved in config.yml file.
-  9. Then press "Install" button. It will initiate all the playbooks running in background.
+  6. Copy server address (`http://10.10.10.18:8088` on example above)  from the log and paste into your browser, then press Enter. Raspberry-Gateway configuration window will appear:
+     ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/Webinstall-01.png)
+  7. Choose all the components you would like to install and change all the passwords (keep them in mind).
+  8. Press "Save" button. When your configuration will be ready:
+     ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/Webinstall-02.png)
+  9. Then press "Install" button. It will initiate installation in background:
+     ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/Webinstall-03.png)
   10. The installation process will take some time.
       Once that's done, it'll be like you have a new **Raspberry Gateway** up and running.
-      If you cant access GUI or have other problems - try CLI installation.
+      You can close browser window and anjoy your new Raspberry Gateway.
   </details>
 
-  or
-  
+  Afraid of GUI? Need more control?
   <details>
-    <summary>Continue with CLI installation</summary>
+    <summary>Install everything with CLI</summary>
    
   5. Make copies of the configuration files and modify them for your enviroment:
       ```shell
