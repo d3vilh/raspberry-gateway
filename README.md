@@ -41,6 +41,31 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
      ansible-galaxy collection install -r requirements.yml
      ```
      > **Note**: If you see `ansible-galaxy: command not found`, you have to relogin (or reboot your Pi) and then try again.
+  <details>
+    <summary>Continue with WebUI Installation</summary>
+   
+  5. Run Webinstall binary:
+     ```shell
+     secret@rpgw:~/raspberry-gateway $ ./webinstall
+     2023/07/07 18:01:03 Welcome! The web interface will guide you on installation process.
+     Installation logs: webinstall.log
+     2023/07/07 18:01:03 Starting web server on http://10.10.10.18:8088
+     ```
+  6. Copy server address (`http://10.10.10.18:8088` on example above)  from the log and paste into your browser address field, then press Enter. Raspberry-Gateway configuration window will appear:
+     ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/raspi-monitoring_1.png)
+  7. Choose all the components you would like to install and change all the passwords (keep them in mind):
+  8. Press "Save" button. Your configuration will be saved in config.yml file.
+  9. Then press "Install" button. It will initiate all the playbooks running in background.
+  10. The installation process will take some time.
+      Once that's done, it'll be like you have a new **Raspberry Gateway** up and running.
+      If you cant access GUI or have other problems - try CLI installation.
+  </details>
+
+  or
+  
+  <details>
+    <summary>Continue with CLI installation</summary>
+   
   5. Make copies of the configuration files and modify them for your enviroment:
       ```shell
       yes | cp -p example.inventory.ini inventory.ini 
@@ -97,7 +122,8 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
      ansible-playbook main.yml
      ```
      > **Note**: **If running locally on the Pi**: You may have error like `Error while fetching server API version`. You have to relogin (or reboot your Pi) and then run the playbook again.
-
+  </details>
+  
 # Features
 [**Pi-hole**](https://pi-hole.net) or [**Technitium-dns**](https://technitium.com/dns/) as the network-wide ad-blocking solution integrated with own local DNS and DHCP servers:
 
