@@ -1,0 +1,13 @@
+all:
+    hosts:
+        raspberry_gateway:
+            ansible_host: 192.168.1.1
+            ansible_user: pi
+            ansible_connection: local
+            ansible_use: "yes"
+# Comment out the previous line and uncomment this to run on remote Raspberry-Pi.
+#            ansible_host: 192.168.1.1
+#            ansible_user: pi
+#            ansible_connection: ssh
+#            ansible_use: "yes"
+
