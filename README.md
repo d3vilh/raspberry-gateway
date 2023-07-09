@@ -41,11 +41,13 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
      ansible-galaxy collection install -r requirements.yml
      ```
      > **Note**: If you see `ansible-galaxy: command not found`, you have to relogin (or reboot your Pi) and then try again.
+  <details>
+    <summary>Continue Installation with WebUI</summary>
    
-   **Next steps are still under testing!** If you afraid of it - just skip to CLI installation.
+   **This is still under testing!** If you afraid of it - just skip to CLI installation.
 
   5. Run [Webinstall](https://github.com/d3vilh/raspberry-gtw-webconfig) binary:
-     ```bash
+     ```shell
      secret@rpgw:~/raspberry-gateway $ ./webinstall
      2023/07/07 18:01:03 Welcome! The web interface will guide you on installation process.
      Installation logs: webinstall.log
@@ -63,6 +65,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
       Once that's done, it'll be like you have a new **Raspberry Gateway** up and running.
 
       You can scroll down for `Quick Links` or close browser window and anjoy your new Raspberry Gateway.
+  </details>
 
   Afraid of GUI? Need more control?
 
