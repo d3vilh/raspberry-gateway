@@ -100,3 +100,11 @@ starlink_monitoring_enable: false               # Set true to enable StarLink di
 
 # Shelly Plug monitoring configuration.         # Set true to enable Shelly Plug Grafana dashboard
 shelly_plug_monitoring_enable: false            # Set true or false
+
+# TESTING! DO NOT USE ON PRODUCTION!               
+# Gluetun part
+gluetun_vpnclient_enable: false                 # Set true to enable Gluetun
+                                                # See https://github.com/qdm12/gluetun-wiki/tree/main/setup#setup
+gluetun_vpn_service_provider: ivpn              # Set your VPN provider
+gluetun_openvpn_user: "user"                    # Set your VPN username
+gluetun_openvpn_password: "password"            # Set your VPN password

@@ -70,3 +70,10 @@
     - name: Setup Shelly Plug Monitoring
       ansible.builtin.import_tasks: tasks/shelly-plug.yml
       when: shelly_plug_monitoring_enable
+
+#  TESTING GLUETUN
+#  DONT USE ON PROD!!!!
+
+    - name: Setup Gluetun Server
+      ansible.builtin.import_tasks: tasks/gluetun.yml
+      when: gluetun_vpnclient_enable
