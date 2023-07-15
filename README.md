@@ -79,10 +79,11 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
       yes | cp -p example.inventory.yml inventory.yml 
       yes | cp -p example.config.yml config.yml
       ```
-  6. Modify `inventory.yml` by replace of IP address with your Pi's IP, or comment that line and uncomment the `connection=local` line if you're running it on the Pi you're setting up. **Double check** that the `ansible_user` is correct for your setup.
-  7. Modify `config.yml` to **enabe or disable desired containers** to be installed on your Pi:
+  6. **Double check** that `ansible_user` is correct for `inventory.yml`. First, uncommented section preconfigured to install everything on your local Raspberry-Pi, if you're would like to run all the installtion towards remote server - comment this section and uncomment the second one, then modify IP and check that user is correct again.
+     
+     > **Note**: To make all necesary changes: `nano inventory.yml`, save the file - `Ctrl+O` and `Ctrl+X` to exit.
+  8. Modify `config.yml` to **enabe or disable desired containers** to be installed on your Pi:
      **To enable** Prtainer - change `enable_portainer: false` option to `enable_portainer: true` and vs to disable.
-      > **Note**: To make all necesary changes: `nano config.yml`, save the file - `Ctrl+O` and `Ctrl+X` to exit.
 
       <details>
       <summary>List of available configuration options</summary>
@@ -124,8 +125,8 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
       </details>
 
       > **Note**: Default configuration options are bold.
-  8. Modify advanced configuration options in `advanced.config.yml` if needed.
-  9. Run installation playbook:
+  9. Modify advanced configuration options in `advanced.config.yml` if needed.
+  10. Run installation playbook:
      ```shell
      ansible-playbook main.yml
      ```
