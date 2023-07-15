@@ -1,6 +1,6 @@
 # OpenVPN and OpenVPN WEB UI
 
-Simple OpenVPN instance for Raspberry Pi based home server. 
+Simple OpenVPN Server setup compatible with AMD64 and ARM64v8 servers. 
 It does include 2 different Docker containers:
  - OpenVPN Back-End container (openvpn) and 
  - OpenVPN WEB UI Front-End container (openvpn-ui) for managing OpenVPN server.
@@ -15,6 +15,7 @@ services:
     openvpn:
        container_name: openvpn
        build: ./openvpn-docker
+       # image: d3vilh/openvpn-server:latest
        privileged: true
        ports: 
           - "1194:1194/udp"
@@ -41,7 +42,7 @@ Alternatevly you can add OpenVPN-UI container for WEB UI:
 ```yaml
     openvpn-ui:
        container_name: openvpn-ui
-       image: d3vilh/openvpn-ui-arm32v7:latest
+       image: d3vilh/openvpn-ui:latest
        environment:
            - OPENVPN_ADMIN_USERNAME={{ ovpnui_user }}
            - OPENVPN_ADMIN_PASSWORD={{ ovpnui_password }}
