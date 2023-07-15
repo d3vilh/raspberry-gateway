@@ -237,7 +237,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
    * **Configuration files** are available after the installation and located in `~/openvpn-server/*` directory
    * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L49) before the installation
 
-  All the [**OpenVPN Server configuration**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md) and Knowhow for this setup can be found [**here**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md). It does include slides 😁
+  All the [**OpenVPN Server configuration**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md) and Knowhow for this setup can be found [**here**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md).
    > **Note**: If you are looking for x86_64 version of OpenVPN and openvpn-ui containers, please check [**openvpn-aws**](https://github.com/d3vilh/openvpn-aws)
 
   ## OpenVPN Client
