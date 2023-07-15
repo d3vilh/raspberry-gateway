@@ -54,13 +54,13 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
      2023/07/07 18:01:03 Starting web server on http://10.10.10.18:8088
      ```
   6. Copy server address (`http://10.10.10.18:8088` as above example) from the console and paste into your browser, then press Enter. Raspberry-Gateway webinstall window will appear:
-     ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/Webinstall-01.png)
+     ![Webinstall picture 1](/images/Webinstall-01.png)
   7. Choose all the components you would like to install and change all the passwords (keep them in mind). 
      > **Note**: You can leave all the passwords as default, but it's not recommended.
   8. Press "Save" button. When your configuration is ready:
-     ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/Webinstall-02.png)
+     ![Webinstall picture 2](/images/Webinstall-02.png)
   9. Then press "Install" button. It will initiate installation in background:
-     ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/Webinstall-03.png)
+     ![Webinstall picture 3](/images/Webinstall-03.png)
   10. The installation process will take some time.
       Once that's done, it'll be like you have a new **Raspberry Gateway** up and running.
 
