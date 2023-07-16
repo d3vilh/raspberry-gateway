@@ -43,8 +43,6 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
      > **Note**: If you see `ansible-galaxy: command not found`, you have to relogin (or reboot your Pi) and then try again.
   <details>
     <summary>Continue Installation with WebUI</summary>
-   
-   **This is still under testing!** If you afraid of it - just skip to CLI installation.
 
   5. Run [Webinstall](https://github.com/d3vilh/raspberry-gtw-webconfig) binary:
      ```shell
@@ -64,7 +62,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
   10. The installation process will take some time.
       Once that's done, it'll be like you have a new **Raspberry Gateway** up and running.
 
-      You can scroll down for `Quick Links` or close browser window and anjoy your new Raspberry Gateway.
+      You can close browser window and anjoy your new Raspberry Gateway.
   </details>
 
   Afraid of GUI? Need more control?
@@ -72,7 +70,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
   <details>
     <summary>Install everything with CLI</summary>
    
-   **Safiest option**. Tested may times and works like a charm.
+   > **Note**: If you alredy did installation with `webinstall`, you don't need this step.
 
   5. Make copies of the configuration files and modify them for your enviroment:
       ```shell
@@ -82,7 +80,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
   6. **Double check** that `ansible_user` is correct for `inventory.yml`. First, uncommented section preconfigured to install everything on your local Raspberry-Pi, if you're would like to run all the installtion towards remote server - comment this section and uncomment the second one, then modify IP and check that user is correct again.
      
      > **Note**: To make all necesary changes: `nano inventory.yml`, save the file - `Ctrl+O` and `Ctrl+X` to exit.
-  8. Modify `config.yml` to **enabe or disable desired containers** to be installed on your Pi:
+  7. Modify `config.yml` to **enabe or disable desired containers** to be installed on your Pi:
      **To enable** Prtainer - change `enable_portainer: false` option to `enable_portainer: true` and vs to disable.
 
       <details>
@@ -125,12 +123,13 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
       </details>
 
       > **Note**: Default configuration options are bold.
-  9. Modify advanced configuration options in `advanced.config.yml` if needed.
-  10. Run installation playbook:
+  8. Modify advanced configuration options in `advanced.config.yml` if needed.
+  9. Run installation playbook: 
      ```shell
      ansible-playbook main.yml
      ```
      > **Note**: **If running locally on the Pi**: You may have error like `Error while fetching server API version`. You have to relogin (or reboot your Pi) and then run the playbook again.
+
   </details>
   
 # Features
