@@ -1,9 +1,10 @@
 ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/Raspberry-Gateway-logo.png) 
-This project provides a simple yet powerful solution for managing your home internet gateway using a Raspberry Pi. The gateway includes a range of Docker containers, each serving a specific purpose to enhance your internet experience:
+This project provides a simple but powerful solution for managing your home internet gateway using a Raspberry Pi. The gateway includes a range of Docker containers, each serving a specific purpose to enhance your internet experience:
 
   * [**Portainer**](https://www.portainer.io) a lightweight *universal* management GUI for all Docker containers which included into this project. 
   * [**OpenVPN Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-server/openvpn-docker) container with OpenVPN, simple [**WEB UI**](https://github.com/d3vilh/openvpn-ui) and VPN subnets support. 
   * [**OpenVPN Client**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) container for qBittorrent connection to the external VPN server.
+  * [**GlueTun**](https://github.com/qdm12/gluetun) as universal VPN client for multiple VPN providers and using DNS over TLS, with a few proxy servers built-in.
   * [**qBittorrent**](https://www.qbittorrent.org) -  an open-source software alternative to µTorrent. 
   * [**Pi-hole**](https://pi-hole.net) container with network-wide ad-blocking&local DNS solution. Can be paried with Unbound.
   * [**Unbound DNS**](https://nlnetlabs.nl/projects/unbound/about/) container with the validating, recursive, caching DNS resolver. Designed to be fast and lean.
@@ -12,7 +13,7 @@ This project provides a simple yet powerful solution for managing your home inte
   * [**WireGuard Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) container with own WEB UI. 
   * **Various Prometheus exporters**: cAdviser, AirGradient, StarLink, ShellyPlug and others. 
 
-Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive solution for managing and monitoring your home internet experience with ease.
+Overall, this Raspberry Pi Home Internet Gateway provides a universal solution for managing and monitoring your home internet experience with ease.
 
 [![latest version](https://img.shields.io/github/v/release/d3vilh/raspberry-gateway?color=%2344cc11&label=Latest%20release&style=for-the-badge)](https://github.com/d3vilh/raspberry-gateway/releases/tag/latest)
 # Requirements
@@ -148,8 +149,10 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
 <img src="/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="600">
 </p>
 
-[**OpenVPN Client**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) container for using external OpenVPN server connection for selected containers of this project. 
-> **Note**: qBitTorrent can be configured to use OpenVPN Client connection to download torrents the way your ISP will not recognize!
+[**OpenVPN Client**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) container for using external OpenVPN server connection for selected containers of this project.
+> **Note**: qBitTorrent can be configured to use OpenVPN Client or Gluetun connection to download torrents the way your ISP will not recognize!
+
+[**GlueTun**](https://github.com/qdm12/gluetun) container as universal VPN client for using multiple commercial VPN providers and  DNS over TLS, with a few proxy servers built-in.
 
 [**qBittorrent**](https://www.qbittorrent.org) an open-source software alternative to µTorrent, with lightweight web administration interface:
 
@@ -256,6 +259,20 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
 
    > **Note**: If you just looking for all purpose OpenVPN client for Raspberry-Pi or x86 PC, please check [**vpntv**](https://github.com/d3vilh/vpntv) project.
 
+  ## Gluetun VPN Client
+   #### Gluetun Client facts:
+   * **UI access port** no UI available, running in Back-End
+   * **Default password** password is not required
+   * **External ports** `8888/tcp` as HTTP proxy, `8388/tcp`&`8388/udp` for Shadowsocks
+   * **Configuration files** are available after the installation and located in `~/openvpn-client/*` directory. 
+   * **Configuration Options** which necessary for the installation (defined in `config.yml` file)`):
+     * `gluetun_vpn_service_provider` - is your VPN service provider (expressvpn, ivpn, nordvpn, protonvpn, surfshark, etc.) full list of supported providers [available here](https://github.com/qdm12/gluetun-wiki/tree/main/setup/providers). 
+     * `gluetun_openvpn_user` - is your OpenVPN user provided by VPN provider
+     * `gluetun_openvpn_password` - is your OpenVPN password, provided by VPN provider
+     * `gluetun_server_countries` -  is comma separated list of countries
+     * `gluetun_server_update_per` - is period to update your servers list using the built-in Gluetun update mechanisms (curently hardcoded to 24h)
+   * **Advanced Configuration** No advanced configuration.
+
   ## WireGuard Server
    #### WireGuard facts:
    * **UI access port** `http://localhost:5000/`, (*change `localhost` to your Raspberry host ip/name*)
@@ -320,6 +337,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a comprehensive soluti
   * [**Pi-hole**](https://pi-hole.net)
   * [**Unbound DNS**](https://nlnetlabs.nl/projects/unbound/about/)
   * [**Technitium-dns**](https://technitium.com/dns/)
+  * [**Gluetun**](https://github.com/qdm12/gluetun)
   * [**qBittorrent**](https://www.qbittorrent.org)
   * [**Portainer**](https://www.portainer.io)
   * [**wireguard-ui**](https://github.com/ngoduykhanh/wireguard-ui)

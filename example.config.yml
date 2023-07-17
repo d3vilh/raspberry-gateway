@@ -65,6 +65,7 @@ gluetun_vpn_service_provider: nordvpn           # Set your VPN provider: cybergh
 gluetun_openvpn_user: "SecretUser"              # Set your OpenVPN username
 gluetun_openvpn_password: "gagaZush"            # Set your OpenVPN password
 gluetun_server_countries: "Netherlands"         # Comma separated list of countries
+gluetun_server_update_per: 24h                  # Period to update your servers list using the built-in Gluetun update mechanisms
 
 #    _ _ _ _         _____               _ 
 #   | | | |_|___ ___|   __|_ _ ___ ___ _| |

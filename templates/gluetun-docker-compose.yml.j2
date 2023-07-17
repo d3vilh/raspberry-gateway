@@ -21,6 +21,7 @@ services:
       # Server list updater
       # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
       - UPDATER_PERIOD=24h
+      # - UPDATER_PERIOD={{ gluetun_server_update_per }} # We are not ready for this at the moment :|
     volumes:
       - ./:/config
     ports:
