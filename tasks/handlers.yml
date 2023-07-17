@@ -13,6 +13,20 @@
     restarted: true
   become: false
 
+- name: Restart OpenVPN client
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/openvpn-client/"
+    build: false
+    restarted: true
+  become: false
+
+- name: Restart gluetun
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/gluetun/"
+    build: false
+    restarted: true
+  become: false
+
 - name: Restart raspi-monitoring
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/monitoring/"
@@ -48,13 +62,6 @@
     restarted: true
   become: false
 
-- name: Restart OpenVPN client
-  community.docker.docker_compose:
-    project_src: "{{ config_dir }}/openvpn-client/"
-    build: false
-    restarted: true
-  become: false
-
 - name: Restart wireguard
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/wireguard/"
@@ -72,13 +79,6 @@
 - name: Restart Technitium DNS Server
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/tech-dns/"
-    build: false
-    restarted: true
-  become: false
-
-- name: Restart gluetun
-  community.docker.docker_compose:
-    project_src: "{{ config_dir }}/gluetun/"
     build: false
     restarted: true
   become: false

@@ -39,6 +39,13 @@
       ansible.builtin.import_tasks: tasks/openvpn-client.yml
       when: ovpn_client_enable
 
+#  TESTING GLUETUN
+#  DONT USE ON PROD!!!!
+
+    - name: Setup Gluetun Server
+      ansible.builtin.import_tasks: tasks/gluetun.yml
+      when: gluetun_vpnclient_enable
+
     - name: Setup OpenVPN Server
       ansible.builtin.import_tasks: tasks/openvpn-server.yml
       when: ovpn_server_enable
@@ -70,10 +77,3 @@
     - name: Setup Shelly Plug Monitoring
       ansible.builtin.import_tasks: tasks/shelly-plug.yml
       when: shelly_plug_monitoring_enable
-
-#  TESTING GLUETUN
-#  DONT USE ON PROD!!!!
-
-    - name: Setup Gluetun Server
-      ansible.builtin.import_tasks: tasks/gluetun.yml
-      when: gluetun_vpnclient_enable

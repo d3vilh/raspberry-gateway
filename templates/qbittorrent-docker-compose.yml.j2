@@ -12,18 +12,16 @@ services:
     volumes:
       - ./config:/config
       - ./downloads:/downloads
-{% if not qbittorrent_inside_vpn or not qbittorrent_inside_gluetun %}
+{% if not qbittorrent_inside_vpn and not qbittorrent_inside_gluetun %}
     ports:
       - {{ qbittorrent_webui_port }}:{{ qbittorrent_webui_port }}
       - 6881:6881
       - 6881:6881/udp
 {% endif %}
-
     restart: unless-stopped
 {% if qbittorrent_inside_vpn %}
     network_mode: container:openvpn-client
 {% endif %}
-
 {% if qbittorrent_inside_gluetun %}
     network_mode: container:gluetun
 {% endif %}
