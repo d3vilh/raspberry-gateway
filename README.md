@@ -152,7 +152,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
 [**OpenVPN Client**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) container for using external OpenVPN server connection for selected containers of this project.
 > **Note**: qBitTorrent can be configured to use OpenVPN Client or Gluetun connection to download torrents the way your ISP will not recognize!
 
-[**GlueTun**](https://github.com/qdm12/gluetun) container as universal VPN client for using multiple commercial VPN providers and  DNS over TLS, with a few proxy servers built-in.
+[**GlueTun**](https://github.com/qdm12/gluetun) container as universal VPN client for using with multiple commercial VPN providers and built-in DNS over TLS, with a few proxy servers.
 
 [**qBittorrent**](https://www.qbittorrent.org) an open-source software alternative to µTorrent, with lightweight web administration interface:
 
