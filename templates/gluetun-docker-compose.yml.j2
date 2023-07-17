@@ -3,28 +3,24 @@ services:
   gluetun:
     image: qmcgaw/gluetun
     container_name: gluetun
-    # line above must be uncommented to allow external containers to connect.
-    # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/connect-a-container-to-gluetun.md#external-container-to-gluetun
     cap_add:
       - NET_ADMIN
     devices:
       - /dev/net/tun:/dev/net/tun
     environment:
       # See https://github.com/qdm12/gluetun-wiki/tree/main/setup#setup
-      # - VPN_SERVICE_PROVIDER=ivpn
       - VPN_SERVICE_PROVIDER={{ gluetun_vpn_service_provider }}
       - VPN_TYPE=openvpn
       # OpenVPN:
       - OPENVPN_USER={{ gluetun_openvpn_user }}
       - OPENVPN_PASSWORD={{ gluetun_openvpn_password }}
-      # Wireguard:
+      # Wireguard: Will be in future versions.
       # - WIREGUARD_PRIVATE_KEY=wOEI9rqqbDwnN8/Bpp22sVz48T71vJ4fYmFWujulwUU=
       # - WIREGUARD_ADDRESSES=10.64.222.21/32
-      # Timezone for accurate log times
       - TZ={{ ur_timezone }}
       # Server list updater
       # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
-      # - UPDATER_PERIOD=
+      - UPDATER_PERIOD=24h
     volumes:
       - ./:/config
     ports:
