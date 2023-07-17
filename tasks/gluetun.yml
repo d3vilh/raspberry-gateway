@@ -6,15 +6,6 @@
     mode: 0755
   become: false
 
-- name: Synchronize Gluetun directory.
-  ansible.posix.synchronize:
-    src: gluetun
-    dest: "{{ config_dir }}/"
-    delete: false
-    recursive: true
-    perms: false
-  become: false
-
 - name: Copy Gluetun docker-compose template to Pi.
   ansible.builtin.template:
     src: templates/{{ item.src }}
