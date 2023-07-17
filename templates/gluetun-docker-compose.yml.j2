@@ -1,0 +1,41 @@
+version: "3"
+services:
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      # See https://github.com/qdm12/gluetun-wiki/tree/main/setup#setup
+      - VPN_SERVICE_PROVIDER={{ gluetun_vpn_service_provider }}
+      - VPN_TYPE=openvpn
+      # OpenVPN:
+      - OPENVPN_USER={{ gluetun_openvpn_user }}
+      - OPENVPN_PASSWORD={{ gluetun_openvpn_password }}
+      # Wireguard: Will be in future versions.
+      # - WIREGUARD_PRIVATE_KEY=wOEI9rqqbDwnN8/Bpp22sVz48T71vJ4fYmFWujulwUU=
+      # - WIREGUARD_ADDRESSES=10.64.222.21/32
+      - TZ={{ ur_timezone }}
+      # Server list updater
+      # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
+      - UPDATER_PERIOD=24h
+      # - UPDATER_PERIOD={{ gluetun_server_update_per }} # We are not ready for this at the moment :|
+    volumes:
+      - ./:/config
+    ports:
+      - 8888:8888/tcp # HTTP proxy
+      - 8388:8388/tcp # Shadowsocks
+      - 8388:8388/udp # Shadowsocks
+      - {{ qbittorrent_webui_port }}:{{ qbittorrent_webui_port }}
+      - 6881:6881
+      - 6881:6881/udp
+    networks:
+      vpn-net:
+    restart: unless-stopped
+
+networks:
+  vpn-net:
+    ipam:
+      driver: default

@@ -13,6 +13,20 @@
     restarted: true
   become: false
 
+- name: Restart OpenVPN client
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/openvpn-client/"
+    build: false
+    restarted: true
+  become: false
+
+- name: Restart gluetun
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/gluetun/"
+    build: false
+    restarted: true
+  become: false
+
 - name: Restart raspi-monitoring
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/monitoring/"
@@ -44,13 +58,6 @@
 - name: Restart OpenVPN Server
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/openvpn-server/"
-    build: false
-    restarted: true
-  become: false
-
-- name: Restart OpenVPN client
-  community.docker.docker_compose:
-    project_src: "{{ config_dir }}/openvpn-client/"
     build: false
     restarted: true
   become: false

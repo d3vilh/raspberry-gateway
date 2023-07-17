@@ -52,6 +52,21 @@ ovpn_client_enable: false                       # Set true to enable internal Op
 ovpn_client_cert: "webinstall-client.ovpn"         # Set your ovpn-client certificate name
 ovpn_client_allowed_subnet: "192.168.88.0/24"   # Allowed subnet for ovpn-client. You must have your local network defined here.
 
+#    _____ _         _____         
+#   |   __| |_ _ ___|_   _|_ _ ___ 
+#   |  |  | | | | -_| | | | | |   |
+#   |_____|_|___|___| |_| |___|_|_|
+#   Universal VPN Client for multiple VPN Providers
+#
+# TESTING! DO NOT USE ON PRODUCTION!               
+gluetun_vpnclient_enable: false                 # Set true to enable Gluetun
+                                                # See the list of all providers https://github.com/qdm12/gluetun-wiki/tree/main/setup/providers
+gluetun_vpn_service_provider: nordvpn           # Set your VPN provider: cyberghost, expressvpn, fastestvpn, hidemyass, ipvanish, ivpn, nordvpn, perfect privacy, privado, private internet access, privatevpn, protonvpn, purevpn, slickvpn, surfshark, torguard, vpnsecure, vpn unlimited, vyprvpn, wevpn, windscribe
+gluetun_openvpn_user: "SecretUser"              # Set your OpenVPN username
+gluetun_openvpn_password: "gagaZush"            # Set your OpenVPN password
+gluetun_server_countries: "Netherlands"         # Comma separated list of countries
+gluetun_server_update_per: 24h                  # Period to update your servers list using the built-in Gluetun update mechanisms
+
 #    _ _ _ _         _____               _ 
 #   | | | |_|___ ___|   __|_ _ ___ ___ _| |
 #   | | | | |  _| -_|  |  | | | .'|  _| . |
@@ -77,6 +92,7 @@ qbittorrent_enable: false                       # Set true to enable qBittorrent
 qbittorrent_default_password: admin/adminadmin  # !Change this password wia WebUI!
 # Local VPN configuration. Allows qBittorrent runs through VPN client connection.
 qbittorrent_inside_vpn: false                   # Set true to route qBitTorrent traffic via internal OpenVPN client
+qbittorrent_inside_gluetun: false               # Set true to route qBitTorrent traffic via Gluetun VPN client
 
 #    _____         _ _               
 #   |     |___ ___|_| |_ ___ ___ ___ 
