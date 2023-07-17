@@ -26,7 +26,7 @@ services:
       # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
       # - UPDATER_PERIOD=
     volumes:
-      - ./:/
+      - ./:/config
     ports:
       - 8888:8888/tcp # HTTP proxy
       - 8388:8388/tcp # Shadowsocks

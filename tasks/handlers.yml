@@ -75,3 +75,10 @@
     build: false
     restarted: true
   become: false
+
+- name: Restart gluetun
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/gluetun/"
+    build: false
+    restarted: true
+  become: false
