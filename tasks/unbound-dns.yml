@@ -53,6 +53,4 @@
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/unbound-dns/"
     build: false
-  async: 320
-  timeout: 600
   become: false

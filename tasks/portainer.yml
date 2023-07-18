@@ -26,6 +26,4 @@
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/portainer/"
     build: false
-  async: 320
-  timeout: 600
   become: false
