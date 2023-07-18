@@ -6,6 +6,12 @@
     mode: 0755
   become: false
 
+- name: Print DOCKER_CLIENT_TIMEOUT and COMPOSE_HTTP_TIMEOUT
+  debug:
+    var:
+      DOCKER_CLIENT_TIMEOUT: "{{ lookup('env', 'DOCKER_CLIENT_TIMEOUT') }}"
+      COMPOSE_HTTP_TIMEOUT: "{{ lookup('env', 'COMPOSE_HTTP_TIMEOUT') }}"
+
 # WA for 60sec TMO bug
 - name: Pull latest Portainer Docker image
   community.general.docker_image:
