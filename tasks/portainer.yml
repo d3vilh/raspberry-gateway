@@ -6,6 +6,13 @@
     mode: 0755
   become: false
 
+# WA for 60sec TMO bug
+- name: Pull latest Portainer Docker image
+  community.general.docker_image:
+    name: portainer/portainer-ce
+    tag: latest
+  become: false
+
 - name: Copy Portainer docker-compose template to Pi.
   ansible.builtin.template:
     src: templates/portainer-docker-compose.yml.j2
