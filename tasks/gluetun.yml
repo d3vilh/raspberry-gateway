@@ -28,6 +28,7 @@
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/gluetun/"
     build: false
-  async: 320
-  timeout: 600
   become: false
+  environment:
+    DOCKER_CLIENT_TIMEOUT: '180'
+    COMPOSE_HTTP_TIMEOUT: '180'
