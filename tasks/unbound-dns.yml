@@ -9,6 +9,13 @@
     - "{{ config_dir }}/unbound-dns/log-unbound/"
   become: false
 
+- name: Pull latest UnboundDNS Docker image
+  community.general.docker_image:
+    source: pull
+    name: d3vilh/unbound-docker
+    tag: latest
+  become: false
+
 - name: Set net.core.rmem_max and net.core.wmem_max kernel parameters to 32MB. Necessary for Unbound DNS
   ansible.builtin.sysctl:
     name: "{{ item }}"
@@ -47,3 +54,6 @@
     project_src: "{{ config_dir }}/unbound-dns/"
     build: false
   become: false
+  environment:
+    DOCKER_CLIENT_TIMEOUT: '180'
+    COMPOSE_HTTP_TIMEOUT: '180'

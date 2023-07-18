@@ -6,6 +6,13 @@
     mode: 0755
   become: false
 
+- name: Pull latest TechDNS Docker image
+  community.general.docker_image:
+    source: pull
+    name: technitium/dns-server
+    tag: latest
+  become: false
+
 - name: Copy Technitium DNS docker-compose template to Pi.
   ansible.builtin.template:
     src: templates/tech-dns-docker-compose.yml.j2
@@ -19,3 +26,6 @@
     project_src: "{{ config_dir }}/tech-dns/"
     build: false
   become: false
+  environment:
+    DOCKER_CLIENT_TIMEOUT: '180'
+    COMPOSE_HTTP_TIMEOUT: '180'
