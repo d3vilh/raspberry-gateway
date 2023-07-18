@@ -111,6 +111,12 @@
       echo "The line is already present"
     fi
 
+# WA for 60sec TMO bug
+- name: Pull latest Grafana Docker image
+  community.general.docker_image:
+    name: grafana/grafana
+  become: false
+
 - name: Ensure raspi-monitoring environment is running.
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/monitoring/"
