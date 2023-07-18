@@ -115,4 +115,5 @@
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/monitoring/"
     build: false
+    timeout: 300
   become: false

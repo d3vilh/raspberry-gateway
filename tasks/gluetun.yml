@@ -21,4 +21,5 @@
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/gluetun/"
     build: false
+    timeout: 300
   become: false

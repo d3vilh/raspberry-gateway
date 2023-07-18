@@ -18,4 +18,5 @@
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/qbittorrent/"
     build: false
+    timeout: 300
   become: false
