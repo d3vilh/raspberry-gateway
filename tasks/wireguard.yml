@@ -30,5 +30,5 @@
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/wireguard/"
     build: false
-    async: 240
+  timeout: 300
   become: false
