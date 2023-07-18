@@ -9,6 +9,7 @@
 # WA for 60sec TMO bug
 - name: Pull latest Pi-hole Docker image
   community.general.docker_image:
+    source: pull  
     name: pihole/pihole
     tag: latest
   become: false
