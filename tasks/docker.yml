@@ -30,24 +30,6 @@
   shell: 'export DOCKER_CLIENT_TIMEOUT=180 && export COMPOSE_HTTP_TIMEOUT=180'
   ignore_errors: true
 
-- name: Print DOCKER_CLIENT_TIMEOUT and COMPOSE_HTTP_TIMEOUT
-  debug:
-    var:
-      DOCKER_CLIENT_TIMEOUT: "{{ lookup('env', 'DOCKER_CLIENT_TIMEOUT') }}"
-      COMPOSE_HTTP_TIMEOUT: "{{ lookup('env', 'COMPOSE_HTTP_TIMEOUT') }}"
-
-- name: Set DOCKER_CLIENT_TIMEOUT and COMPOSE_HTTP_TIMEOUT
-  ansible.builtin.environment:
-    DOCKER_CLIENT_TIMEOUT: "180"
-    COMPOSE_HTTP_TIMEOUT: "180"
-
-- name: 2ND TIME Print DOCKER_CLIENT_TIMEOUT and COMPOSE_HTTP_TIMEOUT
-  debug:
-    var:
-      DOCKER_CLIENT_TIMEOUT: "{{ lookup('env', 'DOCKER_CLIENT_TIMEOUT') }}"
-      COMPOSE_HTTP_TIMEOUT: "{{ lookup('env', 'COMPOSE_HTTP_TIMEOUT') }}"
-
-
 - name: Ensure dependencies are installed (Debian).
   ansible.builtin.apt:
     name:
