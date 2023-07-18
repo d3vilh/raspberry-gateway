@@ -6,6 +6,13 @@
     mode: 0755
   become: false
 
+- name: Pull latest WireGuard Docker image
+  community.general.docker_image:
+    source: pull
+    name: d3vilh/wireguard-ui-arm
+    tag: latest
+  become: false
+
 - name: Synchronize WireGuard directory.
   ansible.posix.synchronize:
     src: wireguard

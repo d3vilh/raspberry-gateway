@@ -6,6 +6,13 @@
     mode: 0755
   become: false
 
+- name: Pull latest Gluetun Docker image
+  community.general.docker_image:
+    source: pull
+    name: qmcgaw/gluetun
+    tag: latest
+  become: false
+
 - name: Copy Gluetun docker-compose template to Pi.
   ansible.builtin.template:
     src: templates/{{ item.src }}

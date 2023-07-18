@@ -6,6 +6,13 @@
     mode: 0755
   become: false
 
+- name: Pull latest qBitTorrent Docker image
+  community.general.docker_image:
+    source: pull
+    name: lscr.io/linuxserver/qbittorrent
+    tag: latest
+  become: false
+
 - name: Copy qbitTorrent docker-compose template to Pi.
   ansible.builtin.template:
     src: templates/qbittorrent-docker-compose.yml.j2
