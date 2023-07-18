@@ -6,6 +6,14 @@
     mode: 0755
   become: false
 
+# WA for 60sec TMO bug
+- name: Pull latest Pi-hole Docker image
+  community.general.docker_image:
+    source: pull  
+    name: pihole/pihole
+    tag: latest
+  become: false
+
 - name: Copy Pi-hole docker-compose template to Pi
   ansible.builtin.template:
     src: templates/pi-hole-docker-compose.yml.j2
@@ -32,5 +40,7 @@
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/pi-hole/"
     build: false
-    timeout: 180
   become: false
+  environment:
+    DOCKER_CLIENT_TIMEOUT: '180'
+    COMPOSE_HTTP_TIMEOUT: '180'
