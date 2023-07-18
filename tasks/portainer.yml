@@ -9,6 +9,7 @@
 # WA for 60sec TMO bug
 - name: Pull latest Portainer Docker image
   community.general.docker_image:
+    source: pull
     name: portainer/portainer-ce
     tag: latest
   become: false

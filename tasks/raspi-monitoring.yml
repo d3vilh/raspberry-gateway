@@ -114,7 +114,9 @@
 # WA for 60sec TMO bug
 - name: Pull latest Grafana Docker image
   community.general.docker_image:
+    source: pull
     name: grafana/grafana
+    tag: latest
   become: false
 
 - name: Ensure raspi-monitoring environment is running.
