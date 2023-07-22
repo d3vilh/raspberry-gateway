@@ -344,4 +344,6 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
   * [**cAdviser**](https://github.com/d3vilh/cadvisor) and 
   * other pieces of software used in this project.
 
+<a href="https://www.buymeacoffee.com/d3vilh" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
+
 May 2021, [**d3vilh**](https://github.com/d3vilh)
