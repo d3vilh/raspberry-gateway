@@ -13,6 +13,8 @@ services:
       # Server list updater
       # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
       - UPDATER_PERIOD={{ gluetun_server_update_per }}
+      - SERVER_COUNTRIES={{ gluetun_server_countries }}
+      - SERVER_CITIES={{ gluetun_server_cities }}
       - VPN_SERVICE_PROVIDER={{ gluetun_vpn_service_provider }}
       - VPN_TYPE={{ gluetun_vpn_type }}
 {% if gluetun_vpn_type == 'openvpn' %}
@@ -25,6 +27,12 @@ services:
 {% elif gluetun_vpn_type == 'wireguard' %}
       # Wireguard:
       - WIREGUARD_PRIVATE_KEY={{ gluetun_wireguard_private_key }}
+{% if gluetun_wireguard_preshared_key != 'none' %}
+      - WIREGUARD_PRESHARED_KEY={{ gluetun_wireguard_preshared_key }}
+{% endif %}
+{% if gluetun_wireguard_public_key != 'none' %}
+      - WIREGUARD_PUBLIC_KEY={{ gluetun_wireguard_public_key }}
+{% endif %}
       - WIREGUARD_ADDRESSES={{ gluetun_wireguard_address }}
 {% endif %}
     volumes:
