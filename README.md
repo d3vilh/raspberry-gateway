@@ -231,6 +231,8 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
    * **Downloaded files** will be stored in the `~/qbittorrent/downloads` directory.
    * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L74) before the installation
 
+  > **Note**: To prove you are **connected via VPN** run this command `sudo docker exec qbittorrent wget -qO - ifconfig.me` it should return your VPN IP address.
+
   ## OpenVPN Server
    #### OpenVPN Server facts:
    * **UI access port** `http://localhost:8080/`, (*change `localhost` to your Raspberry host ip/name*)
@@ -254,6 +256,8 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
    * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L56) before the installation:
      * `ovpn_client_secret: "filename.txt"` - filename with your OpenVPN connection profile user and password if you have any. You have to put it into `~/raspberry-gaveway/openvpn-client/` directory before installation and update its name in `ovpn_client_secret`. Use the [**example-credentials.txt**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-client/example-credentials.txt#L1) as refference.
      * `ovpn_client_killswitch: true` - If set to `true`, it will block all the traffic when VPN is connected, except the one from the `ovpn_client_allowed_subnet` subnet.
+
+  > **Note**: To prove you are **connected via VPN** run this command `sudo docker exec openvpn-client wget -qO - ifconfig.me` it should return your VPN IP address.
 
   For more documentation and How-to, please check dedicated [**openvpn-client README.md**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) file.
 
