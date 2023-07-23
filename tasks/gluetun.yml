@@ -6,6 +6,15 @@
     mode: 0755
   become: false
 
+- name: Synchronize Gluetun directory.
+  ansible.posix.synchronize:
+    src: gluetun
+    dest: "{{ config_dir }}/"
+    delete: false
+    recursive: true
+    perms: false
+  become: false
+
 - name: Pull latest Gluetun Docker image
   community.general.docker_image:
     source: pull

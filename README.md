@@ -127,7 +127,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
   8. Modify advanced configuration options in `advanced.config.yml` if needed.
   9. Run installation playbook: 
      ```shell
-     ansible-playbook main.yml
+     ansible-playbook main.yml -i inventory.yml
      ```
      > **Note**: **If running locally on the Pi**: You may have error like `Error while fetching server API version`. You have to relogin (or reboot your Pi) and then run the playbook again.
 

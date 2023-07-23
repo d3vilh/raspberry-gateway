@@ -2,3 +2,4 @@
 config.yml
 inventory.ini
 webinstall-client.ovpn
+gluetun/ovpn-client/glue-client.ovpn
