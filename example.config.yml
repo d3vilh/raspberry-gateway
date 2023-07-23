@@ -60,25 +60,26 @@ ovpn_client_allowed_subnet: "192.168.88.0/24"   # Allowed subnet for ovpn-client
 #
 # TESTING! DO NOT USE ON PRODUCTION!               
 
+gluetun_vpnclient_enable: false                 # Set true to enable Gluetun
 gluetun_server_countries: "Netherlands"         # Comma separated list of countries
-gluetun_server_update_per: 24h                  # Period to update your servers list using the built-in Gluetun update mechanisms
-gluetun_vpn_service_provider: nordvpn           # Set your VPN provider: cyberghost, expressvpn, fastestvpn, hidemyass, ipvanish, ivpn, nordvpn, perfect privacy, privado, private internet access, privatevpn, protonvpn, purevpn, slickvpn, surfshark, torguard, vpnsecure, vpn unlimited, vyprvpn, wevpn, windscribe
-                                                # See the list of all providers https://github.com/qdm12/gluetun-wiki/tree/main/setup/providers
+gluetun_server_cities: "Amsterdam"              # Comma separated list of cities
 gluetun_server_update_per: 24h                  # Period to update your servers list using the built-in Gluetun update mechanisms. 
                                                 # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
+gluetun_vpn_service_provider: nordvpn           # Set your VPN provider: cyberghost, expressvpn, fastestvpn, hidemyass, ipvanish, ivpn, nordvpn, perfect privacy, privado, private internet access, privatevpn, protonvpn, purevpn, slickvpn, surfshark, torguard, vpnsecure, vpn unlimited, vyprvpn, wevpn, windscribe
+                                                # See the list of all providers https://github.com/qdm12/gluetun-wiki/tree/main/setup/providers
 gluetun_vpn_type: wireguard                     # Set your VPN type: openvpn, wireguard
 
 # OPENVPN PART:
-gluetun_vpnclient_enable: false                 # Set true to enable OpenVPN Gluetun
 gluetun_openvpn_user: "SecretUser"              # Set your OpenVPN username
 gluetun_openvpn_password: "gagaZush"            # Set your OpenVPN password
 gluetun_vpnclient_custom: false                 # Set true to enable custom OpenVPN configuration below
 gluetun_openvpn_custom_conf: "ovpn-custom.conf" # Set your OpenVPN custom configuration. See
 
 # WIREGUARD PART:
-gluetun_wireguard_client_enable: false          # Set true to enable Wireguard Gluetun
+# gluetun_wireguard_client_enable: false        # Set true to enable Wireguard Gluetun
 gluetun_wireguard_private_key: "yCbHtK...X2c="  # Valid base 58 Wireguard Client key. Wireguard client private key to use.
-gluetun_wireguard_public_key: "yCbHtK...X2c="   # Valid base 58 Wireguard Server key. Wireguard Server public key to use.
+gluetun_wireguard_public_key: "none"            # Valid base 58 Wireguard Server key. Wireguard Server public key to use.
+gluetun_wireguard_preshared_key: "none"         #
 gluetun_wireguard_address: "10.99.99.99/32"     # Valid IP network interface address in the format xx.xx.xx.xx/xx or ff:ff:ff...:ff/128
 
 #    _ _ _ _         _____               _ 
