@@ -81,6 +81,8 @@ gluetun_wireguard_private_key: "yCbHtK...X2c="  # Valid base 58 Wireguard Client
 gluetun_wireguard_public_key: "none"            # Valid base 58 Wireguard Server key. Wireguard Server public key to use.
 gluetun_wireguard_preshared_key: "none"         #
 gluetun_wireguard_address: "10.99.99.99/32"     # Valid IP network interface address in the format xx.xx.xx.xx/xx or ff:ff:ff...:ff/128
+gluetun_wireguard_endpoint_ip: "none"           # Valid IP address in the format xx.xx.xx.xx:xxxxx or [ff:ff:ff...:ff]:xxxxx
+gluetun_wireguard_endpoint_port: "none"         # Valid port number in the format xxxx
 
 #    _ _ _ _         _____               _ 
 #   | | | |_|___ ___|   __|_ _ ___ ___ _| |

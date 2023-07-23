@@ -33,6 +33,12 @@ services:
 {% if gluetun_wireguard_public_key != 'none' %}
       - WIREGUARD_PUBLIC_KEY={{ gluetun_wireguard_public_key }}
 {% endif %}
+{% if gluetun_wireguard_endpoint_ip != 'none' %}
+      - VPN_ENDPOINT_IP={{ gluetun_wireguard_endpoint_ip }}
+{% endif %}
+{% if gluetun_wireguard_endpoint_port != 'none' %}
+      - VPN_ENDPOINT_PORT={{ gluetun_wireguard_endpoint_port }}
+{% endif %}
       - WIREGUARD_ADDRESSES={{ gluetun_wireguard_address }}
 {% endif %}
     volumes:
