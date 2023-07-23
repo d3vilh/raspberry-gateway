@@ -9,26 +9,53 @@ services:
       - /dev/net/tun:/dev/net/tun
     environment:
       # See https://github.com/qdm12/gluetun-wiki/tree/main/setup#setup
-      - VPN_SERVICE_PROVIDER={{ gluetun_vpn_service_provider }}
-      - VPN_TYPE=openvpn
-      # OpenVPN:
-      - OPENVPN_USER={{ gluetun_openvpn_user }}
-      - OPENVPN_PASSWORD={{ gluetun_openvpn_password }}
-      # Wireguard: Will be in future versions.
-      # - WIREGUARD_PRIVATE_KEY=wOEI9rqqbDwnN8/Bpp22sVz48T71vJ4fYmFWujulwUU=
-      # - WIREGUARD_ADDRESSES=10.64.222.21/32
       - TZ={{ ur_timezone }}
       # Server list updater
       # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
-      - UPDATER_PERIOD=24h
-      # - UPDATER_PERIOD={{ gluetun_server_update_per }} # We are not ready for this at the moment :|
+      - UPDATER_PERIOD={{ gluetun_server_update_per }}
+{% if gluetun_vpn_type != 'openvpn' and gluetun_vpn_service_provider != 'custom' %}
+      - SERVER_COUNTRIES={{ gluetun_server_countries }}
+      - SERVER_CITIES={{ gluetun_server_cities }}
+{% endif %}
+      - VPN_SERVICE_PROVIDER={{ gluetun_vpn_service_provider }}
+      - VPN_TYPE={{ gluetun_vpn_type }}
+{% if gluetun_vpn_type == 'openvpn' %}
+      # OpenVPN:
+{% if gluetun_openvpn_user != 'none' %}
+      - OPENVPN_USER={{ gluetun_openvpn_user }}
+{% endif %}
+{% if gluetun_openvpn_password != 'none' %}
+      - OPENVPN_PASSWORD={{ gluetun_openvpn_password }}
+{% endif %}
+{% if gluetun_vpnclient_custom == true %}
+      - OPENVPN_CUSTOM_CONFIG=/ovpn-client/{{ gluetun_openvpn_custom_conf }}
+{% endif %}
+{% elif gluetun_vpn_type == 'wireguard' %}
+      # Wireguard:
+      - WIREGUARD_PRIVATE_KEY={{ gluetun_wireguard_private_key }}
+{% if gluetun_wireguard_preshared_key != 'none' %}
+      - WIREGUARD_PRESHARED_KEY={{ gluetun_wireguard_preshared_key }}
+{% endif %}
+{% if gluetun_wireguard_public_key != 'none' %}
+      - WIREGUARD_PUBLIC_KEY={{ gluetun_wireguard_public_key }}
+{% endif %}
+{% if gluetun_wireguard_endpoint_ip != 'none' %}
+      - VPN_ENDPOINT_IP={{ gluetun_wireguard_endpoint_ip }}
+{% endif %}
+{% if gluetun_wireguard_endpoint_port != 'none' %}
+      - VPN_ENDPOINT_PORT={{ gluetun_wireguard_endpoint_port }}
+{% endif %}
+      - WIREGUARD_ADDRESSES={{ gluetun_wireguard_address }}
+{% endif %}
     volumes:
-      - ./:/config
+      - ./ovpn-client:/ovpn-client
     ports:
       - 8888:8888/tcp # HTTP proxy
       - 8388:8388/tcp # Shadowsocks
       - 8388:8388/udp # Shadowsocks
+{% if qbittorrent_inside_gluetun %}
       - {{ qbittorrent_webui_port }}:{{ qbittorrent_webui_port }}
+{% endif %}
       - 6881:6881
       - 6881:6881/udp
     networks:

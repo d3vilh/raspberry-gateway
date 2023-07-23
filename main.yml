@@ -39,9 +39,6 @@
       ansible.builtin.import_tasks: tasks/openvpn-client.yml
       when: ovpn_client_enable
 
-#  TESTING GLUETUN
-#  DONT USE ON PROD!!!!
-
     - name: Setup Gluetun Server
       ansible.builtin.import_tasks: tasks/gluetun.yml
       when: gluetun_vpnclient_enable
