@@ -13,16 +13,22 @@ services:
       # Server list updater
       # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
       - UPDATER_PERIOD={{ gluetun_server_update_per }}
+{% if gluetun_vpn_type != 'openvpn' and gluetun_vpn_service_provider != 'custom' %}
       - SERVER_COUNTRIES={{ gluetun_server_countries }}
       - SERVER_CITIES={{ gluetun_server_cities }}
+{% endif %}
       - VPN_SERVICE_PROVIDER={{ gluetun_vpn_service_provider }}
       - VPN_TYPE={{ gluetun_vpn_type }}
 {% if gluetun_vpn_type == 'openvpn' %}
       # OpenVPN:
+{% if gluetun_openvpn_user != 'none' %}
       - OPENVPN_USER={{ gluetun_openvpn_user }}
+{% endif %}
+{% if gluetun_openvpn_password != 'none' %}
       - OPENVPN_PASSWORD={{ gluetun_openvpn_password }}
+{% endif %}
 {% if gluetun_vpnclient_custom == true %}
-      - OPENVPN_CUSTOM_CONFIG=/config/{{ gluetun_openvpn_custom_conf }}
+      - OPENVPN_CUSTOM_CONFIG=/ovpn-client/{{ gluetun_openvpn_custom_conf }}
 {% endif %}
 {% elif gluetun_vpn_type == 'wireguard' %}
       # Wireguard:
@@ -42,7 +48,7 @@ services:
       - WIREGUARD_ADDRESSES={{ gluetun_wireguard_address }}
 {% endif %}
     volumes:
-      - ./:/config
+      - ./ovpn-client:/ovpn-client
     ports:
       - 8888:8888/tcp # HTTP proxy
       - 8388:8388/tcp # Shadowsocks
