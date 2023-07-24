@@ -64,7 +64,7 @@ ovpn_client_allowed_subnet: "192.168.88.0/24"   # Allowed subnet for ovpn-client
 gluetun_vpnclient_enable: false                 # Set true to enable Gluetun (OpenVPN or Wireguard)
 gluetun_server_countries: "Netherlands"         # Comma separated list of countries
 gluetun_server_cities: "Amsterdam"              # Comma separated list of cities
-gluetun_server_update_per: 24h                  # Period to update your servers list using the built-in Gluetun update mechanisms. 
+gluetun_server_update_per: 0                    # Period to update your servers list using the built-in Gluetun update mechanisms. i.e. "24h".
                                                 # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
 gluetun_vpn_service_provider: custom            # Set your VPN provider: cyberghost, expressvpn, fastestvpn, hidemyass, ipvanish, ivpn, nordvpn, perfect privacy, privado, private internet access, privatevpn, protonvpn, purevpn, slickvpn, surfshark, torguard, vpnsecure, vpn unlimited, vyprvpn, wevpn, windscribe
                                                 # See the list of all providers https://github.com/qdm12/gluetun-wiki/tree/main/setup/providers
@@ -73,7 +73,7 @@ gluetun_vpn_type: openvpn                       # Set your VPN type: openvpn, wi
 # OPENVPN CLIENT PART:
 gluetun_openvpn_user: "none"                    # Set your OpenVPN username
 gluetun_openvpn_password: "none"                # Set your OpenVPN password
-gluetun_vpnclient_custom: true                  # Set true to enable custom OpenVPN configuration below
+gluetun_vpnclient_custom: false                 # Set true to enable custom OpenVPN configuration below
 gluetun_openvpn_custom_conf: "glue-client.ovpn" # Set your OpenVPN custom configuration. See
 
 # WIREGUARD CLIENT PART:
