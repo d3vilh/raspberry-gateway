@@ -29,6 +29,7 @@ unbound_dns_enable: true                        # Set true to enable Unbound DNS
 pihole_enable: true                             # Set true to enable Pi-Hole. Don't use with Technition DNS at the same time!
 pihole_with_unbound: true                       # Enable Pi-Hole to use Unbound DNS as upstream DNS server.
 pihole_password: "gagaZush"                     # !Change this password!
+pihole_hostname: pihole                         # Pi-Hole hostname. Leave it as is.
 
 #      _____         _     ____  _____ _____   
 #     |_   _|___ ___| |_  |    \|   | |   __|  
@@ -59,7 +60,7 @@ ovpn_client_allowed_subnet: "192.168.88.0/24"   # Allowed subnet for ovpn-client
 #   Universal VPN Client for multiple VPN Providers
 #
 # IT WORKS! 
-# STILL TESTING THOUGH! USE IN PRODUCTION ON OWN RISK!               
+# STILL TESTING THOUGH! USE IN PRODUCTION AT OWN RISK!               
 
 gluetun_vpnclient_enable: false                 # Set true to enable Gluetun (OpenVPN or Wireguard)
 gluetun_server_countries: "Netherlands"         # Comma separated list of countries
@@ -91,6 +92,9 @@ gluetun_wireguard_endpoint_port: "none"         # Valid port number in the forma
 # WireGuard Server configuration.
 wireguard_server_enable: false                  # Set true to enable WireGuard Server and its Web-UI
 wireguard_password: "gagaZush"                  # !Change this password! Web-UI password
+wireguard_user: "admin"                         # Wireguard UI username
+wireguard_serverurl: "wg.example.com"
+
 
 #    _____         _       _ 
 #   |  _  |___ ___| |_ ___|_|___ ___ ___ 
@@ -110,6 +114,7 @@ qbittorrent_default_password: admin/adminadmin  # !Change this password wia WebU
 # Local VPN configuration. Allows qBittorrent runs through VPN client connection.
 qbittorrent_inside_vpn: false                   # Set true to route qBitTorrent traffic via internal OpenVPN client
 qbittorrent_inside_gluetun: false               # Set true to route qBitTorrent traffic via Gluetun VPN client
+qbittorrent_webui_port: 8090                    # Do not change it unless you know what you are doing.
 
 #    _____         _ _               
 #   |     |___ ___|_| |_ ___ ___ ___ 
@@ -124,6 +129,10 @@ openvpn_monitoring_enable: false                # Set true to enable OpenVPN ser
 
 # PiKVM monitoring configuration.               # Requires `monitoring_enable`
 pikvm_monitoring_enable: false                  # Set true to enable PiKVM Grafana dashboard
+pikvm_target_ip: "192.168.88.3"                 # Pi-KVM IP address
+pikvm_web_user: "admin"                         # Pi-KVM side preconfigured Web-UI username
+pikvm_web_password: "gagaZush"                  # !Change this password! Pi-KVM side preconfigured Web-UI password
+
 
 # AirGradient monitoring configuration.         # Requires `monitoring_enable`
 airgradient_monitoring_enable: false            # Set true to enable Airgradient Grafana dashboard

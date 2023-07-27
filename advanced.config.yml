@@ -20,13 +20,6 @@ unbound_dns_ipv6: "no"                          # enable ipv6 support
 unbound_dns_num_threads: "1"                    # Keep 1, unless understand you really need it.
 unbound_dns_upstream_4_pihole: "127.0.0.1#5335" # Use local Unbound DNS as upstream DNS server IP.
 
-#    _____ _ _____     _     
-#   |  _  |_|  |  |___| |___ 
-#   |   __| |     | . | | -_|
-#   |__|  |_|__|__|___|_|___| Dont't use with .Tech.DNS at the same time!
-# Advanced i-hole configuration.
-pihole_hostname: pihole
-
 #      _____         _     ____  _____ _____   
 #     |_   _|___ ___| |_  |    \|   | |   __|  
 #    _  | | | -_|  _|   |_|  |  | | | |__   |_ 
@@ -46,32 +39,15 @@ tech_dns_forwarder_proto: "Https"               # Forwarder protocol options: Ud
 #         |_|
 # Advanced OpenVPN Server configuration.
 
-ovpnui_user: "admin"
+ovpnui_user: "admin"                            # OpenVPN UI username
 ovpn_trusted_subnet: "10.0.70.0/24"             # Trusted users subnet
 ovpn_guest_subnet: "10.0.71.0/24"               # Guest users subnet
 ovpn_home_subnet: "192.168.0.0/24"              # Your home network subnet
-ovpn_remote: "remote 123.234.123.12 12345 udp"  # OpenVPN client.ovpn profile connect line. You
+ovpn_remote: "remote 123.234.123.12 12345 udp"  # OpenVPN client.ovpn profile connect line.
 
 # OpenVPN Client configuration for Docker instances only.
 ovpn_client_secret: ""                          # Filename with ovpn-client certificate user and password, "example-credentials.txt"
 ovpn_client_killswitch: true                    # Allow subnet access and block all other traffic if ovpn-client is down
-
-#    _ _ _ _         _____               _ 
-#   | | | |_|___ ___|   __|_ _ ___ ___ _| |
-#   | | | | |  _| -_|  |  | | | .'|  _| . |
-#   |_____|_|_| |___|_____|___|__,|_| |___|
-# Advanced WireGuard Server configuration.
-
-wireguard_user: "admin"
-wireguard_serverurl: "wg.example.com"
-
-#        _____ _ _   _____                     _   
-#    ___| __  |_| |_|_   _|___ ___ ___ ___ ___| |_ 
-#   | . | __ -| |  _| | | | . |  _|  _| -_|   |  _|
-#   |_  |_____|_|_|   |_| |___|_| |_| |___|_|_|_|  
-#     |_|                                         
-# Advanced QbitTorrent configuration.
-qbittorrent_webui_port: 8090                    # Better to keep as is
 
 #    _____         _ _               
 #   |     |___ ___|_| |_ ___ ___ ___ 
@@ -90,12 +66,6 @@ monitoring_ping_hosts:                          # [URL];[HUMAN_READABLE_NAME]
   - https://reddit.com/;reddit
 telegram_bot_chatid: "-508236451"               # Used for sending notifications to Telegram bot !Change this token!
 telegram_bot_token: "5705452771:AAEPOxb7_rSQZ8p4sZYzITBFqD3YvMs_O-e"  # Used for sending notifications to Telegram bot !Change this token!
-
-# Advanced PiKVM monitoring configuration.      # Requires `monitoring_enable`
-
-pikvm_target_ip: "192.168.88.3"
-pikvm_web_user: "admin"
-pikvm_web_password: "gagaZush"                  # !Change this password!
 
 # Advanced AirGradient monitoring configuration.# Requires `monitoring_enable`
 
