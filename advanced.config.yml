@@ -32,23 +32,6 @@ tech_dns_blocking: true                         # Sets DNS server to block domai
 tech_dns_forwarders: "1.1.1.1, 8.8.8.8"         # List of DNS servers to forward DNS queries to.
 tech_dns_forwarder_proto: "Https"               # Forwarder protocol options: Udp, Tcp, Tls, Https, HttpsJson.
 
-#    _____             _____ _____ _____ 
-#   |     |___ ___ ___|  |  |  _  |   | |
-#   |  |  | . | -_|   |  |  |   __| | | |
-#   |_____|  _|___|_|_|\___/|__|  |_|___|
-#         |_|
-# Advanced OpenVPN Server configuration.
-
-ovpnui_user: "admin"                            # OpenVPN UI username
-ovpn_trusted_subnet: "10.0.70.0/24"             # Trusted users subnet
-ovpn_guest_subnet: "10.0.71.0/24"               # Guest users subnet
-ovpn_home_subnet: "192.168.0.0/24"              # Your home network subnet
-ovpn_remote: "remote 123.234.123.12 12345 udp"  # OpenVPN client.ovpn profile connect line.
-
-# OpenVPN Client configuration for Docker instances only.
-ovpn_client_secret: ""                          # Filename with ovpn-client certificate user and password, "example-credentials.txt"
-ovpn_client_killswitch: true                    # Allow subnet access and block all other traffic if ovpn-client is down
-
 #    _____         _ _               
 #   |     |___ ___|_| |_ ___ ___ ___ 
 #   | | | | . |   | |  _| . |  _|_ -|
@@ -56,9 +39,6 @@ ovpn_client_killswitch: true                    # Allow subnet access and block 
 # Advanced Raspberry-monitoring configuration.
 
 monitoring_grafana_public_dashboard: false      # Enable public dashboard for Grafana available in internet
-monitoring_days_keep_interval: 90d              # How long to keep data for (don't change without purpose)
-monitoring_speedtest_interval: 60m              # How often to run speedtest (don't change without purpose)
-monitoring_ping_interval: 30s                   # How often to ping hosts (don't change without purpose)
 monitoring_ping_hosts:                          # [URL];[HUMAN_READABLE_NAME]
   - http://google.com/;google.com
   - https://apple.com/;apple.com
@@ -75,16 +55,3 @@ airgradient_sensors:
   - id: livingroom
     ip: "192.168.88.6"
     port: 9926
-
-# Advanced Starlink monitoring configuration.   # Requires `monitoring_enable`
-
-starlink_ip: "10.10.10.1"
-starlink_port: 9817
-
-# Advanced Shelly Plug monitoring configuration. # Requires `monitoring_enable`
-
-shelly_plug_hostname: my-shelly-plug-host-or-ip
-shelly_ip: "192.168.88.66"
-shelly_port: 9924
-shelly_plug_http_username: "admin"               # username
-shelly_plug_http_password: "gagaZush"            # !Change this password!

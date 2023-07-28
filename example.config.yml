@@ -46,12 +46,19 @@ tech_dns_password: "gagaZush"                   # !Change this password!
 #         |_|
 # OpenVPN Server configuration.
 ovpn_server_enable: false                       # Set true to enable OpenVPN server
+ovpnui_user: "admin"                            # OpenVPN UI username
 ovpnui_password: "gagaZush"                     # !Change this password!
+ovpn_trusted_subnet: "10.0.70.0/24"             # Trusted users subnet
+ovpn_guest_subnet: "10.0.71.0/24"               # Guest users subnet
+ovpn_home_subnet: "192.168.0.0/24"              # Your home network subnet
+ovpn_remote: "remote 123.234.123.12 12345 udp"  # OpenVPN client.ovpn profile connect line.
 
 # OpenVPN Client configuration for qBittorrent only. OpenVPN server is not required.
 ovpn_client_enable: false                       # Set true to enable internal OpenVPN client used for qBittorrent. OpenVPN server is not required.
-ovpn_client_cert: "webinstall-client.ovpn"         # Set your ovpn-client certificate name
+ovpn_client_cert: "webinstall-client.ovpn"      # Set your ovpn-client certificate name
 ovpn_client_allowed_subnet: "192.168.88.0/24"   # Allowed subnet for ovpn-client. You must have your local network defined here.
+ovpn_client_secret: "none"                      # Filename with ovpn-client user and password, "example-credentials.txt"
+ovpn_client_killswitch: true                   # Allow subnet access and block all other traffic if ovpn-client is down
 
 #    _____ _         _____         
 #   |   __| |_ _ ___|_   _|_ _ ___ 
@@ -123,6 +130,9 @@ qbittorrent_webui_port: 8090                    # Do not change it unless you kn
 # Raspberry-monitoring configuration.
 monitoring_enable: true                         # Set true to enable base Raspberry monitoring
 monitoring_grafana_admin_password: "admin"      # Is only used the first time when Grafana starts up
+monitoring_days_keep_interval: 90d              # How long to keep data in Prometheus DB (decrease if you have less than 5Gb of free disk space)
+monitoring_speedtest_interval: 60m              # How often to run speedtest (don't change without purpose)
+monitoring_ping_interval: 30s                   # How often to ping hosts (don't change without purpose)
 
 # OpenVPN monitoring configuration.             # Requires `monitoring_enable`
 openvpn_monitoring_enable: false                # Set true to enable OpenVPN server Grafana dashboard
@@ -139,6 +149,13 @@ airgradient_monitoring_enable: false            # Set true to enable Airgradient
 
 # Starlink monitoring configuration.            # Requires `monitoring_enable`
 starlink_monitoring_enable: false               # Set true to enable StarLink dishy Grafana dashboard
+starlink_ip: "10.10.10.1"                       # Dishy IP address
+starlink_port: 9817                             # Dishy port to get statistics from
 
 # Shelly Plug monitoring configuration.         # Set true to enable Shelly Plug Grafana dashboard
 shelly_plug_monitoring_enable: false            # Set true or false
+shelly_plug_hostname: my-shelly-plug-host-or-ip
+shelly_ip: "192.168.88.66"
+shelly_port: 9924
+shelly_plug_http_username: "admin"               # username
+shelly_plug_http_password: "gagaZush"            # !Change this password!
