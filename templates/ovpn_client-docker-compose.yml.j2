@@ -10,7 +10,7 @@ services:
     environment:
       - ALLOWED_SUBNETS={{ ovpn_client_allowed_subnet }}
       - AUTH_SECRET={{ ovpn_client_secret }}
-      - CONFIG_FILE={{ ovpn_client_cert }}
+      - CONFIG_FILE={{ ovpn_client_cert if ovpn_client_cert != 'none' else '' }}
       - KILL_SWITCH={{ ovpn_client_killswitch }}
     volumes:
       - ./:/config
