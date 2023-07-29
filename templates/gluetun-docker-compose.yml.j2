@@ -28,7 +28,7 @@ services:
       - OPENVPN_PASSWORD={{ gluetun_openvpn_password }}
 {% endif %}
 {% if gluetun_vpnclient_custom == true %}
-      - OPENVPN_CUSTOM_CONFIG=/ovpn-client/{{ gluetun_openvpn_custom_conf }}
+      - OPENVPN_CUSTOM_CONFIG=/ovpn-client/{{ gluetun_ovpn_custom_conf }}
 {% endif %}
 {% elif gluetun_vpn_type == 'wireguard' %}
       # Wireguard:
