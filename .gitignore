@@ -1,5 +1,6 @@
 .DS_Store
 config.yml
-inventory.ini
+inventory.yml
 webinstall-client.ovpn
 gluetun/ovpn-client/glue-client.ovpn
+openvpn-client/webinstall-credentials.txt

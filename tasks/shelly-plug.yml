@@ -21,6 +21,9 @@
     project_src: "{{ config_dir }}/shelly-plug-prometheus/"
     build: false
   become: false
+  environment:
+    DOCKER_CLIENT_TIMEOUT: '180'
+    COMPOSE_HTTP_TIMEOUT: '180'
 
 - name: Copy shelly dashboard config to grafana
   ansible.builtin.copy:
