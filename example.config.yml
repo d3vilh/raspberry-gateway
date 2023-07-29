@@ -57,8 +57,8 @@ ovpn_remote: "remote 123.234.123.12 12345 udp"  # OpenVPN client.ovpn profile co
 ovpn_client_enable: false                       # Set true to enable internal OpenVPN client used for qBittorrent. OpenVPN server is not required.
 ovpn_client_cert: "webinstall-client.ovpn"      # Set your ovpn-client certificate name
 ovpn_client_allowed_subnet: "192.168.88.0/24"   # Allowed subnet for ovpn-client. You must have your local network defined here.
-ovpn_client_secret: "none"                      # Filename with ovpn-client user and password, "example-credentials.txt"
-ovpn_client_killswitch: true                   # Allow subnet access and block all other traffic if ovpn-client is down
+ovpn_client_secret: "webinstall-credentials.txt" # Filename with ovpn-client user and password, "example-credentials.txt"
+ovpn_client_killswitch: true                    # Allow subnet access and block all other traffic if ovpn-client is down
 
 #    _____ _         _____         
 #   |   __| |_ _ ___|_   _|_ _ ___ 
@@ -67,12 +67,12 @@ ovpn_client_killswitch: true                   # Allow subnet access and block a
 #   Universal VPN Client for multiple VPN Providers
 #
 # IT WORKS! 
-# STILL TESTING THOUGH! USE IN PRODUCTION AT OWN RISK!               
+# STILL TESTING THOUGH! USE IN PRODUCTION ON OWN RISK!               
 
 gluetun_vpnclient_enable: false                 # Set true to enable Gluetun (OpenVPN or Wireguard)
 gluetun_server_countries: "Netherlands"         # Comma separated list of countries
 gluetun_server_cities: "Amsterdam"              # Comma separated list of cities
-gluetun_server_update_per: 0                    # Period to update your servers list using the built-in Gluetun update mechanisms. i.e. "24h".
+gluetun_server_update_per: 0                    # Period to update your servers list using the built-in Gluetun update mechanisms. 
                                                 # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
 gluetun_vpn_service_provider: custom            # Set your VPN provider: cyberghost, expressvpn, fastestvpn, hidemyass, ipvanish, ivpn, nordvpn, perfect privacy, privado, private internet access, privatevpn, protonvpn, purevpn, slickvpn, surfshark, torguard, vpnsecure, vpn unlimited, vyprvpn, wevpn, windscribe
                                                 # See the list of all providers https://github.com/qdm12/gluetun-wiki/tree/main/setup/providers
@@ -82,7 +82,7 @@ gluetun_vpn_type: openvpn                       # Set your VPN type: openvpn, wi
 gluetun_openvpn_user: "none"                    # Set your OpenVPN username
 gluetun_openvpn_password: "none"                # Set your OpenVPN password
 gluetun_vpnclient_custom: false                 # Set true to enable custom OpenVPN configuration below
-gluetun_openvpn_custom_conf: "glue-client.ovpn" # Set your OpenVPN custom configuration. See
+glue_ovpn_custom_conf: "webinstall-client.ovpn" # Set your OpenVPN custom configuration. See
 
 # WIREGUARD CLIENT PART:
 gluetun_wireguard_private_key: "yCbHtK...X2c="  # Valid base 58 Wireguard Client key. Wireguard client private key to use.
@@ -101,7 +101,6 @@ wireguard_server_enable: false                  # Set true to enable WireGuard S
 wireguard_password: "gagaZush"                  # !Change this password! Web-UI password
 wireguard_user: "admin"                         # Wireguard UI username
 wireguard_serverurl: "wg.example.com"
-
 
 #    _____         _       _ 
 #   |  _  |___ ___| |_ ___|_|___ ___ ___ 
@@ -143,7 +142,6 @@ pikvm_target_ip: "192.168.88.3"                 # Pi-KVM IP address
 pikvm_web_user: "admin"                         # Pi-KVM side preconfigured Web-UI username
 pikvm_web_password: "gagaZush"                  # !Change this password! Pi-KVM side preconfigured Web-UI password
 
-
 # AirGradient monitoring configuration.         # Requires `monitoring_enable`
 airgradient_monitoring_enable: false            # Set true to enable Airgradient Grafana dashboard
 
@@ -154,7 +152,7 @@ starlink_port: 9817                             # Dishy port to get statistics f
 
 # Shelly Plug monitoring configuration.         # Set true to enable Shelly Plug Grafana dashboard
 shelly_plug_monitoring_enable: false            # Set true or false
-shelly_plug_hostname: my-shelly-plug-host-or-ip
+shelly_plug_hostname: shelly-host-or-ip
 shelly_ip: "192.168.88.66"
 shelly_port: 9924
 shelly_plug_http_username: "admin"               # username
