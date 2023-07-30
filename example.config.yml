@@ -21,12 +21,20 @@ ur_timezone: "Europe/Kyiv"
 # Unbound DNS configuration.
 unbound_dns_enable: true                        # Set true to enable Unbound DNS. Don't use with Technition DNS at the same time!
 
+unbound_dns_identitiy: "unbound-dns"            # Report this identity rather than the hostname of the server.
+unbound_dns_hide: "yes"                         # Send minimum information to upstream servers, reduce responce size, refuse .id and .version queries
+unbound_dns_ipv4: "yes"                         # enable ipv4 support.
+unbound_dns_ipv6: "no"                          # enable ipv6 support
+unbound_dns_num_threads: "1"                    # Keep 1, unless understand you really need it.
+unbound_dns_upstream_4_pihole: "127.0.0.1#5335" # Use local Unbound DNS as upstream DNS server IP.
+
 #    _____ _ _____     _     
 #   |  _  |_|  |  |___| |___ 
 #   |   __| |     | . | | -_|
 #   |__|  |_|__|__|___|_|___| Dont't use with .Tech.DNS at the same time!
 # Pi-hole configuration.
 pihole_enable: true                             # Set true to enable Pi-Hole. Don't use with Technition DNS at the same time!
+
 pihole_with_unbound: true                       # Enable Pi-Hole to use Unbound DNS as upstream DNS server.
 pihole_password: "gagaZush"                     # !Change this password!
 pihole_hostname: pihole                         # Pi-Hole hostname. Leave it as is.
@@ -37,7 +45,14 @@ pihole_hostname: pihole                         # Pi-Hole hostname. Leave it as 
 #   |_| |_| |___|___|_|_|_|____/|_|___|_____|_|  Don't use with PiHole at the same time!
 # Technitium DNS Server configuration.
 tech_dns_enable: false                          # Set true to enable Technitium DNS. Don't use with Pi-hole at the same time!
+
 tech_dns_password: "gagaZush"                   # !Change this password!
+tech_dns_hostname: tech-dns
+tech_dns_server: tech-dns                       # The primary domain name used by this DNS Server to identify itself.
+tech_dns_ipv6: false                            # Enable IPv6 support
+tech_dns_blocking: true                        # Sets DNS server to block domain names using Blocked Zone and Block List Zone.
+tech_dns_forwarders: "1.1.1.1, 8.8.8.8"         # List of DNS servers to forward DNS queries to.
+tech_dns_forwarder_proto: "Https"               # Forwarder protocol options: Udp, Tcp, Tls, Https, HttpsJson.
 
 #    _____             _____ _____ _____ 
 #   |     |___ ___ ___|  |  |  _  |   | |
@@ -46,6 +61,7 @@ tech_dns_password: "gagaZush"                   # !Change this password!
 #         |_|
 # OpenVPN Server configuration.
 ovpn_server_enable: false                       # Set true to enable OpenVPN server
+
 ovpnui_user: "admin"                            # OpenVPN UI username
 ovpnui_password: "gagaZush"                     # !Change this password!
 ovpn_trusted_subnet: "10.0.70.0/24"             # Trusted users subnet
@@ -55,6 +71,7 @@ ovpn_remote: "remote 123.234.123.12 12345 udp"  # OpenVPN client.ovpn profile co
 
 # OpenVPN Client configuration for qBittorrent only. OpenVPN server is not required.
 ovpn_client_enable: false                       # Set true to enable internal OpenVPN client used for qBittorrent. OpenVPN server is not required.
+
 ovpn_client_cert: "webinstall-client.ovpn"      # Set your ovpn-client certificate name
 ovpn_client_allowed_subnet: "192.168.88.0/24"   # Allowed subnet for ovpn-client. You must have your local network defined here.
 ovpn_client_secret: "webinstall-credentials.txt" # Filename with ovpn-client user and password, "example-credentials.txt"
@@ -65,11 +82,8 @@ ovpn_client_killswitch: true                    # Allow subnet access and block 
 #   |  |  | | | | -_| | | | | |   |
 #   |_____|_|___|___| |_| |___|_|_|
 #   Universal VPN Client for multiple VPN Providers
-#
-# IT WORKS! 
-# STILL TESTING THOUGH! USE IN PRODUCTION ON OWN RISK!               
-
 gluetun_vpnclient_enable: false                 # Set true to enable Gluetun (OpenVPN or Wireguard)
+
 gluetun_server_countries: "Netherlands"         # Comma separated list of countries
 gluetun_server_cities: "Amsterdam"              # Comma separated list of cities
 gluetun_server_update_per: 0                    # Period to update your servers list using the built-in Gluetun update mechanisms. 
@@ -98,6 +112,7 @@ gluetun_wireguard_endpoint_port: "none"         # Valid port number in the forma
 #   |_____|_|_| |___|_____|___|__,|_| |___|
 # WireGuard Server configuration.
 wireguard_server_enable: false                  # Set true to enable WireGuard Server and its Web-UI
+
 wireguard_password: "gagaZush"                  # !Change this password! Web-UI password
 wireguard_user: "admin"                         # Wireguard UI username
 wireguard_serverurl: "wg.example.com"
@@ -116,6 +131,7 @@ portainer_enable: true                          # Set true to enable Portainer
 #     |_|                                         
 # QbitTorrent configuration.
 qbittorrent_enable: false                       # Set true to enable qBittorrent and its WebUI
+
 qbittorrent_default_password: admin/adminadmin  # !Change this password wia WebUI!
 # Local VPN configuration. Allows qBittorrent runs through VPN client connection.
 qbittorrent_inside_vpn: false                   # Set true to route qBitTorrent traffic via internal OpenVPN client
@@ -128,6 +144,7 @@ qbittorrent_webui_port: 8090                    # Do not change it unless you kn
 #   |_|_|_|___|_|_|_|_| |___|_| |___|
 # Raspberry-monitoring configuration.
 monitoring_enable: true                         # Set true to enable base Raspberry monitoring
+
 monitoring_grafana_admin_password: "admin"      # Is only used the first time when Grafana starts up
 monitoring_days_keep_interval: 90d              # How long to keep data in Prometheus DB (decrease if you have less than 5Gb of free disk space)
 monitoring_speedtest_interval: 60m              # How often to run speedtest (don't change without purpose)
