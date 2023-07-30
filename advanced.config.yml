@@ -8,30 +8,6 @@ config_dir: '~'
 #   For most cases you are not interested to change this file.
 #
 
-#    _____     _                 _   ____  _____ _____ 
-#   |  |  |___| |_ ___ _ _ ___ _| | |    \|   | |   __|
-#   |  |  |   | . | . | | |   | . |_|  |  | | | |__   |
-#   |_____|_|_|___|___|___|_|_|___|_|____/|_|___|_____| Dont't use with .Tech.DNS at the same time!
-# Advanced Unbound DNS configuration.
-unbound_dns_identitiy: "unbound-dns"            # Report this identity rather than the hostname of the server.
-unbound_dns_hide: "yes"                         # Send minimum information to upstream servers, reduce responce size, refuse .id and .version queries
-unbound_dns_ipv4: "yes"                         # enable ipv4 support.
-unbound_dns_ipv6: "no"                          # enable ipv6 support
-unbound_dns_num_threads: "1"                    # Keep 1, unless understand you really need it.
-unbound_dns_upstream_4_pihole: "127.0.0.1#5335" # Use local Unbound DNS as upstream DNS server IP.
-
-#      _____         _     ____  _____ _____   
-#     |_   _|___ ___| |_  |    \|   | |   __|  
-#    _  | | | -_|  _|   |_|  |  | | | |__   |_ 
-#   |_| |_| |___|___|_|_|_|____/|_|___|_____|_|  Don't use with PiHole at the same time!
-# Advanced Technitium DNS Server configuration.
-tech_dns_hostname: tech-dns
-tech_dns_server: tech-dns                       # The primary domain name used by this DNS Server to identify itself.
-tech_dns_ipv6: false                            # Enable IPv6 support
-tech_dns_blocking: true                         # Sets DNS server to block domain names using Blocked Zone and Block List Zone.
-tech_dns_forwarders: "1.1.1.1, 8.8.8.8"         # List of DNS servers to forward DNS queries to.
-tech_dns_forwarder_proto: "Https"               # Forwarder protocol options: Udp, Tcp, Tls, Https, HttpsJson.
-
 #    _____         _ _               
 #   |     |___ ___|_| |_ ___ ___ ___ 
 #   | | | | . |   | |  _| . |  _|_ -|
