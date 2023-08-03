@@ -1,0 +1,48 @@
+---
+- name: Remove Portainer
+  block:
+    - name: Stop and remove Portainer container
+      community.docker.docker_compose:
+        project_src: "{{ config_dir }}/portainer/"
+        state: absent
+      become: false
+      when: remove_portainer
+
+    - name: Delete Portainer folder
+      ansible.builtin.file:
+        path: "{{ config_dir }}/portainer"
+        state: absent
+      become: false
+      when: remove_portainer
+
+- name: Remove WireGuard
+  block:
+    - name: Stop and remove WireGuard container
+      community.docker.docker_compose:
+        project_src: "{{ config_dir }}/wireguard/"
+        state: absent
+      become: false
+      when: remove_wireguard
+
+    - name: Delete WireGuard folder
+      ansible.builtin.file:
+        path: "{{ config_dir }}/wireguard"
+        state: absent
+      become: false
+      when: remove_wireguard
+
+- name: Remove qBitTorrent
+  block:
+    - name: Stop and remove qBitTorrent container
+      community.docker.docker_compose:
+        project_src: "{{ config_dir }}/qbittorrent/"
+        state: absent
+      become: false
+      when: remove_qbittorrent
+
+    - name: Delete qBitTorrent folder
+      ansible.builtin.file:
+        path: "{{ config_dir }}/qbittorrent"
+        state: absent
+      become: false
+      when: remove_qbittorrent
