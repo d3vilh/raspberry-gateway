@@ -15,22 +15,6 @@
       become: true
       when: remove_portainer
 
-- name: Remove Unbound DNS
-  block:
-    - name: Stop and remove Unbound DNS container
-      community.docker.docker_compose:
-        project_src: "{{ config_dir }}/unbound-dns/"
-        state: absent
-      become: false
-      when: remove_unbound_dns
-
-    - name: Remove Unbound DNS image
-      community.docker.docker_image:
-        name: d3vilh/unbound-docker
-        state: absent
-      become: true
-      when: remove_unbound_dns
-
 - name: Remove Pi-hole
   block:
     - name: Stop and remove Pi-hole container
@@ -46,6 +30,22 @@
         state: absent
       become: true
       when: remove_pihole
+
+- name: Remove Unbound DNS
+  block:
+    - name: Stop and remove Unbound DNS container
+      community.docker.docker_compose:
+        project_src: "{{ config_dir }}/unbound-dns/"
+        state: absent
+      become: false
+      when: remove_unbound_dns
+
+    - name: Remove Unbound DNS image
+      community.docker.docker_image:
+        name: d3vilh/unbound-docker
+        state: absent
+      become: true
+      when: remove_unbound_dns
 
 - name: Remove Technitium DNS
   block:
@@ -78,6 +78,22 @@
         state: absent
       become: true
       when: remove_ovpn_server
+
+- name: Remove qBitTorrent
+  block:
+    - name: Stop and remove qBitTorrent container
+      community.docker.docker_compose:
+        project_src: "{{ config_dir }}/qbittorrent/"
+        state: absent
+      become: false
+      when: remove_qbittorrent
+
+    - name: Remove qBitTorrent image
+      community.docker.docker_image:
+        name: lscr.io/linuxserver/qbittorrent
+        state: absent
+      become: true
+      when: remove_qbittorrent
 
 - name: Remove OpenVPN Client
   block:
@@ -126,22 +142,6 @@
         state: absent
       become: true
       when: remove_wireguard
-
-- name: Remove qBitTorrent
-  block:
-    - name: Stop and remove qBitTorrent container
-      community.docker.docker_compose:
-        project_src: "{{ config_dir }}/qbittorrent/"
-        state: absent
-      become: false
-      when: remove_qbittorrent
-
-    - name: Remove qBitTorrent image
-      community.docker.docker_image:
-        name: lscr.io/linuxserver/qbittorrent
-        state: absent
-      become: true
-      when: remove_qbittorrent
 
 - name: Remove Monitoring
   block:
@@ -211,6 +211,13 @@
     - name: Remove StarLink exporter image
       community.docker.docker_image:
         name: danopstech/starlink_exporter
+        state: absent
+      become: true
+      when: remove_monitoring
+
+    - name: Remove ShellyPlug PHP image
+      community.docker.docker_image:
+        name: php
         state: absent
       become: true
       when: remove_monitoring
