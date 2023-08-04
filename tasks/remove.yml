@@ -15,13 +15,15 @@
       become: true
       when: remove_portainer
 
-- name: Remove Pi-hole
+- name: Remove Pi-hole and Unbound DNS
   block:
+
     - name: Stop and remove Pi-hole container
       community.docker.docker_compose:
         project_src: "{{ config_dir }}/pi-hole/"
         state: absent
       become: false
+      ignore_errors: yes
       when: remove_pihole
 
     - name: Remove Pi-hole image
@@ -31,8 +33,6 @@
       become: true
       when: remove_pihole
 
-- name: Remove Unbound DNS
-  block:
     - name: Stop and remove Unbound DNS container
       community.docker.docker_compose:
         project_src: "{{ config_dir }}/unbound-dns/"
@@ -79,6 +79,13 @@
       become: true
       when: remove_ovpn_server
 
+    - name: Remove OpenVPN Server UI image
+      community.docker.docker_image:
+        name: d3vilh/openvpn-ui
+        state: absent
+      become: true
+      when: remove_ovpn_server
+
 - name: Remove qBitTorrent
   block:
     - name: Stop and remove qBitTorrent container
@@ -86,6 +93,7 @@
         project_src: "{{ config_dir }}/qbittorrent/"
         state: absent
       become: false
+      ignore_errors: yes
       when: remove_qbittorrent
 
     - name: Remove qBitTorrent image
@@ -145,7 +153,7 @@
 
 - name: Remove Monitoring
   block:
-    - name: Stop and remove moditoring containers
+    - name: Stop and remove monitoring containers
       community.docker.docker_compose:
         project_src: "{{ config_dir }}/monitoring/"
         state: absent
@@ -213,6 +221,13 @@
         name: danopstech/starlink_exporter
         state: absent
       become: true
+      when: remove_monitoring
+
+    - name: Stop and remove ShellyPlug container
+      community.docker.docker_compose:
+        project_src: "{{ config_dir }}/shelly-plug-prometheus/"
+        state: absent
+      become: false
       when: remove_monitoring
 
     - name: Remove ShellyPlug PHP image
