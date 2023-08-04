@@ -8,12 +8,108 @@
       become: false
       when: remove_portainer
 
-    - name: Delete Portainer folder
-      ansible.builtin.file:
-        path: "{{ config_dir }}/portainer"
+    - name: Remove Portainer image
+      community.docker.docker_image:
+        name: portainer/portainer-ce
+        state: absent
+      become: true
+      when: remove_portainer
+
+- name: Remove Unbound DNS
+  block:
+    - name: Stop and remove Unbound DNS container
+      community.docker.docker_compose:
+        project_src: "{{ config_dir }}/unbound-dns/"
         state: absent
       become: false
-      when: remove_portainer
+      when: remove_unbound_dns
+
+    - name: Remove Unbound DNS image
+      community.docker.docker_image:
+        name: d3vilh/unbound-docker
+        state: absent
+      become: true
+      when: remove_unbound_dns
+
+- name: Remove Pi-hole
+  block:
+    - name: Stop and remove Pi-hole container
+      community.docker.docker_compose:
+        project_src: "{{ config_dir }}/pi-hole/"
+        state: absent
+      become: false
+      when: remove_pihole
+
+    - name: Remove Pi-hole image
+      community.docker.docker_image:
+        name: pihole/pihole
+        state: absent
+      become: true
+      when: remove_pihole
+
+- name: Remove Technitium DNS
+  block:
+    - name: Stop and remove Technitium DNS container
+      community.docker.docker_compose:
+        project_src: "{{ config_dir }}/tech-dns/"
+        state: absent
+      become: false
+      when: remove_tech_dns
+
+    - name: Remove Technitium DNS image
+      community.docker.docker_image:
+        name: technitium/dns-server
+        state: absent
+      become: true
+      when: remove_tech_dns
+
+- name: Remove OpenVPN Server
+  block:
+    - name: Stop and remove OpenVPN Server container
+      community.docker.docker_compose:
+        project_src: "{{ config_dir }}/openvpn-server/"
+        state: absent
+      become: false
+      when: remove_ovpn_server
+
+    - name: Remove OpenVPN Server image
+      community.docker.docker_image:
+        name: openvpn-server_openvpn
+        state: absent
+      become: true
+      when: remove_ovpn_server
+
+- name: Remove OpenVPN Client
+  block:
+    - name: Stop and remove OpenVPN Client container
+      community.docker.docker_compose:
+        project_src: "{{ config_dir }}/openvpn-client/"
+        state: absent
+      become: false
+      when: remove_ovpn_client
+
+    - name: Remove OpenVPN Client image
+      community.docker.docker_image:
+        name: d3vilh/openvpn-client
+        state: absent
+      become: true
+      when: remove_ovpn_client
+
+- name: Remove Gluetun
+  block:
+    - name: Stop and remove Gluetun container
+      community.docker.docker_compose:
+        project_src: "{{ config_dir }}/gluetun/"
+        state: absent
+      become: false
+      when: remove_gluetun
+
+    - name: Remove Gluetun image
+      community.docker.docker_image:
+        name: qmcgaw/gluetun
+        state: absent
+      become: true
+      when: remove_gluetun
 
 - name: Remove WireGuard
   block:
@@ -24,11 +120,11 @@
       become: false
       when: remove_wireguard
 
-    - name: Delete WireGuard folder
-      ansible.builtin.file:
-        path: "{{ config_dir }}/wireguard"
+    - name: Remove WireGuard image
+      community.docker.docker_image:
+        name: d3vilh/wireguard-ui-arm
         state: absent
-      become: false
+      become: true
       when: remove_wireguard
 
 - name: Remove qBitTorrent
@@ -40,9 +136,81 @@
       become: false
       when: remove_qbittorrent
 
-    - name: Delete qBitTorrent folder
-      ansible.builtin.file:
-        path: "{{ config_dir }}/qbittorrent"
+    - name: Remove qBitTorrent image
+      community.docker.docker_image:
+        name: lscr.io/linuxserver/qbittorrent
+        state: absent
+      become: true
+      when: remove_qbittorrent
+
+- name: Remove Monitoring
+  block:
+    - name: Stop and remove moditoring containers
+      community.docker.docker_compose:
+        project_src: "{{ config_dir }}/monitoring/"
         state: absent
       become: false
-      when: remove_qbittorrent
+      when: remove_monitoring
+
+    - name: Remove Grafana image
+      community.docker.docker_image:
+        name: grafana/grafana
+        state: absent
+      become: true
+      when: remove_monitoring
+
+    - name: Remove Prometheus image
+      community.docker.docker_image:
+        name: prom/prometheus
+        state: absent
+      become: true
+      when: remove_monitoring
+
+    - name: Remove Blackbox exporter image
+      community.docker.docker_image:
+        name: prom/blackbox-exporter
+        state: absent
+      become: true
+      when: remove_monitoring
+
+    - name: Remove Speedtest exporter image
+      community.docker.docker_image:
+        name: miguelndecarvalho/speedtest-exporter
+        state: absent
+      become: true
+      when: remove_monitoring
+
+    - name: Remove Node-exporter image
+      community.docker.docker_image:
+        name: prom/node-exporter
+        state: absent
+      become: true
+      when: remove_monitoring
+
+    - name: Remove rpi-exporter image
+      community.docker.docker_image:
+        name: d3vilh/rpi_exporter-arm64
+        state: absent
+      become: true
+      when: remove_monitoring
+
+    - name: Remove Cadvisor image
+      community.docker.docker_image:
+        name: d3vilh/cadvisor-arm
+        state: absent
+      become: true
+      when: remove_monitoring
+
+    - name: Remove OpenVPN Server exporter image
+      community.docker.docker_image:
+        name: d3vilh/openvpn_exporter
+        state: absent
+      become: true
+      when: remove_monitoring
+
+    - name: Remove StarLink exporter image
+      community.docker.docker_image:
+        name: danopstech/starlink_exporter
+        state: absent
+      become: true
+      when: remove_monitoring
