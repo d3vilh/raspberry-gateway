@@ -232,7 +232,7 @@
 
     - name: Remove ShellyPlug PHP image
       community.docker.docker_image:
-        name: php
+        name: php:8-apache
         state: absent
       become: true
       when: remove_monitoring
