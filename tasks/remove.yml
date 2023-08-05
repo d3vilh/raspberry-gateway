@@ -126,6 +126,7 @@
         project_src: "{{ config_dir }}/gluetun/"
         state: absent
       become: false
+      ignore_errors: yes
       when: remove_gluetun
 
     - name: Remove Gluetun image
