@@ -51,15 +51,15 @@ sysctl -p /etc/sysctl.conf
 
 echo 'Configuring iptables...'
 echo 'NAT for OpenVPN clients'
-iptables -t nat -A POSTROUTING -s {{ ovpn_trusted_subnet }} -o eth0 -j MASQUERADE
-iptables -t nat -A POSTROUTING -s {{ ovpn_guest_subnet }} -o eth0 -j MASQUERADE
+iptables -t nat -A POSTROUTING -s $TRUST_SUB -o eth0 -j MASQUERADE
+iptables -t nat -A POSTROUTING -s $GUEST_SUB -o eth0 -j MASQUERADE
 
 echo 'Blocking ICMP for external clients'
-iptables -A FORWARD -p icmp -j DROP --icmp-type echo-request -s {{ ovpn_guest_subnet }} 
-iptables -A FORWARD -p icmp -j DROP --icmp-type echo-reply -s {{ ovpn_guest_subnet }} 
+iptables -A FORWARD -p icmp -j DROP --icmp-type echo-request -s $GUEST_SUB 
+iptables -A FORWARD -p icmp -j DROP --icmp-type echo-reply -s $GUEST_SUB 
 
 echo 'Blocking internal home subnet to access from external openvpn clients (Internet still available)'
-iptables -A FORWARD -s {{ ovpn_guest_subnet }} -d {{ ovpn_home_subnet }} -j DROP
+iptables -A FORWARD -s $GUEST_SUB -d $HOME_SUB -j DROP
 
 echo 'IPT MASQ Chains:'
 iptables -t nat -L | grep MASQ

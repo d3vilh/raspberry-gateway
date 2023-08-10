@@ -15,6 +15,9 @@ services:
            REQ_ORG: CopyleftCertificateCo
            REQ_OU: ShantiShanti
            REQ_CN: MyOpenVPN
+           TRUST_SUB: {{ ovpn_trusted_subnet }}
+           GUEST_SUB: {{ ovpn_guest_subnet }}
+           HOME_SUB: {{ ovpn_home_subnet }}
        volumes:
            - ./pki:/etc/openvpn/pki
            - ./clients:/etc/openvpn/clients
