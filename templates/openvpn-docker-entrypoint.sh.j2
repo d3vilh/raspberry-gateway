@@ -61,6 +61,14 @@ iptables -A FORWARD -p icmp -j DROP --icmp-type echo-reply -s $GUEST_SUB
 echo 'Blocking internal home subnet to access from external openvpn clients (Internet still available)'
 iptables -A FORWARD -s $GUEST_SUB -d $HOME_SUB -j DROP
 
+if [[ ! -s fw-rules.sh ]]; then
+    echo "No additional firewall rules to apply."
+else
+    echo "Applying firewall rules"
+    ./fw-rules.sh
+    echo 'Additional firewall rules applied.'
+fi
+
 echo 'IPT MASQ Chains:'
 iptables -t nat -L | grep MASQ
 echo 'IPT FWD Chains:'
