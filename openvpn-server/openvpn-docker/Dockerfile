@@ -1,4 +1,5 @@
 # Start from Alpine base image
+#FROM arm32v6/alpine
 FROM arm64v8/alpine
 LABEL maintainer="Mr.Philipp <d3vilh@github.com>"
 
