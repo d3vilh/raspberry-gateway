@@ -4,7 +4,7 @@ Most of documentation can be found in the [main README.md](https://github.com/d3
 if you don't want to use a custom dns-resolve at all you may also want to comment out [this line](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/config/server.conf#L39).
 
 ## Docker and Docker compose
-If you interesting to run Web-UI separately or build own image, refer to the Docker and Docker compose instructions [here](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md).
+[**HERE**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md) you can find all the the **Docker** and **Docker-compose** instructions, volumes and enviroment variables defifintion.
 
 ## Configuration
 **OpenVPN WEB UI** can be accessed on own port (*e.g. `http://localhost:8080` , change `localhost` to your Raspberry host ip/name*), the default user and password is `admin/gagaZush` preconfigured in `config.yml` which you supposed to [set in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L25) `ovpnui_user` & `ovpnui_password` vars, just before the installation.
@@ -24,7 +24,79 @@ The server config [specifies](https://github.com/d3vilh/raspberry-gateway/blob/m
 
 If you wish to use your local Pi-Hole as a DNS server (the one which comes with this setup), you have to modify a [dns-configuration](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/config/server.conf#L20) with your local Pi-Hole IP address.
 
-### Generating .OVPN client profiles
+### OpenVPN client subnets. Guest and Home users
+[Raspberry-Gateway](https://github.com/d3vilh/raspberry-gateway/) OpenVPN server uses `10.0.70.0/24` **"Trusted"** subnet for dynamic clients by default and all the clients connected by default will have full access to your Home network, as well as your home Internet.
+However you can be desired to share VPN access with your friends and restrict access to your **"Home network"** for them, but allow to use Internet connection over your VPN. This type of guest clients needs to live in special **"Guest users"** subnet - `10.0.71.0/24`:
+
+<p align="center">
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="700" border="1" />
+</p>
+
+* **"Trusted"** subnet is `ovpn_trusted_subnet` in [config.yml](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L80) and `TRUST_SUB` var in [docker-compose](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-server/openvpn-docker#run-this-image-using-a-docker-composeyml-file) file.
+* **"Guest"** subnet is `ovpn_guest_subnet` in [config.yml](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L81) and `GUEST_SUB` var in [docker-compose](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-server/openvpn-docker#run-this-image-using-a-docker-composeyml-file) file.
+* **"Home"** subnet is `ovpn_home_subnet` in [config.yml](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L82) and `HOME_SUB` vsr in [docker-compose](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-server/openvpn-docker#run-this-image-using-a-docker-composeyml-file) file.
+
+To assign desired subnet policy to the specific client, you have to define static IP address for this client when you'll be generate new .OVPN profile.
+To do that, just enter `"Static IP (optional)"` field in `"Certificates"` page and press `"Create"` button.
+
+You can apply optional Firewall rules for the OpenVPN server container in `~/openvpn-server/fw-rules.sh` file, which will be executed on the container start. Here is example to blocking traffic between 2 "Trusted" subnet clients:
+```shell
+~/openvpn-server $ cat fw-rules.sh
+iptables -A FORWARD -s 10.0.70.88 -d 10.0.70.77 -j DROP
+iptables -A FORWARD -d 10.0.70.77 -s 10.0.70.88 -j DROP
+```
+
+> Keep in mind, by default, all the clients got **"Trusted"** subnet and have full access, so you don't need to specifically configure static IP for your own devices. 
+
+
+### OpenVPN Pstree structure
+All the Server and Client configuration located in Docker volume and can be easely tuned. Here are tree of volume content:
+
+```shell
+|-- clients
+|   |-- your_client1.ovpn
+|-- config
+|   |-- client.conf
+|   |-- easy-rsa.vars
+|   |-- server.conf
+|-- db
+|   |-- data.db //Optional OpenVPN UI DB
+|-- log
+|   |-- openvpn.log
+|-- pki
+|   |-- ca.crt
+|   |-- certs_by_serial
+|   |   |-- your_client1_serial.pem
+|   |-- crl.pem
+|   |-- dh.pem
+|   |-- index.txt
+|   |-- ipp.txt
+|   |-- issued
+|   |   |-- server.crt
+|   |   |-- your_client1.crt
+|   |-- openssl-easyrsa.cnf
+|   |-- private
+|   |   |-- ca.key
+|   |   |-- your_client1.key
+|   |   |-- server.key
+|   |-- renewed
+|   |   |-- certs_by_serial
+|   |   |-- private_by_serial
+|   |   |-- reqs_by_serial
+|   |-- reqs
+|   |   |-- server.req
+|   |   |-- your_client1.req
+|   |-- revoked
+|   |   |-- certs_by_serial
+|   |   |-- private_by_serial
+|   |   |-- reqs_by_serial
+|   |-- safessl-easyrsa.cnf
+|   |-- serial
+|   |-- ta.key
+|-- staticclients //Directory where stored all the satic clients configuration
+```
+
+### Generating .OVPN client profiles with Openvpn-ui
 Before client cert. generation you need to update the external IP address to your OpenVPN server in OVPN-UI GUI.
 
 For this go to `"Configuration > Settings"`:
@@ -60,66 +132,6 @@ Revoked certificates won't kill active connections, you'll have to restart the s
 <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Restart.png" alt="OpenVPN Restart" width="600" border="1" />
 
 After Revoking and Restarting the service, the client will be disconnected and will not be able to connect again with the same certificate. To delete the certificate from the server, you have to press **Remove** red button.
-
-### OpenVPN client subnets. Guest and Home users
-[Raspberry-Gateway](https://github.com/d3vilh/raspberry-gateway/) OpenVPN server uses `10.0.70.0/24` **"Trusted"** subnet for dynamic clients by default and all the clients connected by default will have full access to your Home network, as well as your home Internet.
-However you can be desired to share VPN access with your friends and restrict access to your Home network for them, but allow to use Internet connection over your VPN. This type of guest clients needs to live in special **"Guest users"** subnet - `10.0.71.0/24`:
-
-<p align="center">
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="700" border="1" />
-</p>
-
-To assign desired subnet policy to the specific client, you have to define static IP address for this client when you'll be generate new .OVPN profile.
-To do that, just enter `"Static IP (optional)"` field in `"Certificates"` page and press `"Create"` button.
-
-> Keep in mind, by default, all the clients have full access, so you don't need to specifically configure static IP for your own devices, your home devices always will land to **"Trusted"** subnet by default. 
-
-### OpenVPN Pstree structure
-All the Server and Client configuration located in Docker volume and can be easely tuned. Here are tree of volume content:
-
-```shell
-|-- clients
-|   |-- your_client1.ovpn
-|-- config
-|   |-- client.conf
-|   |-- easy-rsa.vars
-|   |-- server.conf
-|-- db
-|   |-- data.db //OpenVPN UI DB
-|-- log
-|   |-- openvpn.log
-|-- pki
-|   |-- ca.crt
-|   |-- certs_by_serial
-|   |   |-- your_client1_serial.pem
-|   |-- crl.pem
-|   |-- dh.pem
-|   |-- index.txt
-|   |-- ipp.txt
-|   |-- issued
-|   |   |-- server.crt
-|   |   |-- your_client1.crt
-|   |-- openssl-easyrsa.cnf
-|   |-- private
-|   |   |-- ca.key
-|   |   |-- your_client1.key
-|   |   |-- server.key
-|   |-- renewed
-|   |   |-- certs_by_serial
-|   |   |-- private_by_serial
-|   |   |-- reqs_by_serial
-|   |-- reqs
-|   |   |-- server.req
-|   |   |-- your_client1.req
-|   |-- revoked
-|   |   |-- certs_by_serial
-|   |   |-- private_by_serial
-|   |   |-- reqs_by_serial
-|   |-- safessl-easyrsa.cnf
-|   |-- serial
-|   |-- ta.key
-|-- staticclients //Directory where stored all the satic clients configuration
-```
 
 ### Alternative, CLI ways to deal with OpenVPN configuration
 To generate new .OVPN profile execute following command. Password as second argument is optional:
