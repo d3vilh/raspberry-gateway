@@ -78,3 +78,7 @@
     - name: Remove Containers
       ansible.builtin.import_tasks: tasks/remove.yml
       when: remove_portainer or remove_wireguard or remove_qbittorrent
+
+    - name: Setup xray-xui
+      ansible.builtin.import_tasks: tasks/xray-xui.yml
+      when: xray_enable 

@@ -237,3 +237,19 @@
         state: absent
       become: true
       when: remove_monitoring
+
+- name: Remove Xray
+  block:
+    - name: Stop and remove Xray container
+      community.docker.docker_compose:
+        project_src: "{{ config_dir }}/xray/"
+        state: absent
+      become: false
+      when: remove_xray
+
+    - name: Remove Xray image
+      community.docker.docker_image:
+        name: alireza7/x-ui
+        state: absent
+      become: true
+      when: remove_xray

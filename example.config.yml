@@ -193,3 +193,9 @@ shelly_ip: "192.168.88.66"
 shelly_port: 9924
 shelly_plug_http_username: "admin"               # username
 shelly_plug_http_password: "gagaZush"            # !Change this password!
+
+# XRAY eXperimental configuration.
+# experimental container with X-UI supports Shadowsocks, VMess, VLESS, XTLS and Trojan protocols        
+xray_enable: false                               # Set true to enable X-RAY x-ui eXperimental
+# Xray configuration examples: https://github.com/XTLS/Xray-examples
+# !Beaware! some protocols from the list are prohibited in PRC. Don't use this if you are in PRC.
