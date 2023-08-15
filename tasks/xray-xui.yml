@@ -10,7 +10,7 @@
 - name: Pull latest Xray Docker image
   community.general.docker_image:
     source: pull
-    name: alireza7/x-ui
+    name: d3vilh/x-ui:latest
     tag: latest
   become: false
 
