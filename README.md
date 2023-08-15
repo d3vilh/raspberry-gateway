@@ -12,6 +12,7 @@ This project provides a simple but powerful solution for managing your home inte
   * [**Technitium-dns**](https://technitium.com/dns/) container. Self host DNS server to block ads & malware at DNS level for your network.
   * [**WireGuard Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) container with own WEB UI. 
   * **Various Prometheus exporters**: cAdviser, AirGradient, StarLink, ShellyPlug and others. 
+  * **XRAY Server/Client** container, as experimental Shadowsocks proxy server/client powered by x-ui web-gui.
 
 Overall, this Raspberry Pi Home Internet Gateway provides a universal solution for managing and monitoring your home internet experience with ease.
 

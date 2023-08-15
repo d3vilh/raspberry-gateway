@@ -1,0 +1,44 @@
+---
+- name: Create Xray folder on Pi.
+  ansible.builtin.file:
+    path: "{{ config_dir }}/xray"
+    state: directory
+    mode: 0755
+  become: false
+
+# at the time it is alireza7 image which is the most up to date
+- name: Pull latest Xray Docker image
+  community.general.docker_image:
+    source: pull
+    name: alireza7/x-ui
+    tag: latest
+  become: false
+
+- name: Synchronize Xray directory.
+  ansible.posix.synchronize:
+    src: xray
+    dest: "{{ config_dir }}/"
+    delete: false
+    recursive: true
+    perms: false
+  become: false
+
+- name: Copy Xray docker-compose template to Pi.
+  ansible.builtin.template:
+    src: templates/{{ item.src }}
+    dest: "{{ config_dir }}/xray/{{ item.dest }}"
+    mode: 0640
+  loop:
+    - src: x-ui-docker-compose.yml.j2
+      dest: docker-compose.yml
+  become: false
+  notify: Restart wireguard
+
+- name: Ensure Xray is running.
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/xray/"
+    build: false
+  become: false
+  environment:
+    DOCKER_CLIENT_TIMEOUT: '180'
+    COMPOSE_HTTP_TIMEOUT: '180'
