@@ -1,5 +1,5 @@
-  # Basic Xray Server Configuration
-   > **!Beaware!**: Some protocols described here are [prohibited in PRC](https://en.wikipedia.org/wiki/Shadowsocks). Don't use this if you are in PRC. This is for your educational purposes only. 
+# Basic Xray Server Configuration
+  > **!Beaware!**: Some protocols described here are [prohibited in PRC](https://en.wikipedia.org/wiki/Shadowsocks). Don't use this if you are in PRC. This is for your educational purposes only. 
 
    #### Xray facts:
    * **UI access port** `http://localhost:54321`, (*change `localhost` to your Raspberry host ip/name*)
@@ -37,6 +37,7 @@ To create Shadowsocks Inbound you need to:
 You can use Shadowsocks now, but it is better to continue with VLESS & XTLS-Reality configuration following step below.
 
 Here how Shadow Socs Configuration looks like:
+
 <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/XRAY-SS-Config1.png" alt="Raspberry ShadowSocks Configuration 1" width="60" border="0" />
 
 ### 2. VLESS & XTLS-Reality Configuration
@@ -66,11 +67,14 @@ To create VLESS Inbound you need to:
 * Save it, and you are done.
 
 Here how Realty Configuration looks like:
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/XRAY-Realty-Config1.png" alt="Raspberry Realty Configuration 1" width="150" border="0" />
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/XRAY-Realty-Config2.png" alt="Raspberry Realty Configuration 2" width="150" border="0" />
+
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/XRAY-Realty-Config1.png" alt="Raspberry Realty Configuration 1" width="300" border="0" />
+
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/XRAY-Realty-Config2.png" alt="Raspberry Realty Configuration 2" width="300" border="0" />
 
 This is what you'll have as a result of our configuration:
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/XRAY-Inbounds1.png" alt="Raspberry Configured XRAY Inbounds" width="600" border="0" />
+
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/XRAY-Inbounds1.png" alt="Raspberry Configured XRAY Inbounds" width="900" border="0" />
 
 ## Additional Options.
 Under `Pannel Settings` > `Xray Configuration` you can find some additional options. Such as block BitTorrent traffic for your Clients or enable Ads Blocking or Family-Friendly for them. 
