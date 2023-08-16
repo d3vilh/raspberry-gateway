@@ -32,7 +32,7 @@
     - src: x-ui-docker-compose.yml.j2
       dest: docker-compose.yml
   become: false
-  notify: Restart wireguard
+  notify: Restart xray
 
 - name: Ensure Xray is running.
   community.docker.docker_compose:
