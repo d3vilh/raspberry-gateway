@@ -82,3 +82,10 @@
     build: false
     restarted: true
   become: false
+
+- name: Restart xray
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/xray/"
+    build: false
+    restarted: true
+  become: false
