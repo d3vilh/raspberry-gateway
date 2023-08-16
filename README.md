@@ -11,8 +11,8 @@ This project provides a simple but powerful solution for managing your home inte
   * [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/monitoring) for Internet speed, VPN, Raspberry Pi hardware and Docker containers monitoring. 
   * [**Technitium-dns**](https://technitium.com/dns/) container. Self host DNS server to block ads & malware at DNS level for your network.
   * [**WireGuard Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) container with own WEB UI. 
+  * [**XRAY Server**](https://github.com/d3vilh/raspberry-gateway/blob/master/xray/README.md) container, with experimental Shadowsocks fast tunnel proxy that helps you to bypass firewalls. 
   * **Various Prometheus exporters**: cAdviser, AirGradient, StarLink, ShellyPlug and others. 
-  * **XRAY Server/Client** container, as experimental Shadowsocks proxy server/client powered by x-ui web-gui.
 
 Overall, this Raspberry Pi Home Internet Gateway provides a universal solution for managing and monitoring your home internet experience with ease.
 
@@ -122,6 +122,10 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
          * `airgradient_monitoring_enable: true` or `false` - **disabled** or enabled AirGradient monitoring.
          * `starlink_monitoring_enable: true` or `false` - **disabled** or enabled StarLink monitoring.
          * `shellyplug_monitoring_enable: true` or `false` - **disabled** or enabled ShellyPlug monitoring.
+
+      * **XRAY Server**
+         * `xray_enable: false` or `true` - **disable** or enable XRAY Server installation.
+         * `remove_xray: false` or `true` - **false** Set `true`` to remove XRAY Server installation.
       </details>
 
       > **Note**: Default configuration options are bold.
@@ -285,6 +289,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
 
   ## Xray Server
   **Main Documentation** and Configuration examples is [here](https://github.com/d3vilh/raspberry-gateway/blob/master/xray/README.md).
+  
    #### Xray facts:
    * **UI access port** `http://localhost:54321`, (*change `localhost` to your Raspberry host ip/name*)
    * **Default password** is `admin/admin`, which **must** be changed via web interface on first login (`Pannel Settings` > `User Settings`).

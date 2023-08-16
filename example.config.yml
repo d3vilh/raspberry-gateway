@@ -3,7 +3,6 @@
 config_dir: '~'
 
 #
-#   This is the simplyfied configuration file.
 #   For advanced configuration see `advanced.config.yml`
 #
 
@@ -20,7 +19,7 @@ ur_timezone: "Europe/Kyiv"
 #   |__|  |___|_| |_| |__,|_|_|_|___|_|  
 # Portainer configuration.
 portainer_enable: true                          # Set true to enable Portainer
-remove_portainer: false    #testing             # Set true to remove Portainer
+remove_portainer: false                         # Set true to remove Portainer
 
 #    _____     _                 _   ____  _____ _____ 
 #   |  |  |___| |_ ___ _ _ ___ _| | |    \|   | |   __|
@@ -28,7 +27,7 @@ remove_portainer: false    #testing             # Set true to remove Portainer
 #   |_____|_|_|___|___|___|_|_|___|_|____/|_|___|_____| Dont't use with .Tech.DNS at the same time!
 # Unbound DNS configuration.
 unbound_dns_enable: true                        # Set true to enable Unbound DNS. Don't use with Technition DNS at the same time!
-remove_unbound_dns: false #testing              # Set true to remove Unbound DNS
+remove_unbound_dns: false                       # Set true to remove Unbound DNS
 
 unbound_dns_identitiy: "unbound-dns"            # Report this identity rather than the hostname of the server.
 unbound_dns_hide: "yes"                         # Send minimum information to upstream servers, reduce responce size, refuse .id and .version queries
@@ -43,7 +42,7 @@ unbound_dns_upstream_4_pihole: "127.0.0.1#5335" # Use local Unbound DNS as upstr
 #   |__|  |_|__|__|___|_|___| Dont't use with .Tech.DNS at the same time!
 # Pi-hole configuration.
 pihole_enable: true                             # Set true to enable Pi-Hole. Don't use with Technition DNS at the same time!
-remove_pihole: false #testing                   # Set true to remove Pi-Hole
+remove_pihole: false                            # Set true to remove Pi-Hole
 
 pihole_with_unbound: true                       # Enable Pi-Hole to use Unbound DNS as upstream DNS server.
 pihole_password: "gagaZush"                     # !Change this password!
@@ -55,7 +54,7 @@ pihole_hostname: pihole                         # Pi-Hole hostname. Leave it as 
 #   |_| |_| |___|___|_|_|_|____/|_|___|_____|_|  Don't use with PiHole and UnboundDNS at the same time!
 # Technitium DNS Server configuration.
 tech_dns_enable: false                          # Set true to enable Technitium DNS. Don't use with Pi-hole at the same time!
-remove_tech_dns: false #testing                 # Set true to remove Technitium DNS
+remove_tech_dns: false                          # Set true to remove Technitium DNS
 
 tech_dns_password: "gagaZush"                   # !Change this password!
 tech_dns_hostname: tech-dns
@@ -73,7 +72,7 @@ tech_dns_inside_vpn: false                      # DOESN'T WORK YET! # Set true t
 #         |_|
 # OpenVPN Server configuration.
 ovpn_server_enable: false                       # Set true to enable OpenVPN server
-remove_ovpn_server: false #testing              # Set true to remove OpenVPN server
+remove_ovpn_server: false                       # Set true to remove OpenVPN server
 
 ovpnui_user: "admin"                            # OpenVPN UI username
 ovpnui_password: "gagaZush"                     # !Change this password!
@@ -84,7 +83,7 @@ ovpn_remote: "remote 123.234.123.12 12345 udp"  # OpenVPN client.ovpn profile co
 
 # OpenVPN Client configuration for qBittorrent only. OpenVPN server is not required.
 ovpn_client_enable: false                       # Set true to enable internal OpenVPN client used for qBittorrent. OpenVPN server is not required.
-remove_ovpn_client: false #testing              # Set true to remove internal OpenVPN client used for qBittorrent. OpenVPN server is not required.
+remove_ovpn_client: false                       # Set true to remove internal OpenVPN client used for qBittorrent. OpenVPN server is not required.
 
 ovpn_client_cert: "webinstall-client.ovpn"      # Set your ovpn-client certificate name
 ovpn_client_allowed_subnet: "192.168.88.0/24"   # Allowed subnet for ovpn-client. You must have your local network defined here.
@@ -97,7 +96,7 @@ ovpn_client_killswitch: true                    # Allow subnet access and block 
 #   |_____|_|___|___| |_| |___|_|_|
 # Universal VPN Client for multiple VPN Providers
 gluetun_vpnclient_enable: false                 # Set true to enable Gluetun (OpenVPN or Wireguard)
-remove_gluetun: false #testing                  # Set true to remove Gluetun
+remove_gluetun: false                           # Set true to remove Gluetun
 
 gluetun_server_countries: "Netherlands"         # Comma separated list of countries
 gluetun_server_cities: "Amsterdam"              # Comma separated list of cities
@@ -114,7 +113,7 @@ gluetun_vpnclient_custom: false                 # Set true to enable custom Open
 glue_ovpn_custom_conf: "webinstall-client.ovpn" # Set your OpenVPN custom configuration. See
 
 # WIREGUARD CLIENT PART:
-gluetun_wireguard_private_key: "yCbHtK...X2c="  # Valid base 58 Wireguard Client key. Wireguard client private key to use.
+gluetun_wireguard_private_key: "yTblPoK...2c="  # Valid base 58 Wireguard Client key. Wireguard client private key to use.
 gluetun_wireguard_public_key: "none"            # Valid base 58 Wireguard Server key. Wireguard Server public key to use.
 gluetun_wireguard_preshared_key: "none"         #
 gluetun_wireguard_address: "10.99.99.99/32"     # Valid IP network interface address in the format xx.xx.xx.xx/xx or ff:ff:ff...:ff/128
@@ -127,7 +126,7 @@ gluetun_wireguard_endpoint_port: "none"         # Valid port number in the forma
 #   |_____|_|_| |___|_____|___|__,|_| |___|
 # WireGuard Server configuration.
 wireguard_server_enable: false                  # Set true to enable WireGuard Server and its Web-UI
-remove_wireguard: false #testing                # Set true to remove WireGuard Server
+remove_wireguard: false                         # Set true to remove WireGuard Server
 
 wireguard_password: "gagaZush"                  # !Change this password! Web-UI password
 wireguard_user: "admin"                         # Wireguard UI username
@@ -140,7 +139,7 @@ wireguard_serverurl: "wg.example.com"
 #     |_|                                         
 # QbitTorrent configuration.
 qbittorrent_enable: false                       # Set true to enable qBittorrent and its WebUI
-remove_qbittorrent: false   #testing            # Set true to remove qBittorrent
+remove_qbittorrent: false                       # Set true to remove qBittorrent
 
 qbittorrent_default_password: admin/adminadmin  # !Change this password wia WebUI!
 # Local VPN configuration. Allows qBittorrent runs through VPN client connection.
@@ -154,7 +153,7 @@ qbittorrent_webui_port: 8090                    # Do not change it unless you kn
 #   |_|_|_|___|_|_|_|_| |___|_| |___|
 # Raspberry-monitoring configuration.
 monitoring_enable: true                         # Set true to enable base Raspberry monitoring
-remove_monitoring: false #testing               # Set true to remove base Raspberry monitoring
+remove_monitoring: false                        # Set true to remove base Raspberry monitoring
 
 monitoring_grafana_admin_password: "admin"      # Is only used the first time when Grafana starts up
 monitoring_days_keep_interval: 90d              # How long to keep data in Prometheus DB (decrease if you have less than 5Gb of free disk space)
@@ -163,11 +162,11 @@ monitoring_ping_interval: 30s                   # How often to ping hosts (don't
 
 # OpenVPN monitoring configuration.             # Requires `monitoring_enable`
 openvpn_monitoring_enable: false                # Set true to enable OpenVPN server Grafana dashboard
-remove_openvpn_monitoring: false #testing       # Set true to remove OpenVPN server Grafana dashboard
+remove_openvpn_monitoring: false                # Set true to remove OpenVPN server Grafana dashboard
 
 # PiKVM monitoring configuration.               # Requires `monitoring_enable`
 pikvm_monitoring_enable: false                  # Set true to enable PiKVM Grafana dashboard
-remove_pikvm_monitoring: false #testing         # Set true to remove PiKVM Grafana dashboard
+remove_pikvm_monitoring: false                  # Set true to remove PiKVM Grafana dashboard
 
 pikvm_target_ip: "192.168.88.3"                 # Pi-KVM IP address
 pikvm_web_user: "admin"                         # Pi-KVM side preconfigured Web-UI username
@@ -175,18 +174,18 @@ pikvm_web_password: "gagaZush"                  # !Change this password! Pi-KVM 
 
 # AirGradient monitoring configuration.         # Requires `monitoring_enable`
 airgradient_monitoring_enable: false            # Set true to enable Airgradient Grafana dashboard
-remove_airgradient_monitoring: false #testing   # Set true to remove Airgradient Grafana dashboard
+remove_airgradient_monitoring: false            # Set true to remove Airgradient Grafana dashboard
 
 # Starlink monitoring configuration.            # Requires `monitoring_enable`
 starlink_monitoring_enable: false               # Set true to enable StarLink dishy Grafana dashboard
-remove_starlink_monitoring: false #testing      # Set true to remove StarLink dishy Grafana dashboard
+remove_starlink_monitoring: false               # Set true to remove StarLink dishy Grafana dashboard
 
 starlink_ip: "10.10.10.1"                       # Dishy IP address
 starlink_port: 9817                             # Dishy port to get statistics from
 
 # Shelly Plug monitoring configuration.         # Set true to enable Shelly Plug Grafana dashboard
 shelly_plug_monitoring_enable: false            # Set true or false
-remove_shelly_plug_monitoring: false #testing   # Set true to remove Shelly Plug Grafana dashboard
+remove_shelly_plug_monitoring: false            # Set true to remove Shelly Plug Grafana dashboard
 
 shelly_plug_hostname: shelly-host-or-ip
 shelly_ip: "192.168.88.66"
@@ -194,9 +193,13 @@ shelly_port: 9924
 shelly_plug_http_username: "admin"               # username
 shelly_plug_http_password: "gagaZush"            # !Change this password!
 
-# XRAY eXperimental configuration.
-# experimental container with X-UI supports Shadowsocks, VMess, VLESS, XTLS and Trojan protocols        
+#   __   __      
+#   \ \ / /   _____ _____ __ __ 
+#    \ V /__ | __  |  _  |  |  |
+#    /   \__||    -|     |_   _|
+#   / /^\ \  |__|__|__|__| |_|     
+#   \/   \/ Shadowsocks fast tunnel proxy.
+# experimental container with X-UI supports Shadowsocks, VMess, VLESS, XTLS and Trojan protocols  
+# !Beaware! some XRAY protocols from the list are prohibited in PRC. Don't use this if you are in PRC.      
 xray_enable: false                               # Set true to enable X-RAY x-ui eXperimental
 remove_xray: false
-# Xray configuration examples: https://github.com/XTLS/Xray-examples
-# !Beaware! some protocols from the list are prohibited in PRC. Don't use this if you are in PRC.

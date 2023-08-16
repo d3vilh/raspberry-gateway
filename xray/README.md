@@ -1,7 +1,7 @@
 # Basic Xray Server Configuration
   > **!Beaware!**: Some protocols described here are [prohibited in PRC](https://en.wikipedia.org/wiki/Shadowsocks). Don't use this if you are in PRC. This is for your educational purposes only. 
 
-   #### Xray facts:
+## Xray facts:
    * **UI access port** `http://localhost:54321`, (*change `localhost` to your Raspberry host ip/name*)
    * **Default password** is `admin/admin`, which **must** be changed via web interface on first login (`Pannel Settings` > `User Settings`).
    * **External ports** used by container: `443:tcp`, `80:tcp`, `54321:tcp`(by default), Inbound ports you'll configure.
@@ -14,6 +14,7 @@
 
 ## Inbounds configuration
 Now when default security configuration is done. It is time to configure Xray to work with your Raspberry. There is few steps below you should follow.
+More Xray configuration examples can be found [here](https://github.com/XTLS/Xray-examples).
 
 ### 1. SHADOWSOCKS Configuration
 To create Shadowsocks Inbound you need to:
