@@ -283,7 +283,8 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
    * **Configuration files** are available after the installation and located in `~/tech-dns/config/` directory
    * **Advanced Configuration** No advanced configuration.
 
-  ## Xray Server/Client
+  ## Xray Server
+  **Main Documentation** and Configuration examples is [here](https://github.com/d3vilh/raspberry-gateway/blob/master/xray/README.md).
    #### Xray facts:
    * **UI access port** `http://localhost:54321`, (*change `localhost` to your Raspberry host ip/name*)
    * **Default password** is `admin/admin`, which **must** be changed via web interface on first login (`Pannel Settings` > `User Settings`).
