@@ -200,7 +200,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
    * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L31) `config.yml` file in `pihole_password` var
    * **Unbound DNS connection** can be [enabled in the](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L30) `config.yml`. Default option - `pihole_with_unbound: true`
    * **External ports** used by container: `80:tcp`, `443:tcp`, `53:tcp`, `53:udp`, `67:tcp`, `67:udp`
-   * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L28) before the installation
+   * **Advanced Configuration** No advanced configuration.
 
   > **Note**: If you would like to add Unbound functionality to Pi-Hole, you have to stop and remove old Pi-Hole setup and re-install it again.
 
@@ -211,7 +211,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
    * **Pi-Hole pair** to disable, [you have to set](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L30) `pihole_with_unbound: false` in `config.yml` before the installation.
    * **External ports** used by container: `5335:tcp`, `5335:udp`
    * **Configuration file** is available after the installation and located in `~/unbound-dns/etc-unbound/unbound.conf`
-   * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L16) before the installation
+   * **Advanced Configuration** No advanced configuration.
 
   > **Note**: If you would like to add Unbound to the existent Pi-Hole setup, you have to stop and remove old Pi-Hole container and re-install it again alltogeather with Unbound and necessary options enabled.
 
@@ -221,7 +221,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
    * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) `config.yml` file in the `tech_dns_password` var
    * **External ports** used by container: `5380:tcp`, `53:tcp`, `53:udp`
    * **Configuration files** are available after the installation and located in `~/tech-dns/config/` directory
-   * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L35) before the installation
+   * **Advanced Configuration** No advanced configuration.
 
   ## qBittorrent
    #### qBittorrent facts:
@@ -230,7 +230,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
    * **External ports** used by container: `8090:tcp`, `6881:tcp`, `6881:udp`
    * **Configuration files** are available after the installation and located in `~/qbittorrent/config/qBittorrent/` directory
    * **Downloaded files** will be stored in the `~/qbittorrent/downloads` directory.
-   * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L74) before the installation
+   * **Advanced Configuration** No advanced configuration.
 
   > **Note**: To prove you are **connected via VPN** run this command `sudo docker exec qbittorrent wget -qO - ifconfig.me` it should return your VPN IP address.
 
@@ -240,7 +240,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
    * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L48) `config.yml` file in the `ovpnui_password` var
    * **External ports** used by containers, by default: `8080:tcp`, `1194:tcp`, `1194:udp`
    * **Configuration files** are available after the installation and located in `~/openvpn-server/*` directory
-   * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L49) before the installation
+   * **Advanced Configuration** No advanced configuration.
 
   All the [**OpenVPN Server configuration**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md) and Knowhow for this setup can be found [**here**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md).
    > **Note**: If you are looking for x86_64 version of OpenVPN and openvpn-ui containers, please check [**openvpn-aws**](https://github.com/d3vilh/openvpn-aws)
@@ -254,10 +254,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
    * **Configuration Options** necessary for the installation (defined in `config.yml` file)`):
      * `ovpn_client_cert: "example-client.opvn"` - file with your OpenVPN connection profile (`*.ovpn`). You have to put it into `~/raspberry-gateway/openvpn-client/` directory before installation and update its name in `ovpn_client_cert`. Use the [**example-client.ovpn**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-client/example-client.ovpn#L1) as a refference of all necessary options and file format. After the installation your `*.ovpn` file will be moved to `~/openvpn-client/*.ovpn` and used by container. If for some reason you need to change it, you have to put new file with the same name in `~/openvpn-client/` directory and restart openvpn-client container (`docker openvpn-client restart`).
      * `ovpn_client_allowed_subnet: "192.168.88.0/24" ` - Your local newtwork (WiFi or whatever), from which you want to access qBitTorrent WEB-UI when VPN Client connection is active.
-   * **Advanced Configuration** can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L56) before the installation:
-     * `ovpn_client_secret: "filename.txt"` - filename with your OpenVPN connection profile user and password if you have any. You have to put it into `~/raspberry-gaveway/openvpn-client/` directory before installation and update its name in `ovpn_client_secret`. Use the [**example-credentials.txt**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-client/example-credentials.txt#L1) as refference.
-     * `ovpn_client_killswitch: true` - If set to `true`, it will block all the traffic when VPN is connected, except the one from the `ovpn_client_allowed_subnet` subnet.
-
+   * **Advanced Configuration** No advanced configuration.
   > **Note**: To prove you are **connected via VPN** run this command `sudo docker exec openvpn-client wget -qO - ifconfig.me` it should return your VPN IP address.
 
   For more documentation and How-to, please check dedicated [**openvpn-client README.md**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) file.
@@ -284,7 +281,19 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
    * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L61) `config.yml` file in the `wireguard_password` var
    * **External ports** used by container: `5000:tcp`, `6881:tcp`, `6881:udp`
    * **Configuration files** are available after the installation and located in `~/tech-dns/config/` directory
-   * **Advanced Configuration** Before the installation, can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L65). WebUi username and WireGuard external server URL can be changed.
+   * **Advanced Configuration** No advanced configuration.
+
+  ## Xray Server/Client
+   #### Xray facts:
+   * **UI access port** `http://localhost:54321`, (*change `localhost` to your Raspberry host ip/name*)
+   * **Default password** is `admin/admin`, which **must** be changed via web interface on first login (`Pannel Settings` > `User Settings`).
+   * **External ports** used by container: `443:tcp`, `80:tcp`, `54321:tcp`(by default)
+   * **Configuration files** are available after the installation and located in `~/xray/` directory
+   * **Advanced Configuration** No advanced configuration.
+   * **It is Important** to change following settings for better security:
+     * default password in `Pannel Settings` > `User Settings` > `Password` to something strong and secure.
+     * default pannel port in `Pannel Settings` > `Pannel Configurations` > `Pannel Port` from `54321` to some random port (the best in the upper end of the range, up to `65535`)
+     * default configuration pannel URL in `Pannel Settings` > `Pannel Configurations` > `Panel URL Root Path` to something random, like `/mysecretpannel/` or `/superxray/`.
 
   ## Raspi-monitoring
   All the Data sources, Dashboards and exporters are automatically provisioned. Below you can find the list of available dashboards and their URLs.
