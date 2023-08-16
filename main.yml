@@ -67,6 +67,10 @@
       ansible.builtin.import_tasks: tasks/qbittorrent.yml
       when: qbittorrent_enable
 
+    - name: Setup xray
+      ansible.builtin.import_tasks: tasks/xray-xui.yml
+      when: xray_enable 
+
     - name: Setup Raspi Monitoring
       ansible.builtin.import_tasks: tasks/raspi-monitoring.yml
       when: monitoring_enable
@@ -78,7 +82,3 @@
     - name: Remove Containers
       ansible.builtin.import_tasks: tasks/remove.yml
       when: remove_portainer or remove_wireguard or remove_qbittorrent
-
-    - name: Setup xray-xui
-      ansible.builtin.import_tasks: tasks/xray-xui.yml
-      when: xray_enable 
