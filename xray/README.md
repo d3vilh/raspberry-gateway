@@ -36,9 +36,9 @@ To create Shadowsocks Inbound you need to:
     * `Transmission`: `tcp`
 You can use Shadowsocks now, but it is better to continue with VLESS & XTLS-Reality configuration following step below.
 
-Here how Shadow Socs Configuration looks like:
+Here how Shadowsocs Configuration looks like:
 
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/XRAY-SS-Config1.png" alt="Raspberry ShadowSocks Configuration 1" width="60" border="0" />
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/XRAY-SS-Config1.png" alt="Raspberry ShadowSocks Configuration 1" width="300" border="0" />
 
 ### 2. VLESS & XTLS-Reality Configuration
 To create VLESS Inbound you need to:
