@@ -11,7 +11,7 @@ This project provides a simple but powerful solution for managing your home inte
   * [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/monitoring) for Internet speed, VPN, Raspberry Pi hardware and Docker containers monitoring. 
   * [**Technitium-dns**](https://technitium.com/dns/) container. Self host DNS server to block ads & malware at DNS level for your network.
   * [**WireGuard Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) container with own WEB UI. 
-  * [**XRAY Server**](https://github.com/d3vilh/raspberry-gateway/blob/master/xray/README.md) container, with experimental Shadowsocks fast tunnel proxy that helps you to bypass firewalls. 
+  * [**XRAY Server**](https://github.com/d3vilh/raspberry-gateway/blob/master/xray/README.md) container, with experimental Shadowsocks and XTLS-Reality fast tunnel proxy that helps you to bypass firewalls. 
   * **Various Prometheus exporters**: cAdviser, AirGradient, StarLink, ShellyPlug and others. 
 
 Overall, this Raspberry Pi Home Internet Gateway provides a universal solution for managing and monitoring your home internet experience with ease.

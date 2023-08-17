@@ -35,7 +35,7 @@ To create Shadowsocks Inbound you need to:
     * `Encryption`: for Shadowsocks use any encryption you like which starts with 2022. For example `2022-blake3-aes-256-gcm`
     * `Network`: `tcp,udp` or `tcp` for Shadowsocks
     * `Transmission`: `tcp`
-You can use Shadowsocks now, but it is better to continue with VLESS & XTLS-Reality configuration following step below.
+You can use Shadowsocks now, but it is better to continue with VLESS & XTLS-Reality configuration to bypass [Active probing](https://ensa.fi/active-probing/). Follow the steps below.
 
 Here how Shadowsocs Configuration looks like:
 
@@ -81,7 +81,6 @@ This is what you'll have as a result of our configuration:
 Under `Pannel Settings` > `Xray Configuration` you can find some additional options. Such as block BitTorrent traffic for your Clients or enable Ads Blocking or Family-Friendly for them. 
 You can block connections to specific countries from the list like China, Russia, etc.
 In addition you can setup XRAY Telegram Bot which will help you to manage your XRAY Server via Telegram.
-
 
 # Xray Clients
 Here is the list of Clients you can use with XRAY Server. 
