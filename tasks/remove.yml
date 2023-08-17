@@ -249,7 +249,7 @@
 
     - name: Remove Xray image
       community.docker.docker_image:
-        name: alireza7/x-ui
+        name: d3vilh/x-ui:latest
         state: absent
       become: true
       when: remove_xray
