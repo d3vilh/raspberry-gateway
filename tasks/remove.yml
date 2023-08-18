@@ -229,6 +229,7 @@
         project_src: "{{ config_dir }}/shelly-plug-prometheus/"
         state: absent
       become: false
+      ignore_errors: yes
       when: remove_monitoring
 
     - name: Remove ShellyPlug PHP image
@@ -236,6 +237,7 @@
         name: php:8-apache
         state: absent
       become: true
+      ignore_errors: yes
       when: remove_monitoring
 
 - name: Remove Xray
