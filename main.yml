@@ -81,21 +81,22 @@
 
     - name: Remove Containers
       ansible.builtin.include_tasks: tasks/remove.yml
-      loop:
-        - remove_portainer
-        - remove_unbound_dns
-        - remove_pihole
-        - remove_tech_dns
-        - remove_ovpn_server
-        - remove_ovpn_client
-        - remove_gluetun
-        - remove_wireguard
-        - remove_qbittorrent
-        - remove_xray
-        - remove_monitoring
-        - remove_openvpn_monitoring
-        - remove_pikvm_monitoring
-        - remove_airgradient_monitoring
-        - remove_starlink_monitoring
-        - remove_shelly_plug_monitoring
-      when: loop_item
+      vars:
+        remove_conditions:
+          - remove_portainer
+          - remove_unbound_dns
+          - remove_pihole
+          - remove_tech_dns
+          - remove_ovpn_server
+          - remove_ovpn_client
+          - remove_gluetun
+          - remove_wireguard
+          - remove_qbittorrent
+          - remove_xray
+          - remove_monitoring
+          - remove_openvpn_monitoring
+          - remove_pikvm_monitoring
+          - remove_airgradient_monitoring
+          - remove_starlink_monitoring
+          - remove_shelly_plug_monitoring
+      when: remove_conditions | select('match', '^remove_') | list | length > 0
