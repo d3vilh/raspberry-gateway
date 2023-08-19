@@ -221,7 +221,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
 [**Xray Server**](https://github.com/d3vilh/raspberry-gateway/blob/master/xray/README.md) container, with experimental Shadowsocks and XTLS-Reality fast tunnel proxy that helps you to bypass firewalls.
 
 <p align="center">
-<img src="/images/XRAY-Dashboard1.png" alt="Xray Dashboard" height="360"><img src="/images/XRAY-Dashboard2.png" alt="Xray Inbounds" height="360">
+<img src="/images/XRAY-Dashboard1.png" alt="Xray Dashboard" height="358"><img src="/images/XRAY-Dashboard2.png" alt="Xray Inbounds" height="358">
 </p>
 
 [**qBittorrent**](https://www.qbittorrent.org) an open-source software alternative to µTorrent, with lightweight web administration interface:
