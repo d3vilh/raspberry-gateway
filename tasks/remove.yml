@@ -15,6 +15,12 @@
       become: true
       when: remove_portainer
 
+    - name: Remove Portainer network
+      community.docker.docker_network:
+        name: portainer_default
+        state: absent
+      when: remove_portainer
+
 - name: Remove Pi-hole and Unbound DNS
   block:
 
@@ -47,6 +53,12 @@
       become: true
       when: remove_unbound_dns
 
+    - name: Remove Unbound network
+      community.docker.docker_network:
+        name: unbound-dns_unbound-net
+        state: absent
+      when: remove_unbound_dns
+
 - name: Remove Technitium DNS
   block:
     - name: Stop and remove Technitium DNS container
@@ -61,6 +73,12 @@
         name: technitium/dns-server
         state: absent
       become: true
+      when: remove_tech_dns
+
+    - name: Remove Technitium DNS network
+      community.docker.docker_network:
+        name: tech-dns_default
+        state: absent
       when: remove_tech_dns
 
 - name: Remove OpenVPN Server
@@ -84,6 +102,12 @@
         name: d3vilh/openvpn-ui
         state: absent
       become: true
+      when: remove_ovpn_server
+
+    - name: Remove OpenVPN Server network
+      community.docker.docker_network:
+        name: openvpn-server_default
+        state: absent
       when: remove_ovpn_server
 
 - name: Remove qBitTorrent
@@ -119,6 +143,12 @@
       become: true
       when: remove_ovpn_client
 
+    - name: Remove OpenVPN Client network
+      community.docker.docker_network:
+        name: openvpn-client_vpn-net
+        state: absent
+      when: remove_ovpn_client
+
 - name: Remove Gluetun
   block:
     - name: Stop and remove Gluetun container
@@ -136,6 +166,12 @@
       become: true
       when: remove_gluetun
 
+    - name: Remove Gluetun network
+      community.docker.docker_network:
+        name: gluetun_vpn-net
+        state: absent
+      when: remove_gluetun
+
 - name: Remove WireGuard
   block:
     - name: Stop and remove WireGuard container
@@ -150,6 +186,12 @@
         name: d3vilh/wireguard-ui-arm
         state: absent
       become: true
+      when: remove_wireguard
+
+    - name: Remove Wireguard network
+      community.docker.docker_network:
+        name: wireguard_default
+        state: absent
       when: remove_wireguard
 
 - name: Remove Monitoring
@@ -238,6 +280,18 @@
         state: absent
       become: true
       ignore_errors: yes
+      when: remove_monitoring
+
+    - name: Remove Monitpring back-tier network
+      community.docker.docker_network:
+        name: monitoring_back-tier
+        state: absent
+      when: remove_monitoring
+
+    - name: Remove Monitpring front-tier network
+      community.docker.docker_network:
+        name: monitoring_front-tier
+        state: absent
       when: remove_monitoring
 
 - name: Remove Xray
