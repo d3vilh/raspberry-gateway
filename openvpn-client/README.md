@@ -51,3 +51,5 @@ To confirm other continers are using the VPN, you can run the following command 
 sudo docker exec qbittorrent wget -qO - ifconfig.me
 ```
 This should return the public IP address of the VPN provider, same as openvpn-client container.
+
+<a href="https://www.buymeacoffee.com/d3vilh" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>

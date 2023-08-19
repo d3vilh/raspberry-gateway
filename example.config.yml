@@ -3,7 +3,7 @@
 config_dir: '~'
 
 #
-#   For advanced configuration see `advanced.config.yml`
+#   For advanced Monitoring configuration see `advanced.config.yml`
 #
 
 #    _____ _           _____             
@@ -87,7 +87,7 @@ remove_ovpn_client: false                       # Set true to remove internal Op
 
 ovpn_client_cert: "webinstall-client.ovpn"      # Set your ovpn-client certificate name
 ovpn_client_allowed_subnet: "192.168.88.0/24"   # Allowed subnet for ovpn-client. You must have your local network defined here.
-ovpn_client_secret: "webinstall-credentials.txt" # Filename with ovpn-client user and password, "example-credentials.txt"
+ovpn_client_secret: "webinstall-credentials.txt" # Filename with ovpn-client user and password.
 ovpn_client_killswitch: true                    # Allow subnet access and block all other traffic if ovpn-client is down
 
 #    _____ _         _____         
@@ -110,7 +110,7 @@ gluetun_vpn_type: openvpn                       # Set your VPN type: openvpn, wi
 gluetun_openvpn_user: "none"                    # Set your OpenVPN username
 gluetun_openvpn_password: "none"                # Set your OpenVPN password
 gluetun_vpnclient_custom: false                 # Set true to enable custom OpenVPN configuration below
-glue_ovpn_custom_conf: "webinstall-client.ovpn" # Set your OpenVPN custom configuration. See
+glue_ovpn_custom_conf: "webinstall-client.ovpn" # Set your OpenVPN custom configuration.
 
 # WIREGUARD CLIENT PART:
 gluetun_wireguard_private_key: "yTblPoK...2c="  # Valid base 58 Wireguard Client key. Wireguard client private key to use.
@@ -178,7 +178,7 @@ remove_airgradient_monitoring: false            # Set true to remove Airgradient
 
 # Starlink monitoring configuration.            # Requires `monitoring_enable`
 starlink_monitoring_enable: false               # Set true to enable StarLink dishy Grafana dashboard
-remove_starlink_monitoring: false               # Set true to remove StarLink dishy Grafana dashboard
+remove_starlink_monitoring: false               # Set true to remove dishy Grafana dashboard :(
 
 starlink_ip: "10.10.10.1"                       # Dishy IP address
 starlink_port: 9817                             # Dishy port to get statistics from
@@ -187,11 +187,11 @@ starlink_port: 9817                             # Dishy port to get statistics f
 shelly_plug_monitoring_enable: false            # Set true or false
 remove_shelly_plug_monitoring: false            # Set true to remove Shelly Plug Grafana dashboard
 
-shelly_plug_hostname: shelly-host-or-ip
-shelly_ip: "192.168.88.66"
-shelly_port: 9924
-shelly_plug_http_username: "admin"               # username
-shelly_plug_http_password: "gagaZush"            # !Change this password!
+shelly_plug_hostname: server-room-shelly        # Shelly Plug hostname
+shelly_ip: "192.168.88.66"                      # Shelly Plug IP address
+shelly_port: 9924                               # Shelly Plug port to get statistics from
+shelly_plug_http_username: "admin"              # Shelly Plug username
+shelly_plug_http_password: "gagaZush"           # !Change this password!
 
 #   __   __      
 #   \ \ / /   _____ _____ __ __ 
@@ -201,5 +201,5 @@ shelly_plug_http_password: "gagaZush"            # !Change this password!
 #   \/   \/ Shadowsocks fast tunnel proxy.
 # experimental container with X-UI supports Shadowsocks, VMess, VLESS, XTLS and Trojan protocols  
 # !Beaware! some XRAY protocols from the list are prohibited in PRC. Don't use this if you are in PRC.      
-xray_enable: false                               # Set true to enable X-RAY x-ui eXperimental
-remove_xray: false
+xray_enable: false                               # Set true to enable X-RAY x-ui
+remove_xray: false                               # Set true to remove X-RAY x-ui

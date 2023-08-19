@@ -14,17 +14,20 @@ config_dir: '~'
 #   |_|_|_|___|_|_|_|_| |___|_| |___|
 # Advanced Raspberry-monitoring configuration.
 
+# All parameters below require `monitoring_enable` to be `true` in `config.yml`.
+
 monitoring_grafana_public_dashboard: false      # Enable public dashboard for Grafana available in internet
+
+telegram_bot_chatid: "-508236451"               # Used for sending notifications to Telegram bot !Change this token!
+telegram_bot_token: "5705452771:AAEPOxb7_rSQZ8p4sZYzITBFqD3YvMs_O-e"  # Used for sending notifications to Telegram bot !Change this token!
+
 monitoring_ping_hosts:                          # [URL];[HUMAN_READABLE_NAME]
   - http://google.com/;google.com
   - https://apple.com/;apple.com
   - https://github.com/;github
   - https://reddit.com/;reddit
-telegram_bot_chatid: "-508236451"               # Used for sending notifications to Telegram bot !Change this token!
-telegram_bot_token: "5705452771:AAEPOxb7_rSQZ8p4sZYzITBFqD3YvMs_O-e"  # Used for sending notifications to Telegram bot !Change this token!
 
-# Advanced AirGradient monitoring configuration.# Requires `monitoring_enable`
-
+# Advanced AirGradient monitoring configuration.
 airgradient_sensors:
   # ID is limited in set of "a-z" to not longer than 38 chars.
   # AirGradient FW example ./files/AirGradient-DIY.ino

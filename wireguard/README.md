@@ -16,3 +16,5 @@ A web user interface to manage your WireGuard setup.
 
 Full [wireguard-ui](https://github.com/ngoduykhanh/wireguard-ui) documentation is available on project's [GitHub page](https://github.com/ngoduykhanh/wireguard-ui).
 Kudos to all the contributors of the [wireguard-ui](https://github.com/ngoduykhanh/wireguard-ui) project and [@ngoduykhanh](https://github.com/ngoduykhanh) for the great work and coordination.
+
+<a href="https://www.buymeacoffee.com/d3vilh" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>

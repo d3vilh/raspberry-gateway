@@ -1,4 +1,4 @@
-# Raspi-monitoring
+# Raspberry-monitoring
 
 [**Raspi Monitoring**](https://github.com/d3vilh/raspberry-gateway/tree/master/monitoring) for monitor your Raspberry server utilisation (CPU,MEM,I/O, Tempriture, storage usage) and Internet connection. Internet connection statistics is based on [Speedtest.net exporter](https://github.com/MiguelNdeCarvalho/speedtest-exporter) results, ping stats and overall Internet availability tests based on HTTP push methods running by [Blackbox exporter](https://github.com/prometheus/blackbox_exporter) to the desired internet sites:
 
@@ -49,10 +49,11 @@ All the Data sources, Dashboards and exporters are automatically provisioned. Be
    * **Starlink exporter** - Starlink monitoring. `http://starlink:9817/metrics`
    * **Shelly exporter** - Shelly Plug power consumption monitoring. `http://shelly:9924/metrics`
 
-## Дякую and Kudos to all the envolved peole
+## Дякую and Kudos to all the envolved peole and testers
 
-Kudos to @vegasbrianc for [super easy docker](https://github.com/vegasbrianc/github-monitoring) stack used to build this project.
 Kudos to @maxandersen for making the [Internet Monitoring](https://github.com/maxandersen/internet-monitoring) project, which was forked to extend its functionality and now part of **Raspi-monitoring**.
-Kudos to folks maintaining [**Pi-hole**](https://pi-hole.net), [**Technitium-dns**](https://technitium.com/dns/), [**qBittorrent**](https://www.qbittorrent.org), [**Portainer**](https://www.portainer.io), [**wireguard-ui**](https://github.com/ngoduykhanh/wireguard-ui), [**cAdviser**](https://github.com/d3vilh/cadvisor) and other pieces of software used in this project.
+Kudos to folks maintaining [**cAdviser**](https://github.com/d3vilh/cadvisor) and other pieces of software used in this project.
 
 **Grand Kudos** to Jeff Geerling aka [@geerlingguy](https://github.com/geerlingguy) for all his efforts to keep us interesting in Raspberry Pi compiters and for [all his videos on youtube](https://www.youtube.com/c/JeffGeerling). Like and subscribe.
+
+<a href="https://www.buymeacoffee.com/d3vilh" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>

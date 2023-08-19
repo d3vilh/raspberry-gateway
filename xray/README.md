@@ -4,9 +4,8 @@
 ## Xray facts:
    * **UI access port** `http://localhost:54321`, (*change `localhost` to your Raspberry host ip/name*)
    * **Default password** is `admin/admin`, which **must** be changed via web interface on first login (`Pannel Settings` > `User Settings`).
-   * **External ports** used by container: `443:tcp`, `54321:tcp`(by default), Inbound ports you'll configure.
+   * **External ports** used by container: `443:tcp`, `54321:tcp`(Web-UI by default), Inbound ports you'll configure.
    * **Configuration files** are available after the installation and located in `~/xray/` directory
-   * **Advanced Configuration** No advanced configuration.
    * **It is Important** to change following settings for better security:
      * default password in `Pannel Settings` > `User Settings` > `Password` to something strong and secure.
      * default pannel port in `Pannel Settings` > `Pannel Configurations` > `Pannel Port` from `54321` to some random port (the best in the upper end of the range, up to `65535`)
@@ -69,21 +68,21 @@ To create VLESS Inbound you need to:
 
 Here how Realty Configuration looks like:
 
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/XRAY-Realty-Config1.png" alt="Raspberry Realty Configuration 1" width="300" border="0" />
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/XRAY-Realty-Config1.png" alt="Xray Realty Configuration 1" width="300" border="0" />
 
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/XRAY-Realty-Config2.png" alt="Raspberry Realty Configuration 2" width="300" border="0" />
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/XRAY-Realty-Config2.png" alt="Xray Realty Configuration 2" width="300" border="0" />
 
 This is what you'll have as a result of our configuration:
 
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/XRAY-Inbounds1.png" alt="Raspberry Configured XRAY Inbounds" width="900" border="0" />
+<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/XRAY-Inbounds1.png" alt="Xray Inbounds Configured" width="900" border="0" />
 
 ## Additional Options.
 Under `Pannel Settings` > `Xray Configuration` you can find some additional options. Such as block BitTorrent traffic for your Clients or enable Ads Blocking or Family-Friendly for them. 
 You can block connections to specific countries from the list like China, Russia, etc.
-In addition you can setup XRAY Telegram Bot which will help you to manage your XRAY Server via Telegram.
+In addition you can setup Xray Telegram Bot which will help you to manage your Xray Server via Telegram.
 
 # Xray Clients
-Here is the list of Clients you can use with XRAY Server. 
+Here is the list of Clients you can use with Xray Server. 
 If you glad to use something different, plesae, let me know, I'll add it to the list.
 
 ### Universal Clients
@@ -93,7 +92,7 @@ If you glad to use something different, plesae, let me know, I'll add it to the 
 * [**Nekobox**](https://play.google.com/store/apps/details?id=moe.nb4a) for Android. Free. [Github](https://github.com/MatsuriDayo/NekoBoxForAndroid/releases).
 
 * [**V2RayNG**](https://play.google.com/store/apps/details?id=com.v2ray.ang&hl=en_US), [Github](https://github.com/2dust/v2rayNG)
-Uses XRay as a kernel, supports all the available for XRAY protocols.
+Uses XRay as a kernel, supports all the available for Xray protocols.
 
 ### MacOS Clients
 * [**V2BOX**](https://apps.apple.com/us/app/v2box-v2ray-client/id6446814690) for MacOS. Free.
