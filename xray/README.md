@@ -4,7 +4,7 @@
 ## Xray facts:
    * **UI access port** `http://localhost:54321`, (*change `localhost` to your Raspberry host ip/name*)
    * **Default password** is `admin/admin`, which **must** be changed via web interface on first login (`Pannel Settings` > `User Settings`).
-   * **External ports** used by container: `443:tcp`, `80:tcp`, `54321:tcp`(by default), Inbound ports you'll configure.
+   * **External ports** used by container: `443:tcp`, `54321:tcp`(by default), Inbound ports you'll configure.
    * **Configuration files** are available after the installation and located in `~/xray/` directory
    * **Advanced Configuration** No advanced configuration.
    * **It is Important** to change following settings for better security:
@@ -108,3 +108,5 @@ Uses XRay as a kernel, supports all the available for XRAY protocols.
 
 * [**ShadowRocket**](https://apps.apple.com/us/app/shadowrocket/id932747118). On [Appstore](https://apps.apple.com/us/app/shadowrocket/id932747118) for iPhone and iPad. Costs 3,99$.
 Supports Shadowsocks-2022, VMess, VLESS, Trojan, TUIC, Hysteria, WireGuard, XTLS-Vision, uTLS.
+
+<a href="https://www.buymeacoffee.com/d3vilh" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
