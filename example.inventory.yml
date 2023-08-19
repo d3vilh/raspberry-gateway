@@ -1,14 +1,16 @@
 all:
     hosts:
         raspberry_gateway:
+        #  Section One:
             ansible_host: 192.168.1.1
             ansible_user: pi
             ansible_connection: local
             ansible_use: "yes"
-# Comment out the previous 4 lines and uncomment 4 lines below to run on remote Raspberry-Gateway enviroment.
-# Double check the user name and IP address.
-#            ansible_host: 192.168.1.1
-#            ansible_user: pi
-#            ansible_connection: ssh
-#            ansible_use: "yes"
+        #  Section Two:
+            #ansible_host: 192.168.1.1
+            #ansible_user: pi
+            #ansible_connection: ssh
+            #ansible_use: "yes"
 
+# Comment out "Section One" parameters and uncomment "Section Two" to run on remote Raspberry-Gateway enviroment.
+# Double check the ansible_user and ansible_host.

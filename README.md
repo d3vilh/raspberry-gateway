@@ -1,20 +1,20 @@
-![Raspberry Monitoring Dashboard in Grafana picture 1](/images/Raspberry-Gateway-logo.png) 
-This project provides a simple but powerful solution for managing your home internet gateway using a Raspberry Pi. The gateway includes a range of Docker containers, each serving a specific purpose to enhance your internet experience:
+![Raspberry Gateway Logo](/images/Raspberry-Gateway-logo.png) 
+**Raspberry-Gateway** provides a simple but powerful solution for managing your home internet gateway using a Raspberry Pi. This project includes a range of Docker containers, each serving a specific purpose to enhance your internet experience:
 
-  * [**Portainer**](https://www.portainer.io) a lightweight *universal* management GUI for all Docker containers which included into this project. 
-  * [**OpenVPN Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-server/openvpn-docker) container with OpenVPN, simple [**WEB UI**](https://github.com/d3vilh/openvpn-ui) and VPN subnets support. 
-  * [**OpenVPN Client**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) container for qBittorrent connection to the external VPN server.
-  * [**GlueTun**](https://github.com/qdm12/gluetun) as universal VPN client for multiple VPN providers and using DNS over TLS, with a few proxy servers built-in.
+  * [**Portainer**](https://www.portainer.io) a lightweight universal management GUI for all Docker containers which included into this project. 
+  * [**Unbound DNS**](https://nlnetlabs.nl/projects/unbound/about/) is the validating, recursive and caching DNS resolver. Designed to be fast and lean.
+  * [**Pi-hole**](https://pi-hole.net) network-wide ad-blocking and local DNS solution. Can be paried with Unbound.
+  * [**Technitium-dns**](https://technitium.com/dns/) is the self host DNS server to block ads & malware at DNS level for your network.
+  * [**OpenVPN Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-server/openvpn-docker) with simple [**WEB UI**](https://github.com/d3vilh/openvpn-ui) and VPN subnets support. 
+  * [**OpenVPN Client**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) for qBittorrent connection to the external VPN server.
+  * [**GlueTun**](https://github.com/qdm12/gluetun) - universal OpenVPN and Wireguard client for multiple VPN providers, using DNS over TLS and a few proxy servers built-in.
+  * [**WireGuard Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) with own WEB UI for easy management. 
+  * [**Xray Server**](https://github.com/d3vilh/raspberry-gateway/blob/master/xray/README.md) with experimental Shadowsocks and XTLS-Reality fast tunnel proxy that helps you to bypass firewalls. 
   * [**qBittorrent**](https://www.qbittorrent.org) -  an open-source software alternative to µTorrent. 
-  * [**Pi-hole**](https://pi-hole.net) container with network-wide ad-blocking&local DNS solution. Can be paried with Unbound.
-  * [**Unbound DNS**](https://nlnetlabs.nl/projects/unbound/about/) container with the validating, recursive, caching DNS resolver. Designed to be fast and lean.
   * [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/monitoring) for Internet speed, VPN, Raspberry Pi hardware and Docker containers monitoring. 
-  * [**Technitium-dns**](https://technitium.com/dns/) container. Self host DNS server to block ads & malware at DNS level for your network.
-  * [**WireGuard Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) container with own WEB UI. 
-  * [**XRAY Server**](https://github.com/d3vilh/raspberry-gateway/blob/master/xray/README.md) container, with experimental Shadowsocks and XTLS-Reality fast tunnel proxy that helps you to bypass firewalls. 
   * **Various Prometheus exporters**: cAdviser, AirGradient, StarLink, ShellyPlug and others. 
 
-Overall, this Raspberry Pi Home Internet Gateway provides a universal solution for managing and monitoring your home internet experience with ease.
+Overall, this Raspberry Pi Home Internet Gateway provides a universal solution for managing and monitoring your home internet enviroment with joy and ease.
 
 [![latest version](https://img.shields.io/github/v/release/d3vilh/raspberry-gateway?color=%2344cc11&label=Latest%20release&style=for-the-badge)](https://github.com/d3vilh/raspberry-gateway/releases/latest)
 # Requirements
@@ -63,78 +63,137 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
      ![Webinstall picture 3](/images/Webinstall-03.png)
   10. The installation process will take some time.
       Once that's done, it'll be like you have a new **Raspberry Gateway** up and running.
-
-      You can close browser window and anjoy your new Raspberry Gateway.
+  * #### Additional options:
+    * **To Remove** any of previously installed component - click `remove component` checkbox then `save` configuration file and push `Uninstall` button.
+    * **To set Default options** for the next `webinstall` run - modify `example.config.yml` with the default parameters. 
+    * Default **Ansible parameters**, such as `ansible_user` can be set in `example.inventory.yml` file.
   </details>
 
   Afraid of GUI? Need more control?
 
   <details>
     <summary>Install everything with CLI</summary>
-   
-   > **Note**: If you alredy did installation with `webinstall`, you don't need this step.
 
   5. Make copies of the configuration files and modify them for your enviroment:
       ```shell
       yes | cp -p example.inventory.yml inventory.yml 
       yes | cp -p example.config.yml config.yml
       ```
-  6. **Double check** that `ansible_user` is correct for `inventory.yml`. First, uncommented section preconfigured to install everything on your local Raspberry-Pi, if you're would like to run all the installtion towards remote server - comment this section and uncomment the second one, then modify IP and check that user is correct again.
+  6. **Double check** that `ansible_user` is correct for `inventory.yml`. Need to run installtion on the remote server - follow the recomendations in config file.
      
      > **Note**: To make all necesary changes: `nano inventory.yml`, save the file - `Ctrl+O` and `Ctrl+X` to exit.
-  7. Modify `config.yml` to **enabe or disable desired containers** to be installed on your Pi:
-     **To enable** Prtainer - change `enable_portainer: false` option to `enable_portainer: true` and vs to disable.
-
+  7. Modify `config.yml` to **enable** or **disable** desired containers to be installed on your Pi.
+     For example, to **enable** Portainer - change `enable_portainer: false` option to `enable_portainer: true` and vs to disable.
+     > **Note**: Default configuration options in the list below are **bold**.
       <details>
       <summary>List of available configuration options</summary>
 
+      * **Portainer** 
+         * `portainer_enable: true` or `false` - to install Portainer, the Web-ui for Docker. Default **true**.
+         * `remove_portainer: true` or `false` - to uninstall Portainer. Default **false**.
+
+      * **Unbound DNS**
+         * `unbound_dns_enable: true` or `false` - to install Unbound DNS, the fast and lean DNS. Default **true**. Beaware that Unbound DNS is not compatible with Techtitium DNS as they both use port 53.
+         * `remove_unbound_dns: true` or `false` - to uninstall Unbound DNS. Default **false**.
+         * `additional parameters` - in `config.yml` you'll see lot of additional parameters with default values. You can change them if you know what you are doing. Short description of each parameter is available in the same file.
+
       * **Pi-Hole** 
-         * `pihole_enable: true` or `false` - **enabled** or disabled Pi-Hole installation
+         * `pihole_enable: true` or `false` - to install Pi-Hole. Default **true**. Beaware that Pi-Hole is not compatible with Technitium DNS as they both use port 53.
+         * `remove_pihole: false` or `true` - to uninstall Pi-Hole. Default **false**.
          * `pihole_inside_vpn: false` or `true` - configure Pi-Hole to use your [OpenVPN Client](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) subnet instead of public Internet.
+         * `pihole_password` - password for Pi-Hole WEB UI. Default **"gagaZush"**.
 
       * **Technitium DNS** 
-         * `tech_dns_enable: false` or `true` - **disabled** or enabled Technitium DNS installation. 
+         * `tech_dns_enable: false` or `true` - to install Technitium DNS. Default **false**. Beaware that Technitium DNS is not compatible with Pi-Hole and Unbound DNS as they use port 53 as well.
+         * `remove_tech_dns: false` or `true` - to uninstall Technitium DNS. Default **false**.
+         * `tech_dns_password` - password for Technitium DNS WEB UI. Default **"gagaZush"**.
          * `tech_dns_inside_vpn: false` or `true` - configure Technitium DNS to use your [OpenVPN Client](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) subnet instead of public Internet.
+         * `additional parameters` - in `config.yml` you'll see lot of additional parameters with default values. You can change them if you know what you are doing. Short description of each parameter is available in the same file.
 
       * **OpenVPN Server** 
-         * `ovpn_server_enable: false` or `true` - **disabled** or enabled OpenVPN Server installation.
+         Advanced **OpenVPN Server** documentation and configuration examples is [here](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md).
+         * `ovpn_server_enable: false` or `true` - to install OpenVPN Server. Default **false**.
+         * `remove_ovpn_server: false` or `true` - to uninstall OpenVPN Server. Default **false**.
+         * `ovpnui_user` - username for OpenVPN WEB UI. Default **"admin"**.
+         * `ovpnui_password` - password for OpenVPN WEB UI. Default **"gagaZush"**.
+         * `additional parameters` - in `config.yml` you'll see lot of additional parameters with default values. You can change them if you know what you are doing. Short description of each parameter is available in the same file.
 
       * **OpenVPN Client** 
-         * `ovpn_client_enable: false` or `true` - **disabled** or enabled OpenVPN Client installation.
-         * Put your OpenVPN connection profile `*.ovpn` into `openvpn-client` directory before installation and update its name in `ovpn_client_cert: "example-client.opvn"` option before installation.
-         * `ovpn_client_secret: ""` - filename with your OpenVPN connection profile user and password if you have any.
-         * `ovpn_client_allowed_subnet: "192.168.0.0/24" ` - Your local subnet from which you want to access qBitTorrent web-ui when VPN Client connection is active.
+         Advanced **OpenVPN Client** documentation with configuration examples is [here](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-client/README.md).
+         * `ovpn_client_enable: false` or `true` - to install OpenVPN Client. Default **false**.
+         * `remove_ovpn_client: false` or `true` - to uninstall OpenVPN Client. Default **false**.
+         * Put your OpenVPN connection profile `*.ovpn` into `openvpn-client` directory before installation and update its name in `ovpn_client_cert: "your-client.ovpn"` option before installation. Default **"webinstall-client.ovpn"**.
+         * `ovpn_client_secret: "file with client secrets"` - filename with your OpenVPN connection profile user and password if you have any. Default **"webinstall-credentials.txt"**.
+         * `ovpn_client_allowed_subnet: "your home wifi subnet/mask" ` - your local subnet from which you want to access qBitTorrent web-ui when VPN Client connection is active. Default **"192.168.88.0/24"**.
+         * `ovpn_client_killswitch: false` or `true` - block all traffic if ovpn-client is down. Default **true**.
+
+      * **Gluetun**
+         * `gluetun_vpnclient_enable: false` or `true` - to install Gluetun VPN Client. Default **false**.
+         * `remove_gluetun_vpnclient: false` or `true` - to uninstall Gluetun VPN Client. Default **false**.
+         * `additional parameters` - in `config.yml` you'll see lot of additional parameters with default values. You can change them if you know what you are doing. Short description of each parameter is available in the same file.
 
       * **WireGuard Server** 
-         * `wireguard_server_enable: false` or `true` - **disabled** or enabled WireGuard Server installation.
-
-      * **Portainer** 
-         * `portainer_enable: true` or `false` - **enabled** or disabled Portainer containers management web-ui installation.
+         * `wireguard_server_enable: false` or `true` - to install WireGuard Server. Default **false**.
+         * `remove_wireguard: false` or `true` - to uninstall WireGuard Server. Default **false**.
+         * `wireguard_password` - password for WireGuard WEB UI. Default **"gagaZush"**.
+         * `wireguard_user` - username for WireGuard WEB UI. Default **"admin"**.
+         * `wireguard_serverurl` - URL for WireGuard WEB UI. Default **"wg.example.com"**.
 
       * **qBitTorrent** 
-         * `qbittorrent_enable: false` or `true` - **disabled** or enabled qBittorrent installation.
-         * `qbittorrent_inside_vpn: false` or `true` - configure qBittorrent to use your [OpenVPN Client](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) subnet instead of public Internet.
+         * `qbittorrent_enable: false` or `true` - to install qBitTorrent. Default **false**.
+         * `remove_qbittorrent: false` or `true` - to uninstall qBitTorrent. Default **false**.
+         * `qbittorrent_inside_vpn: false` or `true` - configure qBittorrent to use your [OpenVPN Client](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) subnet instead of public Internet. Dont forget to endable OpenVPN Client installation as well.
+         * `qbittorrent_inside_gluetun: false` or `true` - configure qBittorrent to use your Gluetun VPN Client subnet instead of public Internet. Dont forget to endable Gluetun installation as well.
+         * `qbittorrent_webui_port: "8090"` - qBittorrent WEB UI port. Keept is default **"8090"**.
 
       * **Raspberry Monitoring** 
-         * `monitoring_enable: true` or `false` - **enabled** or disabled general Raspberry Monitoring feature.
-         * `openvpn_monitoring_enable: true` or `false` - **disabled** or enabled OpenVPN monitoring.
-         * `pikvm_monitoring_enable: true` or `false` - **disabled** or enabled Pi-KVM monitoring.
-         * `airgradient_monitoring_enable: true` or `false` - **disabled** or enabled AirGradient monitoring.
-         * `starlink_monitoring_enable: true` or `false` - **disabled** or enabled StarLink monitoring.
-         * `shellyplug_monitoring_enable: true` or `false` - **disabled** or enabled ShellyPlug monitoring.
+        Advanced **Raspberry Monitoring** documentation is [here](https://github.com/d3vilh/raspberry-gateway/blob/master/monitoring/README.md).
+         * **General Monitoring parameters:**
+           * `monitoring_enable: true` or `false` - to install Raspberry Monitoring. Default **true**.
+           * `remove_monitoring: false` or `true` - to uninstall Raspberry Monitoring. Default **false**.
+           * `monitoring_grafana_admin_password` - password for Grafana WEB UI. Default **"gagaZush"**.
+           * `monitoring_days_keep_interval: "90d"` - how long to keep data in Prometheus DB. Default **"90d"**.
+           * `monitoring_speedtest_interval: "1h"` - how often to run speedtest. Default **"60m"**.
+           * `monitoring_ping_interval: "1m"` - how often to run ping tests. Default **"30s"**.
+         * **OpenVPN Monitoring:**
+           * `openvpn_monitoring_enable: true` or `false` - install **OpenVPN** monitoring dashboard. Default **false**.
+           * `remove_openvpn_monitoring: false` or `true` - to uninstall OpenVPN monitoring dashboard. Default **false**.
+         * **PiKVM Monitoring:**
+           * `pikvm_monitoring_enable: true` or `false` - install **Pi-KVM** monitoring dashboard. Default **false**.
+           * `remove_pikvm_monitoring: false` or `true` - to uninstall Pi-KVM monitoring dashboard. Default **false**.
+           * `pikvm_target_ip: "PiKVM IP"` - Pi-KVM IP address to gather statistics from. Default **"192.168.88.3"**.
+           * `pikvm_web_user: "admin"` - Pi-KVM side preconfigured Web-UI username. Default **"admin"**.
+           * `pikvm_web_password` - Pi-KVM side preconfigured Web-UI password. Default **"gagaZush"**.
+         * **AirGradient Monitoring:**
+           * `airgradient_monitoring_enable: true` or `false` - install **AirGradient** monitoring dashboard. Default **false**.
+           * `remove_airgradient_monitoring: false` or `true` - to uninstall AirGradient monitoring dashboard. Default **false**.
+           Complete your **AirGradient** monitoring configuration in `advanced.config.yml`.
+         * **StarLink Monitoring:**
+           * `starlink_monitoring_enable: true` or `false` - install **StarLink** monitoring dashboard. Default **false**.
+           * `remove_starlink_monitoring: false` or `true` - to uninstall StarLink monitoring dashboard. Default **false**.
+           * `starlink_ip: "StarLink IP"` - StarLink IP address to get statistics from. Default **"10.10.10.1"**.
+           * `starlink_port: "9817"` - StarLink port to get statistics from. Default **"9817"**.
+         * **ShellPlug Monitoring:**
+           * `shellyplug_monitoring_enable: true` or `false` - install **ShellyPlug** monitoring dashboard. Default **false**.
+           * `remove_shelly_plug_monitoring: false` or `true` - to uninstall ShellyPlug monitoring dashboard. Default **false**.
+           * `shelly_plug_hostname: "ShellyPlug IP"` - ShellyPlug IP address or hostname to get statistics from. Default **"server-room-shelly"**
+           * `shelly_ip: "ShellyPlug IP"` - ShellyPlug IP address to get statistics from. Default **"192.168.88.66"**.
+           * `shelly_port: "ShellyPlug Port"` - ShellyPlug port to get statistics from. Default **"9924"**.
+           * `shelly_plug_http_username` - ShellyPlug HTTP username. Default **"admin"**.
+           * `shelly_plug_http_password` - ShellyPlug HTTP password. Default **"gagaZush"**.
 
-      * **XRAY Server**
-         * `xray_enable: false` or `true` - **disable** or enable XRAY Server installation.
-         * `remove_xray: false` or `true` - **false** Set `true`` to remove XRAY Server installation.
+      * **Xray Server**
+         Advanced **Xray Server** documentation and configuration examples is [here](https://github.com/d3vilh/raspberry-gateway/blob/master/xray/README.md).
+         * `xray_enable: false` or `true` - to install XRAY Server. Default **false**.
+         * `remove_xray: false` or `true` - to uninstall XRAY Server. Default **false**.
       </details>
 
-      > **Note**: Default configuration options are bold.
-  8. Modify advanced configuration options in `advanced.config.yml` if needed.
+  8. Modify **advanced configuration** options in `advanced.config.yml` if you desire to use additional Monitoring features, such as Telegram bot for notifications, to share your Grafana dashboard over Internet, to tune hosts to ping or set AirGradient monitoring parameters.
   9. Run installation playbook: 
      ```shell
-     ansible-playbook main.yml -i inventory.yml
+     ansible-playbook main.yml
      ```
-     > **Note**: **If running locally on the Pi**: You may have error like `Error while fetching server API version`. You have to relogin (or reboot your Pi) and then run the playbook again.
+     > **Note**: **If running locally on the Pi**: You may have error like `Error while fetching server API version`. You have to relogin to your Pi and then run the playbook again.
 
   </details>
   
@@ -142,16 +201,16 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
 [**Pi-hole**](https://pi-hole.net) or [**Technitium-dns**](https://technitium.com/dns/) as the network-wide ad-blocking solution integrated with own local DNS and DHCP servers:
 
 <p align="center">
-<img src="/images/Pi-hole.1.png" alt="Pi-hole" width="410"> <img src="/images/Technitium-dns.1.png" alt="Technitium" width="410">
+<img src="/images/Pi-hole.1.png" alt="Pi-hole" width="410"><img src="/images/Technitium-dns.1.png" alt="Technitium" width="410">
 </p>
 
 [**OpenVPN Server**](https://openvpn.net) with subnets support and [**openvpn-ui**](https://github.com/d3vilh/openvpn-ui) as fast and lightweight web administration interface or
 [**WireGuard**](https://www.wireguard.com) server - an extremely simple yet fast and modern VPN with own web administration interface:
 <p align="center">
-<img src="/images/OpenVPN-UI-Home.1.png" alt="OpenVPN WEB UI" width="410"> <img src="/images/WireGuard-UI-Home.1.png" alt="WireGuard WEB UI" width="410">
+<img src="/images/OpenVPN-UI-Home.1.png" alt="OpenVPN WEB UI" width="410"><img src="/images/WireGuard-UI-Home.1.png" alt="WireGuard WEB UI" width="410">
 </p>
 <p align="center">
-<img src="/images/OVPN_VLANs.png" alt="OpenVPN Subnets" width="600">
+<img src="/images/OVPN_VLANs.png" alt="OpenVPN Server Subnets" width="600">
 </p>
 
 [**OpenVPN Client**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) container for using external OpenVPN server connection for selected containers of this project.
@@ -159,15 +218,21 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
 
 [**GlueTun**](https://github.com/qdm12/gluetun) container as universal VPN client for using with multiple commercial VPN providers and built-in DNS over TLS, with a few proxy servers.
 
+[**Xray Server**](https://github.com/d3vilh/raspberry-gateway/blob/master/xray/README.md) container, with experimental Shadowsocks and XTLS-Reality fast tunnel proxy that helps you to bypass firewalls.
+
+<p align="center">
+<img src="/images/XRAY-Dashboard1.png" alt="Xray Dashboard" height="360"><img src="/images/XRAY-Dashboard2.png" alt="Xray Inbounds" height="360">
+</p>
+
 [**qBittorrent**](https://www.qbittorrent.org) an open-source software alternative to µTorrent, with lightweight web administration interface:
 
 ![qBittorrent WEB UI](/images/qBittorrent-web-ui.png)
 
-[**Portainer**](https://www.portainer.io) is a lightweight *universal* management interface that can be used to easily manage Docker or K8S containers and environments which included in this setup:
+[**Portainer**](https://www.portainer.io) is a lightweight *universal* management interface that can be used to easily manage containers and environment which included in this setup:
 
 ![Portainer](/images/portainer.png)
 
-[**Raspi Monitoring**](https://github.com/d3vilh/raspberry-gateway/tree/master/monitoring) The simple yet powerfull monitoring solution for your Raspberry server. Covers performance utilisation (CPU,MEM,I/O, Tempriture, storage usage), Hardware utilisation (Voltage, Power States, Devices Clock), Docker containers and Internet connection monitoring:
+[**Raspi Monitoring**](https://github.com/d3vilh/raspberry-gateway/tree/master/monitoring) The simple yet powerfull monitoring solution for your Raspberry Gateway. Covers performance utilisation (CPU,MEM,I/O, storage usage), Hardware utilisation (Temperature, Voltage, Power States, Devices Clock), Docker containers statistics and Internet connection monitoring:
 
 ![Raspberry Monitoring Dashboard in Grafana picture 1](/images/raspi-monitoring_1.png) 
 ![Raspberry Monitoring Dashboard in Grafana picture 2](/images/raspi-monitoring_2.png) 
@@ -176,18 +241,13 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
 ![Raspberry Monitoring Dashboard in Grafana picture 5](/images/raspi-monitoring_5.png) 
 ![Raspberry Monitoring Dashboard in Grafana picture 6](/images/raspi-monitoring_6.png) 
 
-[**AirGradient Monitoring**](https://www.airgradient.com): Configures [`Prometheus`](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/prometheus.yml.j2#L49) to get all necessary data directly from your [AirGradient](https://www.airgradient.com/diy/) device and installs a [Grafana dashboard](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/airgradient-air-quality.json.j2), which tracks and displays air quality over time. 
-
-> **Note**: Your AirGradient device **must** have alternative [airgradient-improved](https://github.com/d3vilh/airgradient-improved) firmware flashed into EEPROM to support this feature.
+[**AirGradient Monitoring**](https://www.airgradient.com/diy): Accurate and Open Air Quality Monitoring Dashboard:
 
 ![AirGradient Monitoring Dashboard in Grafana picture 1](/images/air-gradient_1.png) 
 ![AirGradient Monitoring Dashboard in Grafana picture 2](/images/air-gradient_2.png)
 
-[**OpenVPN activity dashboard**](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/openvpn_exporter.json.j2) and [OpenVPN-exporter](https://github.com/d3vilh/openvpn_exporter) which shows OpenVPN client connetions status, duration and consumed traffic:
-
-![OpenVPN Grafana Dashboard](/images/OVPN_Dashboard.png)
-
 ## Other features:
+  - [**OpenVPN activity dashboard**](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/openvpn_exporter.json.j2) and [OpenVPN-exporter](https://github.com/d3vilh/openvpn_exporter) which shows OpenVPN client connetions status, duration and consumed traffic.
   - [**Starlink Monitoring**](https://github.com/danopstech/starlink_exporter): For StarLink dishy tracking and statisitcs. 
   - [**Shelly Plug Monitoring**](https://github.com/geerlingguy/shelly-plug-prometheus): Tracks and displays power usage on a Shelly Plug running on the local network.
 
@@ -204,7 +264,6 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
    * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L31) `config.yml` file in `pihole_password` var
    * **Unbound DNS connection** can be [enabled in the](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L30) `config.yml`. Default option - `pihole_with_unbound: true`
    * **External ports** used by container: `80:tcp`, `443:tcp`, `53:tcp`, `53:udp`, `67:tcp`, `67:udp`
-   * **Advanced Configuration** No advanced configuration.
 
   > **Note**: If you would like to add Unbound functionality to Pi-Hole, you have to stop and remove old Pi-Hole setup and re-install it again.
 
@@ -215,7 +274,6 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
    * **Pi-Hole pair** to disable, [you have to set](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L30) `pihole_with_unbound: false` in `config.yml` before the installation.
    * **External ports** used by container: `5335:tcp`, `5335:udp`
    * **Configuration file** is available after the installation and located in `~/unbound-dns/etc-unbound/unbound.conf`
-   * **Advanced Configuration** No advanced configuration.
 
   > **Note**: If you would like to add Unbound to the existent Pi-Hole setup, you have to stop and remove old Pi-Hole container and re-install it again alltogeather with Unbound and necessary options enabled.
 
@@ -225,7 +283,6 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
    * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) `config.yml` file in the `tech_dns_password` var
    * **External ports** used by container: `5380:tcp`, `53:tcp`, `53:udp`
    * **Configuration files** are available after the installation and located in `~/tech-dns/config/` directory
-   * **Advanced Configuration** No advanced configuration.
 
   ## qBittorrent
    #### qBittorrent facts:
@@ -234,7 +291,6 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
    * **External ports** used by container: `8090:tcp`, `6881:tcp`, `6881:udp`
    * **Configuration files** are available after the installation and located in `~/qbittorrent/config/qBittorrent/` directory
    * **Downloaded files** will be stored in the `~/qbittorrent/downloads` directory.
-   * **Advanced Configuration** No advanced configuration.
 
   > **Note**: To prove you are **connected via VPN** run this command `sudo docker exec qbittorrent wget -qO - ifconfig.me` it should return your VPN IP address.
 
@@ -244,7 +300,6 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
    * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L48) `config.yml` file in the `ovpnui_password` var
    * **External ports** used by containers, by default: `8080:tcp`, `1194:tcp`, `1194:udp`
    * **Configuration files** are available after the installation and located in `~/openvpn-server/*` directory
-   * **Advanced Configuration** No advanced configuration.
 
   All the [**OpenVPN Server configuration**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md) and Knowhow for this setup can be found [**here**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md).
    > **Note**: If you are looking for x86_64 version of OpenVPN and openvpn-ui containers, please check [**openvpn-aws**](https://github.com/d3vilh/openvpn-aws)
@@ -258,7 +313,6 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
    * **Configuration Options** necessary for the installation (defined in `config.yml` file)`):
      * `ovpn_client_cert: "example-client.opvn"` - file with your OpenVPN connection profile (`*.ovpn`). You have to put it into `~/raspberry-gateway/openvpn-client/` directory before installation and update its name in `ovpn_client_cert`. Use the [**example-client.ovpn**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-client/example-client.ovpn#L1) as a refference of all necessary options and file format. After the installation your `*.ovpn` file will be moved to `~/openvpn-client/*.ovpn` and used by container. If for some reason you need to change it, you have to put new file with the same name in `~/openvpn-client/` directory and restart openvpn-client container (`docker openvpn-client restart`).
      * `ovpn_client_allowed_subnet: "192.168.88.0/24" ` - Your local newtwork (WiFi or whatever), from which you want to access qBitTorrent WEB-UI when VPN Client connection is active.
-   * **Advanced Configuration** No advanced configuration.
   > **Note**: To prove you are **connected via VPN** run this command `sudo docker exec openvpn-client wget -qO - ifconfig.me` it should return your VPN IP address.
 
   For more documentation and How-to, please check dedicated [**openvpn-client README.md**](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) file.
@@ -277,7 +331,6 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
      * `gluetun_openvpn_password` - is your OpenVPN password, provided by VPN provider
      * `gluetun_server_countries` -  is comma separated list of countries
      * `gluetun_server_update_per` - is period to update your servers list using the built-in Gluetun update mechanisms (curently hardcoded to 24h)
-   * **Advanced Configuration** No advanced configuration.
 
   ## WireGuard Server
    #### WireGuard facts:
@@ -285,7 +338,6 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
    * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L61) `config.yml` file in the `wireguard_password` var
    * **External ports** used by container: `5000:tcp`, `6881:tcp`, `6881:udp`
    * **Configuration files** are available after the installation and located in `~/tech-dns/config/` directory
-   * **Advanced Configuration** No advanced configuration.
 
   ## Xray Server
   **Main Documentation** and Configuration examples is [here](https://github.com/d3vilh/raspberry-gateway/blob/master/xray/README.md).
@@ -295,13 +347,12 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
    * **Default password** is `admin/admin`, which **must** be changed via web interface on first login (`Pannel Settings` > `User Settings`).
    * **External ports** used by container: `443:tcp`, `80:tcp`, `54321:tcp`(by default)
    * **Configuration files** are available after the installation and located in `~/xray/` directory
-   * **Advanced Configuration** No advanced configuration.
    * **It is Important** to change following settings for better security:
      * default password in `Pannel Settings` > `User Settings` > `Password` to something strong and secure.
      * default pannel port in `Pannel Settings` > `Pannel Configurations` > `Pannel Port` from `54321` to some random port (the best in the upper end of the range, up to `65535`)
      * default configuration pannel URL in `Pannel Settings` > `Pannel Configurations` > `Panel URL Root Path` to something random, like `/mysecretpannel/` or `/superxray/`.
 
-  ## Raspi-monitoring
+  ## Raspberry-monitoring
   All the Data sources, Dashboards and exporters are automatically provisioned. Below you can find the list of available dashboards and their URLs.
 
    ### Grafana
@@ -316,6 +367,8 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
    * **Raspberry Pi Monitoring**: Shows CPU, memory, and disk usage, as well as network traffic, temperature and Docker containers utilisation. `http://localhost:3030/d/rvk35ERRz/raspberry-monitoring`
    * **OpenVPN Monitoring**: - OpenVPN activity dashboard. `http://localhost:3030/d/58l7kyvVz/openvpn`
    * **AirGradient Monitoring** - Air quality dashboard. `http://localhost:3030/d/aglivingroom/airquality-airgradient`
+     > **Note 1**: You have to configure your AirGradient device in `advanced.config.yml` before the installation.
+     > **Note 2**: Your AirGradient device **must** have alternative [airgradient-improved](https://github.com/d3vilh/airgradient-improved) firmware flashed into EEPROM to support this feature.
    * **Starlink Monitoring**: Starlink monitoring dashboard. `http://localhost:3030/d/GG3mnflGz/starlink-overview`
    * **Shelly Plug Monitoring**: Shelly Plug dashboard. `http://localhost:3030/d/i_aeo-uMz/power-consumption`
    > **Note**: Change `localhost` to your Raspberry ip/hostname.
@@ -327,26 +380,25 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
   Then debug **Prometheus targets** described in the next partagraph.
 
   ### Prometheus
-   Used to collect metrics from exporters and provide them to Grafana.
+   Used for metrics collection from exporters, storing data and provide it to Grafana dashboards.
    * **UI access port** `http://localhost:9090/`, (*change `localhost` to your Raspberry host ip/name*)
    * **Default password** password is not set by default!
    * **External ports** used by container: `9090:tcp`, various exporters ports (see below)
    * **Configuration files** are available after the installation and located in `~/monitoring/prometeus/` directory
-   * **Advanced Configuration** Before the installation, can be predefined in [`advanced.config.yml`](https://github.com/d3vilh/raspberry-gateway/blob/master/advanced.config.yml#L83)
    * **Targets** can be checked on `http://localhost:9090/targets` (*you know what2do with `localhost`* 🧐)
 
    #### Here is list of available exporters/targets:
 
-   * **Node exporter** - Standard Linux server monitoring (CPU,RAM,I/O,FS,PROC). `http://nodeexp:9100/metrics`
-   * **cAdvisor exporter** - Docker containers monitoring. `http://cadvisor:8080/metrics`
-   * **rpi_exporter** - RaspberryPI HW monitoring. `http://rpi_exporter:9110/metrics`
-   * **Speedtest exporter** - Up/down speed and latency. `http://speedtest:9798/metrics` 
-   * **Blackbox exporter** - Desired sites avilability. `http://ping:9115/probe`
-   * **OpenVPN exporter** - OpenVPN activity monitoring. `http://ovpn_exporter:9176/metrics`
-   * **AirGradient exporter** - AirQuality monitoring. `http://remote-AirGradient-ip:9926/metrics`
-   * **PiKVM exporter** - PiKVM utilisation and temp monitoring. `https://remote-PiKVM-ip/api/export/prometheus/metrics`
-   * **Starlink exporter** - Starlink monitoring. `http://starlink:9817/metrics`
-   * **Shelly exporter** - Shelly Plug power consumption monitoring. `http://shelly:9924/metrics`
+   * [**Node exporter**](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/prometheus.yml.j2#L88) - Standard Linux server monitoring (CPU,RAM,I/O,FS,PROC). `http://nodeexp:9100/metrics`
+   * [**cAdvisor exporter**](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/prometheus.yml.j2#L98) - Docker containers monitoring. `http://cadvisor:8080/metrics`
+   * [**rpi_exporter**](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/prometheus.yml.j2#L92) - RaspberryPI HW monitoring. `http://rpi_exporter:9110/metrics`
+   * [**Speedtest exporter**](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/prometheus.yml.j2#L13) - Up/down speed and latency. `http://speedtest:9798/metrics` 
+   * [**Blackbox exporter**](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/prometheus.yml.j2#L66) - Desired sites avilability. `http://ping:9115/probe`
+   * [**OpenVPN exporter**](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/prometheus.yml.j2#L33) - OpenVPN activity monitoring. `http://ovpn_exporter:9176/metrics`
+   * [**AirGradient exporter**](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/prometheus.yml.j2#L49) - AirQuality monitoring. `http://remote-AirGradient-ip:9926/metrics`
+   * [**PiKVM exporter**](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/prometheus.yml.j2#L20) - PiKVM utilisation and temp monitoring. `https://remote-PiKVM-ip/api/export/prometheus/metrics`
+   * [**Starlink exporter**](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/prometheus.yml.j2#L59) - Starlink monitoring. `http://starlink:9817/metrics`
+   * [**Shelly exporter**](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/prometheus.yml.j2#L41) - Shelly Plug power consumption monitoring. `http://shelly:9924/metrics`
 
 ## Дякую and Kudos to all the envolved people:
   * [**Max Rydahl Andersen**](https://github.com/maxandersen) for the [Internet Monitoring](https://github.com/maxandersen/internet-monitoring).
