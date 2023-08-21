@@ -25,7 +25,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 6,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -34,9 +33,37 @@
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
-          "mappings": [],
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "index": 1,
+                  "text": "STOPPING"
+                },
+                "1": {
+                  "index": 0,
+                  "text": "UP"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "index": 2,
+                  "text": "DOWN"
+                }
+              },
+              "type": "special"
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -49,18 +76,17 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "decbytes"
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 14,
+        "h": 3,
+        "w": 3,
         "x": 0,
         "y": 0
       },
-      "id": 14,
+      "id": 16,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -68,14 +94,14 @@
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
-            "max"
+            "last"
           ],
-          "fields": "",
+          "fields": "/^Value$/",
           "values": false
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "10.0.3",
       "targets": [
         {
           "datasource": {
@@ -84,17 +110,64 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "openvpn_bytes_received + openvpn_bytes_sent",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "__auto",
-          "range": true,
+          "expr": "time() - container_start_time_seconds{name=\"openvpn\"}",
+          "format": "time_series",
+          "instant": true,
+          "interval": "15s",
+          "legendFormat": "{{name}}",
+          "range": false,
           "refId": "A"
+        },
+        {
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  1,
+                  0
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "when"
+              },
+              "query": {
+                "params": [
+                  "A"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "count_non_null"
+              },
+              "type": "query"
+            }
+          ],
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "if ",
+          "hide": false,
+          "refId": "B",
+          "type": "classic_conditions"
         }
       ],
-      "title": "Panel Title",
+      "title": "OpenVPN Server status",
+      "transparent": true,
       "type": "stat"
+    },
+    {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 3
+      },
+      "id": 15,
+      "title": "Row title",
+      "type": "row"
     },
     {
       "datasource": {
@@ -128,7 +201,7 @@
         "h": 8,
         "w": 4,
         "x": 0,
-        "y": 8
+        "y": 4
       },
       "id": 12,
       "options": {
@@ -145,7 +218,7 @@
         },
         "textMode": "value"
       },
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "10.0.3",
       "targets": [
         {
           "datasource": {
@@ -191,9 +264,9 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 4,
+        "w": 5,
         "x": 4,
-        "y": 8
+        "y": 4
       },
       "id": 8,
       "options": {
@@ -208,9 +281,10 @@
           "fields": "",
           "values": false
         },
-        "showUnfilled": true
+        "showUnfilled": true,
+        "valueMode": "color"
       },
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "10.0.3",
       "targets": [
         {
           "datasource": {
@@ -263,8 +337,8 @@
       "gridPos": {
         "h": 8,
         "w": 5,
-        "x": 8,
-        "y": 8
+        "x": 9,
+        "y": 4
       },
       "id": 10,
       "options": {
@@ -279,9 +353,10 @@
           "fields": "",
           "values": false
         },
-        "showUnfilled": true
+        "showUnfilled": true,
+        "valueMode": "color"
       },
-      "pluginVersion": "9.2.1",
+      "pluginVersion": "10.0.3",
       "targets": [
         {
           "datasource": {
@@ -300,6 +375,73 @@
       ],
       "title": "Top Traffic",
       "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 14,
+        "y": 4
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "openvpn_bytes_received + openvpn_bytes_sent",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Panel Title",
+      "type": "stat"
     },
     {
       "datasource": {
@@ -366,7 +508,7 @@
         "h": 7,
         "w": 19,
         "x": 0,
-        "y": 16
+        "y": 12
       },
       "id": 2,
       "options": {
@@ -432,7 +574,7 @@
         "h": 9,
         "w": 19,
         "x": 0,
-        "y": 23
+        "y": 19
       },
       "id": 6,
       "options": {
@@ -520,7 +662,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -536,7 +679,7 @@
         "h": 8,
         "w": 19,
         "x": 0,
-        "y": 32
+        "y": 28
       },
       "id": 4,
       "options": {
@@ -589,7 +732,7 @@
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 37,
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [
     "openvpn",
@@ -601,13 +744,13 @@
     "list": []
   },
   "time": {
-    "from": "now-7d",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "OpenVPN",
   "uid": "58l7kyvVz",
-  "version": 48,
+  "version": 1,
   "weekStart": ""
 }
