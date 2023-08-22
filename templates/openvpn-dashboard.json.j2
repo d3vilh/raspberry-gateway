@@ -217,9 +217,11 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "editorMode": "code",
-          "expr": "openvpn_server_connected_clients",
+          "exemplar": false,
+          "expr": "openvpn_server_connected_clients ",
+          "instant": true,
           "legendFormat": "Connected",
-          "range": true,
+          "range": false,
           "refId": "A"
         }
       ],
@@ -365,19 +367,6 @@
       "type": "stat"
     },
     {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 4
-      },
-      "id": 18,
-      "panels": [],
-      "title": "temp",
-      "type": "row"
-    },
-    {
       "datasource": {
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
@@ -396,7 +385,7 @@
           },
           "decimals": 0,
           "mappings": [],
-          "unit": "decbytes"
+          "unit": "bytes"
         },
         "overrides": []
       },
@@ -404,7 +393,7 @@
         "h": 8,
         "w": 5,
         "x": 0,
-        "y": 5
+        "y": 4
       },
       "id": 22,
       "links": [],
@@ -443,11 +432,13 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "editorMode": "code",
-          "expr": "sort(sum(increase(openvpn_server_client_received_bytes_total[1d])+increase(openvpn_server_client_sent_bytes_total[1d]))by(common_name))",
+          "exemplar": false,
+          "expr": "sort(sum(increase(openvpn_server_client_received_bytes_total{common_name!=\"UNDEF\"}[1d])+increase(openvpn_server_client_sent_bytes_total{common_name!=\"UNDEF\"}[1d]))by(common_name))",
           "format": "time_series",
-          "instant": false,
+          "instant": true,
           "intervalFactor": 1,
           "legendFormat": "{{ common_name }}",
+          "range": false,
           "refId": "A"
         }
       ],
@@ -463,10 +454,10 @@
       },
       "fontSize": "100%",
       "gridPos": {
-        "h": 24,
+        "h": 16,
         "w": 11,
         "x": 5,
-        "y": 5
+        "y": 4
       },
       "id": 23,
       "links": [],
@@ -638,7 +629,7 @@
         "h": 8,
         "w": 5,
         "x": 0,
-        "y": 13
+        "y": 12
       },
       "id": 8,
       "options": {
@@ -711,7 +702,7 @@
         "h": 8,
         "w": 5,
         "x": 0,
-        "y": 21
+        "y": 20
       },
       "id": 10,
       "options": {
@@ -749,6 +740,104 @@
       "timeFrom": "24h",
       "title": "Top Traffic",
       "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P1809F7CD0C75ACF3"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 11,
+        "x": 5,
+        "y": 20
+      },
+      "id": 24,
+      "links": [],
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "10.0.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
+          },
+          "expr": "topk(6, sum(count_values(\"connection_time\", count_over_time(openvpn_server_client_received_bytes_total{common_name!=\"UNDEF\"}[1d]))by(common_name))by(common_name)>1)",
+          "format": "time_series",
+          "instant": true,
+          "intervalFactor": 1,
+          "legendFormat": "{{ common_name }}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": "24h",
+      "title": "Connection attempts",
+      "type": "barchart"
     },
     {
       "datasource": {
@@ -813,7 +902,7 @@
         "h": 4,
         "w": 16,
         "x": 0,
-        "y": 29
+        "y": 28
       },
       "id": 2,
       "options": {
@@ -878,7 +967,7 @@
         "h": 7,
         "w": 16,
         "x": 0,
-        "y": 33
+        "y": 32
       },
       "id": 6,
       "options": {
@@ -983,7 +1072,7 @@
         "h": 6,
         "w": 16,
         "x": 0,
-        "y": 40
+        "y": 39
       },
       "id": 4,
       "options": {
@@ -1055,6 +1144,6 @@
   "timezone": "",
   "title": "OpenVPN",
   "uid": "58l7kyvWz",
-  "version": 2,
+  "version": 5,
   "weekStart": ""
 }
