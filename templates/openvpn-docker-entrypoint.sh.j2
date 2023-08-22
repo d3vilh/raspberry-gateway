@@ -1,9 +1,31 @@
 #!/bin/bash
 set -e
+
+    # fix easy-rsa variables
+    echo 'Fixing easy-rsa variables...'
+
+    # Read the environment variables
+    REQ_COUNTRY=${REQ_COUNTRY}
+    REQ_PROVINCE=${REQ_PROVINCE}
+    REQ_CITY=${REQ_CITY}
+    REQ_OU=${REQ_OU}
+    REQ_CN=${REQ_CN}
+    REQ_ORG=${REQ_ORG}
+    REQ_EMAIL=${REQ_EMAIL}
+
+    # Replace the values in the easy-rsa.vars file
+    sed -i "s/^set_var EASYRSA_REQ_COUNTRY.*/set_var EASYRSA_REQ_COUNTRY     \"$REQ_COUNTRY\"/" /etc/openvpn/config/easy-rsa.vars
+    sed -i "s/^set_var EASYRSA_REQ_PROVINCE.*/set_var EASYRSA_REQ_PROVINCE    \"$REQ_PROVINCE\"/" /etc/openvpn/config/easy-rsa.vars
+    sed -i "s/^set_var EASYRSA_REQ_CITY.*/set_var EASYRSA_REQ_CITY        \"$REQ_CITY\"/" /etc/openvpn/config/easy-rsa.vars
+    sed -i "s/^set_var EASYRSA_REQ_CN.*/set_var EASYRSA_REQ_CN          \"$REQ_CN\"/" /etc/openvpn/config/easy-rsa.vars
+    sed -i "s/^set_var EASYRSA_REQ_ORG.*/set_var EASYRSA_REQ_ORG         \"$REQ_ORG\"/" /etc/openvpn/config/easy-rsa.vars
+    sed -i "s/^set_var EASYRSA_REQ_EMAIL.*/set_var EASYRSA_REQ_EMAIL       \"$REQ_EMAIL\"/" /etc/openvpn/config/easy-rsa.vars
+
+
 if [[ ! -f /etc/openvpn/pki/ca.crt ]]; then
     export EASYRSA_BATCH=1 # see https://superuser.com/questions/1331293/easy-rsa-v3-execute-build-ca-and-gen-req-silently
     cd /opt/app/easy-rsa
-
+ 
     # Copy easy-rsa variables
     cp /etc/openvpn/config/easy-rsa.vars ./vars
 
@@ -38,6 +60,15 @@ else
     cp -r /etc/openvpn/pki /opt/app/easy-rsa
     echo 'PKI already set up.'
 fi
+
+# Listing env parameters:
+echo "Following environment variables are set:"  
+echo "EASYRSA_DN = $EASYRSA_DN"
+echo "REQ_COUNTRY = $REQ_COUNTRY"
+echo "REQ_PROVINCE = $REQ_PROVINCE"
+echo "REQ_CITY = $REQ_CITY"
+echo "REQ_ORG = $REQ_ORG"
+echo "REQ_EMAIL = $REQ_EMAIL"
 
 # Configure network
 mkdir -p /dev/net

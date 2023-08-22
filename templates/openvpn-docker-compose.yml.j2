@@ -9,10 +9,12 @@ services:
        ports: 
           - "1194:1194/udp"
        environment:
+           REQ_DN: org
            REQ_COUNTRY: UA
            REQ_PROVINCE: Kyiv
            REQ_CITY: Chayka
            REQ_ORG: CopyleftCertificateCo
+           REQ_EMAIL: sweet@home.net
            REQ_OU: ShantiShanti
            REQ_CN: MyOpenVPN
            TRUST_SUB: {{ ovpn_trusted_subnet }}
