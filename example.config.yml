@@ -86,9 +86,9 @@ easyrsa_dn: "org"                               # Leave this as-is. "org" for tr
 easyrsa_req_country: "UA"                       # The two-letter country code (e.g. US).
 easyrsa_req_province: "KY"                      # The two-letter state or province code (e.g. CA).
 easyrsa_req_city: "Kyiv"                        # The city of the organization.
-easyrsa_req_org: "Sweet Home"                   # The name of the organization.
+easyrsa_req_org: "SweetHome"                   # The name of the organization.
 easyrsa_req_email: "sweet@home.net"             # The email address of the organization.
-easyrsa_req_ou: "My Organizational Unit"        # The name of the organizational unit.
+easyrsa_req_ou: "MyOrganizationalUnit"        # The name of the organizational unit.
 easyrsa_req_cn: "server"                        # The name of the common name.
 easyrsa_key_size: 2048                          # Leave this as-is. Size in bits for your keypairs. The recommended value is 2048. up to 4096.
 easyrsa_ca_expire: 3650                         # Number of days until the root CA expires.
