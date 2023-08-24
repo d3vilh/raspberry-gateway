@@ -27,6 +27,8 @@
       dest: openvpn-docker/docker-entrypoint.sh
     - src: openvpn_client.conf.j2
       dest: config/client.conf
+    - src: easy-rsa.vars.j2
+      dest: config/easy-rsa.vars
   become: false
   notify: Restart OpenVPN Server
 
