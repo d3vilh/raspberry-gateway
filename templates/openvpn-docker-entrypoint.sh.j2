@@ -8,6 +8,10 @@ if [[ ! -f /etc/openvpn/pki/ca.crt ]]; then
     # Copy easy-rsa variables
     cp /etc/openvpn/config/easy-rsa.vars ./vars
 
+    # Listing env parameters:
+    echo "Following EASYRSA variables will be used:"
+    cat /opt/app/easy-rsa/vars | awk '{print $2 ": "$3}';
+
     # Building the CA
     echo 'Setting up public key infrastructure...'
     /usr/share/easy-rsa/easyrsa init-pki
@@ -41,8 +45,8 @@ else
 fi
 
 # Listing env parameters:
-echo "Following environment variables were set:"  
-cat easy-rsa.vars | awk '{print $2 ": "$3}';
+echo "Following EASYRSA variables were set during CA init:"
+cat /opt/app/easy-rsa/vars | awk '{print $2 ": "$3}';
 
 # Configure network
 mkdir -p /dev/net
@@ -81,4 +85,3 @@ iptables -v -x -n -L | grep DROP
 
 echo 'Start openvpn process...'
 /usr/sbin/openvpn --cd /etc/openvpn --script-security 2 --config /etc/openvpn/config/server.conf
-
