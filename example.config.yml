@@ -81,6 +81,21 @@ ovpn_guest_subnet: "10.0.71.0/24"               # Guest users subnet
 ovpn_home_subnet: "192.168.0.0/24"              # Your home network subnet
 ovpn_remote: "remote 123.234.123.12 12345 udp"  # OpenVPN client.ovpn profile connect line.
 
+# EasyRSA configuration parameters.
+easyrsa_dn: "org"                               # Leave this as-is. "org" for traditional, "cn_only" for CN only.
+easyrsa_req_country: "UA"                       # The two-letter country code (e.g. US).
+easyrsa_req_province: "KY"                      # The two-letter state or province code (e.g. CA).
+easyrsa_req_city: "Kyiv"                        # The city of the organization.
+easyrsa_req_org: "Sweet Home"                   # The name of the organization.
+easyrsa_req_email: "sweet@home.net"             # The email address of the organization.
+easyrsa_req_ou: "My Organizational Unit"        # The name of the organizational unit.
+easyrsa_req_cn: "server"                        # The name of the common name.
+easyrsa_key_size: 2048                          # Leave this as-is. Size in bits for your keypairs. The recommended value is 2048. up to 4096.
+easyrsa_ca_expire: 3650                         # Number of days until the root CA expires.
+easyrsa_cert_expire: 825                        # Number of days until certificates expire.
+easyrsa_cert_renew: 30                          # Number of days before expiration to automatically renew certificates.
+easyrsa_crl_days: 180                           # Number of days until the CRL expires.
+
 # OpenVPN Client configuration for qBittorrent only. OpenVPN server is not required.
 ovpn_client_enable: false                       # Set true to enable internal OpenVPN client used for qBittorrent. OpenVPN server is not required.
 remove_ovpn_client: false                       # Set true to remove internal OpenVPN client used for qBittorrent. OpenVPN server is not required.
