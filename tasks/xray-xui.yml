@@ -6,7 +6,6 @@
     mode: 0755
   become: false
 
-# at the time it is alireza7 image which is the most up to date
 - name: Pull latest Xray Docker image
   community.general.docker_image:
     source: pull

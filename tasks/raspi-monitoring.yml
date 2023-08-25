@@ -61,7 +61,7 @@
   notify: Restart raspi-monitoring
   when: pikvm_monitoring_enable
 
-- name: CopyAirGradient dashboard config to Grafana.
+- name: Copy AirGradient dashboard config to Grafana.
   ansible.builtin.template:
     src: templates/airgradient-air-quality.json.j2
     dest: "{{ config_dir }}/monitoring/grafana/provisioning/dashboards/airgradient-{{ item.id }}.json"
