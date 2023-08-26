@@ -104,7 +104,7 @@
         },
         "textMode": "value"
       },
-      "pluginVersion": "10.0.3",
+      "pluginVersion": "10.1.0",
       "targets": [
         {
           "datasource": {
@@ -209,7 +209,7 @@
         },
         "textMode": "value_and_name"
       },
-      "pluginVersion": "10.0.3",
+      "pluginVersion": "10.1.0",
       "targets": [
         {
           "datasource": {
@@ -277,7 +277,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "10.0.3",
+      "pluginVersion": "10.1.0",
       "targets": [
         {
           "datasource": {
@@ -347,7 +347,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "10.0.3",
+      "pluginVersion": "10.1.0",
       "targets": [
         {
           "datasource": {
@@ -576,6 +576,7 @@
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "editorMode": "code",
           "expr": "sort_desc(sum(label_replace(openvpn_server_client_received_bytes_total{common_name!=\"UNDEF\"}, \"connection_time\", \"${1}000\", \"connection_time\", \"(.*)\"))by(common_name, connection_time, virtual_address))",
           "format": "table",
           "instant": true,
@@ -647,7 +648,7 @@
         "showUnfilled": true,
         "valueMode": "color"
       },
-      "pluginVersion": "10.0.3",
+      "pluginVersion": "10.1.0",
       "targets": [
         {
           "datasource": {
@@ -720,16 +721,16 @@
         "showUnfilled": true,
         "valueMode": "color"
       },
-      "pluginVersion": "10.0.3",
+      "pluginVersion": "10.1.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "topk(6, sum by(common_name) (increase(openvpn_server_client_received_bytes_total[24h]))) + topk(6, sum by(common_name) (increase(openvpn_server_client_sent_bytes_total[1d])))",
+          "expr": "topk(6, sum by(common_name) (increase(openvpn_server_client_received_bytes_total{common_name!=\"UNDEF\"}[24h]))) + topk(6, sum by(common_name) (increase(openvpn_server_client_sent_bytes_total{common_name!=\"UNDEF\"}[1d])))",
           "instant": false,
           "interval": "",
           "legendFormat": "{{common_name}}",
@@ -869,6 +870,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "smooth",
             "lineStyle": {
               "fill": "solid"
@@ -949,6 +951,12 @@
           },
           "custom": {
             "fillOpacity": 100,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
             "lineWidth": 1,
             "spanNulls": false
           },
@@ -997,7 +1005,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "count by(common_name) (openvpn_server_client_sent_bytes_total)",
+          "expr": "count by(common_name) (openvpn_server_client_sent_bytes_total{common_name!=\"UNDEF\"})",
           "format": "heatmap",
           "instant": false,
           "interval": "",
@@ -1034,6 +1042,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "smooth",
             "lineStyle": {
               "fill": "solid"
@@ -1099,7 +1108,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "openvpn_server_client_sent_bytes_total",
+          "expr": "openvpn_server_client_sent_bytes_total{common_name!=\"UNDEF\"}",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -1112,9 +1121,9 @@
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "openvpn_server_client_received_bytes_total",
+          "expr": "openvpn_server_client_received_bytes_total{common_name!=\"UNDEF\"}",
           "hide": false,
           "instant": false,
           "interval": "",
@@ -1127,7 +1136,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "10s",
+  "refresh": "30s",
   "schemaVersion": 38,
   "style": "dark",
   "tags": [
@@ -1140,13 +1149,13 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "OpenVPN",
   "uid": "58l7kyvWz",
-  "version": 6,
+  "version": 7,
   "weekStart": ""
 }
