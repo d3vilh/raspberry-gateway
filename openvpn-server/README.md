@@ -16,6 +16,24 @@ The volume container will be inicialized by using the official OpenVPN `openvpn_
  - a self-certificate matching the private key for the OpenVPN server
  - a TLS auth key from HMAC security
 
+Default EasyRSA configuration whoch can be changed in `~/openvpn-server/config/easy-rsa.vars` file, is the following:
+
+```shell
+set_var EASYRSA_DN           "org"
+set_var EASYRSA_REQ_COUNTRY  "UA"
+set_var EASYRSA_REQ_PROVINCE "KY"
+set_var EASYRSA_REQ_CITY     "Kyiv"
+set_var EASYRSA_REQ_ORG      "SweetHome"
+set_var EASYRSA_REQ_EMAIL    "sweet@home.net"
+set_var EASYRSA_REQ_OU       "MyOrganizationalUnit"
+set_var EASYRSA_REQ_CN       "server"
+set_var EASYRSA_KEY_SIZE     2048
+set_var EASYRSA_CA_EXPIRE    3650
+set_var EASYRSA_CERT_EXPIRE  825
+set_var EASYRSA_CERT_RENEW   30
+set_var EASYRSA_CRL_DAYS     180
+```
+
 This setup use `tun` mode, because it works on the widest range of devices. tap mode, for instance, does not work on Android, except if the device is rooted.
 
 The topology used is `subnet`, because it works on the widest range of OS. p2p, for instance, does not work on Windows.
