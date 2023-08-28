@@ -18,12 +18,6 @@ services:
        ports: 
           - "1194:1194/udp"
        environment:
-           REQ_COUNTRY: UA
-           REQ_PROVINCE: Kyiv
-           REQ_CITY: Chayka
-           REQ_ORG: CopyleftCertificateCo
-           REQ_OU: ShantiShanti
-           REQ_CN: MyOpenVPN
            TRUST_SUB: 10.0.70.0/24
            GUEST_SUB: 10.0.71.0/24
            HOME_SUB: 192.168.88.0/24
@@ -88,12 +82,6 @@ docker run  --interactive --tty --rm \
   --name=openvpn-server \
   --cap-add=NET_ADMIN \
   -p 1194:1194/udp \
-  -e REQ_COUNTRY=UA \
-  -e REQ_PROVINCE=Kyiv \
-  -e REQ_CITY=Chayka \
-  -e REQ_ORG=CopyleftCertificateCo \
-  -e REQ_OU=ShantiShanti \
-  -e REQ_CN=MyOpenVPN \
   -e TRUST_SUB=10.0.70.0/24 \
   -e GUEST_SUB=10.0.71.0/24 \
   -e HOME_SUB=192.168.88.0/24 \
@@ -182,6 +170,24 @@ The volume container will be initialised  with included scripts to automatically
  - a new private key
  - a self-certificate matching the private key for the OpenVPN server
  - a TLS auth key from HMAC security
+
+Default EasyRSA configuration whoch can be changed in `~/openvpn-server/config/easy-rsa.vars` file, is the following:
+
+```shell
+set_var EASYRSA_DN           "org"
+set_var EASYRSA_REQ_COUNTRY  "UA"
+set_var EASYRSA_REQ_PROVINCE "KY"
+set_var EASYRSA_REQ_CITY     "Kyiv"
+set_var EASYRSA_REQ_ORG      "SweetHome"
+set_var EASYRSA_REQ_EMAIL    "sweet@home.net"
+set_var EASYRSA_REQ_OU       "MyOrganizationalUnit"
+set_var EASYRSA_REQ_CN       "server"
+set_var EASYRSA_KEY_SIZE     2048
+set_var EASYRSA_CA_EXPIRE    3650
+set_var EASYRSA_CERT_EXPIRE  825
+set_var EASYRSA_CERT_RENEW   30
+set_var EASYRSA_CRL_DAYS     180
+```
 
 This setup use `tun` mode, as the most compatible with wide range of devices, for instance, does not work on MacOS(without special workarounds) and on Android (unless it is rooted).
 
