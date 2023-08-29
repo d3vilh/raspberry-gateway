@@ -254,7 +254,7 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
+        "w": 4,
         "x": 6,
         "y": 0
       },
@@ -325,7 +325,7 @@
       "gridPos": {
         "h": 4,
         "w": 4,
-        "x": 9,
+        "x": 10,
         "y": 0
       },
       "id": 19,
@@ -657,7 +657,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "topk(6, sum by(common_name) (count_over_time(openvpn_connected_since[24h]))) > 1",
+          "expr": "(topk(6, sum by(common_name) (count_over_time(openvpn_server_client_received_bytes_total{common_name!=\"UNDEF\"}[24h]))) + topk(6, sum by(common_name) (count_over_time(openvpn_server_client_sent_bytes_total{common_name!=\"UNDEF\"}[24h]))))/2",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -755,10 +755,10 @@
           },
           "custom": {
             "axisCenteredZero": false,
-            "axisColorMode": "text",
+            "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
-            "fillOpacity": 95,
+            "fillOpacity": 100,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -775,6 +775,7 @@
           },
           "decimals": 0,
           "mappings": [],
+          "min": 1,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -802,9 +803,9 @@
       "links": [],
       "options": {
         "barRadius": 0.05,
-        "barWidth": 0.97,
+        "barWidth": 0.95,
         "fullHighlight": false,
-        "groupWidth": 0.7,
+        "groupWidth": 1,
         "legend": {
           "calcs": [],
           "displayMode": "list",
@@ -812,14 +813,14 @@
           "showLegend": true
         },
         "orientation": "auto",
-        "showValue": "auto",
+        "showValue": "always",
         "stacking": "none",
         "text": {
           "valueSize": 40
         },
         "tooltip": {
           "mode": "single",
-          "sort": "none"
+          "sort": "desc"
         },
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 0
@@ -831,6 +832,7 @@
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "editorMode": "code",
           "expr": "topk(6, sum(count_values(\"connection_time\", count_over_time(openvpn_server_client_received_bytes_total{common_name!=\"UNDEF\"}[1d]))by(common_name))by(common_name)>1)",
           "format": "time_series",
           "instant": true,
@@ -1136,7 +1138,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "30s",
+  "refresh": "10s",
   "schemaVersion": 38,
   "style": "dark",
   "tags": [
@@ -1149,7 +1151,7 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
