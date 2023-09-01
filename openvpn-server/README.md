@@ -1,4 +1,4 @@
-# OpenVPN and OpenVPN WEB UI
+# OpenVPN and OpenVPN UI
 
 Most of documentation can be found in the [main README.md](https://github.com/d3vilh/raspberry-gateway) file, if you want to run it without anything else you'll have to edit the [dns-configuration](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/config/server.conf#L20) (which currently points to the PiHole DNS Server) and
 if you don't want to use a custom dns-resolve at all you may also want to comment out [this line](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/config/server.conf#L39).
@@ -7,7 +7,7 @@ if you don't want to use a custom dns-resolve at all you may also want to commen
 [**HERE**](https://github.com/d3vilh/raspberry-gateway/blob/master/openvpn-server/README.md) you can find all the the **Docker** and **Docker-compose** instructions, volumes and enviroment variables defifintion.
 
 ## Configuration
-**OpenVPN WEB UI** can be accessed on own port (*e.g. `http://localhost:8080` , change `localhost` to your Raspberry host ip/name*), the default user and password is `admin/gagaZush` preconfigured in `config.yml` which you supposed to [set in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L25) `ovpnui_user` & `ovpnui_password` vars, just before the installation.
+**OpenVPN UI** can be accessed on own port (*e.g. `http://localhost:8080` , change `localhost` to your Raspberry host ip/name*), the default user and password is `admin/gagaZush` preconfigured in `config.yml` which you supposed to [set in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L25) `ovpnui_user` & `ovpnui_password` vars, just before the installation.
 
 The volume container will be inicialized by using the official OpenVPN `openvpn_openvpn` image with included scripts to automatically generate everything you need  on the first run:
  - Diffie-Hellman parameters
@@ -33,6 +33,8 @@ set_var EASYRSA_CERT_EXPIRE  825
 set_var EASYRSA_CERT_RENEW   30
 set_var EASYRSA_CRL_DAYS     180
 ```
+In the process of installation these vars will be copied to container volume `/etc/openvpn/pki/vars` and used during all EasyRSA operations.
+You can update all these parameters later with OpenVPN UI on `Configuration > EasyRSA vars` page.
 
 This setup use `tun` mode, because it works on the widest range of devices. tap mode, for instance, does not work on Android, except if the device is rooted.
 
@@ -141,11 +143,11 @@ Deliver .OVPN profile to the client device and import it as a FILE, then connect
 
 ### Revoking and deleting .OVPN profiles and Clients certificates
 If you would like to prevent client to use yor VPN connection, you have to revoke client certificate and restart the OpenVPN daemon.
-You can do it via OpenVPN WEB UI `"Certificates"` menue, by pressing **Revoke** amber button:
+You can do it via OpenVPN UI `"Certificates"` menue, by pressing **Revoke** amber button:
 
 <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Revoke.png" alt="Revoke Certificate" width="600" border="1" />
 
-Revoked certificates won't kill active connections, you'll have to restart the service if you want the user to immediately disconnect. It can be done via Portainer or OpenVPN WEB UI from the same `"Certificates"` page, by pressing Restart red button:
+Revoked certificates won't kill active connections, you'll have to restart the service if you want the user to immediately disconnect. It can be done via Portainer or OpenVPN UI from the same `"Certificates"` page, by pressing Restart red button:
 
 <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Restart.png" alt="OpenVPN Restart" width="600" border="1" />
 
@@ -157,7 +159,7 @@ To generate new .OVPN profile execute following command. Password as second argu
 sudo docker exec openvpn bash /opt/app/bin/genclient.sh <name> <?password?>
 ```
 
-You can find you .ovpn file under `/openvpn/clients/<name>.ovpn`, make sure to check and modify the `remote ip-address`, `port` and `protocol`. It also will appear in `"Certificates"` menue of OpenVPN WEB UI.
+You can find you .ovpn file under `/openvpn/clients/<name>.ovpn`, make sure to check and modify the `remote ip-address`, `port` and `protocol`. It also will appear in `"Certificates"` menue of OpenVPN UI.
 
 Revoking of old .OVPN files can be done via CLI by running following:
 
@@ -189,7 +191,7 @@ ifconfig-push 10.0.71.2 255.255.255.0
 
 ![OpenVPN Grafana Dashboard](/images/OVPN_Dashboard.png)
 
-### OpenVPN WEB UI screenshots
+### OpenVPN UI screenshots
 
 <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Login.png" alt="OpenVPN-UI Login screen" width="1000" border="1" />
 
