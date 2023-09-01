@@ -189,6 +189,9 @@ set_var EASYRSA_CERT_RENEW   30
 set_var EASYRSA_CRL_DAYS     180
 ```
 
+In the process of installation these vars will be copied to container volume `/etc/openvpn/pki/vars` and used during all EasyRSA operations.
+You can update all these parameters later with OpenVPN UI on `Configuration > EasyRSA vars` page.
+
 This setup use `tun` mode, as the most compatible with wide range of devices, for instance, does not work on MacOS(without special workarounds) and on Android (unless it is rooted).
 
 The topology used is `subnet`, for the same reasons. p2p, for instance, does not work on Windows.
