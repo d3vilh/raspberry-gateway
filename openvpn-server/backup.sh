@@ -4,7 +4,7 @@ set -e
 
 if [[ -z $1 || -z $2 || -z $3 ]]; then
     echo -e "\n\033[1mScript for Backing up or Restoration of OpenVPN Server Environment\033[0m"
-    echo -e ' Script usage: \n\n \033[1;32mBackup usage:\033[0m ./backup.sh -b "OpenVPN Server env" "Backup directory"\n  \033[1;32mBackup example:\033[0m ./backup.sh -b ~/openvpn-server backup/openvpn-server-030923\n\n \033[1;34mRestore usage:\033[0m ./backup.sh -r "OpenVPN Server env" "Backup directory"\n  \033[1;34mRestore example:\033[0m ./backup.sh -r ~/openvpn-server backup/openvpn-server-030923\n'
+    echo -e ' Script usage: \n\n \033[1;32mBackup usage:\033[0m sudo ./backup.sh -b "OpenVPN Server env" "Backup directory"\n  \033[1;32mBackup example:\033[0m sudo ./backup.sh -b ~/openvpn-server backup/openvpn-server-030923\n\n \033[1;34mRestore usage:\033[0m sudo ./backup.sh -r "OpenVPN Server env" "Backup directory"\n  \033[1;34mRestore example:\033[0m sudo ./backup.sh -r ~/openvpn-server backup/openvpn-server-030923\n'
     exit 1
 fi
 
@@ -23,15 +23,21 @@ if [[ $ACTION == "-b" ]]; then
         mkdir -p $BACKUP_DIR
 
         # Backup files
-        cp -Rp $SERVER_ENV/config $BACKUP_DIR/config
+        cp -Rp $SERVER_ENV/config $BACKUP_DIR
         echo " OpenVPN config backed up"
-        cp -Rp $SERVER_ENV/db $BACKUP_DIR/db
+        cp -Rp $SERVER_ENV/db $BACKUP_DIR
+        if [ ! -f "$BACKUP_DIR/db/data.db" ]; then
+            echo " You pronbably have old version of OpenVPN-UI, backing up your DB with docker cp"
+            mkdir -p $BACKUP_DIR/db; mkdir -p $SERVER_ENV/db;
+            sudo docker cp openvpn-ui:/opt/openvpn-gui/data.db $BACKUP_DIR/db/data.db
+            sudo cp -p $BACKUP_DIR/db/data.db $SERVER_ENV/db/data.db
+        fi
         echo " OpenVPN-UI db backed up"
-        cp -Rp $SERVER_ENV/pki $BACKUP_DIR/pki
+        cp -Rp $SERVER_ENV/pki $BACKUP_DIR
         echo " OpenVPN pki backed up"
-        cp -Rp $SERVER_ENV/staticclients $BACKUP_DIR/staticclients
+        cp -Rp $SERVER_ENV/staticclients $BACKUP_DIR
         echo " OpenVPN staticclients backed up"
-        cp -Rp $SERVER_ENV/clients $BACKUP_DIR/clients
+        cp -Rp $SERVER_ENV/clients $BACKUP_DIR
         echo " OpenVPN clients backed up"
         cp -Rp $SERVER_ENV/fw-rules.sh $BACKUP_DIR/fw-rules.sh
         echo " OpenVPN fw-rules.sh backed up"
@@ -50,15 +56,15 @@ elif [[ $ACTION == "-r" ]]; then
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         # Perform restore action
         echo -e "\033[1;34mPerforming Restore \033[0m"
-        rm -rf $SERVER_ENV/config; cp -Rp $BACKUP_DIR/config $SERVER_ENV/config
+        rm -rf $SERVER_ENV/config; cp -Rp $BACKUP_DIR/config $SERVER_ENV
         echo " OpenVPN config restored"
-        rm -rf $SERVER_ENV/db; cp -Rp $BACKUP_DIR/db $SERVER_ENV/db
+        rm -rf $SERVER_ENV/db; cp -Rp $BACKUP_DIR/db $SERVER_ENV
         echo " OpenVPN-UI db restored"
-        rm -rf $SERVER_ENV/pki; cp -Rp $BACKUP_DIR/pki $SERVER_ENV/pki
+        rm -rf $SERVER_ENV/pki; cp -Rp $BACKUP_DIR/pki $SERVER_ENV
         echo " OpenVPN pki restored"
-        rm -rf $SERVER_ENV/staticclients; cp -Rp $BACKUP_DIR/staticclients $SERVER_ENV/staticclients
+        rm -rf $SERVER_ENV/staticclients; cp -Rp $BACKUP_DIR/staticclients $SERVER_ENV
         echo " OpenVPN staticclients restored"
-        rm -rf $SERVER_ENV/clients; cp -Rp $BACKUP_DIR/clients $SERVER_ENV/clients
+        rm -rf $SERVER_ENV/clients; cp -Rp $BACKUP_DIR/clients $SERVER_ENV
         echo " OpenVPN clients restored"
         rm -rf $SERVER_ENV/fw-rules.sh; cp -Rp $BACKUP_DIR/fw-rules.sh $SERVER_ENV/fw-rules.sh
         echo " OpenVPN fw-rules.sh restored"
