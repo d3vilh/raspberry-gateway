@@ -255,7 +255,7 @@ You can find you .ovpn file under `/openvpn/clients/<name>.ovpn`, make sure to c
 Revoking of old .OVPN files can be done via CLI by running following:
 
 ```shell
-sudo docker exec openvpn bash /opt/app/bin/rmclient.sh <clientname>
+sudo docker exec openvpn bash /opt/app/bin/revoke.sh <clientname>
 ```
 
 Restart of OpenVPN container can be done via the CLI by running following:
