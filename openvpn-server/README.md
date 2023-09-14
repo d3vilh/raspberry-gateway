@@ -156,7 +156,7 @@ After Revoking and Restarting the service, the client will be disconnected and w
 ### Alternative, CLI ways to deal with OpenVPN configuration
 To generate new .OVPN profile execute following command. Password as second argument is optional:
 ```shell
-sudo docker exec openvpn bash /opt/app/bin/genclient.sh <name> <?password?>
+sudo docker exec openvpn bash /opt/app/bin/genclient.sh <name> <IP> <?password?>
 ```
 
 You can find you .ovpn file under `/openvpn/clients/<name>.ovpn`, make sure to check and modify the `remote ip-address`, `port` and `protocol`. It also will appear in `"Certificates"` menue of OpenVPN UI.
@@ -164,7 +164,13 @@ You can find you .ovpn file under `/openvpn/clients/<name>.ovpn`, make sure to c
 Revoking of old .OVPN files can be done via CLI by running following:
 
 ```shell
-sudo docker exec openvpn bash /opt/app/bin/rmclient.sh <clientname>
+sudo docker exec openvpn bash /opt/app/bin/revoke.sh <clientname>
+```
+
+Removing of old .OVPN files can be done via CLI by running following:
+
+```shell
+sudo docker exec openvpn bash /opt/app/bin/rmcert.sh <clientname>
 ```
 
 Restart of OpenVPN container can be done via the CLI by running following:

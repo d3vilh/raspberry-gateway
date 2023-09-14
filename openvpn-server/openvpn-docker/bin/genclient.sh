@@ -1,21 +1,22 @@
 #!/bin/bash
-
+#VERSION 0.2 by @d3vilh@github.com aka Mr. Philipp
 # Exit immediately if a command exits with a non-zero status
 set -e
 
 # Set the path of the OpenVPN configuration file for the specified user
-DEST_FILE_PATH="/etc/openvpn/clients/$1.ovpn"
+CERT_NAME=$1
+CERT_IP=$2
+CERT_PASS=$3
+EASY_RSA=/usr/share/easy-rsa
+OPENVPN_DIR=/etc/openvpn
+OVPN_FILE_PATH="$OPENVPN_DIR/clients/$CERT_NAME.ovpn"
 
 # Validate the specified username and check for duplicate files
-if  [[ -z $1 ]]; then
-    # Display an error message if the username is empty
+if  [[ -z $CERT_NAME ]]; then
     echo 'Name cannot be empty.'
-    # Exit the script with a non-zero exit status to indicate an error
     exit 1
-elif [[ -f $DEST_FILE_PATH ]]; then
-    # Display an error message if a file with the specified username already exists
-    echo "User with name $1 already exists under openvpn/clients."
-    # Exit the script with a non-zero exit status to indicate an error
+elif [[ -f $OVPN_FILE_PATH ]]; then
+    echo "User with name $CERT_NAME already exists under openvpn/clients."
     exit 1
 fi
 
@@ -23,48 +24,48 @@ fi
 export EASYRSA_BATCH=1 # see https://superuser.com/questions/1331293/easy-rsa-v3-execute-build-ca-and-gen-req-silently
 
 echo 'Patching easy-rsa.3.1.1 openssl-easyrsa.cnf...' 
-sed -i '/serialNumber_default/d' /usr/share/easy-rsa/pki/openssl-easyrsa.cnf
+sed -i '/serialNumber_default/d' $EASY_RSA/pki/openssl-easyrsa.cnf
 
 echo 'Generating client certificate...'
 
 # Change to the easy-rsa directory and copy the easy-rsa variables file
-cd /usr/share/easy-rsa
-cp /etc/openvpn/config/easy-rsa.vars ./vars
+cd $EASY_RSA
 
 # Check if a password was specified
-if  [[ -z $2 ]]; then
-    # If no password was specified, generate a certificate without a password
+if  [[ -z $CERT_PASS ]]; then
     echo 'Generating certificate without password...'
-./easyrsa --batch --req-cn="$1" gen-req "$1" nopass 
+./easyrsa --batch --req-cn="$CERT_NAME" gen-req "$CERT_NAME" nopass 
 else
-    # If a password was specified, generate a certificate with a password
     echo 'Generating certificate with password....'
     # See https://stackoverflow.com/questions/4294689/how-to-generate-an-openssl-key-using-a-passphrase-from-the-command-line
     # ... and https://stackoverflow.com/questions/22415601/using-easy-rsa-how-to-automate-client-server-creation-process
     # ... and https://github.com/OpenVPN/easy-rsa/blob/master/doc/EasyRSA-Advanced.md
     # Use the specified password to generate the certificate
-    (echo -e '\n') | ./easyrsa --batch --req-cn="$1" --passin=pass:${2} --passout=pass:${2} gen-req "$1"
+    (echo -e '\n') | ./easyrsa --batch --req-cn="$CERT_NAME" --passin=pass:${CERT_PASS} --passout=pass:${CERT_PASS} gen-req "$CERT_NAME"
 fi
 
 # Sign the certificate request
-./easyrsa sign-req client "$1"
+./easyrsa sign-req client "$CERT_NAME"
 
-# Modify the index.txt file by adding /name=$1 to the end of the line for the specified user
-sed -i'.bak' "$ s/$/\/name=${1}/" /usr/share/easy-rsa/pki/index.txt
+echo "Fixing Database..."
+sed -i'.bak' "$ s/$/\/name=${CERT_NAME}\/LocalIP=${CERT_IP}/" $EASY_RSA/pki/index.txt
 
 # Display the updated line in the index.txt file
-echo "index.txt updated:"
-tail -1 /usr/share/easy-rsa/pki/index.txt
+echo "Database fixed:"
+tail -1 $EASY_RSA/pki/index.txt
 
 # Set variables for the CA certificate, client certificate, client key, and TLS authentication key
 CA="$(cat ./pki/ca.crt )"
-CERT="$(cat ./pki/issued/${1}.crt | grep -zEo -e '-----BEGIN CERTIFICATE-----(\n|.)*-----END CERTIFICATE-----' | tr -d '\0')"
-KEY="$(cat ./pki/private/${1}.key)"
+CERT="$(awk '/-----BEGIN CERTIFICATE-----/{flag=1;next}/-----END CERTIFICATE-----/{flag=0}flag' ./pki/issued/${CERT_NAME}.crt | tr -d '\0')"
+KEY="$(cat ./pki/private/${CERT_NAME}.key)"
 TLS_AUTH="$(cat ./pki/ta.key)"
+
+echo 'Fixing permissions for pki/issued...'
+chmod +r $EASY_RSA/pki/issued
 
 # Create the .ovpn file for the specified user by combining the contents of the client.conf file with the CA certificate, client certificate, client key, and TLS authentication key
 echo 'Generating .ovpn file...'
-echo "$(cat /etc/openvpn/config/client.conf)
+echo "$(cat $OPENVPN_DIR/config/client.conf)
 <ca>
 $CA
 </ca>
@@ -77,9 +78,6 @@ $KEY
 <tls-auth>
 $TLS_AUTH
 </tls-auth>
-" > "$DEST_FILE_PATH"
+" > "$OVPN_FILE_PATH"
 
-echo 'OpenVPN Client configuration successfully generated!'
-
-# Display the location of the generated .ovpn file
-echo "Checkout openvpn/clients/$1.ovpn"
+echo "OpenVPN Client configuration successfully generated!\nCheckout openvpn-server/clients/$CERT_NAME.ovpn"
