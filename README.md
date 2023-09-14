@@ -64,7 +64,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
   10. The installation process will take some time.
       Once that's done, it'll be like you have a new **Raspberry Gateway** up and running.
   * #### Additional options:
-    * **To Remove** any of previously installed component - click `remove component` checkbox then `save` configuration file and push `Uninstall` button.
+    * **To Remove** any of previously installed component - click `Uninstall "component"` checkbox then `save` configuration file and press `Uninstall` button.
     * **To set Default options** for the next `webinstall` run - modify `example.config.yml` with the default parameters. 
     * Default **Ansible parameters**, such as `ansible_user` can be set in `example.inventory.yml` file.
   </details>
