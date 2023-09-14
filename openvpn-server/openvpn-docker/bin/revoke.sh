@@ -3,7 +3,6 @@
 set -e
 
 CERT_NAME=$1
-CERT_SERIAL=$2
 EASY_RSA=/usr/share/easy-rsa
 OPENVPN_DIR=/etc/openvpn
 INDEX=$EASY_RSA/pki/index.txt
@@ -16,7 +15,7 @@ if [[ ! -f $OVPN_FILE_PATH ]]; then
 fi
 
 # removing the end of the line starting from /name=$NAME for the line that matches the $serial pattern
-sed  -i'.bak' "/$CERT_SERIAL/s/\/name=$CERT_NAME.*//" $INDEX
+sed -i'.bak' "s/\/name=${CERT_NAME}\/.*//" $INDEX
 echo "index.txt patched"
 
 # Set the EASYRSA_BATCH variable to enable non-interactive mode for easy-rsa
