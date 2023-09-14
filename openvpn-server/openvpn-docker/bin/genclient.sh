@@ -56,7 +56,7 @@ tail -1 $EASY_RSA/pki/index.txt
 
 # Set variables for the CA certificate, client certificate, client key, and TLS authentication key
 CA="$(cat ./pki/ca.crt )"
-CERT="$(cat ./pki/issued/${CERT_NAME}.crt | grep -zEo -e '-----BEGIN CERTIFICATE-----(\n|.)*-----END CERTIFICATE-----' | tr -d '\0')"
+CERT="$(awk '/-----BEGIN CERTIFICATE-----/{flag=1;next}/-----END CERTIFICATE-----/{flag=0}flag' ./pki/issued/${CERT_NAME}.crt | tr -d '\0')"
 KEY="$(cat ./pki/private/${CERT_NAME}.key)"
 TLS_AUTH="$(cat ./pki/ta.key)"
 

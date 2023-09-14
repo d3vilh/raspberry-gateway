@@ -5,8 +5,7 @@ set -e
 
 #Variables
 CERT_NAME=$1
-CERT_SERIAL=$2
-EASY_RSA="/usr/share/easy-rsa"
+EASY_RSA=/usr/share/easy-rsa
 OPENVPN_DIR=/etc/openvpn
 INDEX=$EASY_RSA/pki/index.txt
 OVPN_FILE_PATH="$OPENVPN_DIR/clients/$CERT_NAME.ovpn"
@@ -21,10 +20,13 @@ fi
 # Fix for https://github.com/d3vilh/openvpn-ui/issues/5 by shuricksumy@github
 STATUS_CH=$(grep -e ${CERT_NAME}$ -e${CERT_NAME}/ ${INDEX} | awk '{print $1}' | tr -d '\n')
 if [[ $STATUS_CH = "V" ]]; then
-    echo "Cert is VALID\nShould not remove: $CERT_NAME with serial: $CERT_SERIAL\nExiting..."
-    exit 1
+    echo -e "Cert is VALID\nShould not remove: $CERT_NAME"
+    CERT_SERIAL=$(grep ${CERT_NAME}/ ${INDEX} | awk '{print $3}' | tr -d '\n')
+    echo "Valid Cert serial: $CERT_SERIAL"
 else
-    echo "Cert is REVOKED\nContinue to remove: $CERT_NAME with serial: $CERT_SERIAL"
+    echo -e "Cert is REVOKED\nContinue to remove: $CERT_NAME"
+    CERT_SERIAL=$(grep ${CERT_NAME}/ ${INDEX} | awk '{print $4}' | tr -d '\n')
+    echo "Revoked Cert serial: $CERT_SERIAL"
 fi
 
 # Remove user from OpenVPN
@@ -38,4 +40,4 @@ rm -f /etc/openvpn/clients/$CERT_NAME.ovpn
 sed -i'.bak' "/${CERT_SERIAL}/d" $INDEX
 echo "Database fixed."
 
-echo 'Remove done!\nIf you want to disconnect the user please restart the OpenVPN service or container.'
+echo -e "Remove done!\nIf you want to disconnect the user please restart the OpenVPN service or container."
