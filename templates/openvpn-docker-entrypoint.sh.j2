@@ -9,7 +9,6 @@ echo "EasyRSA path: $EASY_RSA OVPN path: $OPENVPN_DIR"
 
 if [[ ! -f $OPENVPN_DIR/pki/ca.crt ]]; then
     export EASYRSA_BATCH=1 # see https://superuser.com/questions/1331293/easy-rsa-v3-execute-build-ca-and-gen-req-silently
-    #cd /opt/app/easy-rsa
     cd $EASY_RSA
 
     # Building the CA
@@ -46,8 +45,7 @@ if [[ ! -f $OPENVPN_DIR/pki/ca.crt ]]; then
     # Copy to mounted volume
     cp -r $EASY_RSA/pki/. $OPENVPN_DIR/pki
 else
-    # Copy from mounted volume
-    # cp -r $OPENVPN_DIR/pki /opt/app/easy-rsa
+
     echo 'PKI already set up.'
 fi
 

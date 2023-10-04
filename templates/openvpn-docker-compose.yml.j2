@@ -8,6 +8,7 @@ services:
        privileged: true
        ports: 
           - "1194:1194/udp"
+         # - "2080:2080/tcp"  # management port. uncomment if you would like to share it with the host
        environment:
            TRUST_SUB: {{ ovpn_trusted_subnet }}
            GUEST_SUB: {{ ovpn_guest_subnet }}
@@ -19,6 +20,7 @@ services:
            - ./staticclients:/etc/openvpn/staticclients
            - ./log:/var/log/openvpn
            - ./fw-rules.sh:/opt/app/fw-rules.sh
+           - ./checkpsw.sh:/opt/app/checkpsw.sh
        cap_add:
            - NET_ADMIN
        restart: always
