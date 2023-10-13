@@ -116,42 +116,132 @@ All the Server and Client configuration located in Docker volume and can be ease
 |-- staticclients //Directory where stored all the satic clients configuration
 ```
 
-### Generating .OVPN client profiles with Openvpn-ui
-Before client cert. generation you need to update the external IP address to your OpenVPN server in OVPN-UI GUI.
+### Generating .OVPN client profiles
+  <details>
+      <summary>How to generate .OVPN client profile</summary>
+You can update external client IP and port address anytime under `"Configuration > OpenVPN Client"` menue. 
 
-For this go to `"Configuration > Settings"`:
+For this go to `"Configuration > OpenVPN Client"`:
 
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_ext_serv_ip1.png" alt="Configuration > Settings" width="350" border="1" />
+<img src="https://github.com/d3vilh/openvpn-ui/blob/main/docs/images/OpenVPN-UI-ext_serv_ip1.png" alt="Configuration > Settings" width="350" border="1" />
 
-And then update `"Server Address (external)"` and `"Server Connection Port (external)"` fields with your external Internet IP and external Port. Then go to `"Certificates"` menu, enter new VPN Client **Name**,  **Passphrase**(optional) and **Static IP**(optional) in the field at the page below and press `"Create"` to generate new Client certificate:
+And then update `"Connection Address"` and `"Connection Port"` fields with your external Internet IP and Port. 
 
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_ext_serv_ip2.png" alt="Server Address" width="350" border="1" />  <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_New_Client.png" alt="Create Certificate" width="350" border="1" />
+To generate new Client Certificate go to `"Certificates"`, then press `"Create Certificate"` button, enter new VPN client name, complete all the rest fields and press `"Create"` to generate new Client certificate:
+
+<img src="https://github.com/d3vilh/openvpn-ui/blob/main/docs/images/OpenVPN-UI-ext_serv_ip2.png" alt="Server Address" width="350" border="1" />  <img src="https://github.com/d3vilh/openvpn-ui/blob/main/docs/images/OpenVPN-UI-New_Client.png" alt="Create Certificate" width="350" border="1" />
 
 To download .OVPN client configuration file, press on the `Client Name` you just created:
 
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_New_Client_download.png" alt="download OVPN" width="350" border="1" />
+<img src="https://github.com/d3vilh/openvpn-ui/blob/main/docs/images/OpenVPN-UI-New_Client_download.png" alt="download OVPN" width="350" border="1" />
 
-You may need to change server port in .OVPN file. For that, just open it in any text editor (emax?) and update IP and port with the desired one in this line: `remote 178.248.232.12 1194 udp`.
-This parameters also can be [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L23) `config.yml` file in var `ovpn_remote`.
-
-### Using .OVPN client profile with OpenVPN client
 Install [Official OpenVPN client](https://openvpn.net/vpn-client/) to your client device.
 
 Deliver .OVPN profile to the client device and import it as a FILE, then connect with new profile to enjoy your free VPN:
 
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_Palm_import.png" alt="PalmTX Import" width="350" border="1" /> <img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OVPN_Palm_connected.png" alt="PalmTX Connected" width="350" border="1" />
+<img src="https://github.com/d3vilh/openvpn-ui/blob/main/docs/images/OpenVPN-UI-Palm_import.png" alt="PalmTX Import" width="350" border="1" /> <img src="https://github.com/d3vilh/openvpn-ui/blob/main/docs/images/OpenVPN-UI-Palm_connected.png" alt="PalmTX Connected" width="350" border="1" />
 
-### Revoking and deleting .OVPN profiles and Clients certificates
+  </details>
+
+### Renew Certificates for client profiles
+  <details>
+      <summary>How to renew old client profile</summary>
+To renew certificate, go to `"Certificates"` and press `"Renew"` button for the client you would like to renew certificate for:
+
+<img src="https://github.com/d3vilh/openvpn-ui/blob/main/docs/images/OpenVPN-UI-Cert-Renew.01.png" alt="Renew OpenVPN Certificate" width="600" border="1" />
+
+Right after this step new Certificate will be genrated and it will appear as new client profile with the same Client name. At this point both client profiles will have updated Certificate when you try to download it.
+
+Once you will deliver new client profile with renewed Certificate to you client, press `"Revoke"` button for old profile to revoke old Certificate, old client profile will be deleted from the list.
+
+If, for some reason you still would like to keep old certificate you have to `"Revoke"` new profile, old certificate will be rolled back and new profile will be deleted from the list.
+
+Renewal process will not affect active VPN connections, old client will be disconnected only after you revoke old certificate or certificate term of use will expire.
+  </details>
+
+### Revoking .OVPN profiles
+  <details>
+      <summary>How to revoke client certificate</summary>
+
 If you would like to prevent client to use yor VPN connection, you have to revoke client certificate and restart the OpenVPN daemon.
-You can do it via OpenVPN UI `"Certificates"` menue, by pressing **Revoke** amber button:
+You can do it via OpenVPN UI `"Certificates"` menue, by pressing `"Revoke"`` amber button:
 
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Revoke.png" alt="Revoke Certificate" width="600" border="1" />
+<img src="https://github.com/d3vilh/openvpn-ui/blob/main/docs/images/OpenVPN-UI-Revoke.png" alt="Revoke Certificate" width="600" border="1" />
 
-Revoked certificates won't kill active connections, you'll have to restart the service if you want the user to immediately disconnect. It can be done via Portainer or OpenVPN UI from the same `"Certificates"` page, by pressing Restart red button:
+Certificate revoke won't kill active VPN connections, you'll have to restart the service if you want the user to immediately disconnect. It can be done from the same `"Certificates"` page, by pressing Restart red button:
 
-<img src="https://github.com/d3vilh/raspberry-gateway/blob/master/images/OpenVPN-UI-Restart.png" alt="OpenVPN Restart" width="600" border="1" />
+<img src="https://github.com/d3vilh/openvpn-ui/blob/main/docs/images/OpenVPN-UI-Restart.png" alt="OpenVPN Restart" width="600" border="1" />
 
-After Revoking and Restarting the service, the client will be disconnected and will not be able to connect again with the same certificate. To delete the certificate from the server, you have to press **Remove** red button.
+You can do the same from the `"Maintenance"` page.
+
+After Revoking and Restarting the service, the client will be disconnected and will not be able to connect again with the same certificate. To delete the certificate from the server, you have to press `"Remove"` button.
+  </details>
+
+### Two Factor Authentication (2FA)
+Starting from vestion `0.9.3` OpenVPN-UI has Two Factor Authentication (2FA) feature.
+OpenVPN-UI uses [oath-toolkit](https://savannah.nongnu.org/projects/oath-toolkit/) for two factor authentication. Means you don't need any ThirdParty 2FA provider.
+When generating 2FA-enabled certificates OpenVPN-UI will provide QR code with 2FA secret, which you can scan with your 2FA app (Google Authenticator [iOS](https://apps.apple.com/us/app/google-authenticator/id388497605), [Android](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&pcampaignid=web_share), Microsoft Authenticator [iOS](https://apps.apple.com/us/app/microsoft-authenticator/id983156458), [Android](https://play.google.com/store/apps/details?id=com.azure.authenticator&pcampaignid=web_share), etc) to get 2FA token for connection with this certificate.
+
+2FA Certificates **`Renewal`**, **`Revoke`** and **`Delete`** process is the same as for regular certificates.
+
+#### To enable 2FA you have to:
+
+* Go to `"Configuration > OpenVPN Client"` page and enable `"Two Factor Authentication"` option to switch Certificates interface to 2FA mode, so you can generate certificates with 2FA enabled and access 2FA QR code for already generated certificates.
+
+  > **Note**: You can generate 2FA-ready certificates at this stage, then deliver 2FA Certificates to all your client devices and enable 2FA Server support later, when you'll be ready to use it. Before that Server will still accept non 2FA-ready certificates only.
+
+* Go to `"Configuration > OpenVPN Server"` page and enable `"Two Factor Authentication"` option for OpenVPN Server backend. Once 2FA is enabled for Server, OpenVPN-Server **will allow 2FA connections only** (non 2FA-ready certificates won't connect).
+
+#### 2FA .OVPN profiles creation
+  <details>
+      <summary>How to generate 2FA Certificate</summary>
+
+Procedure for 2FA generation is the same as for regular certificate, but you have to use the uniq `2FA Name` in the email-kind format:
+
+<img src="https://github.com/d3vilh/openvpn-ui/blob/main/docs/images/OpenVPN-UI-2FA-Cert-Create.png" alt="2FA Certificate create" width="600" border="1" />
+
+> **Note**: For Multifactor Authentication (MFA), you can add one more password by completing **`Passphrase`** option. 
+
+Both **`Passphrase`** and **`Client Static IP`** are optional parameters.
+
+When you complete all the fields, click on **`Create`** and your new 2FA Certificate will be ready.
+
+Once this done, you can click on the new certificate in the `Certificates` page to see all the details including QR code for 2FA token:
+
+<img src="https://github.com/d3vilh/openvpn-ui/blob/main/docs/images/OpenVPN-UI-2FA-Cert-details.png" alt="2FA Certificate details" width="600" border="1" />
+
+You can copy or email this information directly to happy 2FA certificate owner.
+  </details>
+
+#### 2FA certificates usage
+  <details>
+      <summary>How to add 2FA profile to client</summary>
+
+To use 2FA certificate you have to install 2FA app on your device (**Google Authenticator** [iOS](https://apps.apple.com/us/app/google-authenticator/id388497605), [Android](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&pcampaignid=web_share), **Microsoft Authenticator** [iOS](https://apps.apple.com/us/app/microsoft-authenticator/id983156458), [Android](https://play.google.com/store/apps/details?id=com.azure.authenticator&pcampaignid=web_share), etc) and scan QR code from the `Certificates` details page.
+
+After scanning QR-code, new Authenticator profile will be created in your 2FA app with the same name as your 2FA Certificate name:
+
+<img src="https://github.com/d3vilh/openvpn-ui/blob/main/docs/images/OpenVPN-UI-2FA-mobi-authenticator.png" alt="2FA Authenticator" width="350" border="1" />
+
+Then you have to download and deliver `.OVPN profile` to [OpenVPN Connect app](https://openvpn.net/client/) and open it as a file. Following window appear:
+
+<img src="https://github.com/d3vilh/openvpn-ui/blob/main/docs/images/OpenVPN-UI-2FA-mobi-profile-add.png" alt="2FA OpenVPN Connect profile add" width="350" border="1" />
+
+Click `Add` to add new profile to OpenVPN Connect. Then you will be asked to enter your Username. As username use `2FA Name` which you used during Certificate/profile generation (as precisely as you can. `2FA Name` is part of authentication process):
+
+<img src="https://github.com/d3vilh/openvpn-ui/blob/main/docs/images/OpenVPN-UI-2FA-mobi-username.png" alt="2FA OpenVPN Connect profile username" width="350" border="1" />
+
+When you'll be prompted to Enter the password, you have to enter your 2FA token from your 2FA app:
+
+<img src="https://github.com/d3vilh/openvpn-ui/blob/main/docs/images/OpenVPN-UI-2FA-mobi-password.png" alt="2FA OpenVPN Connect profile 2FA password" width="350" border="1" />
+
+Connection will be suceeded if you entered `2FA Name` and 2FA token correctly.
+
+For MFA authentication you can use optional `Passphrase` when generating new Client certificate, to protect your 2FA token with additional password. In this case you have to enter your `Passphrase` as a `Private Key Password` and 2FA token as `Password`: 
+
+<img src="https://github.com/d3vilh/openvpn-ui/blob/main/docs/images/OpenVPN-UI-2FA-mobi-password-cert.png" alt="2FA OpenVPN Connect profile 2FA and Certificate passwords" width="350" border="1" />
+
+  </details>
 
 ### Alternative, CLI ways to deal with OpenVPN configuration
 To generate new .OVPN profile execute following command. Password as second argument is optional:
@@ -191,6 +281,31 @@ slava@Ukraini:~/openvpn/staticclients $ ls -lrt | grep Slava
 slava@Ukraini:~/openvpn/staticclients $ cat Slava
 ifconfig-push 10.0.71.2 255.255.255.0
 ```
+
+### OpenVPN-UI User Management
+Starting from `v.0.9.2` OpenVPN UI has user management feature. 
+
+You can create and delete users with different privileges - Administrators or regular users:
+* Administrators has full access
+* Regular users has access to Home page, Certificates and Logs pages only. This users can create, renew, revoke and delete all the certificates.
+
+
+<details>
+      <summary>How to manage OpenVPN-UI Users</summary>
+
+This functionality available via `"Users Profiles"` page:
+
+<img src="https://github.com/d3vilh/openvpn-ui/blob/main/docs/images/OpenVPN-UI-ProfileAdmin.png" alt="Username > Profile" width="350" border="1" />
+
+
+Then, if your user have enough privilegies you can Create new profile or manage profiles of other users:
+
+<img src="https://github.com/d3vilh/openvpn-ui/blob/main/docs/images/OpenVPN-UI-ProfileCreate.png" alt="New OpenVPN UI Profile creation" width="600" border="1" />
+
+<img src="https://github.com/d3vilh/openvpn-ui/blob/main/docs/images/OpenVPN-UI-ProfileManage.png" alt="OpenVPN UI Profiles management" width="600" border="1" />
+
+</details>
+
 
 ### OpenVPN activity dashboard
 [Raspberry-Gateway](https://github.com/d3vilh/raspberry-gateway/) setup includes Prometheus [OpenVPN-exporter](https://github.com/d3vilh/openvpn_exporter) and OpenVPN [Grafana dashboard](https://github.com/d3vilh/raspberry-gateway/blob/master/templates/openvpn_exporter.json.j2) which you can [enable in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L39) by setting `openvpn_monitoring_enable` option to `true`.
