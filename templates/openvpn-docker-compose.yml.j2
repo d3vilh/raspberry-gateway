@@ -5,6 +5,7 @@ services:
     openvpn:
        container_name: openvpn
        build: ./openvpn-docker
+       # image: d3vilh/openvpn:latest
        privileged: true
        ports: 
           - "1194:1194/udp"
