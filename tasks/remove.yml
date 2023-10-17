@@ -309,3 +309,26 @@
         state: absent
       become: true
       when: remove_xray
+
+
+- name: Remove Samba
+  block:
+    - name: Stop and remove Samba Server container
+      community.docker.docker_compose:
+        project_src: "{{ config_dir }}/samba-server/"
+        state: absent
+      become: false
+      when: remove_samba
+
+    - name: Remove Samba Server image
+      community.docker.docker_image:
+        name: d3vilh/samba-docker
+        state: absent
+      become: true
+      when: remove_samba
+
+  #  - name: Remove Samba Server network
+  #    community.docker.docker_network:
+  #      name: samba-server-net
+  #      state: absent
+  #    when: remove_samba

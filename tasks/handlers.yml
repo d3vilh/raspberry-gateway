@@ -76,6 +76,13 @@
     restarted: true
   become: false
 
+- name: Restart Samba
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/samba-server/"
+    build: false
+    restarted: true
+  become: false
+
 - name: Restart Technitium DNS Server
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/tech-dns/"

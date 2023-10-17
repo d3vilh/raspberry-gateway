@@ -1,0 +1,24 @@
+samba:
+  image: d3vilh/samba-docker
+  hostname: samba
+  container_name: samba
+
+  volumes:
+    # Sharing Samba config file
+    - ./smb.conf:/etc/samba/smb.conf
+
+    # Shares
+    - ~/files:/mnt/files
+    - ~/torrents:/mnt/torrents :ro
+
+  ports:
+    - "137:137/udp"
+    - "138:138/udp"
+    - "139:139/tcp"
+    - "445:445/tcp"
+
+  environment:
+    - USERNAME=raspberry
+    - PASSWORD=gateway
+    # - UID=1000 # Optional to override default UID = 1000
+    # - GID=1000 # Optional to override default GID = 1000
