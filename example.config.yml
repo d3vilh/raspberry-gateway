@@ -218,3 +218,8 @@ shelly_plug_http_password: "gagaZush"            # !Change this password!
 # !Beaware! some XRAY protocols from the list are prohibited in PRC. Don't use this if you are in PRC.      
 xray_enable: false                               # Set true to enable X-RAY x-ui
 remove_xray: false                               # Set true to remove X-RAY x-ui
+
+
+# SAMBA  Testing only. Not ready for production.
+samba_enable: false                              # Set true to enable SAMBA
+remove_samba: false                              # Set true to remove SAMBA

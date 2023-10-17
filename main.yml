@@ -67,6 +67,10 @@
       ansible.builtin.import_tasks: tasks/qbittorrent.yml
       when: qbittorrent_enable
 
+    - name: Setup Samba Server
+      ansible.builtin.import_tasks: tasks/sambaserver.yml
+      when: samba_enable
+
     - name: Setup xray
       ansible.builtin.import_tasks: tasks/xray-xui.yml
       when: xray_enable 
@@ -92,6 +96,7 @@
           - remove_gluetun
           - remove_wireguard
           - remove_qbittorrent
+          - remove_samba
           - remove_xray
           - remove_monitoring
           - remove_openvpn_monitoring
