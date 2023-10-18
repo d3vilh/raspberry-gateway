@@ -223,3 +223,8 @@ remove_xray: false                               # Set true to remove X-RAY x-ui
 # SAMBA  Testing only. Not ready for production.
 samba_enable: false                              # Set true to enable SAMBA
 remove_samba: false                              # Set true to remove SAMBA
+samba_user: "admin"                              # SAMBA username
+samba_password: "gagaZush"                       # !Change this password!
+samba_netbios_name: "Raspberry-gw"               # SAMBA NetBIOS name
+samba_workgroup: "WORKGROUP"                     # SAMBA workgroup
+samba_torrents_share: false                      # Set true to enable torrents share
