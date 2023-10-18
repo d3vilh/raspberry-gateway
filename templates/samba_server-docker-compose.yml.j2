@@ -4,14 +4,12 @@ samba:
   container_name: samba
 
   volumes:
-    # Sharing Samba config file
     - ./smb.conf:/etc/samba/smb.conf
-
-    # Shares
-    - ~/files:/mnt/files
-  {% if samba_torrents_share %}
+    - ~/samba-server/files:/mnt/files
+{% if samba_torrents_share %}
     - ~/qbittorrent/downloads:/mnt/torrents #:ro
-  {% endif %}
+{% endif %}
+
   ports:
     - "137:137/udp"
     - "138:138/udp"
