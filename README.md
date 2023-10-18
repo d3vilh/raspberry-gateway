@@ -307,10 +307,11 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
   ## SAMBA Server
    #### SAMBA facts:
    * **External ports** are standard SAMBA and named Server ports: `137:udp`, `138:udp`, `139:tcp`, `145:tcp` 
+   * **Default username** is `admin` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L173) `config.yml` file in the `samba_user` var
    * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L174) `config.yml` file in the `samba_password` var
    * **Configuration file** is `smb.conf` available after the installation in `~/samba-server/*` directory
-   * **Default Share** is `~/samba-server/files` directory (RW acess).
-   * **Torrents share** is `~/qbittorrent/downloads` directory.
+   * **Default Share** mapped to `~/samba-server/files` directory (RW acess).
+   * **Torrents share** mapped to `~/qbittorrent/downloads` directory.
 
   ## OpenVPN Server
    #### OpenVPN Server facts:
