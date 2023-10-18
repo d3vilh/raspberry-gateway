@@ -9,8 +9,9 @@ samba:
 
     # Shares
     - ~/files:/mnt/files
-    - ~/torrents:/mnt/torrents :ro
-
+  {% if samba_torrents_share %}
+    - ~/qbittorrent/downloads:/mnt/torrents #:ro
+  {% endif %}
   ports:
     - "137:137/udp"
     - "138:138/udp"
@@ -18,7 +19,7 @@ samba:
     - "445:445/tcp"
 
   environment:
-    - USERNAME=raspberry
-    - PASSWORD=gateway
+    - USERNAME={{ samba_user }}
+    - PASSWORD={{ samba_password }}
     # - UID=1000 # Optional to override default UID = 1000
     # - GID=1000 # Optional to override default GID = 1000
