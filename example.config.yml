@@ -162,6 +162,20 @@ qbittorrent_inside_vpn: false                    # Set true to route qBitTorrent
 qbittorrent_inside_gluetun: false                # Set true to route qBitTorrent traffic via Gluetun VPN client
 qbittorrent_webui_port: 8090                     # Do not change it unless you know what you are doing.
 
+#    _____ _____       _____ _____    _____                     
+#   |   __|  _  |_____| __  |  _  |  |   __|___ ___ _ _ ___ ___ 
+#   |__   |     |     | __ -|     |  |__   | -_|  _| | | -_|  _|
+#   |_____|__|__|_|_|_|_____|__|__|  |_____|___|_|  \_/|___|_|  
+# SAMBA Server. Testing only. Not ready for production.
+samba_enable: false                              # Set true to enable SAMBA
+remove_samba: false                              # Set true to remove SAMBA
+
+samba_user: "admin"                              # SAMBA username
+samba_password: "gagaZush"                       # !Change this password!
+samba_netbios_name: "Raspberry-gw"               # SAMBA NetBIOS name
+samba_workgroup: "WORKGROUP"                     # SAMBA workgroup
+samba_torrents_share: false                      # Set true to enable torrents share
+
 #    _____         _ _               
 #   |     |___ ___|_| |_ ___ ___ ___ 
 #   | | | | . |   | |  _| . |  _|_ -|
@@ -218,13 +232,3 @@ shelly_plug_http_password: "gagaZush"            # !Change this password!
 # !Beaware! some XRAY protocols from the list are prohibited in PRC. Don't use this if you are in PRC.      
 xray_enable: false                               # Set true to enable X-RAY x-ui
 remove_xray: false                               # Set true to remove X-RAY x-ui
-
-
-# SAMBA  Testing only. Not ready for production.
-samba_enable: false                              # Set true to enable SAMBA
-remove_samba: false                              # Set true to remove SAMBA
-samba_user: "admin"                              # SAMBA username
-samba_password: "gagaZush"                       # !Change this password!
-samba_netbios_name: "Raspberry-gw"               # SAMBA NetBIOS name
-samba_workgroup: "WORKGROUP"                     # SAMBA workgroup
-samba_torrents_share: false                      # Set true to enable torrents share
