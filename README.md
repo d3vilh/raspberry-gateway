@@ -12,7 +12,7 @@
   * [**Xray Server**](https://github.com/d3vilh/raspberry-gateway/blob/master/xray/README.md) with experimental Shadowsocks and XTLS-Reality fast tunnel proxy that helps you to bypass firewalls. 
   * [**qBittorrent**](https://www.qbittorrent.org) -  an open-source software alternative to µTorrent. 
   * [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/monitoring) for Internet speed, VPN, Raspberry Pi hardware and Docker containers monitoring.
-  * [**SAMBA Server**](https://github.com/d3vilh/samba-docker) for sharing files and accessing your torrents over the local network.
+  * [**SAMBA Server**](https://github.com/d3vilh/samba-docker){:target="_blank"} for sharing files and accessing your torrents over the local network.
   * **Various Prometheus exporters**: cAdviser, AirGradient, StarLink, ShellyPlug and others. 
 
 Overall, this Raspberry Pi Home Internet Gateway provides a universal solution for managing and monitoring your home internet enviroment with joy and ease.
