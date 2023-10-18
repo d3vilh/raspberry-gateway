@@ -1,7 +1,7 @@
 ---
 - name: Create Samba Server folder on Pi.
   ansible.builtin.file:
-    path: "{{ config_dir }}/samba-server"
+    path: "{{ config_dir }}/samba-server/files"
     state: directory
     mode: 0755
   become: false
