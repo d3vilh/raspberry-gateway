@@ -7,7 +7,7 @@ samba:
     - ./smb.conf:/etc/samba/smb.conf
     - ~/samba-server/files:/mnt/files
 {% if samba_torrents_share %}
-    - ~/qbittorrent/downloads:/mnt/torrents #:ro
+    - ~/qbittorrent/downloads:/mnt/torrents
 {% endif %}
 
   ports:
