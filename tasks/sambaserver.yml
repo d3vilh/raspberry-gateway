@@ -1,5 +1,5 @@
 ---
-- name: Create Sambaserver client folder on Pi.
+- name: Create Samba Server folder on Pi.
   ansible.builtin.file:
     path: "{{ config_dir }}/samba-server"
     state: directory
@@ -17,7 +17,7 @@
     - src: samba_smb_conf.yml.j2
       dest: smb.conf
   become: false
-  notify: Restart Samba client
+  notify: Restart Samba
 
 - name: Ensure Samba Server is running.
   community.docker.docker_compose:
