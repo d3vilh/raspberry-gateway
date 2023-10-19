@@ -1,0 +1,37 @@
+[global]
+	workgroup = {{ samba_workgroup }}
+	netbios name = {{ samba_netbios_name }}
+	server string = Samba Server Version %v
+
+	# Uncomment to map SMB user to system user root
+	# admin users = {{ samba_user }}
+
+	map to guest = Bad User
+	security = user
+	passdb backend = tdbsam
+	unix password sync = no
+	name resolve order = bcast host lmhosts wins
+
+	directory mask = 0755
+	force create mode = 0644
+	force directory mode = 0755
+
+	syslog = 0
+
+	load printers = No
+	printing = bsd
+	printcap name = /dev/null
+	disable spoolss = Yes
+
+[Files]
+	comment = Files
+	path = /mnt/files
+	read only = No
+	valid users = {{ samba_user }}
+{% if samba_torrents_share %}
+[Torrents]
+	comment = Torrents
+	path = /mnt/torrents
+	guest ok = Yes
+	guest only = Yes
+{% endif %}

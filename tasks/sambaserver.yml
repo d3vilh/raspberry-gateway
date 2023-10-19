@@ -1,0 +1,29 @@
+---
+- name: Create Samba Server folder on Pi.
+  ansible.builtin.file:
+    path: "{{ config_dir }}/samba-server/files"
+    state: directory
+    mode: 0755
+  become: false
+
+- name: Copy Samba Server docker-compose template and config to Pi.
+  ansible.builtin.template:
+    src: templates/{{ item.src }}
+    dest: "{{ config_dir }}/samba-server/{{ item.dest }}"
+    mode: 0740
+  loop:
+    - src: samba_server-docker-compose.yml.j2
+      dest: docker-compose.yml
+    - src: samba_smb_conf.yml.j2
+      dest: smb.conf
+  become: false
+  notify: Restart Samba
+
+- name: Ensure Samba Server is running.
+  community.docker.docker_compose:
+    project_src: "{{ config_dir }}/samba-server/"
+    build: false
+  become: false
+  environment:
+    DOCKER_CLIENT_TIMEOUT: '180'
+    COMPOSE_HTTP_TIMEOUT: '180'

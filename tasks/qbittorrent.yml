@@ -1,7 +1,7 @@
 ---
 - name: Create qbitTorrent folder on Pi.
   ansible.builtin.file:
-    path: "{{ config_dir }}/qbittorrent"
+    path: "{{ config_dir }}/qbittorrent/downloads"
     state: directory
     mode: 0755
   become: false
