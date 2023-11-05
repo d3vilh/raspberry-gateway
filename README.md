@@ -1,5 +1,5 @@
 ![Raspberry Gateway Logo](/images/Raspberry-Gateway-logo.png) 
-**Raspberry-Gateway** provides a simple but powerful solution for managing your home internet gateway using a Raspberry Pi. This project includes a range of Docker containers, each serving a specific purpose to enhance your internet experience:
+**Raspberry-Gateway dev branch** provides a simple but powerful solution for managing your home internet gateway using a Raspberry Pi. This project includes a range of Docker containers, each serving a specific purpose to enhance your internet experience:
 
   * [**Portainer**](https://www.portainer.io) a lightweight universal management GUI for all Docker containers which included into this project. 
   * [**Unbound DNS**](https://nlnetlabs.nl/projects/unbound/about/) is the validating, recursive and caching DNS resolver. Designed to be fast and lean.
