@@ -1,5 +1,5 @@
 ![Raspberry Gateway Logo](/images/Raspberry-Gateway-logo.png) 
-**Raspberry-Gateway dev branch** provides a simple but powerful solution for managing your home internet gateway using a Raspberry Pi. This project includes a range of Docker containers, each serving a specific purpose to enhance your internet experience:
+**Raspberry-Gateway** provides a simple but powerful solution for managing your home internet gateway using a Raspberry Pi. This project includes a range of Docker containers, each serving a specific purpose to enhance your internet experience:
 
   * [**Portainer**](https://www.portainer.io) a lightweight universal management GUI for all Docker containers which included into this project. 
   * [**Unbound DNS**](https://nlnetlabs.nl/projects/unbound/about/) is the validating, recursive and caching DNS resolver. Designed to be fast and lean.
@@ -11,8 +11,7 @@
   * [**WireGuard Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) with own WEB UI for easy management. 
   * [**Xray Server**](https://github.com/d3vilh/raspberry-gateway/blob/master/xray/README.md) with experimental Shadowsocks and XTLS-Reality fast tunnel proxy that helps you to bypass firewalls. 
   * [**qBittorrent**](https://www.qbittorrent.org) -  an open-source software alternative to µTorrent. 
-  * [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/monitoring) for Internet speed, VPN, Raspberry Pi hardware and Docker containers monitoring.
-  * [**SAMBA Server**](https://github.com/d3vilh/samba-docker) for sharing files and accessing your torrents over the local network.
+  * [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/monitoring) for Internet speed, VPN, Raspberry Pi hardware and Docker containers monitoring. 
   * **Various Prometheus exporters**: cAdviser, AirGradient, StarLink, ShellyPlug and others. 
 
 Overall, this Raspberry Pi Home Internet Gateway provides a universal solution for managing and monitoring your home internet enviroment with joy and ease.
@@ -28,8 +27,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
 # Installation
   1. Install [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html):
      ```shell 
-     sudo apt-get install -y python3-pip
-     pip3 install ansible
+     sudo apt-get install -y git ansible python3-pip 
      ```
   2. Clone this repository: 
      ```shell
@@ -146,15 +144,6 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
          * `qbittorrent_inside_vpn: false` or `true` - configure qBittorrent to use your [OpenVPN Client](https://github.com/d3vilh/raspberry-gateway/tree/master/openvpn-client) subnet instead of public Internet. Dont forget to endable OpenVPN Client installation as well.
          * `qbittorrent_inside_gluetun: false` or `true` - configure qBittorrent to use your Gluetun VPN Client subnet instead of public Internet. Dont forget to endable Gluetun installation as well.
          * `qbittorrent_webui_port: "8090"` - qBittorrent WEB UI port. Keept is default **"8090"**.
-
-      * **SAMBA Server**
-         * `samba_enable: false` or `true` - to install SAMBA Server. Default **false**.
-         * `remove_samba: false` or `true` - to uninstall SAMBA Server. Default **false**.
-         * `samba_user` - SAMBA username to access your shares. Default **"admin"**.
-         * `samba_password` - password for SAMBA user. Default **"gagaZush"**.
-         * `samba_netbios_name` - SAMBA NetBIOS name. Default **"Raspberry-gw"**.
-         * `samba_workgroup` - SAMBA workgroup. Default **"WORKGROUP"**.
-         * `samba_torrents_share` - Set true to enable torrents share. Default **false**.
 
       * **Raspberry Monitoring** 
         Advanced **Raspberry Monitoring** documentation is [here](https://github.com/d3vilh/raspberry-gateway/blob/master/monitoring/README.md).
@@ -303,15 +292,6 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
    * **Downloaded files** will be stored in the `~/qbittorrent/downloads` directory.
 
   > **Note**: To prove you are **connected via VPN** run this command `sudo docker exec qbittorrent wget -qO - ifconfig.me` it should return your VPN IP address.
-
-  ## SAMBA Server
-   #### SAMBA facts:
-   * **External ports** are standard SAMBA and named Server ports: `137:udp`, `138:udp`, `139:tcp`, `145:tcp` 
-   * **Default username** is `admin` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L173) `config.yml` file in the `samba_user` var
-   * **Default password** is `gagaZush` it is [preconfigured in](https://github.com/d3vilh/raspberry-gateway/blob/master/example.config.yml#L174) `config.yml` file in the `samba_password` var
-   * **Configuration file** is `smb.conf` available after the installation in `~/samba-server/*` directory
-   * **Default Share** mapped to `~/samba-server/files` directory (RW acess).
-   * **Torrents share** mapped to `~/qbittorrent/downloads` directory.
 
   ## OpenVPN Server
    #### OpenVPN Server facts:
