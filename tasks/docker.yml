@@ -47,11 +47,20 @@
     state: present
   when: ansible_facts.os_family == "Archlinux"
 
-- name: Install Docker Compose using Pip.
-  ansible.builtin.pip:
+# If you are using legacy Raspbian OS, uncomment this section and comment the next one.
+
+# - name: Install Docker Compose using Pip.
+#  ansible.builtin.pip:
+#    name: docker-compose
+#    state: present
+#    executable: pip3
+
+- name: Install Docker Compose with apt.
+  ansible.builtin.apt:
     name: docker-compose
     state: present
-    executable: pip3
+  become: yes
+  when: ansible_facts.os_family == "Debian"
 
 - name: Ensure {{ ansible_user }} user is added to the docker group.
   ansible.builtin.user:
