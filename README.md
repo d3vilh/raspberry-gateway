@@ -405,12 +405,12 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
   * [**Jeff Geerling**](https://github.com/geerlingguy) aka [@geerlingguy](https://github.com/geerlingguy) for all his efforts to keep us interesting in Raspberry Pi compiters and for [all his videos on youtube](https://www.youtube.com/c/JeffGeerling). Cosider to Like and Subscribe 
 
 ### Kudos to all folks maintaining:
-  * [**Pi-hole**](https://pi-hole.net)
-  * [**Unbound DNS**](https://nlnetlabs.nl/projects/unbound/about/)
-  * [**Technitium-dns**](https://technitium.com/dns/)
+  * [**Pi-hole**](https://github.com/pi-hole)
+  * [**Unbound DNS**](https://github.com/NLnetLabs)
+  * [**Technitium-dns**](https://github.com/TechnitiumSoftware/DnsServer)
   * [**Gluetun**](https://github.com/qdm12/gluetun)
-  * [**qBittorrent**](https://www.qbittorrent.org)
-  * [**Portainer**](https://www.portainer.io)
+  * [**qBittorrent**](https://github.com/qbittorrent)
+  * [**Portainer**](https://github.com/portainer)
   * [**wireguard-ui**](https://github.com/ngoduykhanh/wireguard-ui)
   * [**cAdviser**](https://github.com/d3vilh/cadvisor) and 
   * other pieces of software used in this project.
