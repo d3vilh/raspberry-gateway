@@ -1,7 +1,8 @@
 samba:
-  image: d3vilh/samba-docker:latest
-  hostname: samba
   container_name: samba
+  image: d3vilh/samba-docker:latest
+  restart: unless-stopped
+  hostname: samba
 
   volumes:
     - ./smb.conf:/etc/samba/smb.conf
