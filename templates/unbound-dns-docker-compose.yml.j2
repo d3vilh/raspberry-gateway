@@ -5,6 +5,7 @@ services:
     container_name: unbound-dns
     hostname: unbound-pihole
     image: d3vilh/unbound-docker:latest
+    restart: unless-stopped
     volumes:
       - "./etc-unbound/unbound.conf:/etc/unbound/unbound.conf"
       - "./etc-unbound/root.hints:/etc/unbound/root.hints"
@@ -21,7 +22,6 @@ services:
       unbound-net:
     cap_add:
       - NET_ADMIN
-    restart: unless-stopped
 
 networks:
   unbound-net:

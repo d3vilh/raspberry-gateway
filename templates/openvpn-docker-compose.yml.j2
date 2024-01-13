@@ -6,14 +6,15 @@ services:
        container_name: openvpn
        build: ./openvpn-docker
        # image: d3vilh/openvpn:latest
+       restart: always       
        privileged: true
-       ports: 
-          - "1194:1194/udp"
-         # - "2080:2080/tcp"  # management port. uncomment if you would like to share it with the host
        environment:
            TRUST_SUB: {{ ovpn_trusted_subnet }}
            GUEST_SUB: {{ ovpn_guest_subnet }}
            HOME_SUB: {{ ovpn_home_subnet }}
+       ports: 
+          - "1194:1194/udp"
+         # - "2080:2080/tcp"  # management port. uncomment if you would like to share it with the host
        volumes:
            - ./pki:/etc/openvpn/pki
            - ./clients:/etc/openvpn/clients
@@ -24,17 +25,17 @@ services:
            - ./checkpsw.sh:/opt/app/checkpsw.sh
        cap_add:
            - NET_ADMIN
-       restart: always
        depends_on:
            - "openvpn-ui"
 
     openvpn-ui:
        container_name: openvpn-ui
        image: d3vilh/openvpn-ui:latest
+       restart: always
+       privileged: true
        environment:
            - OPENVPN_ADMIN_USERNAME={{ ovpnui_user }}
            - OPENVPN_ADMIN_PASSWORD={{ ovpnui_password }}
-       privileged: true
        ports:
            - "8080:8080/tcp"
        volumes:
@@ -42,4 +43,3 @@ services:
            - ./db:/opt/openvpn-ui/db
            - ./pki:/usr/share/easy-rsa/pki
            - /var/run/docker.sock:/var/run/docker.sock:ro
-       restart: always
