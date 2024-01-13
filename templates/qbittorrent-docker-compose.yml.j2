@@ -4,6 +4,7 @@ services:
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
+    restart: unless-stopped
     environment:
       - PUID=1000
       - PGID=1000
@@ -18,7 +19,6 @@ services:
       - 6881:6881
       - 6881:6881/udp
 {% endif %}
-    restart: unless-stopped
 {% if qbittorrent_inside_vpn %}
     network_mode: container:openvpn-client
 {% endif %}

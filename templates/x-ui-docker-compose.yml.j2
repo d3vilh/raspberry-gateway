@@ -3,9 +3,10 @@ version: "3.9"
 
 services:
   xui:
-    image: d3vilh/x-ui:latest
     container_name: xray-x-ui
     hostname: raspberry-xray
+    image: d3vilh/x-ui:latest
+    restart: unless-stopped
     volumes:
       - ./db/:/etc/x-ui/
       - ./cert/:/root/cert/
@@ -13,4 +14,3 @@ services:
       XRAY_VMESS_AEAD_FORCED: "false"
     tty: true
     network_mode: host
-    restart: unless-stopped

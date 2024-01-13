@@ -3,6 +3,7 @@ services:
   openvpn-client:
     image: d3vilh/openvpn-client:latest
     container_name: openvpn-client
+    restart: unless-stopped
     cap_add:
       - NET_ADMIN
     devices:
@@ -20,7 +21,6 @@ services:
       - 6881:6881/udp
     networks:
       vpn-net:
-    restart: unless-stopped
 
 networks:
   vpn-net:
