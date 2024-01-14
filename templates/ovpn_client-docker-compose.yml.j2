@@ -20,9 +20,19 @@ services:
       - 6881:6881
       - 6881:6881/udp
     networks:
+{% if ovpn_client_hostmode %}
+      - host
+      - vpn-net
+{% endif %}
+{% if not ovpn_client_hostmode %}
       vpn-net:
+{% endif %}
 
 networks:
+{% if ovpn_client_hostmode %}
+  host:
+    external: true
+{% endif %}
   vpn-net:
     ipam:
       driver: default

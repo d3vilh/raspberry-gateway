@@ -70,7 +70,7 @@ tech_dns_inside_vpn: false                       # DOESN'T WORK YET! # Set true 
 #   |  |  | . | -_|   |  |  |   __| | | |
 #   |_____|  _|___|_|_|\___/|__|  |_|___|
 #         |_|
-# OpenVPN Server configuration.
+# OpenVPN Server configuration. Client configuration below.
 ovpn_server_enable: false                        # Set true to enable OpenVPN server
 remove_ovpn_server: false                        # Set true to remove OpenVPN server
 
@@ -98,7 +98,10 @@ easyrsa_crl_days: 180                            # Number of days until the CRL 
 
 # OpenVPN Client configuration for qBittorrent only. OpenVPN server is not required.
 ovpn_client_enable: false                        # Set true to enable internal OpenVPN client used for qBittorrent. OpenVPN server is not required.
-remove_ovpn_client: false                        # Set true to remove internal OpenVPN client used for qBittorrent. OpenVPN server is not required.
+remove_ovpn_client: false                        # Set true to remove internal OpenVPN client used for qBittorrent.
+# Experimental feature start
+  ovpn_client_hostmode: false                      # Set true to route all server traffic via this OpenVPN client connection.
+# Experimantal feature end
 
 ovpn_client_cert: "webinstall-client.ovpn"       # Set your ovpn-client certificate name
 ovpn_client_allowed_subnet: "192.168.88.0/24"    # Allowed subnet for ovpn-client. You must have your local network defined here.
