@@ -27,7 +27,7 @@
     restarted: true
   become: false
 
-- name: Restart raspi-monitoring
+- name: Restart Raspberry monitoring
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/monitoring/"
     build: false
