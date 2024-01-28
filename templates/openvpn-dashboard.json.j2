@@ -608,7 +608,8 @@
         },
         {
           "datasource": {
-            "uid": "${DS_PROMETHEUS}"
+            "type": "prometheus",
+            "uid": "P1809F7CD0C75ACF3"
           },
           "expr": "sum(label_replace(openvpn_server_client_sent_bytes_total{common_name!=\"UNDEF\"}, \"connection_time\", \"${1}000\", \"connection_time\", \"(.*)\"))by(common_name, connection_time, virtual_address)",
           "format": "table",
