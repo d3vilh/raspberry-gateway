@@ -13,7 +13,7 @@ services:
   prometheus:
     container_name: prometheus
     image: prom/prometheus:latest
-    restart: always
+    restart: unless-stopped
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
@@ -34,7 +34,7 @@ services:
   grafana:
     container_name: grafana
     image: grafana/grafana
-    restart: always
+    restart: unless-stopped
     env_file:
       - ./grafana/config.monitoring
     volumes:
@@ -51,7 +51,7 @@ services:
   ping:
     container_name: ping
     image: prom/blackbox-exporter
-    restart: always
+    restart: unless-stopped
     tty: true
     stdin_open: true
     command:
@@ -68,7 +68,7 @@ services:
   speedtest:
     container_name: speedtest
     image: miguelndecarvalho/speedtest-exporter
-    restart: always
+    restart: unless-stopped
     expose:
       - 9798
     ports:
@@ -79,7 +79,7 @@ services:
   nodeexp:
     container_name: nodeexp
     image: prom/node-exporter
-    restart: always
+    restart: unless-stopped
     privileged: true
     command:
       - '--path.procfs=/host/proc'
@@ -98,7 +98,7 @@ services:
   rpi_exporter:
     container_name: rpi_exporter
     image: d3vilh/rpi_exporter-arm64:latest
-    restart: always
+    restart: unless-stopped
     privileged: true
     ports:
        - "9110:9110/tcp"
@@ -133,7 +133,7 @@ services:
   ovpn_exporter:
     container_name: ovpn_exporter
     image: d3vilh/openvpn_exporter:latest
-    restart: always
+    restart: unless-stopped
     privileged: true
     environment:
        - OVPN_STATUS_FILE=/etc/openvpn/log/openvpn-status.log
@@ -150,7 +150,7 @@ services:
   starlink-exporter:
     container_name: starlink-exporter
     image: danopstech/starlink_exporter
+    restart: unless-stopped
     ports:
       - "9817:9817"
-    restart: unless-stopped
 {% endif %}

@@ -11,7 +11,7 @@
     - ansible_facts.userspace_bits == '32'
     - ansible_facts.packages['libseccomp2'][0]['version'] is version('2.4.4', '<')
 
-- name: Synchronize raspi-monitoring directory.
+- name: Synchronize Raspberry monitoring directory.
   ansible.posix.synchronize:
     src: monitoring
     dest: "{{ config_dir }}/"
@@ -20,7 +20,7 @@
     perms: false
   become: false
 
-- name: Ensure raspi-monitoring directory is not a Git repository.
+- name: Ensure Raspberry monitoring directory is not a Git repository.
   ansible.builtin.file:
     path: "{{ config_dir }}/monitoring/.git/"
     state: absent
@@ -40,7 +40,7 @@
       dest: prometheus/pinghosts.yaml
     - src: prometheus-exporters-docker-compose.yaml.j2
       dest: docker-compose.yml
-  notify: Restart raspi-monitoring
+  notify: Restart Raspberry monitoring
   become: false
 
 - name: Copy OpenVPN monitoring dashboard config to Grafana.
@@ -49,7 +49,7 @@
     dest: "{{ config_dir }}/monitoring/grafana/provisioning/dashboards/openvpn.json"
     mode: '0644'
   become: false
-  notify: Restart raspi-monitoring
+  notify: Restart Raspberry monitoring
   when: openvpn_monitoring_enable
 
 - name: Copy PiKVM monitoring dashboard config to Grafana.
@@ -58,7 +58,7 @@
     dest: "{{ config_dir }}/monitoring/grafana/provisioning/dashboards/pikvm.json"
     mode: 0644
   become: false
-  notify: Restart raspi-monitoring
+  notify: Restart Raspberry monitoring
   when: pikvm_monitoring_enable
 
 - name: Copy AirGradient dashboard config to Grafana.
@@ -68,7 +68,7 @@
     mode: 0644
   become: false
   loop: "{{ airgradient_sensors }}"
-  notify: Restart raspi-monitoring
+  notify: Restart Raspberry monitoring
   when: airgradient_monitoring_enable
 
 - name: Copy Starlink dashboard config to Grafana.
@@ -119,7 +119,7 @@
     tag: latest
   become: false
 
-- name: Ensure raspi-monitoring environment is running.
+- name: Ensure Raspberry monitoring environment is running.
   community.docker.docker_compose:
     project_src: "{{ config_dir }}/monitoring/"
     build: false

@@ -75,8 +75,8 @@
       ansible.builtin.import_tasks: tasks/xray-xui.yml
       when: xray_enable 
 
-    - name: Setup Raspi Monitoring
-      ansible.builtin.import_tasks: tasks/raspi-monitoring.yml
+    - name: Setup Raspberry Monitoring
+      ansible.builtin.import_tasks: tasks/raspberry-monitoring.yml
       when: monitoring_enable
 
     - name: Setup Shelly Plug Monitoring

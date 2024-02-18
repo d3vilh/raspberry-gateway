@@ -3,6 +3,7 @@ services:
   gluetun:
     image: qmcgaw/gluetun
     container_name: gluetun
+    restart: unless-stopped
     cap_add:
       - NET_ADMIN
     devices:
@@ -60,7 +61,6 @@ services:
       - 6881:6881/udp
     networks:
       vpn-net:
-    restart: unless-stopped
 
 networks:
   vpn-net:

@@ -3,7 +3,8 @@
 config_dir: '~'
 
 #
-# For advanced Monitoring configuration see `advanced.config.yml`
+#   This is the simplyfied configuration file.
+#   For advanced configuration see `advanced.config.yml`
 #
 
 #    _____ _           _____             
@@ -18,23 +19,37 @@ ur_timezone: "Europe/Kyiv"
 #   |   __| . |  _|  _| .'| |   | -_|  _|
 #   |__|  |___|_| |_| |__,|_|_|_|___|_|  
 # Portainer configuration.
-portainer_enable: true                           # Set true to enable Portainer
-remove_portainer: false                          # Set true to remove Portainer
+portainer_enable: true                          # Set true to enable Portainer
+remove_portainer: false                         # Set true to remove Portainer
 
 #    _____     _                 _   ____  _____ _____ 
 #   |  |  |___| |_ ___ _ _ ___ _| | |    \|   | |   __|
 #   |  |  |   | . | . | | |   | . |_|  |  | | | |__   |
 #   |_____|_|_|___|___|___|_|_|___|_|____/|_|___|_____| Dont't use with .Tech.DNS at the same time!
 # Unbound DNS configuration.
-unbound_dns_enable: true                         # Set true to enable Unbound DNS. Don't use with Technition DNS at the same time!
-remove_unbound_dns: false                        # Set true to remove Unbound DNS
+unbound_dns_enable: true                        # Set true to enable Unbound DNS. Don't use with Technition DNS at the same time!
+remove_unbound_dns: false                       # Set true to remove Unbound DNS
 
-unbound_dns_identitiy: "unbound-dns"             # Report this identity rather than the hostname of the server.
-unbound_dns_hide: "yes"                          # Send minimum information to upstream servers, reduce responce size, refuse .id and .version queries
-unbound_dns_ipv4: "yes"                          # enable ipv4 support.
-unbound_dns_ipv6: "no"                           # enable ipv6 support
-unbound_dns_num_threads: "1"                     # Keep 1, unless understand you really need it.
-unbound_dns_upstream_4_pihole: "127.0.0.1#5335"  # Use local Unbound DNS as upstream DNS server IP.
+unbound_dns_identitiy: "unbound-dns"            # Report this identity rather than the hostname of the server.
+unbound_dns_hide: "yes"                         # Send minimum information to upstream servers, reduce responce size, refuse .id and .version queries
+unbound_dns_ipv4: "yes"                         # enable ipv4 support.
+unbound_dns_ipv6: "no"                          # enable ipv6 support
+unbound_dns_num_threads: "1"                    # Keep 1, unless understand you really need it.
+unbound_dns_upstream_4_pihole: "127.0.0.1#5335" # Use local Unbound DNS as upstream DNS server IP.
+
+#    _____ _____       _____ _____    _____                     
+#   |   __|  _  |_____| __  |  _  |  |   __|___ ___ _ _ ___ ___ 
+#   |__   |     |     | __ -|     |  |__   | -_|  _| | | -_|  _|
+#   |_____|__|__|_|_|_|_____|__|__|  |_____|___|_|  \_/|___|_|  
+# SAMBA Server. Testing only. Not ready for production.
+samba_enable: false                              # Set true to enable SAMBA
+remove_samba: false                              # Set true to remove SAMBA
+
+samba_user: "admin"                              # SAMBA username
+samba_password: "gagaZush"                       # !Change this password!
+samba_netbios_name: "Raspberry-gw"               # SAMBA NetBIOS name
+samba_workgroup: "WORKGROUP"                     # SAMBA workgroup
+samba_torrents_share: false                      # Set true to enable torrents share
 
 #    _____ _ _____     _     
 #   |  _  |_|  |  |___| |___ 
@@ -84,7 +99,7 @@ ovpn_remote: "remote 123.234.123.12 12345 udp"   # OpenVPN client.ovpn profile c
 # EasyRSA configuration parameters.
 easyrsa_dn: "org"                                # Leave this as-is. "org" for traditional, "cn_only" for CN only.
 easyrsa_req_country: "UA"                        # The two-letter country code (e.g. US).
-easyrsa_req_province: "KY"                       # The two-letter state or province code (e.g. CA).
+easyrsa_req_province: "KY"                       # The state or province (e.g. CA or California).
 easyrsa_req_city: "Kyiv"                         # The city of the organization.
 easyrsa_req_org: "SweetHome"                     # The name of the organization.
 easyrsa_req_email: "sweet@home.net"              # The email address of the organization.
@@ -102,7 +117,7 @@ remove_ovpn_client: false                        # Set true to remove internal O
 
 ovpn_client_cert: "webinstall-client.ovpn"       # Set your ovpn-client certificate name
 ovpn_client_allowed_subnet: "192.168.88.0/24"    # Allowed subnet for ovpn-client. You must have your local network defined here.
-ovpn_client_secret: "webinstall-credentials.txt" # Filename with ovpn-client user and password.
+ovpn_client_secret: "webinstall-credentials.txt" # Filename with ovpn-client user and password, "example-credentials.txt"
 ovpn_client_killswitch: true                     # Allow subnet access and block all other traffic if ovpn-client is down
 
 #    _____ _         _____         
@@ -125,10 +140,10 @@ gluetun_vpn_type: openvpn                        # Set your VPN type: openvpn, w
 gluetun_openvpn_user: "none"                     # Set your OpenVPN username
 gluetun_openvpn_password: "none"                 # Set your OpenVPN password
 gluetun_vpnclient_custom: false                  # Set true to enable custom OpenVPN configuration below
-glue_ovpn_custom_conf: "webinstall-client.ovpn"  # Set your OpenVPN custom configuration.
+glue_ovpn_custom_conf: "webinstall-client.ovpn"  # Set your OpenVPN custom configuration. See
 
 # WIREGUARD CLIENT PART:
-gluetun_wireguard_private_key: "yTblPoK...2c="   # Valid base 58 Wireguard Client key. Wireguard client private key to use.
+gluetun_wireguard_private_key: "TblPoK...2c="    # Valid base 58 Wireguard Client key. Wireguard client private key to use.
 gluetun_wireguard_public_key: "none"             # Valid base 58 Wireguard Server key. Wireguard Server public key to use.
 gluetun_wireguard_preshared_key: "none"          #
 gluetun_wireguard_address: "10.99.99.99/32"      # Valid IP network interface address in the format xx.xx.xx.xx/xx or ff:ff:ff...:ff/128
@@ -162,20 +177,6 @@ qbittorrent_inside_vpn: false                    # Set true to route qBitTorrent
 qbittorrent_inside_gluetun: false                # Set true to route qBitTorrent traffic via Gluetun VPN client
 qbittorrent_webui_port: 8090                     # Do not change it unless you know what you are doing.
 
-#    _____ _____       _____ _____    _____                     
-#   |   __|  _  |_____| __  |  _  |  |   __|___ ___ _ _ ___ ___ 
-#   |__   |     |     | __ -|     |  |__   | -_|  _| | | -_|  _|
-#   |_____|__|__|_|_|_|_____|__|__|  |_____|___|_|  \_/|___|_|  
-# SAMBA Server. Testing only. Not ready for production.
-samba_enable: false                              # Set true to enable SAMBA
-remove_samba: false                              # Set true to remove SAMBA
-
-samba_user: "admin"                              # SAMBA username
-samba_password: "gagaZush"                       # !Change this password!
-samba_netbios_name: "Raspberry-gw"               # SAMBA NetBIOS name
-samba_workgroup: "WORKGROUP"                     # SAMBA workgroup
-samba_torrents_share: false                      # Set true to enable torrents share
-
 #    _____         _ _               
 #   |     |___ ___|_| |_ ___ ___ ___ 
 #   | | | | . |   | |  _| . |  _|_ -|
@@ -207,7 +208,7 @@ remove_airgradient_monitoring: false             # Set true to remove Airgradien
 
 # Starlink monitoring configuration.             # Requires `monitoring_enable`
 starlink_monitoring_enable: false                # Set true to enable StarLink dishy Grafana dashboard
-remove_starlink_monitoring: false                # Set true to remove dishy Grafana dashboard :(
+remove_starlink_monitoring: false                # Set true to remove StarLink dishy Grafana dashboard
 
 starlink_ip: "10.10.10.1"                        # Dishy IP address
 starlink_port: 9817                              # Dishy port to get statistics from
@@ -216,10 +217,10 @@ starlink_port: 9817                              # Dishy port to get statistics 
 shelly_plug_monitoring_enable: false             # Set true or false
 remove_shelly_plug_monitoring: false             # Set true to remove Shelly Plug Grafana dashboard
 
-shelly_plug_hostname: server-room-shelly         # Shelly Plug hostname
-shelly_ip: "192.168.88.66"                       # Shelly Plug IP address
-shelly_port: 9924                                # Shelly Plug port to get statistics from
-shelly_plug_http_username: "admin"               # Shelly Plug username
+shelly_plug_hostname: shelly-host-or-ip
+shelly_ip: "192.168.88.66"
+shelly_port: 9924
+shelly_plug_http_username: "admin"               # username
 shelly_plug_http_password: "gagaZush"            # !Change this password!
 
 #   __   __      
@@ -230,5 +231,5 @@ shelly_plug_http_password: "gagaZush"            # !Change this password!
 #   \/   \/ Shadowsocks fast tunnel proxy.
 # experimental container with X-UI supports Shadowsocks, VMess, VLESS, XTLS and Trojan protocols  
 # !Beaware! some XRAY protocols from the list are prohibited in PRC. Don't use this if you are in PRC.      
-xray_enable: false                               # Set true to enable X-RAY x-ui
-remove_xray: false                               # Set true to remove X-RAY x-ui
+xray_enable: false                               # Set true to enable X-RAY x-ui eXperimental
+remove_xray: false
