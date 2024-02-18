@@ -3,6 +3,7 @@ services:
   openvpn-client:
     image: d3vilh/openvpn-client:latest
     container_name: openvpn-client
+    restart: unless-stopped
     cap_add:
       - NET_ADMIN
     devices:
@@ -19,10 +20,19 @@ services:
       - 6881:6881
       - 6881:6881/udp
     networks:
+{% if ovpn_client_hostmode %}
+      - host
+      - vpn-net
+{% endif %}
+{% if not ovpn_client_hostmode %}
       vpn-net:
-    restart: unless-stopped
+{% endif %}
 
 networks:
+{% if ovpn_client_hostmode %}
+  host:
+    external: true
+{% endif %}
   vpn-net:
     ipam:
       driver: default

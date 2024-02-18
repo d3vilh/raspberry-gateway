@@ -6,6 +6,7 @@ services:
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
+    restart: unless-stopped
 {% if not pihole_with_unbound %}
     hostname: '{{ pihole_hostname }}'
     ports:
@@ -32,7 +33,6 @@ services:
     volumes:
       - './etc-pihole/:/etc/pihole/'
       - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
-    restart: unless-stopped
 {% if pihole_with_unbound %}
     network_mode: "container:unbound-dns"
 {% endif %}
