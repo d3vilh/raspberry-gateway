@@ -45,10 +45,9 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
   <details>
     <summary>Continue Installation with WebUI</summary>
 
-  5. Pi5: Run [Webinstall-pi5](https://github.com/d3vilh/raspberry-gtw-webconfig) binary: <br>
-     Pi: Run [Webinstall](https://github.com/d3vilh/raspberry-gtw-webconfig) binary:
+  5. Run [Webinstall](https://github.com/d3vilh/raspberry-gtw-webconfig) binary:
      ```shell
-     secret@rpgw:~/raspberry-gateway $ ./webinstall # or ./webinstall-pi5
+     secret@rpgw:~/raspberry-gateway $ ./webinstall # Supports now both legacy Pi4_x64 and Pi5_x64
      2023/07/07 18:01:03 Welcome! The web interface will guide you on installation process.
      Installation logs: webinstall.log
      2023/07/07 18:01:03 Starting web server on http://10.10.10.18:8088
