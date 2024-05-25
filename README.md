@@ -27,7 +27,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
 # Installation
   1. Install [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html):
      ```shell 
-     sudo apt-get install -y git ansible python3-pip 
+     sudo apt-get install -y git ansible python3-pip musl-tools
      ```
   2. Clone this repository: 
      ```shell
