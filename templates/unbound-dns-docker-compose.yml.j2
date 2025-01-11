@@ -10,20 +10,21 @@ services:
       - "./etc-unbound/unbound.conf:/etc/unbound/unbound.conf"
       - "./etc-unbound/root.hints:/etc/unbound/root.hints"
       - "./log-unbound/unbound.log:/var/log/unbound.log"
-    ports:
-      - "5335:5335/tcp"
-      - "5335:5335/udp"
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "67:67/udp"
-      - "80:80/tcp"
-      - "443:443/tcp"
-    networks:
-      unbound-net:
+#    ports:
+#      - "5335:5335/tcp"
+#      - "5335:5335/udp"
+#      - "53:53/tcp"
+#      - "53:53/udp"
+#      - "67:67/udp"
+#      - "80:80/tcp"
+#      - "443:443/tcp"
+#    networks:
+#      unbound-net:
+    network_mode: host
     cap_add:
       - NET_ADMIN
 
-networks:
-  unbound-net:
-    ipam:
-      driver: default
+#networks:
+#  unbound-net:
+#    ipam:
+#      driver: default
