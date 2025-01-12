@@ -1073,6 +1073,7 @@
         }
       ],
       "title": "Download Avg.",
+      "transparent": true,
       "type": "gauge"
     },
     {
@@ -1163,6 +1164,7 @@
         }
       ],
       "title": "Upload Avg.",
+      "transparent": true,
       "type": "gauge"
     },
     {
@@ -1256,6 +1258,7 @@
         }
       ],
       "title": "Ping Latency Avg.",
+      "transparent": true,
       "type": "gauge"
     },
     {
@@ -1404,6 +1407,7 @@
         }
       ],
       "title": "Speedtest Graph",
+      "transparent": true,
       "type": "timeseries"
     },
     {
@@ -1422,7 +1426,8 @@
             "scaleDistribution": {
               "type": "linear"
             }
-          }
+          },
+          "fieldMinMax": false
         },
         "overrides": []
       },
@@ -1435,12 +1440,11 @@
       "id": 14,
       "options": {
         "calculate": false,
-        "cellGap": 1,
+        "cellGap": 3,
         "color": {
           "exponent": 0.5,
           "fill": "dark-orange",
           "max": 1,
-          "min": 0,
           "mode": "scheme",
           "reverse": true,
           "scale": "exponential",
@@ -1448,16 +1452,16 @@
           "steps": 2
         },
         "exemplars": {
-          "color": "rgba(255,0,255,0.7)"
+          "color": "dark-red"
         },
         "filterValues": {
-          "le": 1e-9
+          "le": -40
         },
         "legend": {
-          "show": false
+          "show": true
         },
         "rowsFrame": {
-          "layout": "auto"
+          "layout": "unknown"
         },
         "tooltip": {
           "mode": "single",
@@ -1466,7 +1470,7 @@
         },
         "yAxis": {
           "axisPlacement": "left",
-          "reverse": false
+          "reverse": true
         }
       },
       "pluginVersion": "10.4.2",
@@ -1485,6 +1489,7 @@
         }
       ],
       "title": "Uptime",
+      "transparent": true,
       "type": "heatmap"
     },
     {
@@ -2604,12 +2609,11 @@
       "id": 62,
       "options": {
         "calculate": false,
-        "cellGap": 1,
+        "cellGap": 3,
         "color": {
           "exponent": 0.5,
           "fill": "dark-orange",
-          "max": 0,
-          "min": 1,
+          "max": 1,
           "mode": "scheme",
           "reverse": true,
           "scale": "exponential",
@@ -2617,13 +2621,11 @@
           "steps": 2
         },
         "exemplars": {
-          "color": "green"
+          "color": "rgba(255,0,255,0.7)"
         },
-        "filterValues": {
-          "le": 1e-9
-        },
+        "filterValues": {},
         "legend": {
-          "show": false
+          "show": true
         },
         "rowsFrame": {
           "layout": "auto"
@@ -3805,7 +3807,7 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {
