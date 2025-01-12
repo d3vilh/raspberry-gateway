@@ -33,7 +33,7 @@
   notify: Restart OpenVPN Server
 
 - name: Ensure OpenVPN Server is running.
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/openvpn-server/"
     build: false
   become: false

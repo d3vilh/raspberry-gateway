@@ -120,7 +120,7 @@
   become: false
 
 - name: Ensure Raspberry monitoring environment is running.
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/monitoring/"
     build: false
   become: false

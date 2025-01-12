@@ -22,7 +22,7 @@
   notify: Restart Technitium DNS Server
 
 - name: Ensure Technitium DNS Server is running.
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/tech-dns/"
     build: false
   become: false

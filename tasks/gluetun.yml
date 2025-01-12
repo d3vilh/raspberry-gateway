@@ -34,7 +34,7 @@
   notify: Restart gluetun
 
 - name: Ensure Gluetun is running.
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/gluetun/"
     build: false
   become: false

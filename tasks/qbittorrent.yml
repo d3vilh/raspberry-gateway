@@ -22,7 +22,7 @@
   notify: Restart qbitTorrent
 
 - name: Ensure qbitTorrent is running.
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/qbittorrent/"
     build: false
   become: false

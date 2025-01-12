@@ -27,7 +27,7 @@
   notify: Restart OpenVPN client
 
 - name: Ensure OpenVPN client is running.
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/openvpn-client/"
     build: false
   become: false

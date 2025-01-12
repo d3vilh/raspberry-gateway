@@ -49,24 +49,53 @@
 
 # If you are using legacy Raspbian OS, uncomment this section and comment the next one.
 
-# - name: Install Docker Compose using Pip.
-#  ansible.builtin.pip:
+## - name: Install Docker Compose using Pip.
+##  ansible.builtin.pip:
+##    name: docker-compose
+##    state: present
+##    executable: pip3
+
+#- name: Install Docker Compose with apt.
+#  ansible.builtin.apt:
 #    name: docker-compose
 #    state: present
-#    executable: pip3
-
-- name: Install Docker Compose with apt.
-  ansible.builtin.apt:
-    name: docker-compose
-    state: present
-  become: yes
-  when: ansible_facts.os_family == "Debian"
+#  become: yes
+#  when: ansible_facts.os_family == "Debian"
 
 - name: Ensure {{ ansible_user }} user is added to the docker group.
   ansible.builtin.user:
     name: "{{ ansible_user }}"
     groups: docker
     append: true
+
+- name: Get the latest Docker Compose version
+  shell: |
+    curl -s https://api.github.com/repos/docker/compose/releases/latest | grep tag_name | cut -d '"' -f 4
+  register: compose_version
+  changed_when: false
+
+- name: Create directory for Docker CLI plugins
+  file:
+    path: /usr/local/lib/docker/cli-plugins
+    state: directory
+    mode: '0755'
+
+- name: Download Docker Compose V2
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/{{ compose_version.stdout }}/docker-compose-linux-armv7"
+    dest: /usr/local/lib/docker/cli-plugins/docker-compose
+    mode: '0755'
+
+- name: Verify Docker Compose installation
+  shell: docker compose version
+  register: compose_version_output
+  failed_when: "'version' not in compose_version_output.stdout"
+
+- name: (Optional) Create a symlink for backward compatibility
+  file:
+    src: /usr/local/lib/docker/cli-plugins/docker-compose
+    dest: /usr/local/bin/docker-compose
+    state: link
 
 # reset_connection doesn't support conditionals.
 - name: Reset connection so docker group is picked up.

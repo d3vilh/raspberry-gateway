@@ -37,7 +37,7 @@
   when: pihole_with_unbound == true and container_id.rc == 1
 
 - name: Ensure Pi-hole is running.
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/pi-hole/"
     build: false
   become: false

@@ -23,7 +23,7 @@
   notify: Restart portainer
 
 - name: Ensure Portainer is running.
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/portainer/"
     build: false
   become: false

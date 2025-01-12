@@ -50,7 +50,7 @@
   notify: Restart unbound
 
 - name: Ensure Unbound DNS is running
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/unbound-dns/"
     build: false
   become: false
