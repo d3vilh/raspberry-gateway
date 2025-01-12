@@ -29,7 +29,7 @@
 - name: Ensure OpenVPN client is running.
   community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/openvpn-client/"
-    build: false
+    build: never
   become: false
   environment:
     DOCKER_CLIENT_TIMEOUT: '180'

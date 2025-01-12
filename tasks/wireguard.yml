@@ -36,7 +36,7 @@
 - name: Ensure WireGuard is running.
   community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/wireguard/"
-    build: false
+    build: never
   become: false
   environment:
     DOCKER_CLIENT_TIMEOUT: '180'
