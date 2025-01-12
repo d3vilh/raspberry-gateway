@@ -3,96 +3,96 @@
   community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/unbound-dns/"
     build: never
-    restarted: true
+    state: restarted
   become: false
 
 - name: Restart pi-hole
   community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/pi-hole/"
     build: never
-    restarted: true
+    state: restarted
   become: false
 
 - name: Restart OpenVPN client
   community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/openvpn-client/"
     build: never
-    restarted: true
+    state: restarted
   become: false
 
 - name: Restart gluetun
   community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/gluetun/"
     build: never
-    restarted: true
+    state: restarted
   become: false
 
 - name: Restart Raspberry monitoring
   community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/monitoring/"
     build: never
-    restarted: true
+    state: restarted
   become: false
 
 - name: Restart shelly-plug-prometheus
   community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/shelly-plug-prometheus/"
     build: never
-    restarted: true
+    state: restarted
   become: false
 
 - name: Restart starlink-exporter
   community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/starlink-exporter/"
     build: never
-    restarted: true
+    state: restarted
   become: false
 
 - name: Restart portainer
   community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/portainer/"
     build: never
-    restarted: true
+    state: restarted
   become: false
 
 - name: Restart OpenVPN Server
   community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/openvpn-server/"
     build: never
-    restarted: true
+    state: restarted
   become: false
 
 - name: Restart wireguard
   community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/wireguard/"
     build: never
-    restarted: true
+    state: restarted
   become: false
 
 - name: Restart qbitTorrent
   community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/qbittorrent/"
     build: never
-    restarted: true
+    state: restarted
   become: false
 
 - name: Restart Samba
   community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/samba-server/"
     build: never
-    restarted: true
+    state: restarted
   become: false
 
 - name: Restart Technitium DNS Server
   community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/tech-dns/"
     build: never
-    restarted: true
+    state: restarted
   become: false
 
 - name: Restart xray
   community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/xray/"
     build: never
-    restarted: true
+    state: restarted
   become: false
