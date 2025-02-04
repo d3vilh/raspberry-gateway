@@ -1,11 +1,9 @@
 ---
-version: "3.5"
-
 services:
     openvpn:
        container_name: openvpn
-       build: ./openvpn-docker
-       # image: d3vilh/openvpn:latest
+       # build: ./openvpn-docker
+       image: d3vilh/openvpn-server:latest
        restart: always       
        privileged: true
        environment:

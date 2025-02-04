@@ -11,6 +11,7 @@
         - advanced.config.yml
 
     - name: Ensure apt cache is up to date
+      become: true
       ansible.builtin.apt:
         update_cache: true
         cache_valid_time: 3600
@@ -18,6 +19,7 @@
         - ansible_facts.os_family == "Debian"
 
     - name: Ensure pacman cache is up to date
+      become: true
       community.general.pacman:
         update_cache: true
       when:
@@ -29,57 +31,71 @@
 
   tasks:
     - name: Setup Docker
+      become: true
       ansible.builtin.import_tasks: tasks/docker.yml
 
     - name: Setup Portainer
+      become: true
       ansible.builtin.import_tasks: tasks/portainer.yml
       when: portainer_enable
 
     - name: Setup OpenVPN Client
+      become: true
       ansible.builtin.import_tasks: tasks/openvpn-client.yml
       when: ovpn_client_enable
 
     - name: Setup Gluetun Server
+      become: true
       ansible.builtin.import_tasks: tasks/gluetun.yml
       when: gluetun_vpnclient_enable
 
     - name: Setup OpenVPN Server
+      become: true
       ansible.builtin.import_tasks: tasks/openvpn-server.yml
       when: ovpn_server_enable
 
     - name: Setup Unbound DNS
+      become: true
       ansible.builtin.import_tasks: tasks/unbound-dns.yml
       when: unbound_dns_enable
 
     - name: Setup Pi Hole
+      become: true
       ansible.builtin.import_tasks: tasks/pi-hole.yml
       when: pihole_enable
 
     - name: Setup Technitium DNS Server
+      become: true
       ansible.builtin.import_tasks: tasks/tech-dns.yml
       when: tech_dns_enable
 
     - name: Setup WireGuard Server
+      become: true
       ansible.builtin.import_tasks: tasks/wireguard.yml
       when: wireguard_server_enable
 
     - name: Setup qBitTorrent
+      become: true
       ansible.builtin.import_tasks: tasks/qbittorrent.yml
       when: qbittorrent_enable
 
     - name: Setup Samba Server
+      become: true
       ansible.builtin.import_tasks: tasks/sambaserver.yml
       when: samba_enable
 
     - name: Setup xray
+      become: true
       ansible.builtin.import_tasks: tasks/xray-xui.yml
       when: xray_enable 
 
     - name: Setup Raspberry Monitoring
+      become: true
       ansible.builtin.import_tasks: tasks/raspberry-monitoring.yml
       when: monitoring_enable
 
     - name: Setup Shelly Plug Monitoring
+      become: true
       ansible.builtin.import_tasks: tasks/shelly-plug.yml
       when: shelly_plug_monitoring_enable
 

@@ -25,19 +25,24 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
     > **Note**: You can run it on CM4 board with 8Gb eMMC card. Full installation on top of latest [Raspios lite (64bit)](https://downloads.raspberrypi.org/raspios_lite_arm64/images/) will use 4,5Gb of your eMMC card. Raspberry Pi **Zero-W** or **W2** boards can also be used, but it's important to note that they lack an internal Ethernet adapter and have limited CPU and RAM resources. This can restrict the number of containers that can be run and the number of clients that can connect to the VPN server.
 
 # Installation
-  1. Install [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html):
+  1. Install dependencies:
      ```shell 
-     sudo apt-get install -y git ansible python3-pip musl-tools
+     sudo apt-get install -y git python3-pip musl-tools
      ```
-  2. Clone this repository: 
+  2. Install [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) with pip, as yum repo version is to old:
+     ```shell
+     sudo pip install --upgrade pip && sudo pip install ansible --break-system-packages
+     ```
+     We need to use `--break-system-packages` to install *Ansible core 2.18.1* with propper `community.docker-compose-v2` support.
+  3. Clone this repository: 
      ```shell
      git clone https://github.com/d3vilh/raspberry-gateway
      ```
-  3. Then enter the repository directory: 
+  4. Then enter the repository directory: 
      ```shell 
      cd raspberry-gateway
      ```
-  4. Install requirements: 
+  5. Install requirements: 
      ```shell
      ansible-galaxy collection install -r requirements.yml
      ```
@@ -45,22 +50,22 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
   <details>
     <summary>Continue Installation with WebUI</summary>
 
-  5. Run [Webinstall](https://github.com/d3vilh/raspberry-gtw-webconfig) binary:
+  6. Run [Webinstall](https://github.com/d3vilh/raspberry-gtw-webconfig) binary:
      ```shell
      secret@rpgw:~/raspberry-gateway $ ./webinstall # Supports now both legacy Pi4_x64 and Pi5_x64
      2023/07/07 18:01:03 Welcome! The web interface will guide you on installation process.
      Installation logs: webinstall.log
      2023/07/07 18:01:03 Starting web server on http://10.10.10.18:8088
      ```
-  6. Copy server address (`http://10.10.10.18:8088` as above example) from the console and paste into your browser, then press Enter. Raspberry-Gateway webinstall window will appear:
+  7. Copy server address (`http://10.10.10.18:8088` as above example) from the console and paste into your browser, then press Enter. Raspberry-Gateway webinstall window will appear:
      ![Webinstall picture 1](/images/Webinstall-01.png)
-  7. Choose all the components you would like to install and change all the passwords (keep them in mind). 
+  8. Choose all the components you would like to install and change all the passwords (keep them in mind). 
      > **Note**: You can leave all the passwords as default, but it's not recommended.
-  8. Press "Save" button. When your configuration is ready:
+  9. Press "Save" button. When your configuration is ready:
      ![Webinstall picture 2](/images/Webinstall-02.png)
-  9. Then press "Install" button. It will initiate installation in background:
+  10. Then press "Install" button. It will initiate installation in background:
      ![Webinstall picture 3](/images/Webinstall-03.png)
-  10. The installation process will take some time.
+  11. The installation process will take some time.
       Once that's done, it'll be like you have a new **Raspberry Gateway** up and running.
   * #### Additional options:
     * **To Remove** any of previously installed component - click `Uninstall "component"` checkbox then `save` configuration file and press `Uninstall` button.

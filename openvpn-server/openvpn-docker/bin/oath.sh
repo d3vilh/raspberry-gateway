@@ -3,7 +3,8 @@
 # d3vilh/openvpn-server drafted 2FA support
 #
 # MFA verification by OpenVPN server using oath-tool
-echo "string oath.sh"
+# This should be part of OpenVPN server container (github.com/d3vilh/openvpn-server). 
+# This particular script is just example and does not use by OpenVPN-UI at all.
 
 # VARIABLES
 PASSFILE=$1    # Password file passed by openvpn-server with "auth-user-pass-verify /opt/app/bin/oath.sh via-file" in server.conf

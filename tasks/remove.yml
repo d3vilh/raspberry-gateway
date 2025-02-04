@@ -2,7 +2,7 @@
 - name: Remove Portainer
   block:
     - name: Stop and remove Portainer container
-      community.docker.docker_compose:
+      community.docker.docker_compose_v2:
         project_src: "{{ config_dir }}/portainer/"
         state: absent
       become: false
@@ -25,7 +25,7 @@
   block:
 
     - name: Stop and remove Pi-hole container
-      community.docker.docker_compose:
+      community.docker.docker_compose_v2:
         project_src: "{{ config_dir }}/pi-hole/"
         state: absent
       become: false
@@ -40,7 +40,7 @@
       when: remove_pihole
 
     - name: Stop and remove Unbound DNS container
-      community.docker.docker_compose:
+      community.docker.docker_compose_v2:
         project_src: "{{ config_dir }}/unbound-dns/"
         state: absent
       become: false
@@ -62,7 +62,7 @@
 - name: Remove Technitium DNS
   block:
     - name: Stop and remove Technitium DNS container
-      community.docker.docker_compose:
+      community.docker.docker_compose_v2:
         project_src: "{{ config_dir }}/tech-dns/"
         state: absent
       become: false
@@ -84,7 +84,7 @@
 - name: Remove OpenVPN Server
   block:
     - name: Stop and remove OpenVPN Server container
-      community.docker.docker_compose:
+      community.docker.docker_compose_v2:
         project_src: "{{ config_dir }}/openvpn-server/"
         state: absent
       become: false
@@ -113,7 +113,7 @@
 - name: Remove qBitTorrent
   block:
     - name: Stop and remove qBitTorrent container
-      community.docker.docker_compose:
+      community.docker.docker_compose_v2:
         project_src: "{{ config_dir }}/qbittorrent/"
         state: absent
       become: false
@@ -130,7 +130,7 @@
 - name: Remove OpenVPN Client
   block:
     - name: Stop and remove OpenVPN Client container
-      community.docker.docker_compose:
+      community.docker.docker_compose_v2:
         project_src: "{{ config_dir }}/openvpn-client/"
         state: absent
       become: false
@@ -152,7 +152,7 @@
 - name: Remove Gluetun
   block:
     - name: Stop and remove Gluetun container
-      community.docker.docker_compose:
+      community.docker.docker_compose_v2:
         project_src: "{{ config_dir }}/gluetun/"
         state: absent
       become: false
@@ -175,7 +175,7 @@
 - name: Remove WireGuard
   block:
     - name: Stop and remove WireGuard container
-      community.docker.docker_compose:
+      community.docker.docker_compose_v2:
         project_src: "{{ config_dir }}/wireguard/"
         state: absent
       become: false
@@ -197,7 +197,7 @@
 - name: Remove Monitoring
   block:
     - name: Stop and remove monitoring containers
-      community.docker.docker_compose:
+      community.docker.docker_compose_v2:
         project_src: "{{ config_dir }}/monitoring/"
         state: absent
       become: false
@@ -267,7 +267,7 @@
       when: remove_monitoring
 
     - name: Stop and remove ShellyPlug container
-      community.docker.docker_compose:
+      community.docker.docker_compose_v2:
         project_src: "{{ config_dir }}/shelly-plug-prometheus/"
         state: absent
       become: false
@@ -297,7 +297,7 @@
 - name: Remove Xray
   block:
     - name: Stop and remove Xray container
-      community.docker.docker_compose:
+      community.docker.docker_compose_v2:
         project_src: "{{ config_dir }}/xray/"
         state: absent
       become: false
@@ -314,7 +314,7 @@
 - name: Remove Samba
   block:
     - name: Stop and remove Samba Server container
-      community.docker.docker_compose:
+      community.docker.docker_compose_v2:
         project_src: "{{ config_dir }}/samba-server/"
         state: absent
       become: false

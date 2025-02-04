@@ -23,9 +23,9 @@
   notify: Restart portainer
 
 - name: Ensure Portainer is running.
-  community.docker.docker_compose:
+  community.docker.docker_compose_v2:
     project_src: "{{ config_dir }}/portainer/"
-    build: false
+    build: never
   become: false
   environment:
     DOCKER_CLIENT_TIMEOUT: '180'
