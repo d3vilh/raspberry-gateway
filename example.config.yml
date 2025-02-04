@@ -183,7 +183,8 @@ qbittorrent_webui_port: 8090                     # Do not change it unless you k
 #   |    -| | |_ -|  _|  |  | -_|_ -| '_|
 #   |__|__|___|___|_| |____/|___|___|_,_|
 # Rustdesk-server configuration.                                 
-rustdesk_enable: true                          # Set true to enable Rustdesk-server
+rustdesk_enable: false                          # Set true to enable Rustdesk-server
+remove_rustdesk: false                          # Set true to remove Rustdesk-server
 # Experimental feature. Not tested yet.
 # https://rustdesk.com/docs/en/self-host/rustdesk-server-oss/docker/
 
