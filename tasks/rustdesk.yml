@@ -1,0 +1,32 @@
+---
+- name: Create Rustdesk folder on Pi.
+  ansible.builtin.file:
+    path: "{{ config_dir }}/rustdesk-server"
+    state: directory
+    mode: 0755
+  become: false
+
+# WA for 60sec TMO bug
+- name: Pulling latest Rustdesk server image
+  community.general.docker_image:
+    source: pull
+    name: rustdesk/rustdesk-server
+    tag: latest
+  become: false
+
+- name: Copy Rustdesk docker-compose template to Pi.
+  ansible.builtin.template:
+    src: templates/rustdesk-docker-compose.yml.j2
+    dest: "{{ config_dir }}/rustdesk-server/docker-compose.yml"
+    mode: '0640'
+  become: false
+  notify: Restart rustdesk
+
+- name: Ensure Rustdesk server is running.
+  community.docker.docker_compose_v2:
+    project_src: "{{ config_dir }}/rustdesk-server/"
+    build: never
+  become: false
+  environment:
+    DOCKER_CLIENT_TIMEOUT: '180'
+    COMPOSE_HTTP_TIMEOUT: '180'  

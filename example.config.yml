@@ -177,6 +177,17 @@ qbittorrent_inside_vpn: false                    # Set true to route qBitTorrent
 qbittorrent_inside_gluetun: false                # Set true to route qBitTorrent traffic via Gluetun VPN client
 qbittorrent_webui_port: 8090                     # Do not change it unless you know what you are doing.
 
+                                     
+#    _____         _   ____          _   
+#   | __  |_ _ ___| |_|    \ ___ ___| |_ 
+#   |    -| | |_ -|  _|  |  | -_|_ -| '_|
+#   |__|__|___|___|_| |____/|___|___|_,_|
+# Rustdesk-server configuration.                                 
+rustdesk_enable: true                          # Set true to enable Rustdesk-server
+# Experimental feature. Not tested yet.
+# https://rustdesk.com/docs/en/self-host/rustdesk-server-oss/docker/
+
+
 #    _____         _ _               
 #   |     |___ ___|_| |_ ___ ___ ___ 
 #   | | | | . |   | |  _| . |  _|_ -|
