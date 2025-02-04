@@ -91,7 +91,7 @@
 
     - name: Setup Rustdesk
       become: true
-      ansible.builtin.import_tasks: tasks/rustdesk.yml
+      ansible.builtin.import_tasks: tasks/rustdesk-server.yml
       when: rustdesk_enable 
 
     - name: Setup Raspberry Monitoring
