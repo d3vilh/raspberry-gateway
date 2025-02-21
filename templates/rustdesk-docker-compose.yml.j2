@@ -2,6 +2,8 @@ services:
   hbbs:
     container_name: hbbs
     image: rustdesk/rustdesk-server:latest
+    environment:
+      - ALWAYS_USE_RELAY=Y
     command: hbbs
     volumes:
       - ./data:/root
