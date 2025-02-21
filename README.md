@@ -32,7 +32,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
      ```
   2. Install [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) with pip, as yum repo version is to old:
      ```shell
-     sudo pip install --upgrade pip && sudo pip install ansible --break-system-packages
+     sudo pip install --upgrade pip --break-system-packages && sudo pip install ansible --break-system-packages
      ```
      We need to use `--break-system-packages` to install *Ansible core 2.18.1* with propper `community.docker-compose-v2` support.
   3. Clone this repository: 
