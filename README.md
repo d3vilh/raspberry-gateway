@@ -10,6 +10,7 @@
   * [**GlueTun**](https://github.com/qdm12/gluetun) - universal OpenVPN and Wireguard client for multiple VPN providers, using DNS over TLS and a few proxy servers built-in.
   * [**WireGuard Server**](https://github.com/d3vilh/raspberry-gateway/tree/master/wireguard) with own WEB UI for easy management. 
   * [**Xray Server**](https://github.com/d3vilh/raspberry-gateway/blob/master/xray/README.md) with experimental Shadowsocks and XTLS-Reality fast tunnel proxy that helps you to bypass firewalls. 
+  * [**Rustdesk OSS Server**](https://rustdesk.com) is a remote desktop software that allows you to connect to a remote computer from anywhere in the world. It is an alternative to TeamViewer, AnyDesk, and Chrome Remote Desktop.
   * [**qBittorrent**](https://www.qbittorrent.org) -  an open-source software alternative to µTorrent. 
   * [**Grafana Dashboards**](https://github.com/d3vilh/raspberry-gateway/tree/master/monitoring) for Internet speed, VPN, Raspberry Pi hardware and Docker containers monitoring. 
   * **Various Prometheus exporters**: cAdviser, AirGradient, StarLink, ShellyPlug and others. 
@@ -364,7 +365,8 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
    * **Default password** Use public key from configuration files.
    * **External ports** used by container in host mode: `21115:tcp` (Relay) `21116:tcp/udp` (ID Registration), `21117:tcp` (WebRTC Hole punching).
    * **Configuration files** are available after the installation and located in `~/rustdesk-server/*` directory
-   Publik Key is located in `~/rustdesk-server/data/id_ed*.pub` file. You need it to configure your [Rustdesk clients](https://rustdesk.com/docs/en/client/) sides:
+   Publik Key is located in `~/rustdesk-server/data/id_ed*.pub` file. 
+   You need it to [configure](https://rustdesk.com/docs/en/client/) your [Rustdesk clients](https://rustdesk.com/download) sides:
      ```shell
      pi@d3vpi:~ $ cat ~/rustdesk-server/data/id_ed*.pub
      bvij9KsmajenaOdt9AazKURKAtnz1FLBGt8+5goUK4WZs=
