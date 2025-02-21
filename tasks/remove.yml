@@ -310,7 +310,6 @@
       become: true
       when: remove_xray
 
-
 - name: Remove Samba
   block:
     - name: Stop and remove Samba Server container
@@ -326,6 +325,23 @@
         state: absent
       become: true
       when: remove_samba
+
+- name: Remove Rustdesk
+  block:
+    - name: Stop and remove Rustdesk server container
+      community.docker.docker_compose_v2:
+        project_src: "{{ config_dir }}/rustdesk-server/"
+        state: absent
+      become: false
+      ignore_errors: yes
+      when: remove_rustdesk
+
+    - name: Remove Rustdesk server image
+      community.docker.docker_image:
+        name: rustdesk/rustdesk-server
+        state: absent
+      become: true
+      when: remove_rustdesk
 
   #  - name: Remove Samba Server network
   #    community.docker.docker_network:

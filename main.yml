@@ -89,6 +89,11 @@
       ansible.builtin.import_tasks: tasks/xray-xui.yml
       when: xray_enable 
 
+    - name: Setup Rustdesk
+      become: true
+      ansible.builtin.import_tasks: tasks/rustdesk-server.yml
+      when: rustdesk_enable 
+
     - name: Setup Raspberry Monitoring
       become: true
       ansible.builtin.import_tasks: tasks/raspberry-monitoring.yml
@@ -120,4 +125,5 @@
           - remove_airgradient_monitoring
           - remove_starlink_monitoring
           - remove_shelly_plug_monitoring
+          - remove_rustdesk
       when: remove_conditions | select('match', '^remove_') | list | length > 0
