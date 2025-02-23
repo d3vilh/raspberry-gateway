@@ -53,7 +53,7 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
 
   6. Run [Webinstall](https://github.com/d3vilh/raspberry-gtw-webconfig) binary:
      ```shell
-     secret@rpgw:~/raspberry-gateway $ ./webinstall # Supports now both legacy Pi4_x64 and Pi5_x64
+     secret@rpgw:~/raspberry-gateway $ sudo ./webinstall # Supports now both legacy Pi4_x64 and Pi5_x64
      2023/07/07 18:01:03 Welcome! The web interface will guide you on installation process.
      Installation logs: webinstall.log
      2023/07/07 18:01:03 Starting web server on http://10.10.10.18:8088
@@ -238,6 +238,8 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
 ![Portainer](/images/portainer.png)
 
 [**Rustdesk OSS Server**](https://rustdesk.com) is a remote desktop software that allows you to connect to a remote computer from anywhere in the world. It is an alternative to TeamViewer, AnyDesk, and Chrome Remote Desktop.
+
+![RustDesktop Client UI](/images/RustDesktop.png)
 
 [**Raspi Monitoring**](https://github.com/d3vilh/raspberry-gateway/tree/master/monitoring) The simple yet powerfull monitoring solution for your Raspberry Gateway. Covers performance utilisation (CPU,MEM,I/O, storage usage), Hardware utilisation (Temperature, Voltage, Power States, Devices Clock), Docker containers statistics and Internet connection monitoring:
 
