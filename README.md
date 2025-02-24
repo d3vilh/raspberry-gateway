@@ -435,7 +435,8 @@ Overall, this Raspberry Pi Home Internet Gateway provides a universal solution f
   * [**qBittorrent**](https://github.com/qbittorrent)
   * [**Portainer**](https://github.com/portainer)
   * [**wireguard-ui**](https://github.com/ngoduykhanh/wireguard-ui)
-  * [**cAdviser**](https://github.com/d3vilh/cadvisor) and 
+  * [**cAdviser**](https://github.com/d3vilh/cadvisor)
+  * [**RustDesktop**](https://rustdesk.com) team, especially the OSS maintainers and 
   * other pieces of software used in this project.
 
 <a href="https://www.buymeacoffee.com/d3vilh" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="51" width="217"></a>
