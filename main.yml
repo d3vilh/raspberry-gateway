@@ -94,7 +94,7 @@
       ansible.builtin.import_tasks: tasks/rustdesk-server.yml
       when: rustdesk_enable 
     
-    - mane: Setup SOCKS5 Proxy
+    - name: Setup SOCKS5 Proxy
       become: true
       ansible.builtin.import_tasks: tasks/socks5-proxy.yml
       when: socks5_enable

@@ -21,7 +21,7 @@
     mode: '0640'
   loop:
     - { src: "socks5-docker-compose.yml.j2", dest: "docker-compose.yml" }
-    - { src: "socks5.env.j2", dest: ".env" }
+    - { src: "socks5-envfile.yml.j2", dest: ".env" }
   become: false
   notify: Restart socks5-proxy
 
