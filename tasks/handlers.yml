@@ -103,3 +103,10 @@
     build: never
     state: restarted
   become: false
+
+- name: Restart socks5-proxy
+  community.docker.docker_compose_v2:
+    project_src: "{{ config_dir }}/socks5-proxy/"
+    build: never
+    state: restarted
+  become: false

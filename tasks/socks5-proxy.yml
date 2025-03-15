@@ -1,0 +1,35 @@
+---
+- name: Create SOCKS5 folder on Pi.
+  ansible.builtin.file:
+    path: "{{ config_dir }}/socks5-proxy"
+    state: directory
+    mode: 0755
+  become: false
+
+# WA for 60sec TMO bug
+- name: Pulling latest SOCKS5 proxy image
+  community.general.docker_image:
+    source: pull
+    name: serjs/go-socks5-proxy
+    tag: latest
+  become: false
+
+- name: Copy SOCKS5 docker-compose template to Pi.
+  ansible.builtin.template:
+    src: "templates/{{ item.src }}"
+    dest: "{{ config_dir }}/socks5-proxy/{{ item.dest }}"
+    mode: '0640'
+  loop:
+    - { src: "socks5-docker-compose.yml.j2", dest: "docker-compose.yml" }
+    - { src: "socks5-envfile.yml.j2", dest: ".env" }
+  become: false
+  notify: Restart socks5-proxy
+
+- name: Ensure SOCKS5 server is running.
+  community.docker.docker_compose_v2:
+    project_src: "{{ config_dir }}/socks5-proxy/"
+    build: never
+  become: false
+  environment:
+    DOCKER_CLIENT_TIMEOUT: '180'
+    COMPOSE_HTTP_TIMEOUT: '180'  

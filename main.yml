@@ -93,6 +93,11 @@
       become: true
       ansible.builtin.import_tasks: tasks/rustdesk-server.yml
       when: rustdesk_enable 
+    
+    - name: Setup SOCKS5 Proxy
+      become: true
+      ansible.builtin.import_tasks: tasks/socks5-proxy.yml
+      when: socks5_enable
 
     - name: Setup Raspberry Monitoring
       become: true
@@ -126,4 +131,5 @@
           - remove_starlink_monitoring
           - remove_shelly_plug_monitoring
           - remove_rustdesk
+          - remove_socks5
       when: remove_conditions | select('match', '^remove_') | list | length > 0

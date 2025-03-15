@@ -245,3 +245,15 @@ shelly_plug_http_password: "gagaZush"            # !Change this password!
 # !Beaware! some XRAY protocols from the list are prohibited in PRC. Don't use this if you are in PRC.      
 xray_enable: false                               # Set true to enable X-RAY x-ui eXperimental
 remove_xray: false
+
+#                                                                 
+#    _____ ___ ____ _   _____   ___    _____                     
+#   |   __|   |    | |_|   __| |  _|  |   __|___ ___ _ _ ___ ___ 
+#   |__   | | |  --| '_|__   |_|_  |  |__   | -_|  _| | | -_|  _|
+#   |_____|___|____|_,_|_____|_|___|  |_____|___|_|  \_/|___|_|  
+# SOCKS5 proxy configuration.                                                                 
+socks5_enable: false                             # Set true to enable SOCKS5 proxy
+remove_socks5: false                             # Set true to remove SOCKS5 proxy 
+socks5_port: 1080                                # SOCKS5 port
+socks5_user: "admin"                             # SOCKS5 Authentication username
+socks5_password: "gagaZush"                      # !Change this password!

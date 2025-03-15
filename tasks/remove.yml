@@ -343,6 +343,22 @@
       become: true
       when: remove_rustdesk
 
+- name: Remove SOCKS5 Proxy
+  block:
+    - name: Stop and remove SOCKS5 Proxy container
+      community.docker.docker_compose_v2:
+        project_src: "{{ config_dir }}/socks5-proxy/"
+        state: absent
+      become: false
+      when: remove_socks5
+
+    - name: Remove SOCKS5 Proxy image
+      community.docker.docker_image:
+        name: serjs/go-socks5-proxy
+        state: absent
+      become: true
+      when: remove_socks5
+
   #  - name: Remove Samba Server network
   #    community.docker.docker_network:
   #      name: samba-server-net
