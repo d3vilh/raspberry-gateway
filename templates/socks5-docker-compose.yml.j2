@@ -1,7 +1,7 @@
 services:
   socks5:
     restart: always
-    image: serjs/go-socks5-proxy
+    image: d3vilh/socks5-proxy
     env_file: .env
     ports:
       - "{{ socks5_port }}:{{ socks5_port }}"
